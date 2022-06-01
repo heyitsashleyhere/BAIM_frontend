@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "./contexts/UserContext";
 
 function UserRegistration() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [profileName, setProfileName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [zip, setZip] = useState("");
-  const [country, setCountry] = useState("");
+  const {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    profileName,
+    setProfileName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    street,
+    setStreet,
+    city,
+    setCity,
+    zip,
+    setZip,
+    country,
+    setCountry,
+  } = useContext(UserContext);
 
   return (
     <div>
@@ -82,34 +95,38 @@ function UserRegistration() {
   );
 }
 
-function UserLogin() {
-  return (
-    <div>
-      <h1>User Login</h1>
-    </div>
-  );
-}
+// function UserLogin() {
+//   return (
+//     <div>
+//       <h1>User Login</h1>
+//     </div>
+//   );
+// }
 
-function UserEdit() {
-  return (
-    <div>
-      <h1>User Edit</h1>
-    </div>
-  );
-}
+// function UserEdit() {
+//   return (
+//     <div>
+//       <h1>User Edit</h1>
+//     </div>
+//   );
+// }
 
-function RecipePost() {
-  return (
-    <div>
-      <h1>Recipe Post</h1>
-    </div>
-  );
-}
+// function RecipePost() {
+//   return (
+//     <div>
+//       <h1>Recipe Post</h1>
+//     </div>
+//   );
+// }
 
 export default function App() {
+  // just for consol.log
+  const { firstName } = useContext(UserContext);
+  console.log(firstName);
+
   return (
     <div>
-      <p>Hello world</p>
+      <UserRegistration />
     </div>
   );
 }
