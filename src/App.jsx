@@ -25,10 +25,38 @@ function UserRegistration() {
     setCountry,
   } = useContext(UserContext);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const config = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        profileName,
+        email,
+        password,
+        confirmPassword,
+        userAddress: {
+          street,
+          city,
+          zip,
+          country,
+        },
+      }),
+    };
+
+    fetch("http://localhost:8000/user/register", config)
+      .then((response) => response.json())
+      .then((result) => result)
+      .catch((error) => console.log(error));
+  }
+
   return (
     <div>
       <h1>User Registration</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="first name"
@@ -90,6 +118,7 @@ function UserRegistration() {
           value={country}
           onChange={(e) => setCountry(e.target.value)}
         />
+        <button type="submit">Register</button>
       </form>
     </div>
   );
@@ -120,10 +149,6 @@ function UserRegistration() {
 // }
 
 export default function App() {
-  // just for consol.log
-  const { firstName } = useContext(UserContext);
-  console.log(firstName);
-
   return (
     <div>
       <UserRegistration />
