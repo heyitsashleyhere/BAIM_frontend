@@ -44,6 +44,7 @@ export const UserContextProvider = (props) => {
       .catch((error) => console.log(error));
   }
 
+
   const userContextValue = {
     firstName,
     setFirstName,
