@@ -16,6 +16,34 @@ export const UserContextProvider = (props) => {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
 
+  function handleUserRegistration(e) {
+    e.preventDefault();
+
+    const config = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        profileName,
+        email,
+        password,
+        confirmPassword,
+        userAddress: {
+          street,
+          city,
+          zip,
+          country,
+        },
+      }),
+    };
+
+    fetch("http://localhost:8000/user/register", config)
+      .then((response) => response.json())
+      .then((result) => console.log("UserRegistrationPOST:", result))
+      .catch((error) => console.log(error));
+  }
+
   const userContextValue = {
     firstName,
     setFirstName,
@@ -37,12 +65,12 @@ export const UserContextProvider = (props) => {
     setZip,
     country,
     setCountry,
+    handleUserRegistration,
   };
 
-
   return (
-      <UserContext.Provider value= {userContextValue}>
-          {props.children}
-      </UserContext.Provider>
-  )
+    <UserContext.Provider value={userContextValue}>
+      {props.children}
+    </UserContext.Provider>
+  );
 };
