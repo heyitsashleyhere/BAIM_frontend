@@ -5,6 +5,10 @@ const userTemplate = [];
 export const UserContext = React.createContext(userTemplate);
 
 export const UserContextProvider = (props) => {
+  // Current User Placeholder
+  // maybe needs a additional logic later
+  const [ user, setUser ] = useState({id:"", profileName: ""})
+  // User Data State Variables
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [profileName, setProfileName] = useState("");
@@ -45,7 +49,6 @@ export const UserContextProvider = (props) => {
       .catch((error) => console.log(error));
       // Pop up message instead of console.log later
   }
-
   // ///////////////////////////////////
 
   // User Login
@@ -70,6 +73,58 @@ export const UserContextProvider = (props) => {
       // Token and cookie stuff
       // maybe useState set current User?
   }
+  // //////////////////////////////////
+
+  // User  Edit
+
+  function handleUserEdit(e) {
+    e.preventDefault();
+
+    const config = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        profileName,
+        email,
+        password,
+        confirmPassword,
+        userAddress: {
+          street,
+          city,
+          zip,
+          country,
+        },
+      }),
+    };
+
+    fetch(`http://localhost:7000/user/${user.id}`, config)
+      .then((response) => response.json())
+      .then((result) => console.log("UserRegistrationPOST:", result))
+      .catch((error) => console.log(error));
+      // Pop up message instead of console.log later
+      // cookie, Token stuff
+  }
+
+  // //////////////////////////////////
+
+  // User Delete
+
+  function handleUserDelete(){
+    const config = {
+      method: "DELETE"
+    }
+
+    fetch(`http://localhost:7000/user/${user.id}`, config)
+      .then((response) => response.json())
+      .then((result) => console.log("UserRegistrationPOST:", result))
+      .catch((error) => console.log(error));
+      // Pop up message instead of console.log later
+      // cookie, Token stuff
+  }
+
+
 
   const userContextValue = {
     firstName,
@@ -93,7 +148,9 @@ export const UserContextProvider = (props) => {
     country,
     setCountry,
     handleUserRegistration,
-    handleUserLogin
+    handleUserLogin,
+    handleUserEdit,
+    handleUserDelete
   };
 
   return (
