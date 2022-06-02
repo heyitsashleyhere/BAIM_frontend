@@ -1,9 +1,10 @@
+import UserRegistration from "./components/UserRegistration.jsx";
+
+
 export default function App() {
   return (
     <div>
-      <p>Hello world</p>
+      <UserRegistration />
     </div>
   );
 }
-
-
