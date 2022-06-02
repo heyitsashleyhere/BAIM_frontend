@@ -16,6 +16,7 @@ export const UserContextProvider = (props) => {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
 
+  // User Registration maybe put the fetch somewhere else later.
   function handleUserRegistration(e) {
     e.preventDefault();
 
@@ -38,12 +39,37 @@ export const UserContextProvider = (props) => {
       }),
     };
 
-    fetch("http://localhost:8000/user/register", config)
+    fetch("http://localhost:7000/user/register", config)
       .then((response) => response.json())
       .then((result) => console.log("UserRegistrationPOST:", result))
       .catch((error) => console.log(error));
+      // Pop up message instead of console.log later
   }
 
+  // ///////////////////////////////////
+
+  // User Login
+
+  function handleUserLogin(e) {
+    e.preventDefault();
+
+    const config = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    };
+
+    fetch("http://localhost:7000/user/login", config)
+      .then((response) => response.json())
+      .then((result) => console.log("UserRegistrationPOST:", result))
+      .catch((error) => console.log(error));
+      // Pop up message instead of console.log later
+      // Token and cookie stuff
+      // maybe useState set current User?
+  }
 
   const userContextValue = {
     firstName,
@@ -67,6 +93,7 @@ export const UserContextProvider = (props) => {
     country,
     setCountry,
     handleUserRegistration,
+    handleUserLogin
   };
 
   return (
