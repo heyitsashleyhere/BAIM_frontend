@@ -17,6 +17,8 @@ export default function UserRegistration() {
       setConfirmPassword,
       street,
       setStreet,
+      streetNumber,
+      setStreetNumber,
       city,
       setCity,
       zip,
@@ -73,6 +75,12 @@ export default function UserRegistration() {
             placeholder="street"
             value={street}
             onChange={(e) => setStreet(e.target.value)}
+          />
+           <input
+            type="text"
+            placeholder="street number"
+            value={streetNumber}
+            onChange={(e) => setStreetNumber(e.target.value)}
           />
           <input
             type="text"

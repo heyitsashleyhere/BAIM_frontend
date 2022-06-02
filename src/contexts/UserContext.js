@@ -7,7 +7,7 @@ export const UserContext = React.createContext(userTemplate);
 export const UserContextProvider = (props) => {
   // Current User Placeholder
   // maybe needs a additional logic later
-  const [ user, setUser ] = useState({id:"", profileName: ""})
+  const [user, setUser] = useState({ id: "", profileName: "" });
   // User Data State Variables
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,6 +16,7 @@ export const UserContextProvider = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [street, setStreet] = useState("");
+  const [streetNumber, setStreetNumber] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
@@ -36,6 +37,7 @@ export const UserContextProvider = (props) => {
         confirmPassword,
         userAddress: {
           street,
+          streetNumber,
           city,
           zip,
           country,
@@ -47,7 +49,7 @@ export const UserContextProvider = (props) => {
       .then((response) => response.json())
       .then((result) => console.log("UserRegistrationPOST:", result))
       .catch((error) => console.log(error));
-      // Pop up message instead of console.log later
+    // Pop up message instead of console.log later
   }
   // ///////////////////////////////////
 
@@ -69,9 +71,9 @@ export const UserContextProvider = (props) => {
       .then((response) => response.json())
       .then((result) => console.log("UserRegistrationPOST:", result))
       .catch((error) => console.log(error));
-      // Pop up message instead of console.log later
-      // Token and cookie stuff
-      // maybe useState set current User?
+    // Pop up message instead of console.log later
+    // Token and cookie stuff
+    // maybe useState set current User?
   }
   // //////////////////////////////////
 
@@ -92,6 +94,7 @@ export const UserContextProvider = (props) => {
         confirmPassword,
         userAddress: {
           street,
+          streetNumber,
           city,
           zip,
           country,
@@ -103,28 +106,26 @@ export const UserContextProvider = (props) => {
       .then((response) => response.json())
       .then((result) => console.log("UserRegistrationPOST:", result))
       .catch((error) => console.log(error));
-      // Pop up message instead of console.log later
-      // cookie, Token stuff
+    // Pop up message instead of console.log later
+    // cookie, Token stuff
   }
 
   // //////////////////////////////////
 
   // User Delete
 
-  function handleUserDelete(){
+  function handleUserDelete() {
     const config = {
-      method: "DELETE"
-    }
+      method: "DELETE",
+    };
 
     fetch(`http://localhost:7000/user/${user.id}`, config)
       .then((response) => response.json())
       .then((result) => console.log("UserRegistrationPOST:", result))
       .catch((error) => console.log(error));
-      // Pop up message instead of console.log later
-      // cookie, Token stuff
+    // Pop up message instead of console.log later
+    // cookie, Token stuff
   }
-
-
 
   const userContextValue = {
     firstName,
@@ -141,6 +142,8 @@ export const UserContextProvider = (props) => {
     setConfirmPassword,
     street,
     setStreet,
+    streetNumber,
+    setStreetNumber,
     city,
     setCity,
     zip,
@@ -150,7 +153,7 @@ export const UserContextProvider = (props) => {
     handleUserRegistration,
     handleUserLogin,
     handleUserEdit,
-    handleUserDelete
+    handleUserDelete,
   };
 
   return (
