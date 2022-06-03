@@ -9,6 +9,7 @@ export default function UserDelete(){
 
     return(
         <div>
+            <h1>Delete User</h1>
             <button onClick={handleUserDelete}>Delete your account</button>
         </div>
     )

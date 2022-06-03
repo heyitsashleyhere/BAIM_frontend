@@ -18,7 +18,7 @@ function PostsContextProvider({ children }){
             reject(error);
           }
         })
-      }
+    }
     
     const handleFileUpload = async (e) => {
         const file = e.target.files[0];

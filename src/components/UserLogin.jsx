@@ -1,16 +1,42 @@
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { useState } from "react";
 
 export default function UserLogin() {
-  const { email,setEmail, password, setPassword, handleUserLogin } = useContext(UserContext);
+    const [loginData, setLoginData] = useState({})
+
+    // this function can handle all the input changes:
+    function handleChange(e) {
+        setLoginData({ ...loginData, [e.target.name]: e.target.value})
+    }
+  
+    function handleUserLogin(e) {
+      e.preventDefault();
+  
+      const config = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData)
+      };
+  
+      fetch("http://localhost:7000/user/login", config)
+        .then((response) => response.json())
+        .then((result) => console.log("UserRegistrationPOST:", result))
+        .catch((error) => console.log(error));
+      // Pop up message instead of console.log later
+      // Token and cookie stuff
+      // maybe useState set current User?
+    }
 
   return (
     <div>
       <h1>User Login</h1>
-      <form>
-          <input onSubmit={handleUserLogin} type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <form onSubmit={handleUserLogin}>
+          <input name="email" type="email" placeholder="email"
+                 onChange={handleChange} />
 
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input name="password" type="password" placeholder="password"
+                 onChange={handleChange} />
+
+          <button type="submit">Login</button>
       </form>
     </div>
   );
