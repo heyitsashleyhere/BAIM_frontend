@@ -7,11 +7,11 @@ export default function UserRegistration() {
     // this function can handle all the input(but address) changes:
     function handleChange(e) {
        setRegisterData({ ...registerData, [e.target.name]: e.target.value})
+       setRegisterData({ ...registerData, userAddress })
     }
     // this function handles all the address input changes:
     function handleAddressChange(e) {
        setUserAddress({...userAddress, [e.target.name]: e.target.value })
-       setRegisterData({ ...registerData, userAddress })
     }
     // this function creates the 'path' variable for react-routes     
     function convert(str){    
@@ -23,6 +23,7 @@ export default function UserRegistration() {
 
     function handleUserRegistration(e) {
        e.preventDefault();
+
        setRegisterData({...registerData, path: convert(registerData.profileName)})
 
        console.log('registerData :>> ', registerData);
@@ -43,22 +44,22 @@ export default function UserRegistration() {
       <div>
         <h1>User Registration</h1>
         <form onSubmit={handleUserRegistration}>
-          <input name="firstName" placeholder="first name" type="text"
+          <input name="firstName" placeholder="first name" type="text" required
                  onChange={handleChange} />
 
-          <input name="lastName" placeholder="last name" type="text"
+          <input name="lastName" placeholder="last name" type="text" required
                  onChange={handleChange} />
 
-          <input name="profileName" placeholder="profile name" type="text"
+          <input name="profileName" placeholder="profile name" type="text" required
                  onChange={handleChange} />
 
-          <input name="email" placeholder="email" type="email"
+          <input name="email" placeholder="email" type="email" required
                  onChange={handleChange} />
 
-          <input name="password" placeholder="password" type="password"
+          <input name="password" placeholder="password" type="password" required
                  onChange={handleChange} />
 
-          <input name="confirmPassword" placeholder="confirm password" type="password"
+          <input name="confirmPassword" placeholder="confirm password" type="password" required
                  onChange={handleChange} />
           
           <h2>Address</h2>
@@ -66,14 +67,14 @@ export default function UserRegistration() {
                  onChange={handleAddressChange} />
           <input name="streetNumber" placeholder="street number" type="text"
                  onChange={handleAddressChange} />
-          <input name="city" placeholder="ciy" type="text"
+          <input name="city" placeholder="ciy" type="text" required
                  onChange={handleAddressChange} />
           <input name="zip" placeholder="zip code" type="text"
                  onChange={handleAddressChange} />
-          <input name="country" placeholder="country" type="text"
+          <input name="country" placeholder="country" type="text" required
                  onChange={handleAddressChange} />
           <button type="submit">Register</button>
         </form>
       </div>
-    );
-  }
+    )
+}

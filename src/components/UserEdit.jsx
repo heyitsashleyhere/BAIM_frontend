@@ -1,61 +1,74 @@
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext.js";
+
 
 export default function UserRegistration() {
-    const {
-      firstName, setFirstName,
-      lastName, setLastName,
-      profileName, setProfileName,
-      email, setEmail,
-      password, setPassword,
-      confirmPassword, setConfirmPassword,
-      street, setStreet,
-      streetNumber, setStreetNumber,
-      city, setCity,
-      zip, setZip,
-      country, setCountry,
-      handleUserEdit } = useContext(UserContext);
+       const [editData, setEditData] = useState({})
+       const [userAddress, setUserAddress] = useState({})
+       const { user } = useContext(UserContext)
+    
+       // this function can handle all the input changes:
+       function handleChange(e) {
+              setEditData({ ...editData, [e.target.name]: e.target.value})
+       }
+
+        // this function handles all the address input changes:
+       function handleAddressChange(e) {
+              setUserAddress({...userAddress, [e.target.name]: e.target.value })
+       }
+
+       function handleUserEdit(e) {
+              e.preventDefault();
+              const config = {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(editData)
+              };
+          
+              fetch(`http://localhost:7000/user/${user.id}`, config)
+                .then((response) => response.json())
+                .then((result) => console.log("UserEdit:", result))
+                .catch((error) => console.log(error));
+              // Pop up message instead of console.log later
+              // cookie, Token stuff
+       }
   
     return (
       <div>
         <h1>User Edit</h1>
         <form onSubmit={handleUserEdit}>
-          <input value={firstName} placeholder="first name" type="text"
-                 onChange={(e) => setFirstName(e.target.value)} />
+          <input name="firstName" placeholder="first name" type="text"
+                 onChange={handleChange}  />
 
-          <input value={lastName} placeholder="last name" type="text"
-                 onChange={(e) => setLastName(e.target.value)} />
+          <input name="lastName" placeholder="last name" type="text"
+                 onChange={handleChange}  />
 
-          <input value={profileName} placeholder="profile name" type="text"
-                 onChange={(e) => setProfileName(e.target.value)} />
+          <input name="profileName" placeholder="profile name" type="text"
+                 onChange={handleChange}  />
 
-          <input value={email} placeholder="email" type="email"
-                 onChange={(e) => setEmail(e.target.value)} />
+          <input name="email" placeholder="email" type="email"
+                 onChange={handleChange}  />
 
-          <input value={password} placeholder="password" type="password"
-                 onChange={(e) => setPassword(e.target.value)} />
+          <input name="password" placeholder="password" type="password"
+                 onChange={handleChange}  />
 
-          <input value={confirmPassword} placeholder="confirm password" type="password"
-                 onChange={(e) => setConfirmPassword(e.target.value)} />
+          <input name="confirmPassword" placeholder="confirm password" type="password"
+                 onChange={handleChange}  />
 
-          <h2>address</h2>
-           <input value={street} placeholder="street" type="text"
-                  onChange={(e) => setStreet(e.target.value)} />
-
-           <input value={streetNumber} placeholder="street number" type="text"
-                  onChange={(e) => setStreetNumber(e.target.value)} />
-
-           <input value={city} placeholder="ciy" type="text"
-                  onChange={(e) => setCity(e.target.value)} />
-
-           <input value={zip} placeholder="zip code" type="text"
-                  onChange={(e) => setZip(e.target.value)} />
-
-          <input value={country} placeholder="country" type="text"
-                 onChange={(e) => setCountry(e.target.value)} />
+          <h2>Address</h2>
+          <input name="street" placeholder="street" type="text"
+                 onChange={handleAddressChange} />
+          <input name="streetNumber" placeholder="street number" type="text"
+                 onChange={handleAddressChange} />
+          <input name="city" placeholder="ciy" type="text"
+                 onChange={handleAddressChange} />
+          <input name="zip" placeholder="zip code" type="text"
+                 onChange={handleAddressChange} />
+          <input name="country" placeholder="country" type="text"
+                 onChange={handleAddressChange} />
                  
-          <button type="submit">save changes</button>
+          <button type="submit">Save changes</button>
         </form>
       </div>
     );
-  }
+}

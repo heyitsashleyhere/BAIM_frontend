@@ -8,36 +8,7 @@ export const UserContextProvider = (props) => {
   const [user, setUser] = useState({ id: "", profileName: "" });
 
   // User  Edit
-  function handleUserEdit(e) {
-    e.preventDefault();
 
-    const config = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        profileName,
-        email,
-        password,
-        confirmPassword,
-        userAddress: {
-          street,
-          streetNumber,
-          city,
-          zip,
-          country,
-        },
-      }),
-    };
-
-    fetch(`http://localhost:7000/user/${user.id}`, config)
-      .then((response) => response.json())
-      .then((result) => console.log("UserRegistrationPOST:", result))
-      .catch((error) => console.log(error));
-    // Pop up message instead of console.log later
-    // cookie, Token stuff
-  }
 
 
   // User Delete
@@ -55,7 +26,7 @@ export const UserContextProvider = (props) => {
   }
 
   const userContextValue = {
-    handleUserEdit,
+    user, setUser,
     handleUserDelete,
   };
 
