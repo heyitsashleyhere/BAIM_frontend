@@ -1,43 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UserRegistration() {
     const [userAddress, setUserAddress] = useState({})
     const [registerData, setRegisterData] = useState({})
 
+    useEffect(() => {
+       setRegisterData({ ...registerData, userAddress })
+    }, [userAddress])
+    
     // this function can handle all the input(but address) changes:
     function handleChange(e) {
        setRegisterData({ ...registerData, [e.target.name]: e.target.value})
-       setRegisterData({ ...registerData, userAddress })
     }
     // this function handles all the address input changes:
     function handleAddressChange(e) {
        setUserAddress({...userAddress, [e.target.name]: e.target.value })
     }
+
     // this function creates the 'path' variable for react-routes     
-    function convert(str){    
+//     function convert(str){    
        // const string = str.toLowerCase().trim()
-       const string = str.trim()
-       const encoded = encodeURI(string);
-       return encoded;
-    }
+//        const string = str.trim()
+//        const encoded = encodeURI(string);
+//        return encoded;
+//     }
 
     function handleUserRegistration(e) {
        e.preventDefault();
-
-       setRegisterData({...registerData, path: convert(registerData.profileName)})
-
+       // setRegisterData({...registerData, path: convert(registerData.profileName) })
        console.log('registerData :>> ', registerData);
-       const config = {
-           method: "POST",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify(registerData),
-       }
      
+       const config = {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(registerData),
+              }
+               
        fetch("http://localhost:7000/user/register", config)
-           .then((response) => response.json())
-           .then((result) => console.log("UserRegistrationPOST:", result))
-           .catch((error) => console.log(error));
-         //TODO Pop up message instead of console.log later
+              .then((response) => response.json())
+              .then((result) => console.log("UserRegistrationPOST:", result))
+              .catch((error) => console.log(error));
+               //TODO Pop up message instead of console.log later
     }
   
     return (

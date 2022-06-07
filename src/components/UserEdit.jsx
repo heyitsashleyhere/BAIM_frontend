@@ -19,19 +19,25 @@ export default function UserRegistration() {
 
        function handleUserEdit(e) {
               e.preventDefault();
-              const config = {
-                method: "PATCH",
-                credentials: 'include', // specify this if you need cookies
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(editData)
-              };
-          
-              fetch(`http://localhost:7000/user/${user.id}`, config)
-                .then((response) => response.json())
-                .then((result) => console.log("UserEdit:", result))
-                .catch((error) => console.log(error));
-              // Pop up message instead of console.log later
-              // cookie, Token stuff
+              if(user.id){
+                     const config = {
+                            method: "PATCH",
+                            credentials: 'include', // specify this if you need cookies
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(editData)
+                          };
+                      
+                          fetch(`http://localhost:7000/user/${user.id}`, config)
+                            .then((response) => response.json())
+                            .then((result) => console.log("UserEdit:", result))
+                            .catch((error) => console.log(error));
+                          // Pop up message instead of console.log later
+                          // cookie, Token stuff
+
+              } else {
+                     console.log("User is not logged in");
+                 }         
+
        }
   
     return (
