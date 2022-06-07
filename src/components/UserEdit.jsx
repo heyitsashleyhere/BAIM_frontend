@@ -21,6 +21,7 @@ export default function UserRegistration() {
               e.preventDefault();
               const config = {
                 method: "PATCH",
+                credentials: 'include', // specify this if you need cookies
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(editData)
               };

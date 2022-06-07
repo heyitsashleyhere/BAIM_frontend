@@ -28,6 +28,7 @@ export default function UserLogin() {
             console.log("UserLogin:", result);
             // console.log('result.user :>> ', result.user);
             setUser({ id: result.user._id, profileName: result.user.profileName})
+            console.log('user :>> ', user);
           })
         .catch((error) => console.log(error));
       // Pop up message instead of console.log later

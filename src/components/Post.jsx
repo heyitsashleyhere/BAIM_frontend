@@ -11,6 +11,7 @@ export default function Post({category}) {
         setInputValues({...inputValues, address})
         const config ={
                 method: "POST",
+                credentials: 'include', // specify this if you need cookies
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(inputValues)
         }
