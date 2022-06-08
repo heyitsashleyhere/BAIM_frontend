@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext.js";
+import ImageInput from "./ImageInput.jsx";
 
 
 export default function UserRegistration() {
@@ -19,6 +20,7 @@ export default function UserRegistration() {
 
        function handleUserEdit(e) {
               e.preventDefault();
+              console.log(editData)
               if(user.id){
                      const config = {
                             method: "PATCH",
@@ -27,7 +29,7 @@ export default function UserRegistration() {
                             body: JSON.stringify(editData)
                           };
                       
-                          fetch(`http://localhost:7000/user/${user.id}`, config)
+                          fetch(`http://localhost:8080/user/${user.id}`, config)
                             .then((response) => response.json())
                             .then((result) => console.log("UserEdit:", result))
                             .catch((error) => console.log(error));
@@ -73,9 +75,17 @@ export default function UserRegistration() {
                  onChange={handleAddressChange} />
           <input name="country" placeholder="country" type="text"
                  onChange={handleAddressChange} />
+        <h1>AVATAR</h1>
+              <ImageInput editData={editData} setEditData={setEditData}></ImageInput>
+              {/* <h1>AVATAR</h1>
+              <ImageInput></ImageInput> */}
+
                  
           <button type="submit">Save changes</button>
         </form>
+
+        {/* <h1>AVATAR</h1>
+              <ImageInput></ImageInput> */}
       </div>
     );
 }
