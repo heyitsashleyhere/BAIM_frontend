@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ImageInput from "./ImageInput";
 
 export default function UserRegistration() {
     const [userAddress, setUserAddress] = useState({})
@@ -76,8 +77,15 @@ export default function UserRegistration() {
                  onChange={handleAddressChange} />
           <input name="country" placeholder="country" type="text" required
                  onChange={handleAddressChange} />
+        {/* <h1>AVATAR</h1>
+              <ImageInput></ImageInput> */}
           <button type="submit">Register</button>
+
+         
         </form>
+        {/* <h1>AVATAR</h1>
+        <ImageInput></ImageInput> */}
+
       </div>
     )
 }
