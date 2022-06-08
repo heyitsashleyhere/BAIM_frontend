@@ -11,6 +11,7 @@ export default function Post({category}) {
         setInputValues({...inputValues, address})
         const config ={
                 method: "POST",
+                credentials: 'include', // specify this if you need cookies
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(inputValues)
         }
@@ -64,10 +65,10 @@ export default function Post({category}) {
                 </>
                 
             )}
-            <label for="video">video:</label>
+            <label htmlFor="video">video:</label>
             <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" />
 
-            <label for="video">image:</label>
+            <label htmlFor="video">image:</label>
             <input type="file" name="image" accept=".jpeg, .png, .jpg"
                    onChange={(e) => handleFileUpload(e) }/>
 

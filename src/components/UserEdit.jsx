@@ -1,107 +1,81 @@
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext.js";
+
 
 export default function UserRegistration() {
-    const {
-      firstName,
-      setFirstName,
-      lastName,
-      setLastName,
-      profileName,
-      setProfileName,
-      email,
-      setEmail,
-      password,
-      setPassword,
-      confirmPassword,
-      setConfirmPassword,
-      street,
-      setStreet,
-      streetNumber,
-      setStreetNumber,
-      city,
-      setCity,
-      zip,
-      setZip,
-      country,
-      setCountry,
-      handleUserEdit,
-    } = useContext(UserContext);
+       const [editData, setEditData] = useState({})
+       const [userAddress, setUserAddress] = useState({})
+       const { user } = useContext(UserContext)
+    
+       // this function can handle all the input changes:
+       function handleChange(e) {
+              setEditData({ ...editData, [e.target.name]: e.target.value})
+       }
+
+        // this function handles all the address input changes:
+       function handleAddressChange(e) {
+              setUserAddress({...userAddress, [e.target.name]: e.target.value })
+       }
+
+       function handleUserEdit(e) {
+              e.preventDefault();
+              if(user.id){
+                     const config = {
+                            method: "PATCH",
+                            credentials: 'include', // specify this if you need cookies
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(editData)
+                          };
+                      
+                          fetch(`http://localhost:7000/user/${user.id}`, config)
+                            .then((response) => response.json())
+                            .then((result) => console.log("UserEdit:", result))
+                            .catch((error) => console.log(error));
+                          // Pop up message instead of console.log later
+                          // cookie, Token stuff
+
+              } else {
+                     console.log("User is not logged in");
+                 }         
+
+       }
   
     return (
       <div>
         <h1>User Edit</h1>
         <form onSubmit={handleUserEdit}>
-          <label></label>
-          <input
-            type="text"
-            placeholder="first name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="last name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="profile name"
-            value={profileName}
-            onChange={(e) => setProfileName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="confirm password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <h2>address</h2>
-          <input
-            type="text"
-            placeholder="street"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-          />
-           <input
-            type="text"
-            placeholder="street number"
-            value={streetNumber}
-            onChange={(e) => setStreetNumber(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="ciy"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="zip code"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-          <button type="submit">save changes</button>
+          <input name="firstName" placeholder="first name" type="text"
+                 onChange={handleChange}  />
+
+          <input name="lastName" placeholder="last name" type="text"
+                 onChange={handleChange}  />
+
+          <input name="profileName" placeholder="profile name" type="text"
+                 onChange={handleChange}  />
+
+          <input name="email" placeholder="email" type="email"
+                 onChange={handleChange}  />
+
+          <input name="password" placeholder="password" type="password"
+                 onChange={handleChange}  />
+
+          <input name="confirmPassword" placeholder="confirm password" type="password"
+                 onChange={handleChange}  />
+
+          <h2>Address</h2>
+          <input name="street" placeholder="street" type="text"
+                 onChange={handleAddressChange} />
+          <input name="streetNumber" placeholder="street number" type="text"
+                 onChange={handleAddressChange} />
+          <input name="city" placeholder="ciy" type="text"
+                 onChange={handleAddressChange} />
+          <input name="zip" placeholder="zip code" type="text"
+                 onChange={handleAddressChange} />
+          <input name="country" placeholder="country" type="text"
+                 onChange={handleAddressChange} />
+                 
+          <button type="submit">Save changes</button>
         </form>
       </div>
     );
-  }
+}
