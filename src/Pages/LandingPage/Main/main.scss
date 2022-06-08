@@ -1,0 +1,58 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+
+
+.video-wrapper {
+  @include container(100%, 100vh);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // overflow: hidden;
+  z-index: -1;
+
+  video {
+    @include container(100%, 100vh);
+    object-fit: cover;
+  }
+
+  .overlay {
+    @include container(100%, 100vh);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $black;
+    z-index: 5;
+    opacity: 0;
+
+    .overlay-content {
+      font-family: $font-family-Inter;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: $font-size-main;
+
+      .logo {
+        transform: translateY(100%);
+        z-index: 5;
+        width: 30rem;
+      }
+
+      .slogan {
+        padding-left: .7rem;
+        z-index: 3;
+
+        h1 {
+          transform: translateY(-100%);
+          letter-spacing: 6.5px;
+          font-size: $font-size-h2;
+          font-weight: $font-weight-900;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import './variables';
+@import './mixins';
+@import './resets';
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font-size: $font-size-base;
+}

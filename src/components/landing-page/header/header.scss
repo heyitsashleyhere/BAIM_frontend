@@ -1,0 +1,55 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+
+.header {
+  @include container(100%, 4.5rem);
+  @include flexContainer(center, space-between, center, wrap);
+  padding-inline: 2rem;
+
+  position: relative;
+  margin-inline: auto;
+  z-index: 10;
+  background-color: transparent;
+  color: #fff;
+
+  font-weight: $font-weight-800;
+  font-size: $font-size-md;
+
+  font-family: $font-family-Inter;
+  color: $white;
+
+  &-logo {
+    @include flexContainer(row, space-between, center, wrap);
+    gap: .8rem;
+
+    img {
+      @include container(2.2rem, 2.2rem);
+      object-fit: cover;
+
+    }
+
+  }
+
+  .navbar {
+    ul {
+      @include flexContainer(row, flex-start, center, wrap);
+      list-style: none;
+
+      li {
+        display: flex;
+        padding-left: 2rem;
+
+        &:nth-child(1) {
+          padding-left: 0;
+        }
+
+        a {
+          color: $white;
+          text-decoration: none;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}
