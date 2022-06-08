@@ -41,11 +41,11 @@ export default function ImageInput({ editData, setEditData}){
 
         if(inputValues.image){
             const storage = getStorage()
-            const imageRef = ref(storage, `${inputValues.image}`)
+            const imageRef = ref(storage, `${editData.profilePicture}`)
 
             deleteObject(imageRef).then(()=>{
                 console.log('imageRef', img)
-                setInputValues({...inputValues, image:""})
+                setEditData({...editData, profilePicture:""})
                 setProgress(0)
                 setImageUrl('')
             }).catch((error)=>{
@@ -82,6 +82,8 @@ export default function ImageInput({ editData, setEditData}){
             <button onClick={deleteFile}>Delete</button>
 
             </section>
+
+            <p>{progress}</p>
 
         </section>
     )
