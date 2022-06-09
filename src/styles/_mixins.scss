@@ -1,0 +1,62 @@
+@import './variables';
+
+@mixin flexContainer($direction, $justify, $align, $wrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap ;
+}
+
+@mixin container($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin grid($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+
+@mixin single-button($bg, $bg-hover, $text: #fff) {
+  background-color: $bg;
+  border-bottom-color: $bg-hover;
+  color: $text;
+
+  &:hover,
+  &:active {
+    color: $text;
+    background-color: $bg-hover;
+    border-bottom-color: darken($bg-hover, 5%);
+  }
+
+  &:disabled {
+    background-color: $bg  !important;
+    border-bottom-color: $bg-hover  !important;
+  }
+}
+
+
+
+//example
+// .main-container {
+//   @include single-button(#fff, #fff, #000);
+// }
+
+// // if the breakpoint is less than or equal to 320px
+// @include media("<=phone") {
+
+// }
+// // if the breakpoint is less than or equal to 768px
+// @include media("<=tablet") {
+
+// }
+// // if the breakpoint is less than or equal to 1024px
+// @include media("<=desktop") {
+
+// }
+// // if the breakpoint is less than or equal to 1440px
+// @include media(">=widescreen") {
+
+// }

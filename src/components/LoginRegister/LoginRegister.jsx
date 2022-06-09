@@ -6,7 +6,9 @@ import UserRegistration from "./UserRegistration/UserRegistration.jsx";
 
 export default function LoginRegister() {
     const [isRegister, setIsRegister] = useState(false)
-    const { message, setMessage, user, setUser } = useContext(UserContext)
+    const { message, setMessage, 
+            user, setUser,
+            isLogin } = useContext(UserContext)
 
 
     function switchForm() {
@@ -17,14 +19,20 @@ export default function LoginRegister() {
 
   return (
     <div className="LoginRegister">
-         
-        { isRegister ? <UserRegistration />: <UserLogin />}
-        <button onClick={switchForm}>
-            {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
-        </button>
-        {message && <div>{message}</div>}
-        {user.avatar && <img src={user.avatar} alt="avatar" width="100" />}
-        
+        { isLogin ?
+          <section className="welcome-page">
+            <p>{message}</p>
+            <img src={user.avatar} alt="avatar" width="100" />
+          </section> 
+          :
+          <section className="login-page">
+            { isRegister ? <UserRegistration />: <UserLogin />}
+            <button onClick={switchForm}>
+              {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
+            </button>
+          </section>
+
+        }   
     </div>
   )
 }

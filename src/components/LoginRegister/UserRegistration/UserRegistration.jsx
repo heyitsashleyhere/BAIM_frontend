@@ -48,6 +48,10 @@ export default function UserRegistration() {
       <div>
         <h1>User Registration</h1>
         <form onSubmit={handleUserRegistration}>
+
+          <h2>Avatar</h2>
+          <ImageInput imageUsage="avatar"/> 
+              
           <input name="firstName" placeholder="first name" type="text" required
                  onChange={handleChange} />
           {errors.map((error, i) => (    
@@ -115,9 +119,6 @@ export default function UserRegistration() {
           {errors.map((error, i) => (    
             error["userAddress.country"] && (<p key={"countryError"+ i}>{error["userAddress.country"] }</p>)
           ))}
-              
-          <h2>Avatar</h2>
-          <ImageInput imageUsage="avatar"/>
           
           <button type="submit">Register</button>
 
