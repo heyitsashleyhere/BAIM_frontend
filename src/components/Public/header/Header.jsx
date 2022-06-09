@@ -24,7 +24,7 @@ const Header = () => {
     <header ref={headerRef} className="header">
       <div className="header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <p>Loka</p>
+        <Link to="/">Loka</Link>
       </div>
       <nav className="navbar">
         <ul className="nav-list">

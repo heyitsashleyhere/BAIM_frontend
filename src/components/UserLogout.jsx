@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext.js";
 
 export default function UserLogin() {
-    const { user, setUser } = useContext(UserContext)
+    const { user, setUser, setIsLogin } = useContext(UserContext)
     
     function handleUserLogout() {
       const config = {
@@ -16,7 +16,8 @@ export default function UserLogin() {
         .then((result) => {
             console.log("UserLogout:", result);
             // console.log('result.user :>> ', result.user);
-            setUser({ id: "", profileName: ""})
+            setUser({ id: "", profileName: "", avatar: ""})
+            setIsLogin(false)
             console.log('user :>> ', user);
           })
         .catch((error) => console.log(error));

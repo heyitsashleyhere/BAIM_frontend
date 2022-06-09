@@ -1,0 +1,27 @@
+
+
+
+
+
+
+.Login_Outer{
+    border:1px solid red;
+    height:400px;
+  
+    form{
+        border:1px solid blue;
+        height:400px;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        input{
+            border:none;
+
+        }
+
+       .input-Password{
+           
+       }
+    }
+}

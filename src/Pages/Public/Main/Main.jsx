@@ -3,8 +3,10 @@ import gsap from 'gsap'
 
 import Header from '../../../components/Public/header/Header'
 import './main.scss'
+
 import '../../../../src/app.scss'
 import VideoFile from '../../../assets/raspberrie.mp4'
+
 
 import Logo from '../../../assets/pngLogo.png'
 
@@ -49,12 +51,14 @@ const Main = () => {
       },'-=2')
       .to(sloganRef.current, {
         y: 0,
+
         duration: 0.8,
         ease: 'power2.inOut',
         onComplete: () => {
           setShow(true)
         }
       }, '-=1.4')
+
     
   }
   
@@ -67,9 +71,10 @@ const Main = () => {
   console.log(show)
   return (
     <>
-      <Header  />
+      {/* <Header  /> */}
     <div className="video-wrapper">
-      <video ref={videoEl} src={VideoFile} autoPlay playsInline muted
+     {/* try to use this link instead for video outside the src folder */}
+      <video ref={videoEl} src={process.env.PUBLIC_URL + "/landingVideos/raspberrie.mp4"} autoPlay playsInline muted
       onLoadedMetadata={handleLoadedMetadata}/>
       <div ref={overlayRef} className="overlay">
         <div className="overlay-content" style={{overflow: 'hidden'}}>
