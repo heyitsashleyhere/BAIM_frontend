@@ -21,13 +21,15 @@ export default function LoginRegister() {
   return (
 
     <div className="LoginRegister">
-    <video src={process.env.PUBLIC_URL + "/landingVideos/berriesWhite.webm"} loop></video>
+    <section className="outer-Video">
+      <video src={process.env.PUBLIC_URL + "/landingVideos/berriesWhite.webm"} autoPlay playsInline muted loop></video>
+    </section>
         { isLogin ?
           <section className="welcome-page">
             <p>{message}</p>
             <img src={user.avatar} alt="avatar" width="100" />
           </section> 
-          :
+       :
           <section className="login-page">
             { isRegister ? <UserRegistration />: <UserLogin />}
             <button onClick={switchForm}>

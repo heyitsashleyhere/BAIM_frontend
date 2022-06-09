@@ -55,6 +55,9 @@ export default function App() {
                 <Route path="/discover/seasonal">
                   <Route index element={<p>seasonal</p>} />
                 </Route>
+                <Route path="/discover/events">
+                  <Route index element={<p>events</p>} />
+                </Route>
               </Route>
 
               <Route path="/feed" element={<h1>feed</h1>} />

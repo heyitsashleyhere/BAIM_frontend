@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
 
+import './userLogin.scss'
+
 export default function UserLogin() {
     const [errors, setErrors] = useState([])
     const { user, setUser, 
@@ -43,7 +45,7 @@ export default function UserLogin() {
     }
 
   return (
-    <div>
+    <div className="Login_Outer">
       <h1>User Login</h1>
       <form onSubmit={handleUserLogin}>
           <input name="email" type="email" placeholder="email"
@@ -51,9 +53,11 @@ export default function UserLogin() {
           {errors.map((error, i) => (    
             error.email && (<p key={"emailError"+ i}>{error.email}</p>)
           ))}
+          <section className="input-Password">
           <input name="password" type={isShowPassword ? "text" : "password"} placeholder="password"
                  onChange={handleChange} />
           <span onClick={showPasswordHandler}>{isShowPassword ? "🐵" : "🙈"}</span>
+          </section>
           {errors.map((error, i) => (    
             error.password && (<p key={"passwordError"+ i}>{error.password}</p>)
           ))}
