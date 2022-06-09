@@ -3,8 +3,10 @@ import gsap from 'gsap'
 
 import Header from '../../../components/Public/header/Header'
 import './main.scss'
-import '../../../app.scss'
-// import VideoFile from '../../../assets/raspberrie.mp4'
+
+import '../../../../src/app.scss'
+import VideoFile from '../../../assets/raspberrie.mp4'
+
 
 import Logo from '../../../assets/pngLogo.png'
 
@@ -14,9 +16,11 @@ const Main = () => {
   const overlayRef = useRef(null)
   const imageRef = useRef(null)
   const sloganRef = useRef(null)
+  const textRef = useRef(null)
 
   const [pDuration, setPDuration] = useState(0)
   const [isEnded, setIsEnded] = useState(false)
+  const [show, setShow] = useState(false)
 
   const handleLoadedMetadata = () => {
     setPDuration(videoEl.current.duration)
@@ -26,7 +30,7 @@ const Main = () => {
   const handleCanPlay = () => {
     const tl = gsap.timeline()
     tl.to(videoEl.current, {
-      // duration: pDuration,
+      duration: pDuration,
       opacity: 1,
       ease: 'power2.inOut',
       onComplete: () => {
@@ -38,28 +42,33 @@ const Main = () => {
         opacity: 1,
         backgroundColor: `#000000`,
         ease: 'power2.inOut'
-      }, '-=2')
+      }, '+=7')
       .to(imageRef.current, {
         y: 0,
-        duration: 1,
+        duration: 0.8,
         opacity: 1,
         ease: 'power2.inOut'
-      },'-=1')
+      },'-=2')
       .to(sloganRef.current, {
         y: 0,
-        duration: 1,
-        opacity: 1,
-        ease: 'power2.inOut'
-      }, '-=5')
+
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          setShow(true)
+        }
+      }, '-=1.4')
+
     
   }
   
   useEffect(() => {
     handleCanPlay()
 
-  }, [isEnded])
-  
+  }, [isEnded, show])
 
+  
+  console.log(show)
   return (
     <>
       {/* <Header  /> */}
@@ -75,7 +84,15 @@ const Main = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      {/* {show ? (<section className="main-content">
+        <video src={VideoFile} autoPlay playsInline muted
+          onLoadedMetadata={handleLoadedMetadata} />
+        <div ref={textRef} className="text-overlay">
+          <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, dolor.</h1>
+        </div>
+      </section>) : null
+      } */}
     </>
   )
 }
