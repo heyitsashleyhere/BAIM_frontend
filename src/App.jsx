@@ -6,12 +6,13 @@ import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import Header from "./components/Public/header/Header.jsx";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import Main from "./Pages/Public/Main/Main.jsx"
+import LoginRegister from "./components/Public/LoginRegister/LoginRegister.jsx"
 // Ashley testing components
 import Posts from "./components/Posts.jsx";
 import UserEdit from "./components/UserEdit.jsx";
 import UserDelete from "./components/UserDelete.jsx";
 import UserLogout from "./components/UserLogout.jsx";
-import LoginRegister from "./components/LoginRegister/LoginRegister.jsx";
+// import LoginRegister from "./components/Public/header/LoginRegister/LoginRegister.jsx.js";
 // context
 import { UserContext } from "./contexts/UserContext.js";
 
@@ -27,7 +28,7 @@ export default function App() {
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<p>about</p>} />
           <Route path="/team" element={<p>team</p>} />
-          <Route path="/login" element={<p>login</p>} />
+          <Route path="/login" element={<LoginRegister />} />
 
           {isLogin && (
             <>
