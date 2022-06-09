@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-import Header from '../../../components/landing-page/header/Header'
+import Header from '../../../components/Public/header/Header'
 import './main.scss'
-import '../../../styles/index.scss'
+import '../../../app.scss'
 import VideoFile from '../../../assets/raspberrie.mp4'
 
 import Logo from '../../../assets/pngLogo.png'

@@ -42,70 +42,71 @@
           transition: all 0.3s ease-in-out;
         }
       
-    
-  }
-  @include media(">=tablet") {
-      grid-template-columns: 2rem repeat(8, 1fr) 2rem;
-      transition: $transition-slow;
-
-      &-logo {
-        grid-column: 3/4;
-        transition: $transition-slow;
-        img {
-          @include container(2.6rem, 2.6rem);
-          object-fit: cover;
-        }
-      }
-    
-      .navbar {
-        grid-column: 5/9;
-        padding-left: 0;
-        transition: $transition-slow;
-    
-        ul {
-          gap: 4rem;
+        @include media(">=tablet") {
+          grid-template-columns: 2rem repeat(8, 1fr) 2rem;
           transition: $transition-slow;
     
-          li {
-            &:nth-child(3) {
-              padding-left: 11rem;
+          &-logo {
+            grid-column: 3/4;
+            transition: $transition-slow;
+            img {
+              @include container(2.6rem, 2.6rem);
+              object-fit: cover;
+            }
+          }
+        
+          .navbar {
+            grid-column: 5/9;
+            padding-left: 0;
+            transition: $transition-slow;
+        
+            ul {
+              gap: 4rem;
               transition: $transition-slow;
+        
+              li {
+                &:nth-child(3) {
+                  padding-left: 11rem;
+                  transition: $transition-slow;
+                }
+              }
+            }
+          }
+      }
+    
+      @include media(">=desktop") {
+        grid-template-columns: 2rem repeat(12, 1fr) 2rem;
+        transition: $transition-slow;
+    
+        &-logo {
+          grid-column: 4/5;
+          transition: $transition-slow;
+    
+          img {
+            @include container(2.6rem, 2.6rem);
+            object-fit: cover;
+          }
+        }
+    
+        .navbar {
+          grid-column: 6/12;
+          padding-left: 0;
+          transition: $transition-slow;
+    
+          ul {
+            gap: 4rem;
+            transition: $transition-slow;
+    
+            li {
+              &:nth-child(3) {
+                padding-left: 18rem;
+                transition: $transition-slow;
+              }
             }
           }
         }
-      }
-  }
-
-  @include media(">=desktop") {
-    grid-template-columns: 2rem repeat(12, 1fr) 2rem;
-    transition: $transition-slow;
-
-    &-logo {
-      grid-column: 4/5;
-      transition: $transition-slow;
-
-      img {
-        @include container(2.6rem, 2.6rem);
-        object-fit: cover;
-      }
+      
     }
-
-    .navbar {
-      grid-column: 6/12;
-      padding-left: 0;
-      transition: $transition-slow;
-
-      ul {
-        gap: 4rem;
-        transition: $transition-slow;
-
-        li {
-          &:nth-child(3) {
-            padding-left: 18rem;
-            transition: $transition-slow;
-          }
-        }
-      }
-    }
-  
+        
 }
+  
