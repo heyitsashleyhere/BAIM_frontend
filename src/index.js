@@ -9,14 +9,6 @@ import About from '../src/Pages/Public/About/About.jsx'
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
-<<<<<<< HEAD
-	<UserContextProvider>
-		<PostsContextProvider>
-			{/* <App /> */}
-			<Main />
-		</PostsContextProvider>
-	</UserContextProvider>
-=======
   <BrowserRouter>
   <UserContextProvider>
     <PostsContextProvider>
@@ -24,5 +16,4 @@ root.render(
     </PostsContextProvider>
   </UserContextProvider>
    </BrowserRouter>
->>>>>>> design
 );
