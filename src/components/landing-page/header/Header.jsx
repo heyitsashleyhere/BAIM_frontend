@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 import './header.scss'
-// import Berries from '../../../../public/landingVideos/berries(1).webm'
-import Logo from '../../../../public/landingVideos/Vectorlogo.png'
+import Logo from '../../../assets/raspberry.png'
 
 
 const Header = () => {
@@ -17,13 +16,14 @@ const Header = () => {
       y: -100,
       opacity: 0,
       ease: 'power2.inOut'
-    },'+=10.8')
+    },'+=9')
   }, [])
 
   return (
     <header ref={headerRef} className="header">
       <div className="header-logo">
-        <img src={Logo} alt="LOKA" /> <p>Loka</p>
+        <img src={Logo} alt="LOKA" />
+        <p>Loka</p>
       </div>
       <nav className="navbar">
         <ul className="nav-list">
