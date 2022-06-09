@@ -13,45 +13,41 @@
 
   
   video {
-    @include container(100%, 100vh);
+    width: 100%;
+    height: 100vh;
     object-fit: cover;
   }
   
   .overlay {
-    display: grid;
-    grid-template-columns: 1rem repeat(4, 1fr) 1rem;
-    gap: 1rem;
-    margin: 0;
-    @include container(100%, 100vh);
+    width: 100%;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     background-color: $black;
     z-index: 5;
     opacity: 0;
-    // transition: $transition-slow;
 
 
     .overlay-content {
-      display: grid;
-      grid-column: 2/6;
       position: absolute;
       top: 65%;
-      left: 0;
+      left: 2rem;
       
       font-family: $font-family-Inter;
       font-size: $font-size-main;
       color: #fff;
-      transition: $transition-slow;
+      transition: 0.35s all ease-in-out;
 
       .logo {
         transform: translateY(120%);
         opacity: 0;
         width: 30rem;
-        transition: $transition-slow;
+        transition: 0.35s all ease-in-out;
       }
 
       .slogan {
+        transform: translateY(-100%);
         padding-left: .7rem;
         z-index: 3;
 
@@ -60,50 +56,52 @@
           letter-spacing: 5px;
           font-size: $font-size-h4;
           font-weight: $font-weight-900;
-          transition: $transition-slow;
+          transition: 0.35s all ease-in-out;
         }
       }
     }
     @include media(">=tablet") {
-      grid-template-columns: 2rem repeat(8, 1fr) 2rem;
-      // transition: $transition-slow;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
 
       .overlay-content {
-        grid-column: 3/9;
-        transition: $transition-slow;
+        grid-column: 2/9;
+        transition: 0.35s all ease-in-out;
         top: 60%;
+        left: 0;
 
         .logo {
             width: 40rem;
-            transition: $transition-slow;
+            transition: 0.35s all ease-in-out;
           }
-          .slogan {
-            transform: translateY(-150%)
-            h1{
-              letter-spacing: 5px;
-              font-size: $font-size-h3;
-            }
+
+        .slogan {
+
+          h1{
+            letter-spacing: 5px;
+            font-size: 3rem;
           }
         }
       }
+    }
 
     @include media(">=desktop") {
-      grid-template-columns: 2rem repeat(12, 1fr) 2rem;
-      transition: $transition-slow;
+      grid-template-columns: repeat(12, 1fr);
+      transition: 0.35s all ease-in-out;
 
       .overlay-content {
-        grid-column: 4/12;
-        transition: $transition-slow;
-        top: 50%;
+        grid-column: 3/12;
+        transition: 0.35s all ease-in-out;
+        top: 60%;
 
         .logo {
           width: 50rem;
-          transition: $transition-slow;
+          transition: 0.35s all ease-in-out;
         }
         .slogan {
           h1 {
             letter-spacing: 7px;
-            font-size: $font-size-h2;
+            font-size: 3.5rem;
           }
         }
       }
