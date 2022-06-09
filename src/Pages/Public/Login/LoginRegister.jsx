@@ -1,8 +1,9 @@
 import { useState, useContext }  from "react";
 import { UserContext } from "../../../contexts/UserContext.js";
-import UserLogin from "./UserLogin/UserLogin.jsx";
-import UserRegistration from "./UserRegistration/UserRegistration.jsx";
+import UserLogin from "../../../components/Public/LoginRegister/UserLogin/UserLogin.jsx";
+import UserRegistration from "../../../components/Public/LoginRegister/UserRegistration/UserRegistration.jsx";
 
+import './loginRegister.scss'
 
 export default function LoginRegister() {
     const [isRegister, setIsRegister] = useState(false)
@@ -18,7 +19,9 @@ export default function LoginRegister() {
     }
 
   return (
+
     <div className="LoginRegister">
+    <video src={process.env.PUBLIC_URL + "/landingVideos/berriesWhite.webm"} loop></video>
         { isLogin ?
           <section className="welcome-page">
             <p>{message}</p>
@@ -34,5 +37,6 @@ export default function LoginRegister() {
 
         }   
     </div>
+
   )
 }
