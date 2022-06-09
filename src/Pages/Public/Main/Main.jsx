@@ -5,9 +5,6 @@ import Header from '../../../components/Public/header/Header'
 import './main.scss'
 
 import '../../../../src/app.scss'
-import VideoFile from '../../../assets/raspberrie.mp4'
-
-
 import Logo from '../../../assets/pngLogo.png'
 
 

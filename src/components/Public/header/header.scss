@@ -28,6 +28,11 @@
       @include container(2.2rem, 2.2rem);
       margin-right: 0.5rem;
       }
+
+      a{
+        color: $white;
+        text-decoration: none;
+      }
     }
 
     .navbar {
