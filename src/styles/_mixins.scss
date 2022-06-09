@@ -13,6 +13,11 @@
   height: $height;
 }
 
+@mixin grid($width, $height) {
+  width: $width;
+  height: $height;
+}
+
 
 @mixin single-button($bg, $bg-hover, $text: #fff) {
   background-color: $bg;
@@ -53,3 +58,5 @@
 // }
 // // if the breakpoint is less than or equal to 1440px
 // @include media(">=widescreen") {
+
+// }

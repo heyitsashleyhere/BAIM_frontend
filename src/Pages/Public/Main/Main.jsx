@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-import './video.scss'
-import VideoFile from '../assets/Lake.mp4'
-import Logo from '../assets/svgLogo.svg'
+import Header from '../../../components/landing-page/header/Header'
+import './main.scss'
+import '../../../styles/index.scss'
+import VideoFile from '../../../assets/raspberrie.mp4'
+
+import Logo from '../../../assets/pngLogo.png'
 
 
 const Main = () => {
@@ -18,11 +21,12 @@ const Main = () => {
   const handleLoadedMetadata = () => {
     setPDuration(videoEl.current.duration)
   }
+  console.log(pDuration)
 
   const handleCanPlay = () => {
     const tl = gsap.timeline()
     tl.to(videoEl.current, {
-      duration: pDuration,
+      // duration: pDuration,
       opacity: 1,
       ease: 'power2.inOut',
       onComplete: () => {
@@ -34,13 +38,13 @@ const Main = () => {
         opacity: 1,
         backgroundColor: `#000000`,
         ease: 'power2.inOut'
-      }, '+=8.3')
+      }, '-=2')
       .to(imageRef.current, {
         y: 0,
-        duration: 2,
+        duration: 1,
         opacity: 1,
         ease: 'power2.inOut'
-      }, '-=3')
+      },'-=1')
       .to(sloganRef.current, {
         y: 0,
         duration: 1,
@@ -57,6 +61,8 @@ const Main = () => {
   
 
   return (
+    <>
+      <Header  />
     <div className="video-wrapper">
       <video ref={videoEl} src={VideoFile} autoPlay playsInline muted
       onLoadedMetadata={handleLoadedMetadata}/>
@@ -69,6 +75,7 @@ const Main = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
