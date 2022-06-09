@@ -4,13 +4,12 @@
 
 .header {
   @include container(100%, 4.5rem);
-  @include flexContainer(center, space-between, center, wrap);
+  @include flexContainer(center, space-between, center, nowrap);
   padding-inline: 2rem;
-
   position: relative;
   margin-inline: auto;
   z-index: 10;
-  background-color: transparent;
+  background-color: black;
   color: #fff;
 
   font-weight: $font-weight-800;
@@ -20,7 +19,7 @@
   color: $white;
 
   &-logo {
-    @include flexContainer(row, space-between, center, wrap);
+    @include flexContainer(row, space-between, center, nowrap);
     gap: .8rem;
 
     img {
