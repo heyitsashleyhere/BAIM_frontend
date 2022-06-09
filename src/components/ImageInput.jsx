@@ -1,20 +1,17 @@
 import { ref,uploadBytesResumable, getDownloadURL, getStorage, deleteObject } from 'firebase/storage'
+import { useState, useRef, useContext } from 'react'
 import { storage } from "../firebase.js"
 import { PostsContext } from '../contexts/PostContext.js'
-import { useState, useRef, useContext } from 'react'
+import { UserContext } from '../contexts/UserContext.js'
 
 
-export default function ImageInput({ editData, setEditData}){
-
-    console.log(editData)
-
-    // const { inputValues, setInputValues}=useContext(PostsContext)
-    
+export default function ImageInput({imageUsage}){
+    const { inputValues, setInputValues } = useContext(UserContext)
     const [ progress, setProgress ] = useState(0)
     const [ imageUrl, setImageUrl ] = useState()
     const img = useRef()
 
-    function fileHandler(e){
+    function fileHandler(e) {
         e.preventDefault()
         setImageUrl(URL.createObjectURL(img.current.files[0]))
 
@@ -23,7 +20,6 @@ export default function ImageInput({ editData, setEditData}){
 
 
     function uploadFile(file){
-
         if(!file){return}
         const storageRef= ref(storage,`/files/image/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file)
@@ -31,21 +27,20 @@ export default function ImageInput({ editData, setEditData}){
         uploadTask.on("state_changed", (snapshot)=>{
             const prog= Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
             setProgress(prog)
-        }, (err) => console.log(err), 
+        }, (err) => console.log("uploadFile error", err), 
         () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=>setEditData({...editData, profilePicture: imgURL}))
+            getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> setInputValues({...inputValues, [`${imageUsage}`]: imgURL}))
         })
     }
 
     function deleteFile(file){
-
-        if(inputValues.image){
+        if(inputValues[`${imageUsage}`]){
             const storage = getStorage()
-            const imageRef = ref(storage, `${editData.profilePicture}`)
+            const imageRef = ref(storage, `${inputValues[`${imageUsage}`]}`)
 
             deleteObject(imageRef).then(()=>{
                 console.log('imageRef', img)
-                setEditData({...editData, profilePicture:""})
+                setInputValues({...inputValues, [`${imageUsage}`]:""})
                 setProgress(0)
                 setImageUrl('')
             }).catch((error)=>{
@@ -54,18 +49,16 @@ export default function ImageInput({ editData, setEditData}){
         }
     }
 
-    console.log(editData.profilePicture)
+    console.log("checking image URL", inputValues[`${imageUsage}`])
 
     // I have to find more about this according to some research in the 
     function updateFile(file){
 
         if(inputValues.image){
             const storage=getStorage()
-            const imageRef = ref(storage,`${inputValues.image}`)
+            const imageRef = ref(storage,`${inputValues[`${imageUsage}`]}`)
 
         }
-
-
 
     }
 
@@ -74,7 +67,7 @@ export default function ImageInput({ editData, setEditData}){
     return(
         <section className="image">
             <section className="image-container">
-                { editData.profilePicture ? <img src={editData.profilePicture} width="620" height="240"></img> : null }
+                { inputValues[`${imageUsage}`] ? <img src={inputValues[`${imageUsage}`] || ""} width="620" /> : null }
             </section>
             <section className="input-image">
             <input ref={img} type="file" accept="image/*" className="input"/>

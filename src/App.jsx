@@ -1,16 +1,14 @@
 import Posts from "./components/Posts.jsx";
-import UserLogin from "./components/UserLogin.jsx";
-import UserRegistration from "./components/UserRegistration.jsx";
 import UserEdit from "./components/UserEdit.jsx";
 import UserDelete from "./components/UserDelete.jsx";
 import UserLogout from "./components/UserLogout.jsx";
+import LoginRegister from "./components/LoginRegister/LoginRegister.jsx";
 
 
 export default function App() {
   return (
     <div>
-      <UserRegistration />
-      <UserLogin />
+      <LoginRegister />
       <UserLogout />
       <UserEdit />
       <UserDelete />

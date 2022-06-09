@@ -5,10 +5,23 @@ const userTemplate = [];
 export const UserContext = React.createContext(userTemplate);
 
 export const UserContextProvider = (props) => {
-  const [user, setUser] = useState({ id: "", profileName: "" });
+  const [user, setUser] = useState({ id: "", profileName: "", avatar: "" });
+  const [inputValues, setInputValues] = useState({})
+  const [message, setMessage] = useState("")
+  const [isLogin, setIsLogin] = useState(false)
+  const [isShowPassword, setIsShowPassword] = useState(false)
+
+  function showPasswordHandler(){
+    setIsShowPassword(!isShowPassword)
+  }
 
   const userContextValue = {
-    user, setUser
+    user, setUser,
+    inputValues, setInputValues,
+    message, setMessage,
+    isLogin, setIsLogin,
+    isShowPassword, setIsShowPassword,
+    showPasswordHandler
   };
 
   return (
@@ -16,15 +29,4 @@ export const UserContextProvider = (props) => {
       {props.children}
     </UserContext.Provider>
   );
-};
-
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [profileName, setProfileName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [street, setStreet] = useState("");
-  // const [streetNumber, setStreetNumber] = useState("");
-  // const [city, setCity] = useState("");
-  // const [zip, setZip] = useState("");
-  // const [country, setCountry] = useState("");
+}
