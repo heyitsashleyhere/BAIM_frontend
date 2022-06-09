@@ -1,0 +1,32 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    overflow: hidden;
+    font-size: $font-size-base;
+  }
+
+.About{
+    background-color: $black;
+    @include container(100%, 100vh);
+
+
+    
+}

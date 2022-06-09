@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import gsap from 'gsap'
 
 import './header.scss'
-import Logo from '../../../assets/raspberry.png'
+// import Berries from '../../../../public/landingVideos/berries(1).webm'
+import Logo from '../../../assets/logo/raspberry.png'
 
 
 const Header = () => {
@@ -16,31 +18,27 @@ const Header = () => {
       y: -100,
       opacity: 0,
       ease: 'power2.inOut'
-    },'+=9')
+    },'+=1')
   }, [])
 
   return (
     <header ref={headerRef} className="header">
       <div className="header-logo">
-        <img src={Logo} alt="LOKA" />
+        <img src={Logo} alt="LOKA" /> 
         <p>Loka</p>
       </div>
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <a href="#" className="nav-link">
-              <p>team</p>
-            </a>
+            <Link to="/team">Team</Link>
+        
           </li>
           <li className="nav-item">
-            <a href="#" className="nav-link">
-              <p>about</p>
-            </a>
+          <Link to='/about'>About</Link>
+            
           </li>
           <li className="nav-item">
-            <a href="#" className="nav-link">
-              <p>login</p>
-            </a>
+          <Link to='login'>Login</Link>
           </li>
         </ul>
       </nav>

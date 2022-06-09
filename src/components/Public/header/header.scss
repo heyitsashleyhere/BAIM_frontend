@@ -29,40 +29,20 @@
 
     img {
       @include container(2.2rem, 2.2rem);
-      object-fit: cover;
-    }
-  }
-
-  .navbar {
     display: grid;
-    grid-column: 3/6;
-    align-items: center;
-    justify-content: end;
     padding-left: 2rem;
-    transition: $transition-slow;
-    ul {
-      @include flexContainer(row, flex-start, center, wrap);
       list-style: none;
-      gap: 2rem;
-
-      li {
         display: flex;
-
-        &:nth-child(1) {
-          padding-left: 0;
         }
-        &:nth-child(3) {
-          // padding-left: 3rem;
-          transition: $transition-slow;
-        }
+  }
 
         a {
           color: $white;
           text-decoration: none;
           transition: all 0.3s ease-in-out;
         }
-      }
-    }
+      
+    
   }
   @include media(">=tablet") {
       grid-template-columns: 2rem repeat(8, 1fr) 2rem;
@@ -127,5 +107,5 @@
         }
       }
     }
-  }
+  
 }
