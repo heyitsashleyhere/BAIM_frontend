@@ -45,7 +45,8 @@
       transition: $transition-slow;
 
       .logo {
-        transform: translateY(100%);
+        transform: translateY(120%);
+        opacity: 0;
         width: 30rem;
         transition: $transition-slow;
       }
@@ -77,6 +78,7 @@
             transition: $transition-slow;
           }
           .slogan {
+            transform: translateY(-150%)
             h1{
               letter-spacing: 5px;
               font-size: $font-size-h3;

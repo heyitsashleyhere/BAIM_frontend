@@ -1,13 +1,14 @@
 @import '../../../styles/variables';
 @import '../../../styles/mixins';
 @import '../../../styles/breakpoints';
+@import '../../../styles/resets';
 
 .header {
+  transform: translateY(-100%);
   display: grid;
   grid-template-columns: 1rem repeat(4, 1fr) 1rem;
   gap: 1rem;
   margin: 0;
-  width: 100%;
   height: 4.5rem;
 
   z-index: 10;
@@ -17,34 +18,48 @@
   font-size: $font-size-md;
   color: $white;
   transition: $transition-slow;
+  align-items: center;
 
   &-logo {
     display: grid;
     grid-auto-flow: column;
     justify-content: start;
-    align-items: center;
     grid-column: 2/3;
     gap: .8rem;
     transition: $transition-slow;
 
     img {
       @include container(2.2rem, 2.2rem);
-    display: grid;
-    padding-left: 2rem;
-      list-style: none;
-        display: flex;
+      display: grid;
         }
-  }
+    }
 
-        a {
-          color: $white;
-          text-decoration: none;
-          transition: all 0.3s ease-in-out;
-        }
+    .navbar {
+      display: grid;
+      grid-column: 3/6;
+      justify-content: end;
+      transition: $transition-slow;
       
-    
-  }
-  @include media(">=tablet") {
+      .nav-list {
+        gap: 2rem;
+        transition: $transition-slow;
+        display: flex;
+        list-style: none;
+
+        .nav-item {
+          &:nth-child(3) {
+            // padding-left: 11rem;
+            transition: $transition-slow;
+          }
+          a {
+            color: $white;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+      }
+    } 
+    @include media(">=tablet") {
       grid-template-columns: 2rem repeat(8, 1fr) 2rem;
       transition: $transition-slow;
 
@@ -56,7 +71,7 @@
           object-fit: cover;
         }
       }
-    
+      
       .navbar {
         grid-column: 5/9;
         padding-left: 0;
@@ -74,38 +89,38 @@
           }
         }
       }
-  }
-
-  @include media(">=desktop") {
-    grid-template-columns: 2rem repeat(12, 1fr) 2rem;
-    transition: $transition-slow;
-
-    &-logo {
-      grid-column: 4/5;
-      transition: $transition-slow;
-
-      img {
-        @include container(2.6rem, 2.6rem);
-        object-fit: cover;
-      }
     }
-
-    .navbar {
-      grid-column: 6/12;
-      padding-left: 0;
+      
+    @include media(">=desktop") {
+      grid-template-columns: 2rem repeat(12, 1fr) 2rem;
       transition: $transition-slow;
-
-      ul {
-        gap: 4rem;
+  
+      &-logo {
+        grid-column: 4/5;
         transition: $transition-slow;
-
-        li {
-          &:nth-child(3) {
-            padding-left: 18rem;
-            transition: $transition-slow;
+  
+        img {
+          @include container(2.6rem, 2.6rem);
+          object-fit: cover;
+        }
+      }
+  
+      .navbar {
+        grid-column: 6/12;
+        padding-left: 0;
+        transition: $transition-slow;
+  
+        ul {
+          gap: 4rem;
+          transition: $transition-slow;
+  
+          li {
+            &:nth-child(3) {
+              padding-left: 18rem;
+              transition: $transition-slow;
+            }
           }
         }
       }
     }
-  
-}
+  }

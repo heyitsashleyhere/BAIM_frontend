@@ -13,12 +13,11 @@ const Header = () => {
 
 
   useEffect(() => {
-    gsap.from(headerRef.current, {
-      duration: 1,
-      y: -100,
-      opacity: 0,
+    gsap.to(headerRef.current, {
+      duration: 0.8,
+      y: 0,
       ease: 'power2.inOut'
-    },'+=1')
+    },'+=9.5')
   }, [])
 
   return (
@@ -30,15 +29,15 @@ const Header = () => {
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="/team">Team</Link>
+            <Link to="/team">team</Link>
         
           </li>
           <li className="nav-item">
-          <Link to='/about'>About</Link>
+          <Link to='/about'>about</Link>
             
           </li>
           <li className="nav-item">
-          <Link to='login'>Login</Link>
+          <Link to='login'>login</Link>
           </li>
         </ul>
       </nav>
