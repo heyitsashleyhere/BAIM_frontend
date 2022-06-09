@@ -1,0 +1,110 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+
+.video-wrapper {
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  
+  video {
+    @include container(100%, 100vh);
+    object-fit: cover;
+  }
+  
+  .overlay {
+    display: grid;
+    grid-template-columns: 1rem repeat(4, 1fr) 1rem;
+    gap: 1rem;
+    margin: 0;
+    @include container(100%, 100vh);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $black;
+    z-index: 5;
+    opacity: 0;
+    // transition: $transition-slow;
+
+
+    .overlay-content {
+      display: grid;
+      grid-column: 2/6;
+      position: absolute;
+      top: 65%;
+      left: 0;
+      
+      font-family: $font-family-Inter;
+      font-size: $font-size-main;
+      color: #fff;
+      transition: $transition-slow;
+
+      .logo {
+        transform: translateY(100%);
+        width: 30rem;
+        transition: $transition-slow;
+      }
+
+      .slogan {
+        padding-left: .7rem;
+        z-index: 3;
+
+        h1 {
+          transform: translateY(-100%);
+          letter-spacing: 5px;
+          font-size: $font-size-h4;
+          font-weight: $font-weight-900;
+          transition: $transition-slow;
+        }
+      }
+    }
+    @include media(">=tablet") {
+      grid-template-columns: 2rem repeat(8, 1fr) 2rem;
+      // transition: $transition-slow;
+
+      .overlay-content {
+        grid-column: 3/9;
+        transition: $transition-slow;
+        top: 60%;
+
+        .logo {
+            width: 40rem;
+            transition: $transition-slow;
+          }
+          .slogan {
+            h1{
+              letter-spacing: 5px;
+              font-size: $font-size-h3;
+            }
+          }
+        }
+      }
+
+    @include media(">=desktop") {
+      grid-template-columns: 2rem repeat(12, 1fr) 2rem;
+      transition: $transition-slow;
+
+      .overlay-content {
+        grid-column: 4/12;
+        transition: $transition-slow;
+        top: 50%;
+
+        .logo {
+          width: 50rem;
+          transition: $transition-slow;
+        }
+        .slogan {
+          h1 {
+            letter-spacing: 7px;
+            font-size: $font-size-h2;
+          }
+        }
+      }
+    }
+  }
+}
