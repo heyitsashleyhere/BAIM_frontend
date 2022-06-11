@@ -16,7 +16,9 @@ html {
 }
 
 body {
-  overflow: hidden;
+  // overflow: hidden;
+  min-height: -webkit-fill-available;
+  min-height: 100vh;
   font-size: $font-size-base;
   background-color: black;
 }
