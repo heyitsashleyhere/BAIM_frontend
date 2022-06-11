@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import Header from '../../../components/Public/header/Header'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/src/all'
 import './main.scss'
