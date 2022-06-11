@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/src/all'
 import './main.scss'
+
 import '../../../../src/app.scss'
+
 
 
 import Logo from '../../../assets/pngLogo.png'
@@ -87,6 +89,7 @@ const Main = () => {
       }, '-=1')
       .to(sloganRef.current, {
         y: 0,
+
         duration: 0.8,
         ease: 'power2.inOut',
         onComplete: () => {
