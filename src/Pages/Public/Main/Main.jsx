@@ -133,7 +133,7 @@ const Main = () => {
   console.log(show)
   return (
   <>
-    <section className="cta-container">
+        <section className="cta-container">
       <div className="overlay" ref={overlayRef}>
         <div className="overlay-content">
           <img ref={imageRef} src={Logo} alt="LOKA" className='logo' />
