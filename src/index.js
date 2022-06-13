@@ -16,7 +16,6 @@ root.render(
 		<UserContextProvider>
 			<PostsContextProvider>
 				<App />
-				
 			</PostsContextProvider>
 		</UserContextProvider>
 	</BrowserRouter>
