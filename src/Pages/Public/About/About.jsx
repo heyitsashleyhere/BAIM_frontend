@@ -10,7 +10,7 @@ import Footer from '../../../components/Public/Footer/Footer'
 
 
 export default function About(){
-    const [isLoaded, setIsLoaded] = useState(false)
+    // const [isLoaded, setIsLoaded] = useState(false)
     const imagesRef = useRef([])
     imagesRef.current = []
 
