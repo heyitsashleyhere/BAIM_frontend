@@ -5,8 +5,6 @@ import './main.scss'
 
 import '../../../../src/app.scss'
 
-
-
 import Logo from '../../../assets/pngLogo.png'
 
 gsap.registerPlugin(ScrollTrigger)

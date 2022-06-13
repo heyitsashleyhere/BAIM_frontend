@@ -32,7 +32,7 @@ export default function LoginRegister() {
        :
           <section className="login-page">
             { isRegister ? <UserRegistration />: <UserLogin />}
-            <button onClick={switchForm}>
+            <button className="LogIn-Button" onClick={switchForm}>
               {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
             </button>
           </section>

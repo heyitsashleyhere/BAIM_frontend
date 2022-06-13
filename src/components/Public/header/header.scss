@@ -16,6 +16,7 @@
   font-weight: $font-weight-800;
   font-size: $font-size-md;
   color: $white;
+  mix-blend-mode: difference;
   transition: 0.35s all ease-in-out;
   align-items: center;
 
@@ -28,10 +29,14 @@
       @include container(2.2rem, 2.2rem);
       margin-right: 0.5rem;
       }
+
+      a{
+        color: $white;
+        text-decoration: none;
+      }
     }
 
     .navbar {
-
       transition: 0.35s all ease-in-out;
       
       .nav-list {

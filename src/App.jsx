@@ -67,7 +67,7 @@ export default function App() {
             </>
           )}
 
-          <Route path="*" element={<p>error</p>} />
+          <Route path="*" element={<LoginRegister/>} />
         </Routes>
       </>
 

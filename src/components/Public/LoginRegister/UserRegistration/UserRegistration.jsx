@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
 import ImageInput from "../../../ImageInput.jsx";
 
+import './userRegistration.scss'
+
 export default function UserRegistration() {
     const [userAddress, setUserAddress] = useState({})
     const [errors, setErrors] = useState([])
@@ -45,82 +47,110 @@ export default function UserRegistration() {
     }
   
     return (
-      <div>
-        <h1>User Registration</h1>
+      <div className="Register_Outer">
+        <h1>Register</h1>
         <form onSubmit={handleUserRegistration}>
-
-          <h2>Avatar</h2>
-          <ImageInput imageUsage="avatar"/> 
+        
+          {/* <h2>Avatar</h2>
+          <ImageInput imageUsage="avatar"/>  */}
+          <section className="Input">
+          <p className="Input_title">First Name</p>   
+          <input name="firstName" placeholder="" type="text" required
+                 onChange={handleChange} />
+          {errors.map((error, i) => (    
+            error.firstName && (<p className="inputAlert" key={"firstNameError"+ i}>{error.firstName}</p>)
+          ))}
+          </section> 
               
-          <input name="firstName" placeholder="first name" type="text" required
+          <section className="Input">
+          <p className="Input_title">Family Name</p>
+          <input name="lastName" placeholder="" type="text" required
                  onChange={handleChange} />
           {errors.map((error, i) => (    
-            error.firstName && (<p key={"firstNameError"+ i}>{error.firstName}</p>)
-          ))}    
-
-          <input name="lastName" placeholder="last name" type="text" required
-                 onChange={handleChange} />
-          {errors.map((error, i) => (    
-            error.lastName && (<p key={"lastNameError"+ i}>{error.lastName}</p>)
-          ))}      
-
-          <input name="profileName" placeholder="profile name" type="text" required
-                 onChange={handleChange} />
-          {errors.map((error, i) => (    
-            error.profileName && (<p key={"profileNameError"+ i}>{error.profileName}</p>)
-          ))} 
-
-          <input name="email" placeholder="email" type="email" required
-                 onChange={handleChange} />
-          {errors.map((error, i) => (    
-            error.email && (<p key={"emailError"+ i}>{error.email}</p>)
+            error.lastName && (<p className="InputAlert" key={"lastNameError"+ i}>{error.lastName}</p>)
           ))}
-
-          <input name="password" placeholder="password" type={isShowPassword ? "text" : "password"} required
-                 onChange={handleChange} />
-          <span onClick={showPasswordHandler}>{isShowPassword ? "🐵" : "🙈"}</span>
-          {errors.map((error, i) => (    
-            error.password && (<p key={"passwordError"+ i}>{error.password}</p>)
-          ))}
-
-          <input name="confirmPassword" placeholder="confirm password" type="password" required
+          </section>      
+          <section className="Input">
+          <p className="Input_title">Profile Name</p>
+          <input name="profileName" placeholder="" type="text" required
                  onChange={handleChange} />
           {errors.map((error, i) => (    
-            error.confirmPassword && (<p key={"confirmPasswordError"+ i}>{error.confirmPassword}</p>)
+            error.profileName && (<p className="inputAlert" key={"profileNameError"+ i}>{error.profileName}</p>)
           ))}
+          </section> 
+          <section className="Input">
+          <p className="Input_title">email</p>
+          <input name="email" placeholder="" type="email" required
+                 onChange={handleChange} />
+          {errors.map((error, i) => (    
+            error.email && (<p className="inputAlert" key={"emailError"+ i}>{error.email}</p>)
+          ))}
+          </section>
+
+          <section className="Input">
+          <p className="Input_title">Password</p>
+
+          <section className="Input_Hidden">
+          <input name="password" placeholder="****" type={isShowPassword ? "text" : "password"} required
+                 onChange={handleChange} />
+          <span className="icon" onClick={showPasswordHandler}>{isShowPassword ? "🐵" : "🙈"}</span>
+          </section>
+          {errors.map((error, i) => (    
+            error.password && (<p className="inputAlert" key={"passwordError"+ i}>{error.password}</p>)
+          ))}
+          </section>
           
-          <h2>Address</h2>
-          <input name="street" placeholder="street" type="text"
+          <section className="Input">
+          <p className="Input_title">Confirm Password</p>
+          <input name="confirmPassword" placeholder="*****" type="password" required
+                 onChange={handleChange} />
+          {errors.map((error, i) => (    
+            error.confirmPassword && (<p className="inputAlert" key={"confirmPasswordError"+ i}>{error.confirmPassword}</p>)
+          ))}
+          </section>
+          <section className="Input">
+          <p className="Input_title">street</p>
+          <input name="street" placeholder="" type="text"
                  onChange={handleAddressChange} />
           {errors.map((error, i) => (    
-            error["userAddress.street"] && (<p key={"streetError"+ i}>{error["userAddress.street"] }</p>)
+            error["userAddress.street"] && (<p className="inputAlert" key={"streetError"+ i}>{error["userAddress.street"] }</p>)
           ))}
+          </section>
+          <section className="Input">
+          <p className="Input_title">House Number</p>
+          <input name="streetNumber" placeholder="ex:12, 12B 12A-B" type="text" 
+                 onChange={handleAddressChange} />
+          {errors.map((error, i) => (    
+            error["userAddress.streetNumber"] && (<p className="inputAlert" key={"streetNumberError"+ i}>{error["userAddress.streetNumber"] }</p>)
+          ))}
+          </section>
+          <section className="Input">
+          <p className="Input_title">City</p>
+          <input name="city" placeholder="" type="text" required
+                 onChange={handleAddressChange} />
+          {errors.map((error, i) => (    
+            error["userAddress.city"] && (<p className="inputAlert" key={"cityError"+ i}>{error["userAddress.city"] }</p>)
+          ))}
+          </section>
 
-          <input name="streetNumber" placeholder="street number" type="text"
+          <section className="Input">
+          <p className="Input_title">Zip Code</p>
+          <input name="zip" placeholder="12345" type="text"
                  onChange={handleAddressChange} />
           {errors.map((error, i) => (    
-            error["userAddress.streetNumber"] && (<p key={"streetNumberError"+ i}>{error["userAddress.streetNumber"] }</p>)
+            error["userAddress.zip"] && (<p className="inputAlert" key={"zipError"+ i}>{error["userAddress.zip"] }</p>)
           ))}
-
-          <input name="city" placeholder="ciy" type="text" required
+          </section>
+          <section className="Input">
+          <p className="Input_title">Country</p>
+          <input name="country" placeholder="" type="text" required
                  onChange={handleAddressChange} />
           {errors.map((error, i) => (    
-            error["userAddress.city"] && (<p key={"cityError"+ i}>{error["userAddress.city"] }</p>)
+            error["userAddress.country"] && (<p className="inputAlert" key={"countryError"+ i}>{error["userAddress.country"] }</p>)
           ))}
-
-          <input name="zip" placeholder="zip code" type="text"
-                 onChange={handleAddressChange} />
-          {errors.map((error, i) => (    
-            error["userAddress.zip"] && (<p key={"zipError"+ i}>{error["userAddress.zip"] }</p>)
-          ))}
-
-          <input name="country" placeholder="country" type="text" required
-                 onChange={handleAddressChange} />
-          {errors.map((error, i) => (    
-            error["userAddress.country"] && (<p key={"countryError"+ i}>{error["userAddress.country"] }</p>)
-          ))}
+          </section>
           
-          <button type="submit">Register</button>
+          <button className="Button" type="submit">Register</button>
 
         </form>
 
