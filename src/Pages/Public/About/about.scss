@@ -77,28 +77,28 @@
 
       .about_images{
         margin-top: 10rem;
-        display:flex;
-        align-items: flex-start;
-        flex-direction: column;
         width:100%;
         grid-column:2/8;
-      
-        .plant{
-          margin:2rem 0rem;
-          width:40%;
+        
+        .overlay{
+          display:flex;
+          flex-direction: column;
+          overflow: hidden;
+          width: 100%;
           
-        }
+          img{
+            transform: translateY(calc(100% + 2rem));
+            margin: 2rem 0rem;
+            width: 40%;
+          }
 
-        .veg{
-          margin:2rem 0rem;
-          width:40%;
-          align-self:flex-end;
-        }
+          .veg{
+            align-self:flex-end;
+          }
 
-        .man{
-          margin:2rem 0rem;
-          width:40%;
-          align-self:flex-start;
+          .man{
+            align-self:flex-start;
+          }
         }
       
       }

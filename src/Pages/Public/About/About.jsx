@@ -1,4 +1,5 @@
-
+import { useRef, useEffect, useState } from 'react';
+import gsap from 'gsap'
 
 import './about.scss'
 import plant from '../../../assets/images/growing.jpg'
@@ -9,7 +10,35 @@ import Footer from '../../../components/Public/Footer/Footer'
 
 
 export default function About(){
+    const [isLoaded, setIsLoaded] = useState(false)
+    const imagesRef = useRef([])
+    imagesRef.current = []
 
+    useEffect(() => {
+
+        imagesRef.current.forEach(image => {
+            image.addEventListener('load', () => {
+                
+                const tl = gsap.timeline()
+                tl.to(image, {
+                    duration: 0.8,
+                    y: 0,
+                    ease: 'power2.inOut',
+                    stagger: 0.3,
+                    delay: 0.8
+                })
+
+            })
+
+        })
+    }, [ imagesRef ])
+    
+
+
+
+    const addToRefs = (e) => {
+        imagesRef.current.push(e)
+    }
 
 
 
@@ -23,9 +52,15 @@ export default function About(){
         <section className="About">
 
         <section className="about_images">
-            <img className="plant" src={plant}></img>
-            <img className="veg" src={vegetables}></img>
-            <img className="man" src={gardner}></img>
+            <span className="overlay">
+                <img ref={addToRefs} className="plant" src={plant}></img>
+            </span>
+            <span className="overlay">
+                <img ref={addToRefs} className="veg" src={vegetables}></img>
+            </span>
+            <span className="overlay">
+                <img ref={addToRefs} className="man" src={gardner}></img>
+            </span>
         </section>
 
         <section className="about_logo">
