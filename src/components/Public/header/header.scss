@@ -4,7 +4,6 @@
 @import '../../../styles/resets';
 
 .header {
-  transform: translateY(-100%);
   display: flex;
   justify-content: space-between;
   padding-inline: 1rem;
@@ -16,7 +15,6 @@
   font-weight: $font-weight-800;
   font-size: $font-size-md;
   color: $white;
-  mix-blend-mode: difference;
   transition: 0.35s all ease-in-out;
   align-items: center;
 

@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
+import { AnimationContext } from '../../../contexts/AnimationContext'
+
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/src/all'
 import './main.scss'
@@ -11,15 +13,13 @@ gsap.registerPlugin(ScrollTrigger)
 
 
 const Main = () => {
+  const { isEnded, setIsEnded, show, setShow, handleGsapTiming, windowWidth } = useContext(AnimationContext)
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [pDuration, setPDuration] = useState(0)
-  const [isEnded, setIsEnded] = useState(false)
-  const [show, setShow] = useState(false)
+
 
 
   const videoEl = useRef(null)
-
   const overlayRef = useRef(null)
   const imageRef = useRef(null)
   const sloganRef = useRef(null)
@@ -37,30 +37,11 @@ const Main = () => {
 
   const videoUrl = windowWidth >= 992 ? desktopVideo : tabletVideo;
 
-  useEffect(() => {
-    const handleWindowResize = () => {
-        setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    }
-  }, []);
-
-
   const handleLoadedMetadata = () => {
     setPDuration(videoEl.current.duration)
   }
 
-//GSAP ANIMATIONS
-  // overlay and overlay-contents animations delay timing
-  const handleGsapTiming = () => {
-    if (windowWidth >= 992) {
-      return '+=85'
-    } else {
-      return '+=7'
-    }
-  }
+  console.log(pDuration)
 
   //Main page gsap timeline
   const handleCanPlay = () => {
@@ -78,7 +59,7 @@ const Main = () => {
         opacity: 1,
         backgroundColor: `#000000`,
         ease: 'power2.inOut'
-      }, handleGsapTiming())
+      }, `+=${handleGsapTiming(0)}`)
       .to(imageRef.current, {
         y: 0,
         duration: 0.8,
@@ -96,6 +77,7 @@ const Main = () => {
       }, '+=0.8')
     
   }
+  console.log(handleGsapTiming(0))
 
   //firing animations
   useEffect(() => {

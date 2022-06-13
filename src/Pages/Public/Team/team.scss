@@ -1,0 +1,119 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+@import '../../../app.scss';
+
+.team{
+padding-top: 10rem;
+padding-bottom: 5rem;
+background: #000;
+width: 100%;
+height: auto;
+display: grid;
+
+  .team_images{
+    display: flex;
+    padding: 3rem 1rem;
+    gap: 1rem;
+
+    .image{
+    width: 8rem;
+    height: 12rem;
+    background-size: cover;
+    border-radius:1rem; 
+    display: flex;
+    align-items: flex-end;
+    filter: grayscale(100%);
+
+    h2{
+      color: #fff;
+      font-weight: 900;
+      padding: 0 0 0.5rem 0.5rem;
+      }
+    }
+  }
+
+  .team_logo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 2rem 0rem;
+
+    p {
+      margin: 0rem 2rem;
+      align-self: flex-end;
+      color: white;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+
+    .logo {
+      margin: 0rem 2rem;
+      align-self: flex-end;
+      width: 10%;
+    }
+  }
+
+  .team_section {
+    color: white;
+    padding: 2rem;
+    margin: 1rem 0rem;
+    font-size: $font-size-base;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    p {
+      margin: 2rem 0rem;
+    }
+  }
+
+  @include media(">=tablet"){
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2.5rem;
+
+    .team_images{
+      grid-column: 2/8;
+
+      .image{
+        width: 13rem;
+        height: 25rem;
+
+        h2{
+          font-size: 3.2rem;
+          mix-blend-mode: color-dodge;
+          padding: 0 0 1rem 1rem;
+        }
+      }
+    }
+
+    .team_logo {
+      grid-column: 2/8;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      p {
+        margin: 0rem 2rem;
+        align-self: flex-end;
+        color: white;
+        font-size: 3rem;
+      }
+      .logo {
+        align-self: flex-end;
+        width: 10%;
+      }
+    }
+    .team_section{
+      grid-column: 2/8;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+    }
+
+  }
+  
+}
