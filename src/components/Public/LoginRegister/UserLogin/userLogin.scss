@@ -1,27 +1,44 @@
 
 
-
-
-
-
 .Login_Outer{
-    border:1px solid red;
-    height:400px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  
+
+
+
+    h1{
+        align-self: flex-start;
+        font-size:5.5rem;
+        margin:1rem 3rem;
+    }
   
     form{
-        border:1px solid blue;
-        height:400px;
-        display:flex;
-        flex-direction: column;
-        justify-content: space-around;
+       align-self: center;
+        height:450px;
+        width:90%;
 
-        input{
-            border:none;
 
+        .Input{
+            margin:10rem 0rem;
+        
         }
 
-       .input-Password{
-           
-       }
+        .Button{
+            background-color:black;
+            color:white;
+            border:none;
+            font-size: 2rem;
+            width:35%;
+            height:10%;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
     }
+
+
+
 }

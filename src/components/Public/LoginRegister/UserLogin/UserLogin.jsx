@@ -46,22 +46,33 @@ export default function UserLogin() {
 
   return (
     <div className="Login_Outer">
-      <h1>User Login</h1>
+        <h1 >Login</h1>
       <form onSubmit={handleUserLogin}>
-          <input name="email" type="email" placeholder="email"
-                 onChange={handleChange} />              
+
+           <section className="Input">
+           <p className="Input_title">email</p>
+            <input name="email" type="email" placeholder="....here@"
+                 onChange={handleChange} />     
           {errors.map((error, i) => (    
-            error.email && (<p key={"emailError"+ i}>{error.email}</p>)
+            error.email && (<p className="inputAlert" key={"emailError"+ i}>{error.email}</p>)
           ))}
-          <section className="input-Password">
-          <input name="password" type={isShowPassword ? "text" : "password"} placeholder="password"
-                 onChange={handleChange} />
-          <span onClick={showPasswordHandler}>{isShowPassword ? "🐵" : "🙈"}</span>
           </section>
-          {errors.map((error, i) => (    
-            error.password && (<p key={"passwordError"+ i}>{error.password}</p>)
-          ))}
-          <button type="submit">Login</button>
+
+          <section className="Input">
+            <p className="Input_title">password</p>
+
+            <section className="Input_Hidden">
+
+            <input name="password" type={isShowPassword ? "text" : "password"} placeholder="*********"
+                  onChange={handleChange} />
+            <span className="icon" onClick={showPasswordHandler}>{isShowPassword ? "🐵" : "🙈"}</span>
+            </section>
+
+            {errors.map((error, i) => (    
+              error.password && (<p className="inputAlert" key={"passwordError"+ i}>{error.password}</p>)
+            ))}
+          </section>
+          <button className="Button" type="submit">Login</button>
           
       </form>
     </div>
