@@ -11,13 +11,23 @@ width: 100%;
 height: auto;
 display: grid;
 
+  .back{
+    color: #fff;
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+    left: 2rem;
+    top: 8rem;
+    font-size: 1.4rem;
+  }
+
   .team_images{
     display: flex;
-    padding: 1rem 1rem;
+    padding: 1rem 2rem;
     gap: 1rem;
 
     .team_member {
-      width: 8rem;
+      width: 7.7rem;
       height: 12rem;
       position: relative;
       border-radius: 1rem;
@@ -41,21 +51,11 @@ display: grid;
         }
         &:hover {
           img{
-            // filter: grayscale(0%);
+            filter: grayscale(0%);
             transform: scale(1.4) !important;
             cursor: pointer;
           }
-        }
-        &:visited {
-          img {
-            filter: grayscale(0%) !important;
-            transform: scale(1.4) !important;
-          }
-          // h2{
-          //   color: #000;
-          // }
-        }
-        
+        }       
         h2{
           color: #fff;
           font-weight: 900;
@@ -86,6 +86,12 @@ display: grid;
       align-self: flex-end;
       width: 10%;
     }
+
+    svg{
+      fill: #fff;
+      width: 5rem;
+      height: 5rem;
+    }
   }
 
   .team_section {
@@ -110,9 +116,6 @@ display: grid;
         display: flex;
         align-items: center;
         gap: .2rem;
-        // .icon{
-        //   font-size: 2.2rem;
-        // }
       }
     }
   }
@@ -134,6 +137,12 @@ display: grid;
   @include media(">=tablet"){
     grid-template-columns: repeat(8, 1fr);
     gap: 2.5rem;
+    
+    .back {
+      grid-column: 2/3;
+        position: relative;
+        top: 2rem;
+      }
 
     .team_images{
       grid-column: 2/8;
@@ -177,10 +186,31 @@ display: grid;
     }
 
   }
+
+  @include media(">=820px") {
+    .team_images {
+  
+      .team_member {
+        width: 14rem;
+  
+        .overlay {
+          width: 14rem;
+  
+          img {
+            width: 14rem;
+          }
+        }
+      }
+    }
+  }
   
   @include media(">=desktop") {
     width: 100%;
     grid-template-columns: repeat(12, 1fr);
+
+    .back {
+        grid-column: 3/11;
+      }
 
     .team_images {
       grid-column: 3/11;
@@ -217,6 +247,34 @@ display: grid;
       grid-column: 3/11;
       display: flex;
       flex-direction: column;
+    }
+  }
+
+  @include media(">=1190px"){
+  .team_images {
+    gap: 1.5rem;
+      .team_member {
+        width: 20rem;
+        height: 25rem;
+  
+        .overlay {
+          width: 20rem;
+          height: 25rem;
+  
+          img {
+            width: 20rem;
+            height: 25rem;
+            border-radius: 1rem;
+          }
+  
+          h2 {
+            font-size: 3rem;
+            color: #fff;
+            font-weight: 900;
+            padding: 0 0 1rem 1rem;
+          }
+        }
+      }
     }
   }
 }

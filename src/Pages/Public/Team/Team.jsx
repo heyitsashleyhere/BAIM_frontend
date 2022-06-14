@@ -4,7 +4,9 @@ import team from './teamData.js'
 
 import gsap from 'gsap'
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { MdAlternateEmail, MdPhoneIphone } from "react-icons/md";
+import { MdAlternateEmail, MdPhoneIphone, MdOutlineArrowBackIosNew } from "react-icons/md";
+import { IoIosCloseCircleOutline, IoIosCloseCircle, IoIosClose } from "react-icons/io";
+
 
 import './team.scss'
 import Logo from '../../../assets/logo/raspberry.png' 
@@ -26,12 +28,11 @@ const Team = () => {
   
   useEffect(() => {
     // ${name}/ h2 yposition for gsap name animation
-    const yPosition = windowWidth >= 768 ? '-100%' : '-25%'
+    // const yPosition = windowWidth >= 768 ? '-100%' : '-25%'
 
     console.log(imagesRef.current)
     console.log(revealRef.current)
     console.log(nameRef.current)
-    console.log(yPosition);
 
     const tl = gsap.timeline({
       stagger: 0.1,
@@ -61,12 +62,12 @@ const Team = () => {
       })
       tl.to(name, {
         duration: 0.6,
-        y: yPosition,
+        y: '-100%',
         ease: "power2.inOut",
       })
     })
 
-  }, [ windowWidth ])
+  }, [ ])
 
   const addToRefs = (el) => {
     imagesRef.current.push(el);
@@ -81,7 +82,7 @@ const Team = () => {
   const handleMemberComponent = (data) => {
     console.log(data);
     setMemberData(data);
-    setIsClicked(!isClicked);
+    setIsClicked(true);
   }
   console.log(memberData, isClicked);
 
@@ -89,6 +90,9 @@ const Team = () => {
 
   return (
     <section className="team">
+      <section className="back" onClick={() => setIsClicked(false)}>
+        <MdOutlineArrowBackIosNew  /><p>go back</p>
+      </section>
         <section className="team_images">
         {team.map((member, index) => {
         return (
