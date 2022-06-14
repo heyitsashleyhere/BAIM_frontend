@@ -16,11 +16,11 @@ export default function UserRegistration() {
     
     // this function can handle all the input(but address) changes:
     function handleChange(e) {
-       setInputValues({ ...inputValues, [e.target.name]: e.target.value})
+       setInputValues({ ...inputValues, [e.target.name]: e.target.value.trim()})
     }
     // this function handles all the address input changes:
     function handleAddressChange(e) {
-       setUserAddress({...userAddress, [e.target.name]: e.target.value })
+       setUserAddress({...userAddress, [e.target.name]: e.target.value.trim()})
     }
 
 

@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { AnimationContext } from '../../../contexts/AnimationContext'
@@ -10,11 +11,17 @@ import Logo from '../../../assets/logo/raspberry.png'
 
 const Header = () => {
 
+
   const { show, handleGsapTiming, windowWidth } = useContext(AnimationContext)
   const headerRef = useRef(null)
 
   const childrensRef = useRef([])
   childrensRef.current = []
+
+    const headerRef = useRef(null)
+    const location = useLocation()
+    console.log(location)
+
 
   console.log(windowWidth)
 
