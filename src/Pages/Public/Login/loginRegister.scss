@@ -1,0 +1,115 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+
+.LoginRegister{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    color:white;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+
+    .outer-Video{
+        top:0px;
+        width:100%;
+        height:100vh;
+        overflow: hidden;
+        object-fit: cover;
+    }
+
+    .login-page, .welcome-page{
+        position:absolute;
+        background-color:rgba(0, 0, 0, 0.507);
+        width:95%;
+        height:90%;
+        border-radius:20px;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        
+    }
+
+    .LogIn-Button{
+        width:100%;
+        position:relative;
+        background-color: transparent;
+        border:none;
+        font-size: 2rem;
+        color:white;
+        cursor:pointer;
+      }
+
+      .LogIn-Button:after {
+        content: "";
+        position: absolute;
+        display: inline;
+        top: 3.4rem;
+        width: 100%;
+        transform: scaleX(0);
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background-color: rgb(250, 248, 248);
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+      }
+
+      .LogIn-Button:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    
+
+    .welcome-page{
+        position:absolute;
+
+        img{
+            border-radius: 50%;
+            border:1px solid black;
+        }
+    }
+
+    @include media(">=tablet"){
+        display:grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap:2.5rem;
+
+        .outer-Video{
+            height:100vh;
+            grid-column: 1/9;
+        }
+
+
+        .login-page{
+            width:100%;
+            grid-column: 3/7;
+        }
+
+    }
+
+    @include media(">=desktop"){
+        display:grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap:2.5rem;
+
+        .outer-Video{
+            height:100vh;
+            grid-column: 1/13;
+        }
+
+        .login-page{
+            margin-top:15rem;
+            width:100%;
+            grid-column: 6/10;
+        }
+
+    }
+ 
+
+}
+
