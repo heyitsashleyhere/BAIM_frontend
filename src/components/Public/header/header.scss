@@ -4,19 +4,18 @@
 @import '../../../styles/resets';
 
 .header {
-  transform: translateY(-100%);
+  // transform: translateY(-100%);
   display: flex;
   justify-content: space-between;
   padding-inline: 1rem;
   height: 4.5rem;
   background-color: black;
-  z-index: 10;
+  z-index: 100;
 
   font-family: $font-family-Varela;
   font-weight: $font-weight-800;
   font-size: $font-size-md;
   color: $white;
-  mix-blend-mode: difference;
   transition: 0.35s all ease-in-out;
   align-items: center;
 

@@ -26,8 +26,8 @@ export default function LoginRegister() {
     </section>
         { isLogin ?
           <section className="welcome-page">
+            <img src={user.avatar} alt="avatar" width="100" height="100"/>
             <p>{message}</p>
-            <img src={user.avatar} alt="avatar" width="100" />
           </section> 
        :
           <section className="login-page">

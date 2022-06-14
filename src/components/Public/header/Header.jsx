@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink , useLocation} from 'react-router-dom'
 import gsap from 'gsap'
 
 import './header.scss'
@@ -10,6 +10,8 @@ import Logo from '../../../assets/logo/raspberry.png'
 const Header = () => {
 
     const headerRef = useRef(null)
+    const location = useLocation()
+    console.log(location)
 
 
   useEffect(() => {
