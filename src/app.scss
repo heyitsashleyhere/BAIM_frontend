@@ -1,6 +1,7 @@
 @import './styles/variables';
 @import './styles/mixins';
 @import './styles/resets';
+@import './styles/breakpoints';
 
 html {
   font-size: 62.5%;
@@ -18,6 +19,8 @@ html {
 body {
   font-size: $font-size-base;
   font-family: $font-family-Varela;
+
+
   input{
     height:3rem;
     border:none;
@@ -81,6 +84,83 @@ body {
     font-size: 1rem;
     color:red;
   }
+
+  .Pages{
+    width:100%;
+   
+
+    .Hero{
+        width:100%;
+
+        .hero-image{
+            position:relative;
+            width:100%;
+            height:100vh;
+        }
+
+        .Hero-text{
+            width:100%;
+            height:100vh;
+            border:1px solid red;
+            position:absolute;
+            top:0;
+            display:flex;
+            justify-content: center;
+            flex-direction: column;
+
+            h1{
+                margin:0rem 1rem;
+                font-size: 7rem;
+                color:white;
+                
+            }
+
+            p{
+                margin:1rem 1rem;
+                font-size:3rem;
+                color:white;
+            }
+
+    
+
+        }
+    }
+
+
+    @include media(">=tablet"){
+        display:grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap:2.5rem;
+
+        .Hero{
+            grid-column: 1/9;
+    
+            .Hero-text{
+                justify-content: space-between;
+                align-items: flex-start;
+    
+                h1{
+                    margin:10rem 0rem;
+                    font-size: 15rem;
+                    align-self: flex-end;
+                }
+    
+                p{
+                    margin:5rem 2rem;
+                    font-size:7rem;
+                }
+            }
+        }
+    }
+
+    @include media(">=desktop"){
+        grid-template-columns: repeat(12,1fr);
+
+        .Hero{
+            grid-column: 1/13;
+        }
+    }
+}
 
 
 }

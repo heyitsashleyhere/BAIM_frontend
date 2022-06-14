@@ -1,0 +1,12 @@
+// @import '../../../styles/breakpoints';
+
+.Pages{
+    width:100%;
+
+        .gardens{
+            background: url(../../../assets/images/gardens.jpg);
+            background-position: center;
+            background-repeat: repeat;
+            background-size: cover;
+        }
+    }
