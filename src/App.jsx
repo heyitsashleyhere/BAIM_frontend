@@ -18,6 +18,13 @@ import { UserContext } from "./contexts/UserContext.js";
 import About from "./Pages/Public/About/About.jsx";
 import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
 import Team from "./Pages/Public/Team/Team.jsx"
+import { Discover } from "./Pages/Private/Discover/Discover.jsx";
+import { Gardens } from './Pages/Private/Gardens/Gardens.jsx'
+import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
+import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
+
+
+
 
 export default function App() {
   const { isLogin } = useContext(UserContext);
@@ -36,16 +43,16 @@ export default function App() {
           {isLogin && (
             <>
               <Route path="/discover">
-                <Route index element={<h1>DISCOVER</h1>} />
+                <Route index element={<Discover/>} />
                 <Route path="/discover/recipes">
-                  <Route index element={<Allrecipes />} />
+                  <Route index element={<Recipes/>} />
                   {/* <Route path="/discover/recipes/:title" element={<Recipes/>}/> */}
                 </Route>
                 <Route path="/discover/gardens">
-                  <Route index element={<p>gardens</p>} />
+                  <Route index element={<Gardens/>} />
                 </Route>
                 <Route path="/discover/beauty">
-                  <Route index element={<p>beauty</p>} />
+                  <Route index element={<Beauty/>} />
                 </Route>
                 <Route path="/discover/arts&crafts">
                   <Route index element={<p>arts</p>} />
@@ -54,7 +61,7 @@ export default function App() {
                   <Route index element={<p>community</p>} />
                 </Route>
                 <Route path="/discover/seasonal">
-                  <Route index element={<p>seasonal</p>} />
+                  <Route index element={<Seasonal/>} />
                 </Route>
                 <Route path="/discover/events">
                   <Route index element={<p>events</p>} />
