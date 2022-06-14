@@ -17,6 +17,7 @@ import UserLogout from "./components/UserLogout.jsx";
 import { UserContext } from "./contexts/UserContext.js";
 import About from "./Pages/Public/About/About.jsx";
 import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
+import Team from "./Pages/Public/Team/Team.jsx"
 
 export default function App() {
   const { isLogin } = useContext(UserContext);
@@ -29,7 +30,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<About/>}/>
-          <Route path="/team" element={<p>team</p>} />
+          <Route path="/team" element={<Team/>} />
           <Route path="/login" element={<LoginRegister/>} />
 
           {isLogin && (

@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef, useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimationContext } from '../../../contexts/AnimationContext'
 
 import gsap from 'gsap'
@@ -18,9 +18,8 @@ const Header = () => {
   const childrensRef = useRef([])
   childrensRef.current = []
 
-    const headerRef = useRef(null)
-    const location = useLocation()
-    console.log(location)
+  const location = useLocation()
+  console.log(location)
 
 
   console.log(windowWidth)
