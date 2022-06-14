@@ -14,19 +14,18 @@ export const Recipes = () => {
 
     const recipes = foods.map(item => <Link to={`/discover/recipes/${item.title}`} ><p>{item.title}</p></Link>)
   return (
-    <div>
+    <section className="Pages">
+    <section className="Hero">
+        <section className="hero-image recipes">
+        
+        </section>
+    
+        <section className="Hero-text">
+            <h1>recipes</h1>
+            <p>Harvest calendar</p>
+        </section>
 
-    {recipes.map(item => item.type === 'soup')}
-
-
-
-
-    <section>
-    <h2>{recipe.titel}</h2>
-    <p>{recipe.ingrediantes}</p>
-    <h1>{recipe.author}</h1>
-    </section> 
-  
-    </div>
+    </section>
+</section>
   )
 }

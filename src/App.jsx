@@ -45,7 +45,7 @@ export default function App() {
               <Route path="/discover">
                 <Route index element={<Discover/>} />
                 <Route path="/discover/recipes">
-                  <Route index element={<Allrecipes />} />
+                  <Route index element={<Recipes/>} />
                   {/* <Route path="/discover/recipes/:title" element={<Recipes/>}/> */}
                 </Route>
                 <Route path="/discover/gardens">
