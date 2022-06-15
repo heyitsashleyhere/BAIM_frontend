@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 // components
-import { Allrecipes } from "./components/Private/Allrecipes/Allrecipes.jsx";
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import Header from "./components/Public/header/Header.jsx";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
@@ -22,6 +21,7 @@ import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from './Pages/Private/Gardens/Gardens.jsx'
 import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
+import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 
 
 
@@ -46,7 +46,7 @@ export default function App() {
                 <Route index element={<Discover/>} />
                 <Route path="/discover/recipes">
                   <Route index element={<Recipes/>} />
-                  {/* <Route path="/discover/recipes/:title" element={<Recipes/>}/> */}
+                  <Route path="/discover/recipes/:title" element={<RecipePost/>}/>
                 </Route>
                 <Route path="/discover/gardens">
                   <Route index element={<Gardens/>} />

@@ -6,8 +6,10 @@ import PostsContextProvider from "./contexts/PostContext.js";
 import { UserContextProvider } from "./contexts/UserContext.js";
 
 import { AnimationContextProvider } from "./contexts/AnimationContext.js";
+import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
+
 
 
 const container = document.getElementById("app");
@@ -17,8 +19,10 @@ root.render(
 		<UserContextProvider>
 			<PostsContextProvider>
 				<AnimationContextProvider>
-					{/* <App /> */}
-					<Gardens/>
+					<App />
+					{/* <Discover/> */}
+					{/* <Gardens/> */}
+					{/* <Recipes/> */}
 				</AnimationContextProvider>
 			</PostsContextProvider>
 		</UserContextProvider>

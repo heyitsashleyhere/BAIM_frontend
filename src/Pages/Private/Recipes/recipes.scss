@@ -1,5 +1,6 @@
+@import '../../../styles/breakpoints';
 
-
+@include media(">=phone"){
 
 .Pages{
 
@@ -9,5 +10,24 @@
         background-repeat: repeat;
         background-size: cover;
     }
+
+    .Library-container{
+        display:flex;
+        border:1px solid red;
+        margin:1rem 0rem;
+        overflow: auto;
+        overflow-x: scroll;
+    }
+
+    @include media(">=tablet"){
+        .Library-container{
+            grid-column: 1/9;
+            border:1px solid red;
+            margin:0.5rem 0rem;
+            overflow: hidden;
+            overflow-x: scroll;
+        }
+    }
+}
 
 }
