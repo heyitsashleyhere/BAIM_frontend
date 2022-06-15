@@ -14,11 +14,12 @@ export default function UserLogin() {
 
     // this function can handle all the input changes:
     function handleChange(e) {
-      setInputValues({ ...inputValues, [e.target.name]: e.target.value})
+      setInputValues({ ...inputValues, [e.target.name]: e.target.value.trim()})
     }
   
     function handleUserLogin(e) {
       e.preventDefault();
+      console.log(inputValues)
       setErrors([])
       const config = {
         method: "POST",

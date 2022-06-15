@@ -90,9 +90,7 @@ const Team = () => {
 
   return (
     <section className="team">
-      <section className="back" onClick={() => setIsClicked(false)}>
-        <MdOutlineArrowBackIosNew  /><p>go back</p>
-      </section>
+      
         <section className="team_images">
         {team.map((member, index) => {
         return (
@@ -112,7 +110,12 @@ const Team = () => {
       </section>
       {
         isClicked ? (
+          <>
+          <section className="back" onClick={() => setIsClicked(false)}>
+          <MdOutlineArrowBackIosNew  /><p>go back</p>
+          </section>
           <Member memberData={memberData} />
+          </>
         ) : ( 
       <>
       <section className="team_logo">

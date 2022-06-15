@@ -18,7 +18,7 @@ display: grid;
     position: absolute;
     left: 2rem;
     top: 8rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .team_images{
@@ -139,11 +139,11 @@ display: grid;
     gap: 2.5rem;
     
     .back {
-      grid-column: 2/3;
+      grid-column: 2/4;
         position: relative;
-        top: 2rem;
-      }
-
+        top: -2rem;
+        font-size: 1.6rem;
+        }
     .team_images{
       grid-column: 2/8;
 
