@@ -113,7 +113,7 @@ const Main = () => {
   console.log(show)
   return (
   <>
-        <section className="cta-container">
+      <section className="cta-container">
       <div className="overlay" ref={overlayRef}>
         <div className="overlay-content">
           <img ref={imageRef} src={Logo} alt="LOKA" className='logo' />
@@ -127,7 +127,7 @@ const Main = () => {
       <div className="cta-video-wrapper">
         <video ref={videoEl} src={videoUrl} autoPlay playsInline muted 
               onLoadedMetadata={handleLoadedMetadata}/>
-        </div>
+      </div>
       </section>
       {
         show ? (

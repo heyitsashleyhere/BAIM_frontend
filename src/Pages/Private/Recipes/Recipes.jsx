@@ -1,7 +1,7 @@
 
 import React from 'react'
 import {useState} from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, Outlet } from 'react-router-dom'
 
 import {ProfileAvatar, RecipesAvatar} from '../../../components/Private/Avatars-Links/Avatars'
 
@@ -19,9 +19,12 @@ const foods=[
 
 export const Recipes = () => {
 
-  const [select, setSelect]=useState(false)
-//   const { title } = useParams()
-// console.log(title)
+  // const [select, setSelect]=useState(false)
+
+  // const { title } = useParams()
+  // console.log(title)
+
+    // type arrays. entrance, breakfast, maindish, soup, juices, sandwishes, dessert 
  
     const recipe = foods.find(item => item.title === foods.title)
     const recipes = foods.map(item => <Link to={`/discover/recipes/${item.title}`} ><p>{item.title}</p></Link>)
@@ -30,30 +33,71 @@ export const Recipes = () => {
 
   return (
     <section className="Pages">
-    {/* {profiles.map(item => <ProfileAvatar id={item.id} image={item.image} name={item.name}/>)} */}
     <section className="Hero">
-        <section className="hero-image recipes">
-        
-        </section>
-    
+        <section className="hero-image recipes"></section>
         <section className="Hero-text">
             <h1>recipes</h1>
-            <p>Harvest calendar</p>
+            <p>YUMMY</p>
         </section>
-
-    </section>
-    <h2>breakfast</h2>
-    <section className="Library-container">
-    {foods.map(item => <RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
     </section>
 
-     <RecipePost/>
+    <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Breakfast </h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
 
-    <h2>main dishes</h2>
-    <section className="Library-container">
+    <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Soups</h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
+
+    <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Main Dish & salads</h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
+
+    <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Sandwishes</h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
+
+    <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Juices</h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
+
     
-    {foods.map(item => <RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+
+    <section>
     </section>
+   
 </section>
+
+
   )
 }

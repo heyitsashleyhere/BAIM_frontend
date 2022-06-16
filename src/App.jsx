@@ -22,6 +22,7 @@ import { Gardens } from './Pages/Private/Gardens/Gardens.jsx'
 import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
+import { Community } from "./Pages/Private/Community/Community.jsx";
 
 
 
@@ -31,7 +32,7 @@ export default function App() {
 
   return (
 
-      <>
+      <section className="App">
         {isLogin ? <AppHeader /> : <Header />}
 
         <Routes>
@@ -58,7 +59,7 @@ export default function App() {
                   <Route index element={<p>arts</p>} />
                 </Route>
                 <Route path="/discover/community">
-                  <Route index element={<p>community</p>} />
+                  <Route index element={<Community/>}/>
                 </Route>
                 <Route path="/discover/seasonal">
                   <Route index element={<Seasonal/>} />
@@ -75,9 +76,9 @@ export default function App() {
             </>
           )}
 
-          <Route path="*" element={<LoginRegister/>} />
+          {/* <Route path="*" element={<LoginRegister/>} /> */}
         </Routes>
-      </>
+      </section>
 
   )
 }

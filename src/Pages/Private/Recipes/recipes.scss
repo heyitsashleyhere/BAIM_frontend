@@ -2,32 +2,15 @@
 
 @include media(">=phone"){
 
-.Pages{
+    .Pages{
 
-    .recipes{
-        background: url(../../../assets/images/recipes.jpg);
-        background-position: center;
-        background-repeat: repeat;
-        background-size: cover;
-    }
-
-    .Library-container{
-        display:flex;
-        border:1px solid red;
-        margin:1rem 0rem;
-        overflow: auto;
-        overflow-x: scroll;
-    }
-
-    @include media(">=tablet"){
-        .Library-container{
-            grid-column: 1/9;
-            border:1px solid red;
-            margin:0.5rem 0rem;
-            overflow: hidden;
-            overflow-x: scroll;
+        .recipes{
+            background: url(../../../assets/images/recipes.jpg);
+            background-position: center;
+            background-repeat: repeat;
+            background-size: cover;
         }
+
     }
-}
 
 }

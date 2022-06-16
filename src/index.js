@@ -20,8 +20,8 @@ root.render(
 			<PostsContextProvider>
 				<AnimationContextProvider>
 					<App />
-					{/* <Discover/> */}
-					{/* <Gardens/> */}
+					
+					
 					{/* <Recipes/> */}
 				</AnimationContextProvider>
 			</PostsContextProvider>
