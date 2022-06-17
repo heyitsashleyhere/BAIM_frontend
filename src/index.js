@@ -1,19 +1,30 @@
-import { createRoot} from "react-dom/client";
-import {BrowserRouter} from 'react-router-dom'
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
-// import Main from "./Pages/Public/Main/Main.jsx";
+
 import PostsContextProvider from "./contexts/PostContext.js";
 import { UserContextProvider } from "./contexts/UserContext.js";
-// import About from '../src/Pages/Public/About/About.jsx'
+
+import { AnimationContextProvider } from "./contexts/AnimationContext.js";
+import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
+import { Discover } from "./Pages/Private/Discover/Discover.jsx";
+import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
+
+
 
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
-  <BrowserRouter>
-  <UserContextProvider>
-    <PostsContextProvider>
-      <App />
-    </PostsContextProvider>
-  </UserContextProvider>
-   </BrowserRouter>
+	<BrowserRouter>
+		<UserContextProvider>
+			<PostsContextProvider>
+				<AnimationContextProvider>
+					<App />
+					
+					
+					{/* <Recipes/> */}
+				</AnimationContextProvider>
+			</PostsContextProvider>
+		</UserContextProvider>
+	</BrowserRouter>
 );

@@ -8,7 +8,7 @@ export const UserContextProvider = (props) => {
   const [user, setUser] = useState({ id: "", profileName: "", avatar: "" });
   const [inputValues, setInputValues] = useState({})
   const [message, setMessage] = useState("")
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
   const [isShowPassword, setIsShowPassword] = useState(false)
 
   function showPasswordHandler(){

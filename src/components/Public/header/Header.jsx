@@ -1,44 +1,75 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+
+import { useState, useEffect, useRef, useContext } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { AnimationContext } from '../../../contexts/AnimationContext'
+
 import gsap from 'gsap'
 
 import './header.scss'
-// import Berries from '../../../../public/landingVideos/berries(1).webm'
 import Logo from '../../../assets/logo/raspberry.png'
 
 
 const Header = () => {
 
-    const headerRef = useRef(null)
 
+  const { show, handleGsapTiming, windowWidth } = useContext(AnimationContext)
+  const headerRef = useRef(null)
+
+  const childrensRef = useRef([])
+  childrensRef.current = []
+
+  const location = useLocation()
+  console.log(location)
+
+
+  console.log(windowWidth)
+
+  const styling = windowWidth >= 768 ? 'grid' : 'flex'
 
   useEffect(() => {
-    gsap.from(headerRef.current, {
-      duration: 1,
-      y: -100,
-      opacity: 0,
-      ease: 'power2.inOut'
-    },'+=1')
+
+    console.log(childrensRef.current);
+
+    childrensRef.current.forEach(child => {
+      const tl = gsap.timeline()
+      tl.fromTo(child, {
+        duration: 0.8,
+        y: -100,
+      }, {
+        y: 0,
+        ease: 'power2.inOut',
+        stagger: 0.2
+      })
+    }, `+=${handleGsapTiming(0)}`)
   }, [])
+  console.log(handleGsapTiming(3))
+
+  console.log(show);
+
+
+  const addToChildrens = (el) => {
+    childrensRef.current.push(el)
+  }
 
   return (
-    <header ref={headerRef} className="header">
-      <div className="header-logo">
+    <header ref={headerRef} className="header"
+    style={{display: show ? styling : 'none'}}>
+      <div ref={addToChildrens} className="header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <p>Loka</p>
+        <Link to="/">Loka</Link>
       </div>
-      <nav className="navbar">
+      <nav ref={addToChildrens} className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="/team">Team</Link>
+            <Link to="/team">team</Link>
         
           </li>
           <li className="nav-item">
-          <Link to='/about'>About</Link>
+          <Link to='/about'>about</Link>
             
           </li>
           <li className="nav-item">
-          <Link to='login'>Login</Link>
+          <Link to='login'>login</Link>
           </li>
         </ul>
       </nav>

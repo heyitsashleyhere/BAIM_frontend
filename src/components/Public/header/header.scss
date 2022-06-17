@@ -1,112 +1,134 @@
 @import '../../../styles/variables';
 @import '../../../styles/mixins';
 @import '../../../styles/breakpoints';
+@import '../../../styles/resets';
 
 .header {
-  display: grid;
-  grid-template-columns: 1rem repeat(4, 1fr) 1rem;
-  gap: 1rem;
-  margin: 0;
-  width: 100%;
+  // transform: translateY(-100%);
+
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1rem;
   height: 4.5rem;
+  background-color: black;
+  z-index: 100;
 
-  z-index: 10;
-
-  font-family: $font-family-Inter;
+  font-family: $font-family-Varela;
   font-weight: $font-weight-800;
   font-size: $font-size-md;
   color: $white;
-  transition: $transition-slow;
+  transition: 0.35s all ease-in-out;
+  align-items: center;
 
   &-logo {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: start;
+    display: flex;
     align-items: center;
-    grid-column: 2/3;
-    gap: .8rem;
-    transition: $transition-slow;
+    transition: 0.35s all ease-in-out;
 
     img {
       @include container(2.2rem, 2.2rem);
-    display: grid;
-    padding-left: 2rem;
-      list-style: none;
-        display: flex;
-        }
-  }
-
-        a {
-          color: $white;
-          text-decoration: none;
-          transition: all 0.3s ease-in-out;
-        }
-      
-        @include media(">=tablet") {
-          grid-template-columns: 2rem repeat(8, 1fr) 2rem;
-          transition: $transition-slow;
-    
-          &-logo {
-            grid-column: 3/4;
-            transition: $transition-slow;
-            img {
-              @include container(2.6rem, 2.6rem);
-              object-fit: cover;
-            }
-          }
-        
-          .navbar {
-            grid-column: 5/9;
-            padding-left: 0;
-            transition: $transition-slow;
-        
-            ul {
-              gap: 4rem;
-              transition: $transition-slow;
-        
-              li {
-                &:nth-child(3) {
-                  padding-left: 11rem;
-                  transition: $transition-slow;
-                }
-              }
-            }
-          }
+      margin-right: 0.5rem;
       }
-    
-      @include media(">=desktop") {
-        grid-template-columns: 2rem repeat(12, 1fr) 2rem;
-        transition: $transition-slow;
-    
-        &-logo {
-          grid-column: 4/5;
-          transition: $transition-slow;
-    
-          img {
-            @include container(2.6rem, 2.6rem);
-            object-fit: cover;
+
+      a{
+        color: $white;
+        text-decoration: none;
+      }
+    }
+
+    .navbar {
+      transition: 0.35s all ease-in-out;
+      
+      .nav-list {
+        gap: 2rem;
+        transition: 0.35s all ease-in-out;
+        display: flex;
+        list-style: none;
+
+        .nav-item {
+          &:nth-child(3) {
+            // padding-left: 11rem;
+            transition: 0.35s all ease-in-out;
+          }
+          a {
+            color: $white;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
           }
         }
+
+      }
+    } 
+    @include media(">=tablet") {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      transition: 0.35s all ease-in-out;
+      padding-inline: 0;
+
+      &-logo {
+        grid-column: 2/3;
+        transition: 0.35s all ease-in-out;
+        img {
+          @include container(2.6rem, 2.6rem);
+          object-fit: cover;
+        }
+      }
+      
+      .navbar {
+        grid-column: 4/8;
+        transition: 0.35s all ease-in-out;
     
-        .navbar {
-          grid-column: 6/12;
-          padding-left: 0;
-          transition: $transition-slow;
+        ul {
+          transition: 0.35s all ease-in-out;
     
-          ul {
-            gap: 4rem;
-            transition: $transition-slow;
-    
-            li {
-              &:nth-child(3) {
-                padding-left: 18rem;
-                transition: $transition-slow;
-              }
+          li {
+            margin-right: 2rem;
+            &:nth-child(3) {
+              margin-left: auto;
+              margin-right: 0;
+              transition: 0.35s all ease-in-out;
+            }
+          }
+        }
+      }
+    }
+      
+    @include media(">=desktop") {
+      grid-template-columns: repeat(12, 1fr);
+      transition: 0.35s all ease-in-out;
+  
+      &-logo {
+        grid-column: 3/4;
+        transition: 0.35s all ease-in-out;
+  
+        img {
+          @include container(2.6rem, 2.6rem);
+          object-fit: cover;
+        }
+      }
+  
+      .navbar {
+        grid-column: 6/11;
+        padding-left: 0;
+        transition: 0.35s all ease-in-out;
+  
+        ul {
+          gap: 4rem;
+          transition: 0.35s all ease-in-out;
+  
+          li {
+            &:nth-child(3) {
+              transition: 0.35s all ease-in-out;
+
             }
           }
         }
       
     }
+
+  }
+
         
 }
   
+
