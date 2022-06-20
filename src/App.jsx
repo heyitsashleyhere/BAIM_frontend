@@ -14,6 +14,7 @@ import UserLogout from "./components/UserLogout.jsx";
 // import LoginRegister from "./components/Public/header/LoginRegister/LoginRegister.jsx.js";
 // context
 import { UserContext } from "./contexts/UserContext.js";
+import { AnimationContext } from "./contexts/AnimationContext.js";
 import About from "./Pages/Public/About/About.jsx";
 import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
 import Team from "./Pages/Public/Team/Team.jsx"
@@ -33,11 +34,13 @@ import Loader from './Pages/Public/Main/Loader';
 export default function App() {
   const { isLogin } = useContext(UserContext);
   const [loading, setLoading] = useState(true)
+  const { isNav } = useContext(AnimationContext);
 
   return (
 
       <section className="App">
-        {isLogin ? <AppHeader /> : <Header />}
+      {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
+      <AppHeader  />
 
         <Routes>
           {/* Public routes */}

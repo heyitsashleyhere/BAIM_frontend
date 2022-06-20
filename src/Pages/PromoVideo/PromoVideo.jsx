@@ -5,8 +5,9 @@ import { AnimationContext } from '../../contexts/AnimationContext.js'
 import './promoVideo.scss'
 
 const PromoVideo = () => {
-  const { windowWidth } = useContext(AnimationContext)
+  const { windowWidth, setIsNav  } = useContext(AnimationContext)
   const [show, setShow] = useState(false)
+
 
   
   let navigate = useNavigate();
@@ -30,16 +31,20 @@ const PromoVideo = () => {
 
 
   return (
-    <section className="cta-container">
+    <section className="promo-container">
 
-      <div className="cta-video-wrapper">
-        <video src={videoUrl} autoPlay playsInline muted 
-               onEnded={() => navigate('/main')}/>
+      <div className="promo-video-wrapper">
+        <video src={videoUrl} autoPlay playsInline muted onEnded={() => {
+              setIsNav(true) 
+              navigate('/main') }}/>
       </div>
 
       <div className='skip-wrapper'>
         {show && (
-          <button onClick={() => navigate('/main')}>Skip</button>
+          <button onClick={() => {
+            setIsNav(true) 
+            navigate('/main')
+            }}>Skip</button>
         )}
         
       </div>

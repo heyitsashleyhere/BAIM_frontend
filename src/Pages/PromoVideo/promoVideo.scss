@@ -2,10 +2,13 @@
 // @import '../../../styles/mixins';
 // @import '../../../styles/breakpoints';
 
-.cta-container {
+.promo-container {
+  width: 100%;
+  height: 100vh;
   background: #000;
   overflow-x: hidden;
   position: relative;
+
   .skip-wrapper {
     position: absolute;
     bottom: 10rem;
@@ -13,13 +16,13 @@
     z-index: 10;
   }
 
-  .cta-video-wrapper {
+  .promo-video-wrapper {
     width: 100%;
     height: 100%;
 
     video {
       width: 100%;
-      height: 100vh;
+      height: 100%;
       object-fit: cover;
       object-position: center;
     }

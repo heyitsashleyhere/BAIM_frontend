@@ -3,11 +3,11 @@
 @import '../../../styles/breakpoints';
 
 .cta-container {
-  height: 100vh;
   width: 100%;
+  height: 100vh;
   background: #000;
 
-  .cta-overlay {
+  .cta-wrapper {
     width: 100%;
     height: 100%;
     position: relative;
@@ -15,7 +15,7 @@
     
     .cta-content {
       position: absolute;
-      top: 65%;
+      top: 70%;
       left: 2rem;
       overflow: hidden;
 
@@ -41,26 +41,28 @@
         }
       }
     }
-    @include media(">=tablet") {
-      grid-column: 1/9;
-      // display: grid;
-      // grid-template-columns: repeat(8, 1fr);
+  }
+      @include media(">=tablet") {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
 
-      .cta-content {
-        grid-column: 2/9;
-        transition: 0.35s all ease-in-out;
-        top: 60%;
-        left: 0;
-    
-        .logo {
-          width: 40rem;
+      .cta-wrapper{
+        grid-column: 2/8;
+        .cta-content {
           transition: 0.35s all ease-in-out;
-        }
+          top: 65%;
+          left: 0;
       
-        .slogan {
-          h1 {
-            letter-spacing: 5px;
-            font-size: 3rem;
+          .logo {
+            width: 40rem;
+            transition: 0.35s all ease-in-out;
+          }
+        
+          .slogan {
+            h1 {
+              letter-spacing: 5px;
+              font-size: 3rem;
+            }
           }
         }
       }
@@ -69,28 +71,30 @@
     @include media(">=desktop") {
       grid-template-columns: repeat(12, 1fr);
       transition: 0.35s all ease-in-out;
-      // grid-column: 3/12;
 
-      .cta-content {
-        grid-column: 3/12;
-        transition: 0.35s all ease-in-out;
+      .cta-wrapper{
+        grid-column: 3/11;
 
-        .logo {
-          width: 50rem;
+        .cta-content {
+          top: 60%;
           transition: 0.35s all ease-in-out;
-        }
-
-        .slogan {
-          
-          h1 {
-            transform: translateY(-200%);
-            letter-spacing: 7px;
-            font-size: 3.8rem;
+  
+          .logo {
+            width: 50rem;
+            transition: 0.35s all ease-in-out;
+          }
+  
+          .slogan {
+            
+            h1 {
+              transform: translateY(-200%);
+              letter-spacing: 7px;
+              font-size: 3.8rem;
+            }
           }
         }
       }
     }
-  }
 }
 
 .promo-vid-container {

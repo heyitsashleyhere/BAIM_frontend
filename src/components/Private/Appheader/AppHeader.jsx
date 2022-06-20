@@ -36,15 +36,15 @@ export const AppHeader = () => {
 
   return (
     <>
-    <header className="header">
-      <div className="header-logo">
+    <header className="app-header">
+      <div className="app-header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link to="/">Loka</Link>
+        <Link to="/main">Loka</Link>
       </div>
       {mobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons" onClick={() => setBurgerMenu(!burgerMenu)}>
-            burgerMenu &&
+            {/* burgerMenu && */}
               <Icons.MdMenu className="toggle-icon" />
           </div>
         </div>
@@ -62,6 +62,10 @@ export const AppHeader = () => {
               </li>
               <li className="nav-item">
                 <Link to="/create">Create</Link>
+              </li>
+              <li className="nav-item">
+                  <input type="" placeholder="Search" className="search"/>
+                  <Icons.MdOutlineSearch className="search-icon" />
               </li>
             </ul>
           </nav>
@@ -81,23 +85,17 @@ export const AppHeader = () => {
           </li>
               <li className="burger-menu-list-item">
             <Link to="/create">Create</Link>
-              </li>
-          </ul>
+          </li>
+          <li className="burger-menu-list-item">
+            <input type="" placeholder="Search" className="mobile-search"/>
+            <Icons.MdOutlineSearch className="search-icon" />
+          </li>
+        </ul>
+        
         <Icons.MdClose className='close-icon' onClick={() => setBurgerMenu(false)} />
       </div>
     </>
   );
 }
 
-export default AppHeader
-
-//       <div>
-//         <Link to="discover"><h1>discover</h1></Link>
-//         <Link to="feed"><h1>feed</h1></Link>
-//         <Link to="profile"><h1>profile</h1></Link>
-//         <Link to="create"><h1>create</h1></Link>
-//      </div>
-    
-//   )
-// }
-
+export default AppHeader;
