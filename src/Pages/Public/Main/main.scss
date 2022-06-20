@@ -6,8 +6,8 @@
   height: 100vh;
   width: 100%;
   background: #000;
-  
-  .cta-wrapper {
+
+  .cta-overlay {
     width: 100%;
     height: 100%;
     position: relative;
@@ -42,8 +42,9 @@
       }
     }
     @include media(">=tablet") {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-column: 1/9;
+      // display: grid;
+      // grid-template-columns: repeat(8, 1fr);
 
       .cta-content {
         grid-column: 2/9;
@@ -68,6 +69,7 @@
     @include media(">=desktop") {
       grid-template-columns: repeat(12, 1fr);
       transition: 0.35s all ease-in-out;
+      // grid-column: 3/12;
 
       .cta-content {
         grid-column: 3/12;
@@ -92,6 +94,7 @@
 }
 
 .promo-vid-container {
+  
   width: 100%;
   height: 100vh;
   position: relative;

@@ -15,7 +15,6 @@ import Logo from '../../../assets/logo/raspberry.png'
 const Team = () => {
   const { windowWidth } = useContext(AnimationContext)
   const [isClicked, setIsClicked] = useState(false)
-  const [isActive, setIsActive] = useState(false)
   const [memberData, setMemberData] = useState(null)
 
   
@@ -29,10 +28,6 @@ const Team = () => {
   useEffect(() => {
     // ${name}/ h2 yposition for gsap name animation
     // const yPosition = windowWidth >= 768 ? '-100%' : '-25%'
-
-    console.log(imagesRef.current)
-    console.log(revealRef.current)
-    console.log(nameRef.current)
 
     const tl = gsap.timeline({
       stagger: 0.1,
@@ -84,9 +79,6 @@ const Team = () => {
     setMemberData(data);
     setIsClicked(true);
   }
-  console.log(memberData, isClicked);
-
-
 
   return (
     <section className="team">

@@ -1,12 +1,14 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
-
+// Contexts:
 import PostsContextProvider from "./contexts/PostContext.js";
 import { UserContextProvider } from "./contexts/UserContext.js";
-
 import { AnimationContextProvider } from "./contexts/AnimationContext.js";
-// import Team from "./Pages/Public/Team/Team.jsx";
+// Components
+import App from "./App.jsx";
+import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
+import { Discover } from "./Pages/Private/Discover/Discover.jsx";
+import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
 
 const container = document.getElementById("app");
 const root = createRoot(container);

@@ -14,7 +14,8 @@
   mix-blend-mode: difference;
 
   font-size: $font-size-md;
-  color: $white;
+  // color: $white;
+  mix-blend-mode: difference;
   transition: 0.35s all ease-in-out;
   align-items: center;
   z-index: 9999;

@@ -1,6 +1,6 @@
 
-import { useState, useEffect, useRef, useContext } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useContext } from 'react'
+import { NavLink } from 'react-router-dom'
 import { AnimationContext } from '../../../contexts/AnimationContext'
 
 import gsap from 'gsap'
@@ -10,49 +10,53 @@ import Logo from '../../../assets/logo/raspberry.png'
 
 
 const Header = () => {
+  const { windowWidth } = useContext(AnimationContext)
 
-
-  const { show, handleGsapTiming, windowWidth } = useContext(AnimationContext)
   const headerRef = useRef(null)
-
-    const location = useLocation()
-    console.log(location)
+  const childrensRef = useRef([])
+  childrensRef.current = []
 
   const styling = windowWidth >= 768 ? 'grid' : 'flex'
 
+
   useEffect(() => {
+
+    // console.log(childrensRef.current);
+    childrensRef.current.forEach(child => {
       const tl = gsap.timeline()
       tl.to(headerRef.current, {
         duration: 1,
         y: 0,
         ease: 'power2.inOut'
       })
+    })
   }, [])
+
+
+  const addToChildrens = (el) => {
+    childrensRef.current.push(el)
+  }
 
   return (
     <header ref={headerRef} className="header"
-      style={{ display: styling }}
-    >
-      <div className="header-logo">
+    style={{display: styling}}>
+      <div ref={addToChildrens} className="header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link to="/">Loka</Link>
+        <NavLink to="/main">Loka</NavLink>
       </div>
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="/team">team</Link>
-        
+            <NavLink to="/team">team</NavLink> 
           </li>
           <li className="nav-item">
-          <Link to='/about'>about</Link>
-            
+            <NavLink to='/about'>about</NavLink>  
           </li>
           <li className="nav-item">
-          <Link to='login'>login</Link>
+            <NavLink to='/auth'>login</NavLink>
           </li>
         </ul>
       </nav>
-
     </header>
 
   )

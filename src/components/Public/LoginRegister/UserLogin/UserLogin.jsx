@@ -37,6 +37,7 @@ export default function UserLogin() {
               setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
               setMessage(result.message)
               setIsLogin(true)
+              
             } else {
               setErrors(result.errors)
               console.log('errors :>> ', errors);
