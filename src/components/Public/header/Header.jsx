@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef, useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimationContext } from '../../../contexts/AnimationContext'
 
 import gsap from 'gsap'
@@ -15,51 +15,29 @@ const Header = () => {
   const { show, handleGsapTiming, windowWidth } = useContext(AnimationContext)
   const headerRef = useRef(null)
 
-  const childrensRef = useRef([])
-  childrensRef.current = []
-
-    const headerRef = useRef(null)
     const location = useLocation()
     console.log(location)
-
-
-  console.log(windowWidth)
 
   const styling = windowWidth >= 768 ? 'grid' : 'flex'
 
   useEffect(() => {
-
-    console.log(childrensRef.current);
-
-    childrensRef.current.forEach(child => {
       const tl = gsap.timeline()
-      tl.fromTo(child, {
-        duration: 0.8,
-        y: -100,
-      }, {
+      tl.to(headerRef.current, {
+        duration: 1,
         y: 0,
-        ease: 'power2.inOut',
-        stagger: 0.2
+        ease: 'power2.inOut'
       })
-    }, `+=${handleGsapTiming(0)}`)
   }, [])
-  console.log(handleGsapTiming(3))
-
-  console.log(show);
-
-
-  const addToChildrens = (el) => {
-    childrensRef.current.push(el)
-  }
 
   return (
     <header ref={headerRef} className="header"
-    style={{display: show ? styling : 'none'}}>
-      <div ref={addToChildrens} className="header-logo">
+      style={{ display: styling }}
+    >
+      <div className="header-logo">
         <img src={Logo} alt="LOKA" /> 
         <Link to="/">Loka</Link>
       </div>
-      <nav ref={addToChildrens} className="navbar">
+      <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
             <Link to="/team">team</Link>

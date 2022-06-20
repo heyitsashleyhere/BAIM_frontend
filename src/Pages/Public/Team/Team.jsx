@@ -123,24 +123,34 @@ const Team = () => {
         <img className="logo" src={Logo}></img>
       </section>
       <section className="team_text team_section">
-        <p>We are a group of students doing our final project.
-        We all meet in DCI-digital career institute and started this journey together as developers. We come from very different backgrounds. All of us are full stack developers, still with specific roles in this project. We are super happy we came together and were able to finalize our one year program with this project. if your interest click in our fotos tosee our backgrounds.</p>
+        <span className="inner_text">
+          <p>We are a group of students doing our final project.
+          We all meet in DCI-digital career institute and started this journey together as developers. We come from very different backgrounds. All of us are full stack developers, still with specific roles in this project. We are super happy we came together and were able to finalize our one year program with this project. if your interest click in our fotos tosee our backgrounds.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Project Stack</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Figma Project</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Backend Repository</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Frontend Repository</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
               </section>
       </>
     )}
