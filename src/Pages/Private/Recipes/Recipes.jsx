@@ -33,14 +33,51 @@ export const Recipes = () => {
 
   return (
     <section className="Pages">
-    <section className="Hero">
-        <section className="hero-image recipes"></section>
-        <section className="Hero-text">
-            <h1>recipes</h1>
-            <p>YUMMY</p>
-        </section>
+      <section className="Hero">
+          <section className="hero-image recipes"></section>
+          <section className="Hero-text">
+              <h1>recipes</h1>
+              <p>YUMMY</p>
+          </section>
+      </section>
+
+    <section className="collection-wrapper">
+
+    <section className="collection-inner">
+    <button>
+      <img></img>
+      <p>breakfast</p>
+    </button>
+    <button>
+      <img></img>
+      <p>soups</p>
+    </button>
+    <button>
+      <img></img>
+      <p>main dish</p>
+    </button>
+    <button>
+      <img></img>
+      <p>salads</p>
+    </button>
+    <button>
+      <img></img>
+      <p>sandwishes</p>
+    </button>
+    <button>
+      <img></img>
+      <p>juices</p>
+    </button>
+    <button>
+      <img></img>
+      <p>deserts</p>
+    </button>
+
     </section>
 
+    </section>
+
+  {/* <section className="Main-Wrapper"> */}
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">
         <h2>Breakfast </h2>
@@ -91,10 +128,7 @@ export const Recipes = () => {
     </section>
     </section>
 
-    
 
-    <section>
-    </section>
    
 </section>
 

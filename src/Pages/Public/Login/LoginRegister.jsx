@@ -25,17 +25,21 @@ export default function LoginRegister() {
       <video src={process.env.PUBLIC_URL + "/landingVideos/berriesWhite.webm"} autoPlay playsInline muted loop></video>
     </section>
         { isLogin ?
+       
           <section className="welcome-page">
             <img src={user.avatar} alt="avatar" width="100" height="100"/>
             <p>{message}</p>
-          </section> 
+          </section>
+           
        :
+       
           <section className="login-page">
             { isRegister ? <UserRegistration />: <UserLogin />}
             <button className="LogIn-Button" onClick={switchForm}>
               {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
             </button>
           </section>
+         
 
         }   
     </div>
