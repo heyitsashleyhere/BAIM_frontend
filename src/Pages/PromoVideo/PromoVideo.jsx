@@ -9,8 +9,9 @@ import './promoVideo.scss'
 
 
 const PromoVideo = () => {
-  const { windowWidth } = useContext(AnimationContext)
+  const { windowWidth, setIsNav  } = useContext(AnimationContext)
   const [show, setShow] = useState(false)
+
 
   
   let navigate = useNavigate();
@@ -38,12 +39,18 @@ const PromoVideo = () => {
 
       <div className="cta-video-wrapper">
         <video src={videoUrl} autoPlay playsInline muted 
-               onEnded={() => navigate('/main')}/>
+               onEnded={() => {
+                setIsNav(true) 
+                navigate('/main')
+                }}/>
       </div>
 
       <div className='skip-wrapper'>
         {show && (
-          <button onClick={() => navigate('/main')}>Skip</button>
+          <button onClick={() => {
+            setIsNav(true) 
+            navigate('/main')
+            }}>Skip</button>
         )}
         
       </div>
