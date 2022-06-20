@@ -1,0 +1,55 @@
+import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AnimationContext } from '../../contexts/AnimationContext.js'
+
+import './promoVideo.scss'
+
+// import '../../../../src/app.scss'
+
+
+
+const PromoVideo = () => {
+  const { windowWidth } = useContext(AnimationContext)
+  const [show, setShow] = useState(false)
+
+  
+  let navigate = useNavigate();
+  //to change the CTA section video based on the window width
+  const desktopVideo = `${process.env.PUBLIC_URL}/landingVideos/mainVideo.webm`
+  const tabletVideo = `${process.env.PUBLIC_URL}/landingVideos/raspberrie.mp4`
+  
+  const videoUrl = windowWidth >= 992 ? desktopVideo : tabletVideo;
+  
+  
+  useEffect(() => {
+    const skip = setTimeout(() => {
+      setShow(true)
+    }, 3000)
+
+    return () => {
+      clearTimeout(skip)
+    }
+
+  }, [])
+
+
+  return (
+    <section className="cta-container">
+
+      <div className="cta-video-wrapper">
+        <video src={videoUrl} autoPlay playsInline muted 
+               onEnded={() => navigate('/main')}/>
+      </div>
+
+      <div className='skip-wrapper'>
+        {show && (
+          <button onClick={() => navigate('/main')}>Skip</button>
+        )}
+        
+      </div>
+    </section>
+    
+  )
+}
+
+export default PromoVideo

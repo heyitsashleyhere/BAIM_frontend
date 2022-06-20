@@ -1,6 +1,6 @@
 
-import { useState, useEffect, useRef, useContext } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useContext } from 'react'
+import { NavLink } from 'react-router-dom'
 import { AnimationContext } from '../../../contexts/AnimationContext'
 
 import gsap from 'gsap'
@@ -10,26 +10,18 @@ import Logo from '../../../assets/logo/raspberry.png'
 
 
 const Header = () => {
+  const { windowWidth } = useContext(AnimationContext)
 
-
-  const { show, handleGsapTiming, windowWidth } = useContext(AnimationContext)
   const headerRef = useRef(null)
-
   const childrensRef = useRef([])
   childrensRef.current = []
 
-  const location = useLocation()
-  console.log(location)
-
-
-  console.log(windowWidth)
-
   const styling = windowWidth >= 768 ? 'grid' : 'flex'
+
 
   useEffect(() => {
 
-    console.log(childrensRef.current);
-
+    // console.log(childrensRef.current);
     childrensRef.current.forEach(child => {
       const tl = gsap.timeline()
       tl.fromTo(child, {
@@ -40,11 +32,8 @@ const Header = () => {
         ease: 'power2.inOut',
         stagger: 0.2
       })
-    }, `+=${handleGsapTiming(0)}`)
+    })
   }, [])
-  console.log(handleGsapTiming(3))
-
-  console.log(show);
 
 
   const addToChildrens = (el) => {
@@ -53,27 +42,24 @@ const Header = () => {
 
   return (
     <header ref={headerRef} className="header"
-    style={{display: show ? styling : 'none'}}>
+    style={{display: styling}}>
       <div ref={addToChildrens} className="header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link to="/">Loka</Link>
+        <NavLink to="/main">Loka</NavLink>
       </div>
       <nav ref={addToChildrens} className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="/team">team</Link>
-        
+            <NavLink to="/team">team</NavLink> 
           </li>
           <li className="nav-item">
-          <Link to='/about'>about</Link>
-            
+            <NavLink to='/about'>about</NavLink>  
           </li>
           <li className="nav-item">
-          <Link to='login'>login</Link>
+            <NavLink to='/auth'>login</NavLink>
           </li>
         </ul>
       </nav>
-
     </header>
 
   )

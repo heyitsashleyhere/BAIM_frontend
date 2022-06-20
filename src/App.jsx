@@ -5,7 +5,7 @@ import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import Header from "./components/Public/header/Header.jsx";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import Main from "./Pages/Public/Main/Main.jsx"
-
+import PromoVideo from "./Pages/PromoVideo/PromoVideo.jsx"
 // Ashley testing components
 import Posts from "./components/Posts.jsx";
 import UserEdit from "./components/UserEdit.jsx";
@@ -36,11 +36,42 @@ export default function App() {
         {isLogin ? <AppHeader /> : <Header />}
 
         <Routes>
-          <Route path="/" element={<Main />} />
+          {/* Public routes */}
+          <Route path="/" element={<PromoVideo />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/about" element={<About/>}/>
           <Route path="/team" element={<Team/>} />
-          <Route path="/login" element={<LoginRegister/>} />
+          <Route path="/auth" element={<LoginRegister/>} />
 
+          {/* Private routes */}
+          <Route path="/discover" element={<Discover/>} />
+
+          <Route path="/gardens" element={<Gardens/>}>
+            <Route path="/gardens/:title" element={<p>garden post</p>}/>
+          </Route>
+
+          <Route path="/artsCraft" element={<p>arts and craft</p>}>
+            <Route path="/artsCraft/:title" element={<p>arts and craft post</p>}/>
+          </Route>
+
+          <Route path="/recipes" element={<Recipes/>}>
+            <Route path="/recipes/:title" element={<RecipePost/>}/>
+          </Route>
+
+          <Route path="/beauty" element={<Beauty/>}>
+            <Route path="/beauty/:title" element={<p>beauty post</p>}/>
+          </Route>
+
+          <Route path="/community" element={<Community/>}>
+            <Route path="/community/:title" element={<p>community post?</p>}/>
+          </Route>
+
+          <Route path="/seasonal" element={<Seasonal/>}>
+            <Route path="/seasonal/:item" element={<p>seasonal post</p>}/>
+          </Route>
+
+          <Route path="/*" element={<Main />} />
+{/* 
           {isLogin && (
             <>
               <Route path="/discover">
@@ -74,7 +105,7 @@ export default function App() {
               <Route path="/create" element={<h1>create</h1>} />
               <Route path="/logout" element={<h1>logout</h1>} />
             </>
-          )}
+          )} */}
 
           {/* <Route path="*" element={<LoginRegister/>} /> */}
         </Routes>
