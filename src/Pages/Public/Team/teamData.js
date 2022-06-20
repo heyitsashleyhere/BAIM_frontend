@@ -1,7 +1,7 @@
 const team = [
 	{
 		id: 1,
-		name: "Brian",
+		name: "Brian Ladwig",
 		title: "CEO",
 		image:
 			"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
@@ -21,7 +21,7 @@ const team = [
 	},
 	{
 		id: 2,
-		name: "Ashley",
+		name: "Ashley Jiang",
 		title: "CTO",
 		image:
 			"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
@@ -41,7 +41,7 @@ const team = [
 	},
 	{
 		id: 3,
-		name: "Murad",
+		name: "Murad Muqbel",
 		title: "CEO",
 		image:
 			"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
@@ -61,7 +61,7 @@ const team = [
 	},
 	{
 		id: 4,
-		name: "Ivo",
+		name: "Ivo Serra",
 		title: "CTO",
 		image:
 			"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",

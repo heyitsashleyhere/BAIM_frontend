@@ -3,20 +3,17 @@
 @import '../../../styles/breakpoints';
 
 .cta-container {
+  height: 100vh;
+  width: 100%;
   background: #000;
-  overflow-x: hidden;
-  position: relative;
-  
-  .overlay {
+
+  .cta-overlay {
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     opacity: 0;
-    z-index: 5;
     
-    .overlay-content {
+    .cta-content {
       position: absolute;
       top: 65%;
       left: 2rem;
@@ -45,8 +42,9 @@
       }
     }
     @include media(">=tablet") {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-column: 1/9;
+      // display: grid;
+      // grid-template-columns: repeat(8, 1fr);
 
       .overlay-content {
         grid-column: 2/9;
@@ -71,6 +69,7 @@
     @include media(">=desktop") {
       grid-template-columns: repeat(12, 1fr);
       transition: 0.35s all ease-in-out;
+      // grid-column: 3/12;
 
       .overlay-content {
         grid-column: 3/12;
@@ -93,22 +92,12 @@
     }
   }
 
-  .cta-video-wrapper {
-    width: 100%;
-    height: 100%;
-
-    video {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-      object-position: center;
-    }
-  }
 }
 
 
 
 .promo-vid-container {
+  
   width: 100%;
   height: 100vh;
   position: relative;

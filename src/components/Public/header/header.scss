@@ -16,7 +16,8 @@
   font-family: $font-family-Varela;
   font-weight: $font-weight-800;
   font-size: $font-size-md;
-  color: $white;
+  // color: $white;
+  mix-blend-mode: difference;
   transition: 0.35s all ease-in-out;
   align-items: center;
 

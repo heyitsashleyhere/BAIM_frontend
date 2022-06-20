@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 // components
-import { Allrecipes } from "./components/Private/Allrecipes/Allrecipes.jsx";
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import Header from "./components/Public/header/Header.jsx";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import Main from "./Pages/Public/Main/Main.jsx"
-
+import PromoVideo from "./Pages/PromoVideo/PromoVideo.jsx"
 // Ashley testing components
 import Posts from "./components/Posts.jsx";
 import UserEdit from "./components/UserEdit.jsx";
@@ -22,6 +21,8 @@ import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from './Pages/Private/Gardens/Gardens.jsx'
 import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
+import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
+import { Community } from "./Pages/Private/Community/Community.jsx";
 
 
 
@@ -31,22 +32,53 @@ export default function App() {
 
   return (
 
-      <>
+      <section className="App">
         {isLogin ? <AppHeader /> : <Header />}
 
         <Routes>
-          <Route path="/" element={<Main />} />
+          {/* Public routes */}
+          <Route path="/" element={<PromoVideo />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/about" element={<About/>}/>
           <Route path="/team" element={<Team/>} />
-          <Route path="/login" element={<LoginRegister/>} />
+          <Route path="/auth" element={<LoginRegister/>} />
 
+          {/* Private routes */}
+          <Route path="/discover" element={<Discover/>} />
+
+          <Route path="/gardens" element={<Gardens/>}>
+            <Route path="/gardens/:title" element={<p>garden post</p>}/>
+          </Route>
+
+          <Route path="/artsCraft" element={<p>arts and craft</p>}>
+            <Route path="/artsCraft/:title" element={<p>arts and craft post</p>}/>
+          </Route>
+
+          <Route path="/recipes" element={<Recipes/>}>
+            <Route path="/recipes/:title" element={<RecipePost/>}/>
+          </Route>
+
+          <Route path="/beauty" element={<Beauty/>}>
+            <Route path="/beauty/:title" element={<p>beauty post</p>}/>
+          </Route>
+
+          <Route path="/community" element={<Community/>}>
+            <Route path="/community/:title" element={<p>community post?</p>}/>
+          </Route>
+
+          <Route path="/seasonal" element={<Seasonal/>}>
+            <Route path="/seasonal/:item" element={<p>seasonal post</p>}/>
+          </Route>
+
+          <Route path="/*" element={<Main />} />
+{/* 
           {isLogin && (
             <>
               <Route path="/discover">
                 <Route index element={<Discover/>} />
                 <Route path="/discover/recipes">
                   <Route index element={<Recipes/>} />
-                  {/* <Route path="/discover/recipes/:title" element={<Recipes/>}/> */}
+                  <Route path="/discover/recipes/:title" element={<RecipePost/>}/>
                 </Route>
                 <Route path="/discover/gardens">
                   <Route index element={<Gardens/>} />
@@ -58,7 +90,7 @@ export default function App() {
                   <Route index element={<p>arts</p>} />
                 </Route>
                 <Route path="/discover/community">
-                  <Route index element={<p>community</p>} />
+                  <Route index element={<Community/>}/>
                 </Route>
                 <Route path="/discover/seasonal">
                   <Route index element={<Seasonal/>} />
@@ -73,11 +105,11 @@ export default function App() {
               <Route path="/create" element={<h1>create</h1>} />
               <Route path="/logout" element={<h1>logout</h1>} />
             </>
-          )}
+          )} */}
 
-          <Route path="*" element={<LoginRegister/>} />
+          {/* <Route path="*" element={<LoginRegister/>} /> */}
         </Routes>
-      </>
+      </section>
 
   )
 }

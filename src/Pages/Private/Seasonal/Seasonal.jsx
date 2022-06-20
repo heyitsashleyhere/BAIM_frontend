@@ -14,6 +14,25 @@ export const Seasonal = () => {
             </section>
 
         </section>
+        <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Breakfast </h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><Avatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
+
+    <section className="Library-wrapper">
+      <section className="lib-wrapper-header">
+        <h2>Soups</h2>
+        <p>{foods.length} items</p>
+      </section>
+      <section className="Library-container">
+      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
+    </section>
+    </section>
     </section>
   )
 }

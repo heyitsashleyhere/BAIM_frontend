@@ -1,0 +1,27 @@
+// @import '../../../styles/variables';
+// @import '../../../styles/mixins';
+// @import '../../../styles/breakpoints';
+
+.cta-container {
+  background: #000;
+  overflow-x: hidden;
+  position: relative;
+  .skip-wrapper {
+    position: absolute;
+    bottom: 10rem;
+    right: 50%;
+    z-index: 10;
+  }
+
+  .cta-video-wrapper {
+    width: 100%;
+    height: 100%;
+
+    video {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
