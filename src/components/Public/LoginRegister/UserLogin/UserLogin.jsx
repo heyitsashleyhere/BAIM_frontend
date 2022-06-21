@@ -1,7 +1,10 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
+// mui
+import { TextField, InputAdornment, IconButton, Button, FormHelperText, Stack, Grow, Box } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import './userLogin.scss'
 
 export default function UserLogin() {
     const [errors, setErrors] = useState([])
@@ -14,6 +17,7 @@ export default function UserLogin() {
 
     // this function can handle all the input changes:
     function handleChange(e) {
+      console.log('e.target.value :>> ', e.target.value);
       setInputValues({ ...inputValues, [e.target.name]: e.target.value.trim()})
     }
   
@@ -32,7 +36,7 @@ export default function UserLogin() {
       fetch("http://localhost:7000/user/login", config)
         .then((response) => response.json())
         .then((result) => {
-            console.log("UserLogin:", result);
+            // console.log("UserLogin:", result);
             if(!result.errors) {
               setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
               setMessage(result.message)
@@ -47,36 +51,54 @@ export default function UserLogin() {
     }
 
   return (
-    <div className="Login_Outer">
-        <h1 >Login</h1>
-      <form onSubmit={handleUserLogin}>
+    <section className="LoginForm">
+    <Grow in>
+      <Stack component="form" onSubmit={handleUserLogin}>
+          <h1>Login</h1>
+          <TextField
+              name="email"
+              label="Email"
+              fullWidth
+              margin="normal"
+              error={errors.find(error => error.email)}
+              type="email"
+              onChange={handleChange} />
 
-           <section className="Input">
-           <p className="Input_title">email</p>
-            <input name="email" type="email" placeholder="....here@"
-                 onChange={handleChange} />     
-          {errors.map((error, i) => (    
-            error.email && (<p className="inputAlert" key={"emailError"+ i}>{error.email}</p>)
+          {errors.map((error, i) => (
+            error.email && (<FormHelperText error key={"emailError"+ i}>{error.email}</FormHelperText>)
           ))}
-          </section>
 
-          <section className="Input">
-            <p className="Input_title">password</p>
+          <TextField
+              name="password"
+              color="primary"
+              label="Password"
+              fullWidth
+              margin="normal"
+              error={errors.find(error => error.password)}
+              type={isShowPassword ? "text" : "password"}
+              onChange={handleChange}
+              InputProps={
+                {endAdornment: (
+                 <InputAdornment position="end">
+                  <IconButton
+                    onClick={showPasswordHandler}
+                    onMouseDown={showPasswordHandler}
+                    >
+                    {isShowPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+                )}} />
 
-            <section className="Input_Hidden">
-
-            <input name="password" type={isShowPassword ? "text" : "password"} placeholder="*********"
-                  onChange={handleChange} />
-            <span className="icon" onClick={showPasswordHandler}>{isShowPassword ? "🐵" : "🙈"}</span>
-            </section>
-
-            {errors.map((error, i) => (    
-              error.password && (<p className="inputAlert" key={"passwordError"+ i}>{error.password}</p>)
-            ))}
-          </section>
-          <button className="Button" type="submit">Login</button>
+          {errors.map((error, i) => (
+            error.password && (<FormHelperText error key={"passwordError"+ i}>{error.password}</FormHelperText>)
+          ))}  
           
-      </form>
-    </div>
-  );
+          <Box textAlign='center'>
+            <Button variant="contained" type="submit" size="large">Login</Button>
+          </Box>
+   
+      </Stack>
+    </Grow>
+    </section>
+  )
 }

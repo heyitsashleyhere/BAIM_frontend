@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 // components
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import Header from "./components/Public/header/Header.jsx";
@@ -25,7 +26,23 @@ import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000'
+    },
 
+    secondary: {
+      main: '#0eebf6'
+    }
+  },
+  typography: {
+    fontFamily : [
+      'Varela Round',
+      'Arial', 'Helvetica', 'sans-serif'
+    ].join(','),
+  }
+});
 
 
 export default function App() {
@@ -33,7 +50,7 @@ export default function App() {
   const { isNav } = useContext(AnimationContext);
 
   return (
-
+    <ThemeProvider theme={theme}>
       <section className="App">
         {isNav && ( isLogin ? <AppHeader /> : <Header /> )}
 
@@ -112,6 +129,7 @@ export default function App() {
           {/* <Route path="*" element={<LoginRegister/>} /> */}
         </Routes>
       </section>
+    </ThemeProvider>
 
   )
 }
