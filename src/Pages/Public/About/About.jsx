@@ -10,26 +10,20 @@ import Footer from '../../../components/Public/Footer/Footer'
 
 
 export default function About(){
-    // const [isLoaded, setIsLoaded] = useState(false)
     const imagesRef = useRef([])
     imagesRef.current = []
 
     useEffect(() => {
 
+        const tl = gsap.timeline({
+            stagger: 0.1,
+        })
         imagesRef.current.forEach(image => {
-            image.addEventListener('load', () => {
-                
-                const tl = gsap.timeline()
-                tl.to(image, {
-                    duration: 0.8,
-                    y: 0,
-                    ease: 'power2.inOut',
-                    stagger: 0.3,
-                    delay: 0.8
-                })
-
+            tl.to(image, {
+                duration: 0.8,
+                y: 0,
+                ease: 'power2.inOut',
             })
-
         })
     }, [ imagesRef ])
     

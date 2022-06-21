@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 // components
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
@@ -28,14 +28,19 @@ import { Community } from "./Pages/Private/Community/Community.jsx";
 
 
 
+//Murad Testing Component
+import Loader from './Pages/Public/Main/Loader';
+
 export default function App() {
   const { isLogin } = useContext(UserContext);
+  const [loading, setLoading] = useState(true)
   const { isNav } = useContext(AnimationContext);
 
   return (
 
       <section className="App">
-        {isNav && ( isLogin ? <AppHeader /> : <Header /> )}
+      {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
+      <AppHeader  />
 
         <Routes>
           {/* Public routes */}

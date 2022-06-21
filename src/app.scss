@@ -3,6 +3,10 @@
 @import './styles/resets';
 @import './styles/breakpoints';
 
+:root{
+  height: 100%;
+}
+
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;

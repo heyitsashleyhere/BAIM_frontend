@@ -42,7 +42,7 @@ const Main = () => {
       })
   }
 
-  //firing animations
+    //firing animations
   useEffect(() => {
     handleCanPlay()
   }, [])
@@ -74,7 +74,7 @@ const addToRefs = (el) => {
   return (
   <>
       <section className="cta-container">
-        <div className="cta-overlay" ref={overlayRef}>
+        <div className="cta-wrapper" ref={overlayRef}>
           <div className="cta-content">
             <img ref={imageRef} src={Logo} alt="LOKA" className='logo' />
             <div  className="slogan">

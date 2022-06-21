@@ -10,8 +10,6 @@ import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
 
-
-
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(

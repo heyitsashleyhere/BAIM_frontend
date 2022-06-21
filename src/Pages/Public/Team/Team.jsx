@@ -15,7 +15,6 @@ import Logo from '../../../assets/logo/raspberry.png'
 const Team = () => {
   const { windowWidth } = useContext(AnimationContext)
   const [isClicked, setIsClicked] = useState(false)
-  const [isActive, setIsActive] = useState(false)
   const [memberData, setMemberData] = useState(null)
 
   
@@ -29,10 +28,6 @@ const Team = () => {
   useEffect(() => {
     // ${name}/ h2 yposition for gsap name animation
     // const yPosition = windowWidth >= 768 ? '-100%' : '-25%'
-
-    console.log(imagesRef.current)
-    console.log(revealRef.current)
-    console.log(nameRef.current)
 
     const tl = gsap.timeline({
       stagger: 0.1,
@@ -84,9 +79,6 @@ const Team = () => {
     setMemberData(data);
     setIsClicked(true);
   }
-  console.log(memberData, isClicked);
-
-
 
   return (
     <section className="team">
@@ -123,24 +115,34 @@ const Team = () => {
         <img className="logo" src={Logo}></img>
       </section>
       <section className="team_text team_section">
-        <p>We are a group of students doing our final project.
-        We all meet in DCI-digital career institute and started this journey together as developers. We come from very different backgrounds. All of us are full stack developers, still with specific roles in this project. We are super happy we came together and were able to finalize our one year program with this project. if your interest click in our fotos tosee our backgrounds.</p>
+        <span className="inner_text">
+          <p>We are a group of students doing our final project.
+          We all meet in DCI-digital career institute and started this journey together as developers. We come from very different backgrounds. All of us are full stack developers, still with specific roles in this project. We are super happy we came together and were able to finalize our one year program with this project. if your interest click in our fotos tosee our backgrounds.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Project Stack</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Figma Project</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Backend Repository</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
       </section>
       <section className="team_text team_section">
+        <span className="inner_text">
         <h2>Frontend Repository</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate inventore dolorem voluptatum recusandae eligendi sed.</p>
+        </span>
               </section>
       </>
     )}

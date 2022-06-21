@@ -6,7 +6,9 @@ import React from 'react'
 // import Gardens from '../../../assets/images/gardens.jpg'
 // import Markets from '../../../assets/images/markets.jpg'
 
-import './discover.scss'
+// import './discover.scss'
+import './discover2.scss'
+
 import { useLocation } from 'react-router-dom'
 
 export const Discover = () => {
