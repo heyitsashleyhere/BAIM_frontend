@@ -3,7 +3,7 @@
 .SquareAvatar{
     display: inline;
     text-decoration: none;
-    margin:1rem 1rem;
+    margin:0.2rem 0.2rem;
     cursor: pointer;
 
     .imageAvatar{
@@ -42,13 +42,14 @@
     @include media(">=tablet"){
 
     .imageAvatar{
-        width:200px;
-        height:120px;
+        width:170px;
+        height:100px;
         cursor:pointer;
+        margin:0.3rem 0.5rem;
 
 
         h2{
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             
         }
 
@@ -59,7 +60,7 @@
     @include media(">=desktop"){
 
         .imageAvatar{
-            width:250px;
+            width:260px;
             height:150px;
     
     

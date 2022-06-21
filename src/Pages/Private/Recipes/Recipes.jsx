@@ -1,6 +1,6 @@
 
-import React from 'react'
-import {useState} from 'react'
+import React, { useContext } from 'react'
+import {useState , useEffect} from 'react'
 import { useParams, Link, Outlet } from 'react-router-dom'
 
 import {ProfileAvatar, RecipesAvatar} from '../../../components/Private/Avatars-Links/Avatars'
@@ -8,6 +8,8 @@ import {ProfileAvatar, RecipesAvatar} from '../../../components/Private/Avatars-
 import './recipes.scss'
 import profiles from '../../Public/Team/teamData.js'
 import { RecipePost } from '../../../components/Private/RecipePost.jsx/RecipePost'
+import DataContextProvider, { DataContext } from '../../../contexts/dataContext'
+
 
 const foods=[
   {id:"01", title:'chicken', ingrediantes:['8grams'], author: 'Jack', type: 'soup',image:"https://images.unsplash.com/photo-1651222602706-420ee6ddcecd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"},
@@ -19,17 +21,8 @@ const foods=[
 
 export const Recipes = () => {
 
-  // const [select, setSelect]=useState(false)
-
-  // const { title } = useParams()
-  // console.log(title)
-
-    // type arrays. entrance, breakfast, maindish, soup, juices, sandwishes, dessert 
- 
-    const recipe = foods.find(item => item.title === foods.title)
-    const recipes = foods.map(item => <Link to={`/discover/recipes/${item.title}`} ><p>{item.title}</p></Link>)
-    
-    // type arrays. entrance, breakfast, maindish, soup, juices, sandwishes, dessert 
+const {recipes, setRecipes}=useContext(DataContext)
+console.log(recipes)
 
   return (
     <section className="Pages">
@@ -41,95 +34,19 @@ export const Recipes = () => {
           </section>
       </section>
 
-    <section className="collection-wrapper">
 
-    <section className="collection-inner">
-    <button>
-      <img></img>
-      <p>breakfast</p>
-    </button>
-    <button>
-      <img></img>
-      <p>soups</p>
-    </button>
-    <button>
-      <img></img>
-      <p>main dish</p>
-    </button>
-    <button>
-      <img></img>
-      <p>salads</p>
-    </button>
-    <button>
-      <img></img>
-      <p>sandwishes</p>
-    </button>
-    <button>
-      <img></img>
-      <p>juices</p>
-    </button>
-    <button>
-      <img></img>
-      <p>deserts</p>
-    </button>
 
-    </section>
-
-    </section>
-
-  {/* <section className="Main-Wrapper"> */}
+  
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">
-        <h2>Breakfast </h2>
+        <h2>recipes</h2>
         <p>{foods.length} items</p>
       </section>
       <section className="Library-container">
       {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
     </section>
-    </section>
-
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>Soups</h2>
-        <p>{foods.length} items</p>
-      </section>
-      <section className="Library-container">
-      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
-    </section>
-    </section>
-
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>Main Dish & salads</h2>
-        <p>{foods.length} items</p>
-      </section>
-      <section className="Library-container">
-      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
-    </section>
-    </section>
-
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>Sandwishes</h2>
-        <p>{foods.length} items</p>
-      </section>
-      <section className="Library-container">
-      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
-    </section>
-    </section>
-
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>Juices</h2>
-        <p>{foods.length} items</p>
-      </section>
-      <section className="Library-container">
-      {foods.map(item =><RecipesAvatar id={item.id} image={item.image} title={item.title}/>)}
-    </section>
-    </section>
-
-
-   
+    </section> 
+    
 </section>
 
 

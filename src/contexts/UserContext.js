@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const userTemplate = [];
 
@@ -8,7 +8,7 @@ export const UserContextProvider = (props) => {
   const [user, setUser] = useState({ id: "", profileName: "", avatar: "" });
   const [inputValues, setInputValues] = useState({})
   const [message, setMessage] = useState("")
-  const [isLogin, setIsLogin] = useState(!true)
+  const [isLogin, setIsLogin] = useState(true)
   const [isShowPassword, setIsShowPassword] = useState(false)
 
   function showPasswordHandler(){
@@ -23,6 +23,21 @@ export const UserContextProvider = (props) => {
     isShowPassword, setIsShowPassword,
     showPasswordHandler
   };
+
+
+  const [recipes, setRecipes]=useState([])
+
+  const dataContextValue={
+    recipes, setRecipes
+
+  }
+
+
+
+
+
+
+
 
   return (
     <UserContext.Provider value={userContextValue}>

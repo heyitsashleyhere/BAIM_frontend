@@ -9,6 +9,7 @@ import { AnimationContextProvider } from "./contexts/AnimationContext.js";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
+import DataContextProvider from "./contexts/dataContext.js";
 
 
 
@@ -16,15 +17,14 @@ const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
 	<BrowserRouter>
+	<DataContextProvider>
 		<UserContextProvider>
 			<PostsContextProvider>
 				<AnimationContextProvider>
 					<App />
-					
-					
-					{/* <Recipes/> */}
 				</AnimationContextProvider>
 			</PostsContextProvider>
 		</UserContextProvider>
+		</DataContextProvider>
 	</BrowserRouter>
 );
