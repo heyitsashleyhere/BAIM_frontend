@@ -4,6 +4,7 @@ export const PostsContext = React.createContext(null)
 
 function PostsContextProvider({ children }){
     const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"] 
+    const [data, setData] = useState({})
     const [inputValues, setInputValues] = useState({ title: "", description: "", link: "", tags: "" })
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
 
@@ -44,6 +45,7 @@ function PostsContextProvider({ children }){
         inputValues, setInputValues,
         address, setAddress,
         convertToBase64, handleFileUpload,
+        data, setData
     }
 
     return (
