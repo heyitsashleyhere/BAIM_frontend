@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimationContext } from '../../../contexts/AnimationContext'
 
 import gsap from 'gsap'
 import * as Icons from "react-icons/md";
@@ -72,7 +71,7 @@ export const AppHeader = () => {
       )}
     </header>
 
-    <div className={burgerMenu ? "burger-menu active" : "burger-menu"}>
+    <div className={burgerMenu ? "burger-menu open" : "burger-menu"}>
         <ul className="burger-menu-list">
           <li className="burger-menu-list-item">
             <Link to="/discover">Discover</Link>

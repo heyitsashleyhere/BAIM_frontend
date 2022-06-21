@@ -1,19 +1,16 @@
-import { useRef, useEffect, useContext, useState} from 'react'
-import { AnimationContext } from '../../../contexts/AnimationContext'
-import team from './teamData.js'
-
+import { useRef, useEffect, useState} from 'react'
 import gsap from 'gsap'
+// Icons
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { MdAlternateEmail, MdPhoneIphone, MdOutlineArrowBackIosNew } from "react-icons/md";
-import { IoIosCloseCircleOutline, IoIosCloseCircle, IoIosClose } from "react-icons/io";
-
-
+// Components
+import team from './teamData.js'
+// Styles and images
 import './team.scss'
 import Logo from '../../../assets/logo/raspberry.png' 
 
 
 const Team = () => {
-  const { windowWidth } = useContext(AnimationContext)
   const [isClicked, setIsClicked] = useState(false)
   const [memberData, setMemberData] = useState(null)
 
@@ -62,7 +59,7 @@ const Team = () => {
       })
     })
 
-  }, [ ])
+  }, [])
 
   const addToRefs = (el) => {
     imagesRef.current.push(el);
@@ -75,7 +72,7 @@ const Team = () => {
   }
 
   const handleMemberComponent = (data) => {
-    console.log(data);
+    // console.log(data);
     setMemberData(data);
     setIsClicked(true);
   }
