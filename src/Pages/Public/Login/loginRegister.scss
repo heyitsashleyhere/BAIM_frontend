@@ -3,44 +3,54 @@
 @import '../../../styles/breakpoints';
 
 .LoginRegister{
-    position:absolute;
+    position:relative;
     top:0;
     bottom:0;
     left:0;
     right:0;
-    z-index: -100;
     width:100%;
+    height: 100vh;
     display:flex;
     justify-content:center;
     align-items: center;
 
     .outer-Video{
+        position: absolute;
+        z-index: -100;
         top:0px;
         width:100%;
-        height:100vh;
+        height:100%;
         overflow: hidden;
         object-fit: cover;
     }
 
     .login-page, .welcome-page{
-        padding: 5rem;
-        position:absolute;
-        right: 0;
-        top: 0;
         background-color: white;
-        width:50%;
-        height:100%;
-        border-radius:20px;
+        width:85%;
+        height:85%;
         display:flex;
         flex-direction: column;
         justify-content: space-between;
-        a {
-            cursor: pointer;
-        }
+        padding: 5rem;
+        border-radius:20px;
+        box-shadow: 7px 10px 37px 3px rgba(0,0,0,0.61);
+        -webkit-box-shadow: 7px 10px 37px 3px rgba(0,0,0,0.61);
+        -moz-box-shadow: 7px 10px 37px 3px rgba(0,0,0,0.61);
+        // a {
+        //     cursor: pointer;
+        // }
         .LoginForm, .RegisterForm {
             h1 {
                 font-size: 4rem;
             }
+        }
+        .LoginForm {
+            h1 {
+                margin-bottom: 2em;
+            }
+        }
+        .RegisterForm {
+            overflow: scroll;
         }
     }
 
@@ -49,7 +59,7 @@
         position:relative;
         background-color: transparent;
         border:none;
-        font-size: 2rem;
+        font-size: 1.6rem;
         color:black;
         cursor:pointer;
       }
@@ -88,12 +98,13 @@
         display:grid;
         grid-template-columns: repeat(8, 1fr);
         gap:2.5rem;
+        overflow: hidden;
 
         .outer-Video{
+            top: 100px;
             height:100vh;
             grid-column: 1/9;
         }
-
 
         .login-page{
             width:100%;
@@ -108,6 +119,7 @@
         gap:2.5rem;
 
         .outer-Video{
+            top: 0;
             height:100vh;
             grid-column: 1/13;
         }
@@ -115,7 +127,8 @@
         .login-page{
             margin-top:5rem;
             width:100%;
-            grid-column: 6/10;
+            height: 90%;
+            grid-column: 7/11;
         }
 
     }
