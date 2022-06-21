@@ -3,6 +3,10 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.4",
     "firebase": "^9.8.2",
     "gsap": "^3.10.4",
     "react": "^18.1.0",
