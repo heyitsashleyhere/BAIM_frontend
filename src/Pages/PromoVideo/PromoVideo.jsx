@@ -1,13 +1,17 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimationContext } from '../../contexts/AnimationContext.js'
 
+import gsap from 'gsap'
+
 import './promoVideo.scss'
+import * as Icons from "react-icons/md";
 
 const PromoVideo = () => {
   const { windowWidth, setIsNav  } = useContext(AnimationContext)
   const [show, setShow] = useState(false)
 
+  const skipBtn = useRef(null)
 
   
   let navigate = useNavigate();
@@ -26,13 +30,24 @@ const PromoVideo = () => {
     return () => {
       clearTimeout(skip)
     }
-
   }, [])
+
+  useEffect(() => {
+    gsap.fromTo(skipBtn.current, {
+      opacity: 0,
+      y: 0
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out"
+    })
+  }, [ show ])
+    
 
 
   return (
     <section className="promo-container">
-
       <div className="promo-video-wrapper">
         <video src={videoUrl} autoPlay playsInline muted onEnded={() => {
               setIsNav(true) 
@@ -41,10 +56,10 @@ const PromoVideo = () => {
 
       <div className='skip-wrapper'>
         {show && (
-          <button onClick={() => {
+          <button ref={skipBtn} onClick={() => {
             setIsNav(true) 
             navigate('/main')
-            }}>Skip</button>
+            }} className='skip-btn'>Skip <Icons.MdSkipNext className='skip-icon' /></button>
         )}
         
       </div>
