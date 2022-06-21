@@ -3,7 +3,7 @@ import { PostsContext } from '../contexts/PostContext.js'
 import Post from './Post.jsx'
 
 export default function Posts() {
-    const {postCategories} = useContext(PostsContext)
+    const {postCategories, data, setData} = useContext(PostsContext)
 
     useEffect(() => {
         postCategories.map(category => {
@@ -14,7 +14,7 @@ export default function Posts() {
         
             fetch(url, config)
               .then(res => res.json())
-              .then(console.log)
+              .then(result => setData({...data, [`${category}`]: result}))
               .catch(console.error)
         })
 
