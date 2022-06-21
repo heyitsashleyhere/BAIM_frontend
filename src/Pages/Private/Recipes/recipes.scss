@@ -1,6 +1,6 @@
 @import '../../../styles/breakpoints';
 
-@include media(">=phone"){
+
 
     .Pages{
 
@@ -11,6 +11,174 @@
             background-size: cover;
         }
 
+            width:100%;
+        
+            .Hero{
+                width:100%;
+        
+                .hero-image{
+                    position:relative;
+                    width:100%;
+                    height:50vh;
+                }
+        
+                .Hero-text{
+                    height:50vh;
+                    position:absolute;
+                    top:0;
+                    display:flex;
+                    justify-content: flex-end;
+                    flex-direction: column;
+        
+                    h1{
+                        margin:0rem 1rem;
+                        font-size: 7rem;
+                        color:white;
+                        
+                    }
+        
+                    p{
+                        margin:1rem 1rem;
+                        font-size:7rem;
+                        color:white;
+                    }
+        
+            
+        
+                }
+            }
+        
+            .Library-wrapper{
+                width:100%;
+                margin: 0.5rem 0rem;
+        
+                .lib-wrapper-header{
+                    display:flex;
+                    align-items: center;
+                    margin-left:1rem;
+        
+                    h2{
+                        font-size: 2rem;
+                    }
+        
+                    p{
+                        font-size: 1.2rem;
+                        margin-left:1rem;
+                        color:red;
+                    }
+                    
+                }
+        
+                .Library-container{
+                    width:100%;
+                    display:flex;
+                    flex-wrap:wrap;
+                    align-content: center;
+                    justify-content:flex-start;
+                    padding:1rem;
+                    
+                }
+        
+                .Library-container::-webkit-scrollbar {
+                    height:5px;
+                    
+                  }
+        
+                .Library-container::-webkit-scrollbar-track {
+                    box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
+                    border-radius: 10px;
+                }
+        
+                .Library-container::-webkit-scrollbar-thumb {
+                    background: rgb(99, 99, 99);
+                    border-radius: 20px;
+                  }
+            }
+        
+        
+        
+            @include media(">=tablet"){
+                display:grid;
+                grid-template-columns: repeat(8, 1fr);
+                gap:2.5rem;
+        
+                .Hero{
+                    grid-column: 1/9;
+            
+                    .Hero-text{
+                        justify-content: flex-end;
+                       
+            
+                        h1{
+                            margin:0rem 2rem;
+                            font-size: 15rem;
+                            
+                        }
+            
+                        p{
+                            margin:0rem 2rem;
+                            font-size:10rem;
+                        }
+                    }
+                }
+        
+                .Library-wrapper{
+                    grid-column: 1/9;
+        
+                    .Library-container{
+                        overflow: hidden;
+                        overflow-x: scroll;
+                    }
+        
+                }
+            }
+        
+            @include media(">=desktop"){
+                grid-template-columns: repeat(12,1fr);
+        
+                .Hero{
+                    grid-column: 2/12;
+        
+                    .hero-image{
+                        position:relative;
+                        width:100%;
+                        
+                       
+                    }
+        
+                    .Hero-text{
+                        top:6.5rem;
+                        height:50vh;
+                        justify-content: flex-end;
+                       
+        
+                        h1{
+                            margin:0rem 2rem;
+                            font-size:15rem;
+                        }
+        
+                        p{
+                            margin:0rem 2rem;
+                            font-size: 10rem;
+                        }
+                    }
+                }
+        
+                // .Main-wrapper
+        
+                .Library-wrapper{
+                    grid-column:2/12;
+                }
+            }
+        
+        
+        
+        .Pages::-webkit-scrollbar {
+            display: none;
+        }
+
     }
 
-}
+
+
+

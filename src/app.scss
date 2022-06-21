@@ -85,158 +85,169 @@ body {
     color:red;
   }
 
-  .Pages{
-    width:100%;
+//   .Pages{
+//     width:100%;
 
-    .Hero{
-        width:100%;
+//     .Hero{
+//         width:100%;
 
-        .hero-image{
-            position:relative;
-            width:100%;
-            height:100vh;
-        }
+//         .hero-image{
+//             position:relative;
+//             width:100%;
+//             height:50vh;
+//         }
 
-        .Hero-text{
-           
-            height:100vh;
-            position:absolute;
-            top:0;
-            display:flex;
-            justify-content: center;
-            flex-direction: column;
+//         .Hero-text{
+//             height:50vh;
+//             position:absolute;
+//             top:0;
+//             display:flex;
+//             justify-content: flex-end;
+//             flex-direction: column;
 
-            h1{
-                margin:0rem 1rem;
-                font-size: 5rem;
-                color:white;
+//             h1{
+//                 margin:0rem 1rem;
+//                 font-size: 10rem;
+//                 color:white;
                 
-            }
+//             }
 
-            p{
-                margin:1rem 1rem;
-                font-size:3rem;
-                color:white;
-            }
+//             p{
+//                 margin:1rem 1rem;
+//                 font-size:10rem;
+//                 color:white;
+//             }
 
     
 
-        }
-    }
+//         }
+//     }
 
-    .Library-wrapper{
-        margin: 3rem 0rem;
+//     .Library-wrapper{
+//         margin: 3rem 0rem;
 
-        .lib-wrapper-header{
-            display:flex;
-            align-items: center;
-            margin-left:1rem;
+//         .lib-wrapper-header{
+//             display:flex;
+//             align-items: center;
+//             margin-left:1rem;
 
-            h2{
-                font-size: 2rem;
-            }
+//             h2{
+//                 font-size: 2rem;
+//             }
+
+//             p{
+//                 font-size: 1.2rem;
+//                 margin-left:1rem;
+//                 color:red;
+//             }
             
-            p{
-                font-size: 1.2rem;
-                margin-left:1rem;
-                color:red;
-            }
+//         }
+
+//         .Library-container{
+//             display:flex;
+//             padding:1rem;
+//             margin:1rem;
+//             overflow: auto;
+//             overflow-x: scroll;
+//         }
+
+//         .Library-container::-webkit-scrollbar {
+//             height:5px;
             
-        }
+//           }
 
-        .Library-container{
-            display:flex;
-            padding:1rem;
-            margin:1rem;
-            overflow: auto;
-            overflow-x: scroll;
-        }
+//         .Library-container::-webkit-scrollbar-track {
+//             box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
+//             border-radius: 10px;
+//         }
 
-        .Library-container::-webkit-scrollbar {
-            height:5px;
-            
-          }
-
-        .Library-container::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
-            border-radius: 10px;
-        }
-
-        .Library-container::-webkit-scrollbar-thumb {
-            background: rgb(99, 99, 99);
-            border-radius: 20px;
-          }
-    }
+//         .Library-container::-webkit-scrollbar-thumb {
+//             background: rgb(99, 99, 99);
+//             border-radius: 20px;
+//           }
+//     }
 
 
 
-    @include media(">=tablet"){
-        display:grid;
-        grid-template-columns: repeat(8, 1fr);
-        gap:2.5rem;
+//     @include media(">=tablet"){
+//         display:grid;
+//         grid-template-columns: repeat(8, 1fr);
+//         gap:2.5rem;
 
-        .Hero{
-            grid-column: 1/9;
+//         .Hero{
+//             grid-column: 1/9;
     
-            .Hero-text{
-                justify-content: space-between;
-                align-items: flex-start;
+//             .Hero-text{
+//                 justify-content: flex-end;
+               
     
-                h1{
-                    margin:10rem 0rem;
-                    font-size: 10rem;
-                    align-self: flex-end;
-                }
+//                 h1{
+//                     margin:0rem 2rem;
+//                     font-size: 15rem;
+                    
+//                 }
     
-                p{
-                    margin:5rem 2rem;
-                    font-size:7rem;
-                }
-            }
-        }
+//                 p{
+//                     margin:0rem 2rem;
+//                     font-size:10rem;
+//                 }
+//             }
+//         }
 
-        .Library-wrapper{
-            grid-column: 1/9;
+//         .Library-wrapper{
+//             grid-column: 1/9;
 
-            .Library-container{
-                overflow: hidden;
-                overflow-x: scroll;
-            }
+//             .Library-container{
+//                 overflow: hidden;
+//                 overflow-x: scroll;
+//             }
 
-        }
-    }
+//         }
+//     }
 
-    @include media(">=desktop"){
-        grid-template-columns: repeat(12,1fr);
+//     @include media(">=desktop"){
+//         grid-template-columns: repeat(12,1fr);
 
-        .Hero{
-            grid-column: 3/11;
+//         .Hero{
+//             grid-column: 2/12;
 
-            .Hero-text{
+//             .hero-image{
+//                 position:relative;
+//                 width:100%;
+                
+               
+//             }
 
-                h1{
-                    margin:10rem 0rem;
-                    font-size:10rem;
-                    align-self: flex-start;
-                }
+//             .Hero-text{
+//                 top:6.5rem;
+//                 height:50vh;
+//                 justify-content: flex-end;
+               
 
-                p{
-                    margin:5rem 10rem;
-                    font-size: 10rem;
-                }
-            }
-        }
+//                 h1{
+//                     margin:0rem 2rem;
+//                     font-size:15rem;
+//                 }
 
-        .Library-wrapper{
-            grid-column:3/11;
-        }
-    }
-}
+//                 p{
+//                     margin:0rem 2rem;
+//                     font-size: 10rem;
+//                 }
+//             }
+//         }
+
+//         // .Main-wrapper
+
+//         .Library-wrapper{
+//             grid-column:2/12;
+//         }
+//     }
+// }
 
 
-.Pages::-webkit-scrollbar {
-    display: none;
-}
+// .Pages::-webkit-scrollbar {
+//     display: none;
+// }
 
 
 }
