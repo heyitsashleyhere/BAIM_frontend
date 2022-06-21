@@ -1,0 +1,244 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/breakpoints';
+
+.app-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4.5rem;
+  background: black;
+  padding-inline: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9998;
+
+  &-logo {
+      display: flex;
+      align-items: center;
+      transition: 0.35s all ease-in-out;
+  
+      img {
+        width: 2.2rem;
+        height: 2.2rem;
+        margin-right: 0.5rem;
+      }
+  
+      a {
+        color: white;
+        // mix-blend-mode: difference;
+        text-decoration: none;
+      }
+    }
+
+  .mobile-toggle{
+    width: 65vw;
+    display: flex;
+    justify-content: flex-end;
+
+    &-icon {
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .toggle-icon{
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  @include media(">=tablet") {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    transition: 0.35s all ease-in-out;
+    padding-inline: 0;
+
+    &-logo {
+      grid-column: 2/3;
+      transition: 0.35s all ease-in-out;
+
+      img {
+        @include container(2.6rem, 2.6rem);
+        object-fit: cover;
+      }
+    }
+
+    .navbar {
+      grid-column: 3/8;
+      transition: 0.35s all ease-in-out;
+
+      ul {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        transition: 0.35s all ease-in-out;
+
+        li {
+          display: flex;
+          margin-right: 2rem;
+
+          a {
+            color: $white;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+          }
+
+          &:last-child{
+            width: 35rem;
+            min-width: 20rem;
+            margin-left: auto;
+            position: relative;
+            border: none;
+            border-bottom: 2px solid white;
+            
+            .search{
+              padding: 1rem !important;
+              font-size: 1.8rem !important;
+              color: white;
+            }
+
+            ::placeholder {
+              color: white !important;
+            }
+
+            .search-icon{
+              font-size: 2.25rem;
+              color: white;
+              cursor: pointer;
+              position: absolute;
+              right: 0.5rem;
+              top: 50%;
+              transform: translateY(-50%);
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include media(">=desktop") {
+    grid-template-columns: repeat(12, 1fr);
+    transition: 0.35s all ease-in-out;
+
+    &-logo {
+      grid-column: 3/4;
+      transition: 0.35s all ease-in-out;
+
+      img {
+        @include container(2.6rem, 2.6rem);
+        object-fit: cover;
+      }
+    }
+
+    .navbar {
+      grid-column: 6/11;
+      padding-left: 0;
+      transition: 0.35s all ease-in-out;
+
+      ul {
+        gap: 4rem;
+        transition: 0.35s all ease-in-out;
+
+        li {
+          &:nth-child(3) {
+            transition: 0.35s all ease-in-out;
+
+          }
+        }
+      }
+
+    }
+
+  }
+}
+
+.burger-menu{
+  width: 100%;
+  background: #000;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transition: 0.3s all ease-in-out;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  &-list{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 5rem;
+
+    &-item{
+      font-size: 3.6rem;
+
+      a{
+        text-decoration: none;
+        color: white;
+      }
+
+      &:last-child{
+        margin-top: auto;
+        width: 40rem ;
+        height: 4rem ;
+        position: relative ;
+        font-size: 2rem;
+        border-bottom: 2px solid white;
+        
+        .mobile-search {
+          border-radius: 5rem !important;
+          border: none !important;
+          padding: 2rem 1rem !important;
+          font-size: 2rem !important;
+          color: white !important;
+          
+        }
+        ::placeholder {
+          color: white !important;
+          font-size: 2rem !important;
+        }
+
+      
+        .search-icon {
+          font-size: 2.25rem;
+          color: white;
+          cursor: pointer;
+          position: absolute;
+          right: 1.5rem;
+          top: 50%;
+          transform: translateY(-50%);
+      
+        }
+    }
+  }
+}
+  .close-icon {
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 1.25rem;
+    right: 1rem;
+  }
+}
+.active{
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  overflow-x: hidden;
+}

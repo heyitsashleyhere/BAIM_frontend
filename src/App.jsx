@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 // components
@@ -45,14 +45,19 @@ const theme = createTheme({
 });
 
 
+//Murad Testing Component
+import Loader from './Pages/Public/Main/Loader';
+
 export default function App() {
   const { isLogin } = useContext(UserContext);
+  const [loading, setLoading] = useState(true)
   const { isNav } = useContext(AnimationContext);
 
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
-        {isNav && ( isLogin ? <AppHeader /> : <Header /> )}
+      {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
+      <AppHeader  />
 
         <Routes>
           {/* Public routes */}

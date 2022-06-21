@@ -24,13 +24,10 @@ const Header = () => {
     // console.log(childrensRef.current);
     childrensRef.current.forEach(child => {
       const tl = gsap.timeline()
-      tl.fromTo(child, {
-        duration: 0.8,
-        y: -100,
-      }, {
+      tl.to(headerRef.current, {
+        duration: 1,
         y: 0,
-        ease: 'power2.inOut',
-        stagger: 0.2
+        ease: 'power2.inOut'
       })
     })
   }, [])
@@ -47,7 +44,7 @@ const Header = () => {
         <img src={Logo} alt="LOKA" /> 
         <NavLink to="/main">Loka</NavLink>
       </div>
-      <nav ref={addToChildrens} className="navbar">
+      <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
             <NavLink to="/team">team</NavLink> 

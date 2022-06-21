@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const userTemplate = [];
 
@@ -23,6 +23,21 @@ export const UserContextProvider = (props) => {
     isShowPassword, setIsShowPassword,
     showPasswordHandler
   };
+
+
+  const [recipes, setRecipes]=useState([])
+
+  const dataContextValue={
+    recipes, setRecipes
+
+  }
+
+
+
+
+
+
+
 
   return (
     <UserContext.Provider value={userContextValue}>

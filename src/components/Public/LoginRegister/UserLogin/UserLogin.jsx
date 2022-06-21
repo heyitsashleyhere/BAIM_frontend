@@ -88,7 +88,6 @@ export default function UserLogin() {
                   </IconButton>
                 </InputAdornment>
                 )}} />
-
           {errors.map((error, i) => (
             error.password && (<FormHelperText error key={"passwordError"+ i}>{error.password}</FormHelperText>)
           ))}  

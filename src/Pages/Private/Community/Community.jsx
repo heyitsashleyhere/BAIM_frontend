@@ -37,7 +37,7 @@ export const Community = () => {
 
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">
-        <h2>Agricultures</h2>
+        <h2>Farmers</h2>
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">

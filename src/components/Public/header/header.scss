@@ -1,28 +1,26 @@
 @import '../../../styles/variables';
 @import '../../../styles/mixins';
 @import '../../../styles/breakpoints';
-@import '../../../styles/resets';
 
 .header {
-  // transform: translateY(-100%);
-
+  position: fixed;
+  transform: translateY(-100%);
   display: flex;
   justify-content: space-between;
   padding-inline: 1rem;
+  width: 100%;
   height: 4.5rem;
-  background-color: black;
-  z-index: 100;
+  mix-blend-mode: difference;
 
-  font-family: $font-family-Varela;
-  font-weight: $font-weight-800;
   font-size: $font-size-md;
-  // color: $white;
   mix-blend-mode: difference;
   transition: 0.35s all ease-in-out;
   align-items: center;
+  z-index: 9999;
 
   &-logo {
     display: flex;
+    flex-direction: row;
     align-items: center;
     transition: 0.35s all ease-in-out;
 
@@ -65,6 +63,7 @@
       grid-template-columns: repeat(8, 1fr);
       transition: 0.35s all ease-in-out;
       padding-inline: 0;
+      z-index: 1000;
 
       &-logo {
         grid-column: 2/3;
