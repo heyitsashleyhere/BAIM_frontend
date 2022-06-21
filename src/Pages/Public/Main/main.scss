@@ -1,5 +1,4 @@
 @import '../../../styles/variables';
-@import '../../../styles/mixins';
 @import '../../../styles/breakpoints';
 
 .cta-container {
@@ -12,7 +11,7 @@
     height: 100%;
     position: relative;
     opacity: 0;
-    
+
     .cta-content {
       position: absolute;
       top: 70%;
@@ -42,63 +41,65 @@
       }
     }
   }
-      @include media(">=tablet") {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
 
-      .cta-wrapper{
-        grid-column: 2/8;
-        .cta-content {
+  @include media(">=tablet") {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    .cta-wrapper {
+      grid-column: 2/8;
+
+      .cta-content {
+        transition: 0.35s all ease-in-out;
+        top: 65%;
+        left: 0;
+
+        .logo {
+          width: 40rem;
           transition: 0.35s all ease-in-out;
-          top: 65%;
-          left: 0;
-      
-          .logo {
-            width: 40rem;
-            transition: 0.35s all ease-in-out;
-          }
-        
-          .slogan {
-            h1 {
-              letter-spacing: 5px;
-              font-size: 3rem;
-            }
+        }
+
+        .slogan {
+          h1 {
+            letter-spacing: 5px;
+            font-size: 3rem;
           }
         }
       }
     }
+  }
 
-    @include media(">=desktop") {
-      grid-template-columns: repeat(12, 1fr);
-      transition: 0.35s all ease-in-out;
+  @include media(">=desktop") {
+    grid-template-columns: repeat(12, 1fr);
+    transition: 0.35s all ease-in-out;
 
-      .cta-wrapper{
-        grid-column: 3/11;
+    .cta-wrapper {
+      grid-column: 3/11;
 
-        .cta-content {
-          top: 60%;
+      .cta-content {
+        top: 60%;
+        transition: 0.35s all ease-in-out;
+
+        .logo {
+          width: 50rem;
           transition: 0.35s all ease-in-out;
-  
-          .logo {
-            width: 50rem;
-            transition: 0.35s all ease-in-out;
-          }
-  
-          .slogan {
-            
-            h1 {
-              transform: translateY(-200%);
-              letter-spacing: 7px;
-              font-size: 3.8rem;
-            }
+        }
+
+        .slogan {
+
+          h1 {
+            transform: translateY(-200%);
+            letter-spacing: 7px;
+            font-size: 3.8rem;
           }
         }
       }
     }
+  }
 }
 
 .promo-vid-container {
-  
+
   width: 100%;
   height: 100vh;
   position: relative;
@@ -118,6 +119,7 @@
       color: $white;
       transition: 0.35s all ease-in-out;
     }
+
     @include media(">=tablet") {
       // top: 50%;
       // left: 50%;
@@ -133,11 +135,12 @@
 
   }
 
-  .promo-video-wrapper {
-
+  .promo-vid-wrapper {
+    width: 100%;
+    height: 100%;
     video {
       width: 100%;
-      height: 100vh;
+      height: 100%;
       object-fit: cover;
       object-position: center;
     }

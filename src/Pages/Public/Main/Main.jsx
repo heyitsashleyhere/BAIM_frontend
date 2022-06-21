@@ -10,18 +10,31 @@ import Logo from '../../../assets/pngLogo.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const ctaVideos = [
+  {
+    text : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat est necessitatibus soluta ipsam sunt nesciunt repudiandae velit architecto, a sapiente.',
+    src : process.env.PUBLIC_URL + '/landingVideos/strawberries.webm',
+  },
+  {
+    text : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat est necessitatibus soluta ipsam sunt nesciunt repudiandae velit architecto, a sapiente.',
+  src : process.env.PUBLIC_URL + '/landingVideos/lemons.webm',
+  }
+]
 
 const Main = () => {
+
+  //refs used for gsap animation 
   const overlayRef = useRef(null)
   const imageRef = useRef(null)
   const sloganRef = useRef(null)
 
+  //a function to add multiple refs to an array
   const videosRef = useRef([])
   videosRef.current = []
 
 
- //Main page gsap timeline
- const handleCanPlay = () => {
+ //Main page Animations
+  useEffect(() => {
     const tl = gsap.timeline()
       tl.to(overlayRef.current, {
         duration: 1,
@@ -40,11 +53,6 @@ const Main = () => {
         duration: 0.8,
         ease: 'power2.inOut'
       })
-  }
-
-    //firing animations
-  useEffect(() => {
-    handleCanPlay()
   }, [])
 
 //revealing promo sections and promo video onscroll animation
@@ -67,53 +75,43 @@ useEffect(() => {
 //adding promo videos to an array for ScrollTrigger
 const addToRefs = (el) => {
   videosRef.current.push(el)  
-// console.log(videosRef.current);
 }
 
 
   return (
   <>
-      <section className="cta-container">
-        <div className="cta-wrapper" ref={overlayRef}>
-          <div className="cta-content">
-            <img ref={imageRef} src={Logo} alt="LOKA" className='logo' />
-            <div  className="slogan">
-              <h1 ref={sloganRef}>
-                Lokalisieren
-              </h1>
-            </div>
+    <section className="cta-container">
+      <div className="cta-wrapper" ref={overlayRef}>
+        <div className="cta-content">
+          <img ref={imageRef} src={Logo} alt="LOKA" className='logo' />
+          <div  className="slogan">
+            <h1 ref={sloganRef}>
+              Lokalisieren
+            </h1>
           </div>
         </div>
-      </section>
-     
-      <section className="promo-vid-container">
+      </div>
+    </section>
+    
+    <section className="promo-vid-container">
+      {ctaVideos.map((video, index) => {
+        return (
+          <>
           <div className="promo-vid-overlay">
-              <div className="promo-vid-overlay-content">
-                {/* TODO: What the app has to offer */}
-                  <h1 className="overlay-content-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat est necessitatibus soluta ipsam sunt nesciunt repudiandae velit architecto, a sapiente.
-                  </h1>
-              </div>
-              </div>
-              <div className="promo-video-wrapper">
-                <video ref={addToRefs} src={process.env.PUBLIC_URL + "/landingVideos/strawberries.webm"} playsInline muted loop
-                   />
-              </div>
-            </section>
-            <section className="promo-vid-container">
-              <div className="promo-vid-overlay">
-                <div className="promo-vid-overlay-content">
-                  {/* TODO: What the app has to offer */}
-                  <h1 className="overlay-content-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat est necessitatibus soluta ipsam sunt nesciunt repudiandae velit architecto, a sapiente.
-                  </h1>
-                </div>
-              </div>
-              <div className="promo-video-wrapper">
-                <video ref={addToRefs} src={process.env.PUBLIC_URL + "/landingVideos/lemons.webm"} playsInline muted loop
-                  />
-              </div>
-      </section>
-        
-    </> 
+          <div className="promo-vid-overlay-content" key={index}>
+            <h1 className="promo-vid-content-title">{video.text}</h1>
+            </div>
+            </div>
+          <div className="promo-vid-wrapper" key={index}>
+            <video ref={addToRefs} className="promo-vid" src={video.src} type="video/webm" autoPlay loop muted playsInline />
+              {/* <source  />
+            </video> */}
+            </div>
+          </>
+        )
+      })}
+    </section>
+  </>
   )
 }
 

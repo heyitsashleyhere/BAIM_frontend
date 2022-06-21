@@ -76,14 +76,14 @@ export const AppHeader = () => {
         <ul className="burger-menu-list">
           <li className="burger-menu-list-item">
             <Link to="/discover">Discover</Link>
-              </li>
-              <li className="burger-menu-list-item">
+          </li>
+          <li className="burger-menu-list-item">
             <Link to="/feed">Feed</Link>
-              </li>
-              <li className="burger-menu-list-item">
+          </li>
+          <li className="burger-menu-list-item">
             <Link to="/profile">Profile</Link>
           </li>
-              <li className="burger-menu-list-item">
+          <li className="burger-menu-list-item">
             <Link to="/create">Create</Link>
           </li>
           <li className="burger-menu-list-item">

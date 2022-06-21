@@ -1,8 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
 @import '../../../styles/breakpoints';
 
-.app-header{
+.app-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -17,24 +15,24 @@
   z-index: 9998;
 
   &-logo {
-      display: flex;
-      align-items: center;
-      transition: 0.35s all ease-in-out;
-  
-      img {
-        width: 2.2rem;
-        height: 2.2rem;
-        margin-right: 0.5rem;
-      }
-  
-      a {
-        color: white;
-        // mix-blend-mode: difference;
-        text-decoration: none;
-      }
+    display: flex;
+    align-items: center;
+    transition: 0.35s all ease-in-out;
+
+    img {
+      width: 2.2rem;
+      height: 2.2rem;
+      margin-right: 0.5rem;
     }
 
-  .mobile-toggle{
+    a {
+      color: white;
+      // mix-blend-mode: difference;
+      text-decoration: none;
+    }
+  }
+
+  .mobile-toggle {
     width: 65vw;
     display: flex;
     justify-content: flex-end;
@@ -45,7 +43,7 @@
       cursor: pointer;
     }
 
-    .toggle-icon{
+    .toggle-icon {
       font-size: 2rem;
       color: white;
       cursor: pointer;
@@ -63,7 +61,8 @@
       transition: 0.35s all ease-in-out;
 
       img {
-        @include container(2.6rem, 2.6rem);
+        width: 2.6rem;
+        height: 2.6rem;
         object-fit: cover;
       }
     }
@@ -83,20 +82,20 @@
           margin-right: 2rem;
 
           a {
-            color: $white;
+            color: white;
             text-decoration: none;
             transition: all 0.3s ease-in-out;
           }
 
-          &:last-child{
+          &:last-child {
             width: 35rem;
             min-width: 20rem;
             margin-left: auto;
             position: relative;
             border: none;
             border-bottom: 2px solid white;
-            
-            .search{
+
+            .search {
               padding: 1rem !important;
               font-size: 1.8rem !important;
               color: white;
@@ -106,7 +105,7 @@
               color: white !important;
             }
 
-            .search-icon{
+            .search-icon {
               font-size: 2.25rem;
               color: white;
               cursor: pointer;
@@ -131,7 +130,8 @@
       transition: 0.35s all ease-in-out;
 
       img {
-        @include container(2.6rem, 2.6rem);
+        width: 2.6rem;
+        height: 2.6rem;
         object-fit: cover;
       }
     }
@@ -158,7 +158,7 @@
   }
 }
 
-.burger-menu{
+.burger-menu {
   width: 100%;
   background: #000;
   height: 100vh;
@@ -172,46 +172,48 @@
   justify-content: center;
   align-items: flex-end;
 
-  &-list{
+  &-list {
     width: 100%;
-    height: 60%;
+    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 3rem;
+    padding-inline: 2rem;
     padding-bottom: 5rem;
 
-    &-item{
-      font-size: 3.6rem;
+    &-item {
+      font-size: 3.2rem;
 
-      a{
+      a {
         text-decoration: none;
         color: white;
       }
 
-      &:last-child{
+      &:last-child {
         margin-top: auto;
-        width: 40rem ;
-        height: 4rem ;
-        position: relative ;
+        width: 30rem;
+        height: 4rem;
+        position: relative;
         font-size: 2rem;
         border-bottom: 2px solid white;
-        
+
         .mobile-search {
           border-radius: 5rem !important;
           border: none !important;
           padding: 2rem 1rem !important;
           font-size: 2rem !important;
           color: white !important;
-          
-        }
-        ::placeholder {
-          color: white !important;
-          font-size: 2rem !important;
+
         }
 
-      
+        ::placeholder {
+          color: white !important;
+          font-size: 1.6rem !important;
+        }
+
+
         .search-icon {
           font-size: 2.25rem;
           color: white;
@@ -220,11 +222,12 @@
           right: 1.5rem;
           top: 50%;
           transform: translateY(-50%);
-      
+
         }
+      }
     }
   }
-}
+
   .close-icon {
     font-size: 2rem;
     color: white;
@@ -234,7 +237,8 @@
     right: 1rem;
   }
 }
-.active{
+
+.active {
   left: 0;
   top: 0;
   right: 0;

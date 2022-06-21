@@ -35,10 +35,8 @@ const PromoVideo = () => {
   useEffect(() => {
     gsap.fromTo(skipBtn.current, {
       opacity: 0,
-      y: 0
     }, {
       opacity: 1,
-      y: 0,
       duration: 1,
       ease: "power3.out"
     })
