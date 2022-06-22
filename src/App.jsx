@@ -56,8 +56,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
-      {isNav && (isLogin ? <AppHeader /> : <Header />)}
-      {/* <AppHeader  /> */}
+      {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
+      <AppHeader  />
 
         <Routes>
           {/* Public routes */}
