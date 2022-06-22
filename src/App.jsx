@@ -25,6 +25,7 @@ import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
+import ScrollToTop from './components/Public/Footer/ScrollToTop'
 
 const theme = createTheme({
   palette: {
@@ -56,6 +57,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
+
+        <ScrollToTop  />
+
       {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
       <AppHeader  />
 
@@ -70,68 +74,38 @@ export default function App() {
           {/* Private routes */}
           <Route path="/discover" element={<Discover/>} />
 
-          <Route path="/gardens" element={<Gardens/>}>
+          <Route path="/gardens" >
+            <Route index element={<Gardens/>}/>
             <Route path="/gardens/:title" element={<p>garden post</p>}/>
           </Route>
 
-          <Route path="/artsCraft" element={<p>arts and craft</p>}>
+          <Route path="/artsCraft">
+            <Route index  element={<p>arts and craft</p>}/>
             <Route path="/artsCraft/:title" element={<p>arts and craft post</p>}/>
           </Route>
 
-          <Route path="/recipes" element={<Recipes/>}>
+          <Route path="/recipes">
+            <Route index element={<Recipes/>}/>
             <Route path="/recipes/:title" element={<RecipePost/>}/>
           </Route>
 
-          <Route path="/beauty" element={<Beauty/>}>
+          <Route path="/beauty">
+            <Route index element={<Beauty/>}/>
             <Route path="/beauty/:title" element={<p>beauty post</p>}/>
           </Route>
 
-          <Route path="/community" element={<Community/>}>
+          <Route path="/community">
+            <Route index element={<Community/>}/>
             <Route path="/community/:title" element={<p>community post?</p>}/>
           </Route>
 
-          <Route path="/seasonal" element={<Seasonal/>}>
+          <Route path="/seasonal">
+            <Route index element={<Seasonal/>}/>
             <Route path="/seasonal/:item" element={<p>seasonal post</p>}/>
           </Route>
 
           <Route path="/*" element={<Main />} />
-{/* 
-          {isLogin && (
-            <>
-              <Route path="/discover">
-                <Route index element={<Discover/>} />
-                <Route path="/discover/recipes">
-                  <Route index element={<Recipes/>} />
-                  <Route path="/discover/recipes/:title" element={<RecipePost/>}/>
-                </Route>
-                <Route path="/discover/gardens">
-                  <Route index element={<Gardens/>} />
-                </Route>
-                <Route path="/discover/beauty">
-                  <Route index element={<Beauty/>} />
-                </Route>
-                <Route path="/discover/arts&crafts">
-                  <Route index element={<p>arts</p>} />
-                </Route>
-                <Route path="/discover/community">
-                  <Route index element={<Community/>}/>
-                </Route>
-                <Route path="/discover/seasonal">
-                  <Route index element={<Seasonal/>} />
-                </Route>
-                <Route path="/discover/events">
-                  <Route index element={<p>events</p>} />
-                </Route>
-              </Route>
 
-              <Route path="/feed" element={<h1>feed</h1>} />
-              <Route path="/profile" element={<h1>profile</h1>} />
-              <Route path="/create" element={<h1>create</h1>} />
-              <Route path="/logout" element={<h1>logout</h1>} />
-            </>
-          )} */}
-
-          {/* <Route path="*" element={<LoginRegister/>} /> */}
         </Routes>
       </section>
     </ThemeProvider>
@@ -139,10 +113,3 @@ export default function App() {
   )
 }
 
-// <div>
-// <LoginRegister />
-// <UserLogout />
-// <UserEdit />
-// <UserDelete />
-// <Posts />
-// </div>

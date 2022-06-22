@@ -16,9 +16,9 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
     )
   }
 
-  export const RecipesAvatar = ({id, image, title}) => {
+  export const RecipesAvatar = ({id, image, title, path}) => {
     return (
-        <Link key={id} to={`${title}`} className="SquareAvatar">
+        <Link key={id} to={`${path}`} className="SquareAvatar">
              <section className="imageAvatar">
                 <img src={image}></img>
                 <h2>{title}</h2>
@@ -42,6 +42,33 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
       
     )
   }
+
+  export const HeaderAvatar=({id, name, image})=>{
+
+    return (
+      <Link to={`/profile/${name}`} key={id} className="HeaderAvatar"> 
+      <section className="headAvatar">
+           <img src={image}></img>           
+      </section>
+           <h2>{name}</h2> 
+   </Link>
+    )
+  }
+
+  export const CommentsAvatar=({id, name, image})=>{
+
+    return (
+      <Link to={`/profile/${name}`} key={id} className="CommentAvatar"> 
+      <section className="comAvatar">
+           <img src={image}></img>           
+      </section>
+           <h2>{name}</h2> 
+   </Link>
+    )
+  }
+
+
+
 
   export const BeautyAvatar = ({id, name, title, image})=>{
 

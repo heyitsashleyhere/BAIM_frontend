@@ -19,6 +19,7 @@ display: grid;
     left: 2rem;
     top: 8rem;
     font-size: 1.2rem;
+    cursor: pointer;
   }
 
   .team_images{
@@ -48,20 +49,19 @@ display: grid;
           object-fit: cover;
           filter: grayscale(100%);
           transition: 0.8s all cubic-bezier(.25, .77, .68, .99);
-
+          cursor: pointer;
         }
         &:hover {
           img{
             filter: grayscale(0%);
             transform: scale(1.4) !important;
-            cursor: pointer;
           }
         }       
+
         h2{
           color: #fff;
           font-weight: 900;
           padding: 0 0 0.5rem 0.5rem;
-          // transition: 1s all cubic-bezier(.25, .77, .68, .99);
         }
       }
     }

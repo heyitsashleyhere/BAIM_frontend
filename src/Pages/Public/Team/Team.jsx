@@ -1,6 +1,7 @@
 import { useRef, useEffect, useContext, useState} from 'react'
 import { AnimationContext } from '../../../contexts/AnimationContext'
 import team from './teamData.js'
+import ScrollToTop from '../../../components/Public/Footer/ScrollToTop'
 
 import gsap from 'gsap'
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
@@ -29,11 +30,9 @@ const Team = () => {
     // ${name}/ h2 yposition for gsap name animation
     // const yPosition = windowWidth >= 768 ? '-100%' : '-25%'
 
-    const tl = gsap.timeline({
-      stagger: 0.1,
-    })
     revealRef.current.forEach((mask, index) => {
       
+      const tl = gsap.timeline()
       const image = imagesRef.current[index];
       const name = nameRef.current[index];
       
@@ -81,6 +80,7 @@ const Team = () => {
   }
 
   return (
+    <>
     <section className="team">
       
         <section className="team_images">
@@ -147,6 +147,8 @@ const Team = () => {
       </>
     )}
     </section>
+      {/* <ScrollToTop /> */}
+      </>
   )
 }
 

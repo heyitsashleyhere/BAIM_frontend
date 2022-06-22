@@ -1,0 +1,203 @@
+@import '../../../styles/breakpoints';
+
+.Post-Page{
+    
+
+    .Post-Page-Inner{
+        border:1px solid rgba(0, 0, 0, 0.13);
+        border-radius: 10px;
+        padding:1rem;
+    }
+
+    .Post-Page-header{
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button{
+            width:100px;
+            height:30px;
+        }
+    }
+
+    .Post-hero{
+        position: relative;
+        overflow: hidden;
+
+        img{
+            width:100%;
+            object-fit: cover;
+            object-position:bottom;
+          
+        }
+
+        h1{
+            bottom:0;
+            position:absolute;
+            margin:1rem 1.5rem;
+            font-size: 3rem;
+            color:white;
+            background-color: rgba(0, 0, 0, 0.295);
+            border-radius: 3px;
+        }
+
+    }
+
+    .Post-header{
+        width:100%;
+        display:flex;
+       justify-content: space-between;
+        align-items: center;
+    
+
+    }
+
+    .Post-title{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        height:30px;
+        padding:0.5rem;
+        margin:1rem 0rem;
+      
+
+        p{
+            margin:0rem 1rem;
+        }
+
+    }
+
+    .Post-date{
+    
+        p{
+            margin:0.5rem 1.5rem;
+        }
+    }
+   
+    .Post-description{
+        padding:1.5rem;
+
+        p{
+            margin:1rem 0rem;
+        }
+
+    }
+    
+
+    .Post-tags{
+        width:100%;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin:2rem 0rem;
+
+        p{
+            margin:0rem 1rem;
+            font-size:2rem;
+            font-weight: 700;
+            color:rgb(34, 34, 34);
+
+        }
+
+    }
+
+    .Post-comments{
+        margin-top: 1rem;
+        width:100%;
+        padding:1rem;
+    
+
+        .Comments-inner{
+            width:100%;
+            display:flex;
+            flex-direction: column;
+            background-color: whitesmoke;
+            border-radius: 10px;
+            margin:1rem 0rem;
+
+            .commentDate{
+                margin: 0.5rem;
+                font-size:1rem;
+                align-self: flex-end;
+                
+            }
+        }
+
+        .comment{
+            width:100%;
+            display:flex;
+            justify-content:left;
+            align-items: center;
+            
+
+            .comment-text{
+                font-size: 1.3rem;
+            }
+
+        }
+
+        .Leave-Comment{
+            display: flex;
+            flex-direction: column;
+        }
+
+    }
+
+   
+
+
+    @include media(">=tablet"){
+        display:grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 2.5rem;
+
+        .Post-Page-Inner{
+            grid-column: 2/8;
+
+            .Post-hero{ 
+                height:45vh;
+                
+                img{
+                    object-fit: none;
+
+                }
+
+                h1{
+                    font-size: 5rem;
+                }
+            }
+
+           
+        }
+    }
+
+    @include media(">=desktop"){
+        grid-template-columns: repeat(12, 1fr);
+
+        .Post-Page-Inner{
+            grid-column: 3/11;
+
+            .Post-hero{
+               width:100%; 
+               
+            
+                img{
+                    width:100%;
+                    object-position: bottom;
+                }
+
+                h1{
+                    font-size: 7rem;
+                }
+             
+            }
+
+            .Post-header{
+                .Like-button{
+                    margin:0rem 2rem;
+                }
+            }
+        }
+    }
+}
