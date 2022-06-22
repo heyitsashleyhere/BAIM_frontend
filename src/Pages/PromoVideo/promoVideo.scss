@@ -7,36 +7,32 @@
   overflow-x: hidden;
   position: relative;
 
-  .skip-wrapper {
+  .skip-btn {
     position: absolute;
-    bottom: 10rem;
-    right: 30%;
-    z-index: 10;
-    overflow: hidden;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 4rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background: #000;
+    transition: all 0.4s ease-out;
 
-    .skip-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 4rem;
-      font-size: 2rem;
-      border: none;
-      border-radius: 1rem;
-      font-weight: 500;
-      color: #fff;
-      background: #000;
-      transition: all 0.4s ease-out;
+    &:hover {
+      cursor: pointer;
+      background: #fff;
+      color: #000;
+      transition: all 0.4s ease-in;
+    }
 
-      &:hover {
-        cursor: pointer;
-        background: #fff;
-        color: #000;
-        transition: all 0.4s ease-in;
-      }
-
-      .skip-icon {
-        font-size: 3.2rem;
-      }
+    .skip-icon {
+      font-size: 3.2rem;
     }
   }
 

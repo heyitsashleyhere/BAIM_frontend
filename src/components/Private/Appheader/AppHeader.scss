@@ -88,7 +88,7 @@
           }
 
           &:last-child {
-            width: 35rem;
+            width: 2.7rem;
             min-width: 20rem;
             margin-left: auto;
             position: relative;
@@ -146,7 +146,9 @@
         transition: 0.35s all ease-in-out;
 
         li {
-          &:nth-child(3) {
+          &:last-child {
+            width: 3.2rem;
+            min-width: 20rem;
             transition: 0.35s all ease-in-out;
 
           }
@@ -159,90 +161,75 @@
 }
 
 .burger-menu {
-  width: 100%;
-  background: #000;
-  height: 100vh;
-  position: absolute;
+  position: fixed;
+  left: 0;
   top: 0;
-  left: -100%;
-  transition: 0.3s all ease-in-out;
+  width: 100%;
+  height: 100vh;
+  display: none;
   z-index: 9999;
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-
-  &-list {
+  
+  &-inner {
     width: 100%;
-    height: 70%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 3rem;
-    padding-inline: 2rem;
-    padding-bottom: 5rem;
-
-    &-item {
-      font-size: 3.2rem;
-
-      a {
-        text-decoration: none;
-        color: white;
-      }
-
-      &:last-child {
-        margin-top: auto;
-        width: 30rem;
-        height: 4rem;
-        position: relative;
-        font-size: 2rem;
-        border-bottom: 2px solid white;
-
-        .mobile-search {
-          border-radius: 5rem !important;
-          border: none !important;
-          padding: 2rem 1rem !important;
-          font-size: 2rem !important;
-          color: white !important;
-
-        }
-
-        ::placeholder {
-          color: white !important;
-          font-size: 1.6rem !important;
-        }
+    align-items: flex-end;
 
 
-        .search-icon {
-          font-size: 2.25rem;
+    .burger-menu-list {
+      width: 100%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      padding-bottom: 5rem;
+
+      &-item {
+        overflow: hidden;
+
+        a {
+          text-decoration: none;
           color: white;
-          cursor: pointer;
-          position: absolute;
-          right: 1.5rem;
-          top: 50%;
-          transform: translateY(-50%);
+          font-size: 3.2rem;
+        }
 
+        &:last-child {
+          margin-top: auto;
+          width: 30rem;
+          height: 4rem;
+          position: relative;
+          font-size: 2rem;
+          border-bottom: 2px solid white;
+
+          .mobile-search {
+            border-radius: 5rem !important;
+            border: none !important;
+            padding: 2rem 1rem !important;
+            font-size: 2rem !important;
+            color: white !important;
+          }
+
+          ::placeholder {
+            color: white !important;
+            font-size: 1.6rem !important;
+          }
         }
       }
     }
-  }
 
-  .close-icon {
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-    position: absolute;
-    top: 1.25rem;
-    right: 1rem;
+    .close-icon {
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      top: 1.25rem;
+      right: 1rem;
+    }
   }
-}
-
-.active {
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-  overflow-x: hidden;
 }
