@@ -117,24 +117,12 @@ export default function Post({ category }) {
                 />
 
                 <h4>Time</h4>
-                <input
-                  type="date"
-                  name="startDate"
-                  onChange={(e) =>
-                    setInputValues({
-                      ...inputValues,
-                      startDate: e.target.value,
-                    })
-                  }
-                  min={new Date().toISOString().split("T")[0]}
-                  max={
-                    new Date(
-                      new Date().setFullYear(new Date().getFullYear() + 1)
-                    )
-                      .toISOString()
-                      .split("T")[0]
-                  }
-                />
+                    
+                 <input type="date" name="startDate" 
+                           onChange={e => setInputValues({...inputValues, startDate: e.target.value}) } 
+                           min={(new Date()).toISOString().split('T')[0]} 
+                           max={(new Date((new Date()).setFullYear((new Date()).getFullYear() + 1))).toISOString().split('T')[0]}/>
+
 
                 <input
                   type="time"
@@ -172,6 +160,7 @@ export default function Post({ category }) {
                 />
               </>
             )}
+
             <label htmlFor="video">video:</label>
             <input
               type="file"

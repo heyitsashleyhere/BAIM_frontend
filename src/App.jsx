@@ -16,9 +16,11 @@ import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
+import ScrollToTop from './components/Public/Footer/ScrollToTop'
 // context
 import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
+
 
 
 const theme = createTheme({
@@ -55,7 +57,11 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
+
         {displayNav || isNav ? (isLogin ? <AppHeader /> : <Header /> ) : null}
+
+        <ScrollToTop  />
+
 
         <Routes>
           {/* Public routes */}
@@ -68,27 +74,33 @@ export default function App() {
           {/* Private routes */}
           <Route path="/discover" element={<Discover/>} />
 
-          <Route path="/gardens" element={<Gardens/>}>
+          <Route path="/gardens" >
+            <Route index element={<Gardens/>}/>
             <Route path="/gardens/:title" element={<p>garden post</p>}/>
           </Route>
 
-          <Route path="/artsCraft" element={<p>arts and craft</p>}>
+          <Route path="/artsCraft">
+            <Route index  element={<p>arts and craft</p>}/>
             <Route path="/artsCraft/:title" element={<p>arts and craft post</p>}/>
           </Route>
 
-          <Route path="/recipes" element={<Recipes/>}>
+          <Route path="/recipes">
+            <Route index element={<Recipes/>}/>
             <Route path="/recipes/:title" element={<RecipePost/>}/>
           </Route>
 
-          <Route path="/beauty" element={<Beauty/>}>
+          <Route path="/beauty">
+            <Route index element={<Beauty/>}/>
             <Route path="/beauty/:title" element={<p>beauty post</p>}/>
           </Route>
 
-          <Route path="/community" element={<Community/>}>
+          <Route path="/community">
+            <Route index element={<Community/>}/>
             <Route path="/community/:title" element={<p>community post?</p>}/>
           </Route>
 
-          <Route path="/seasonal" element={<Seasonal/>}>
+          <Route path="/seasonal">
+            <Route index element={<Seasonal/>}/>
             <Route path="/seasonal/:item" element={<p>seasonal post</p>}/>
           </Route>
 
@@ -101,10 +113,3 @@ export default function App() {
   )
 }
 
-// <div>
-// <LoginRegister />
-// <UserLogout />
-// <UserEdit />
-// <UserDelete />
-// <Posts />
-// </div>
