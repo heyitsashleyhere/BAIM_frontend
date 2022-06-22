@@ -88,7 +88,7 @@
           }
 
           &:last-child {
-            width: 35rem;
+            width: 2.7rem;
             min-width: 20rem;
             margin-left: auto;
             position: relative;
@@ -146,7 +146,9 @@
         transition: 0.35s all ease-in-out;
 
         li {
-          &:nth-child(3) {
+          &:last-child {
+            width: 3.2rem;
+            min-width: 20rem;
             transition: 0.35s all ease-in-out;
 
           }

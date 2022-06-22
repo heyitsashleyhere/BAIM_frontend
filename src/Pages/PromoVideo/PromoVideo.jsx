@@ -52,7 +52,7 @@ const PromoVideo = () => {
               navigate('/main') }}/>
       </div>
 
-      <div className='skip-wrapper'>
+      <>
         {show && (
           <button ref={skipBtn} onClick={() => {
             setIsNav(true) 
@@ -60,7 +60,7 @@ const PromoVideo = () => {
             }} className='skip-btn'>Skip <Icons.MdSkipNext className='skip-icon' /></button>
         )}
         
-      </div>
+      </>
     </section>
     
   )

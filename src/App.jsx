@@ -25,6 +25,7 @@ import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
+import ScrollToTop from './components/Public/Footer/ScrollToTop'
 
 const theme = createTheme({
   palette: {
@@ -56,8 +57,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
-      {isNav && (isLogin ? <AppHeader /> : <Header />)}
-      {/* <AppHeader  /> */}
+        <ScrollToTop  />
+      {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
+      <AppHeader  />
 
         <Routes>
           {/* Public routes */}
