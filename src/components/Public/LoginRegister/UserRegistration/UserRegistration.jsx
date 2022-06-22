@@ -131,7 +131,7 @@ export default function UserRegistration() {
                 endAdornment: ( 
                   <InputAdornment position="end">
                     <IconButton onClick={showPasswordHandler} onMouseDown={showPasswordHandler} >
-                      {isShowPassword ? <VisibilityOff /> : <Visibility />}
+                      {isShowPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment> )
               }} />
@@ -239,13 +239,11 @@ export default function UserRegistration() {
                 )
             )}
           </Grid>
-        </Grid>
 
-        <Box textAlign="center">
-          <Button variant="contained" type="submit" size="large">
-            Register
-          </Button>
-        </Box>
+          <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
+            <Button variant="contained" type="submit" size="large">Register</Button>
+          </Grid>
+        </Grid>
       </form>
     </Grow>
     </section>

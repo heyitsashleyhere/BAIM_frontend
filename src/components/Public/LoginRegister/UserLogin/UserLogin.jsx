@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
 // mui
-import { TextField, InputAdornment, IconButton, Button, FormHelperText, Stack, Grow, Box } from '@mui/material';
+import { Grid, TextField, InputAdornment, IconButton, Button, FormHelperText, Stack, Grow, Box } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -51,50 +51,54 @@ export default function UserLogin() {
   return (
     <section className="LoginForm">
     <Grow in>
-      <Stack component="form" onSubmit={handleUserLogin}>
-          <h1>Login</h1>
-          <TextField
-              name="email"
-              label="Email"
-              fullWidth
-              margin="normal"
-              error={errors.find(error => error.email)}
-              type="email"
-              onChange={handleChange} />
+      <Grid component="form" spacing={4} container onSubmit={handleUserLogin}>
+          <Grid item xs={12}>
+            <h1>Login</h1>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+                name="email"
+                label="Email"
+                fullWidth
+                margin="normal"
+                error={errors.find(error => error.email)}
+                type="email"
+                onChange={handleChange} />
 
-          {errors.map((error, i) => (
-            error.email && (<FormHelperText error key={"emailError"+ i}>{error.email}</FormHelperText>)
-          ))}
-
-          <TextField
-              name="password"
-              color="primary"
-              label="Password"
-              fullWidth
-              margin="normal"
-              error={errors.find(error => error.password)}
-              type={isShowPassword ? "text" : "password"}
-              onChange={handleChange}
-              InputProps={
-                {endAdornment: (
-                 <InputAdornment position="end">
-                  <IconButton
-                    onClick={showPasswordHandler}
-                    onMouseDown={showPasswordHandler}
-                    >
-                    {isShowPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-                )}} />
-          {errors.map((error, i) => (
-            error.password && (<FormHelperText error key={"passwordError"+ i}>{error.password}</FormHelperText>)
-          ))}  
-          
-          <Box textAlign='center'>
+            {errors.map((error, i) => (
+              error.email && (<FormHelperText error key={"emailError"+ i}>{error.email}</FormHelperText>)
+            ))}
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+                name="password"
+                color="primary"
+                label="Password"
+                fullWidth
+                margin="normal"
+                error={errors.find(error => error.password)}
+                type={isShowPassword ? "text" : "password"}
+                onChange={handleChange}
+                InputProps={
+                  {endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={showPasswordHandler}
+                      onMouseDown={showPasswordHandler}
+                      >
+                      {isShowPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                  )}} />
+            {errors.map((error, i) => (
+              error.password && (<FormHelperText error key={"passwordError"+ i}>{error.password}</FormHelperText>)
+            ))}  
+          </Grid>
+          <Grid item xs={12} textAlign='center'>
             <Button variant="contained" type="submit" size="large">Login</Button>
-          </Box>
-   
-      </Stack>
+          </Grid>
+          
+      </Grid>
     </Grow>
     </section>
   )
