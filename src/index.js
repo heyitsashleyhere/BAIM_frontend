@@ -15,7 +15,6 @@ const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
 	<BrowserRouter>
-	<DataContextProvider>
 		<UserContextProvider>
 			<PostsContextProvider>
 				<AnimationContextProvider>
@@ -23,6 +22,5 @@ root.render(
 				</AnimationContextProvider>
 			</PostsContextProvider>
 		</UserContextProvider>
-		</DataContextProvider>
 	</BrowserRouter>
 );

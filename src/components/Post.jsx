@@ -47,6 +47,7 @@ export default function Post({category}) {
                            onChange={e => setAddress({...address, country: e.target.value})}  />
 
                     <h4>Time</h4>
+                    
                     <input type="date" name="startDate" 
                            onChange={e => setInputValues({...inputValues, startDate: e.target.value}) } 
                            min={(new Date()).toISOString().split('T')[0]} 
@@ -65,6 +66,7 @@ export default function Post({category}) {
                 </>
                 
             )}
+
             <label htmlFor="video">video:</label>
             <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" />
 
