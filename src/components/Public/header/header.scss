@@ -23,20 +23,20 @@
     flex-direction: row;
     align-items: center;
     transition: 0.35s all ease-in-out;
-
-    img {
-      @include container(2.2rem, 2.2rem);
-      margin-right: 0.5rem;
-      }
-
       a{
         color: $white;
         text-decoration: none;
+        img {
+          @include container(2.2rem, 2.2rem);
+          margin-right: 2rem;
+          }
       }
     }
 
     .navbar {
       transition: 0.35s all ease-in-out;
+
+  z-index: 9999;
       
       .nav-list {
         gap: 2rem;

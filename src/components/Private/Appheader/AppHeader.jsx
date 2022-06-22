@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+
 
 
 import gsap from "gsap";
@@ -268,7 +269,8 @@ export const AppHeader = () => {
       </header>
 
 
-      <div className={burgerMenu ? "burger-menu active" : "burger-menu"}>
+
+    <div className={burgerMenu ? "burger-menu open" : "burger-menu"}>
         <ul className="burger-menu-list">
           <li className="burger-menu-list-item">
             <Link to="/discover">Discover</Link>

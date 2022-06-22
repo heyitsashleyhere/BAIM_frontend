@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 // components
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
@@ -7,15 +7,6 @@ import Header from "./components/Public/header/Header.jsx";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
 import Main from "./Pages/Public/Main/Main.jsx"
 import PromoVideo from "./Pages/PromoVideo/PromoVideo.jsx"
-// Ashley testing components
-import Posts from "./components/Posts.jsx";
-import UserEdit from "./components/UserEdit.jsx";
-import UserDelete from "./components/UserDelete.jsx";
-import UserLogout from "./components/UserLogout.jsx";
-// import LoginRegister from "./components/Public/header/LoginRegister/LoginRegister.jsx.js";
-// context
-import { UserContext } from "./contexts/UserContext.js";
-import { AnimationContext } from "./contexts/AnimationContext.js";
 import About from "./Pages/Public/About/About.jsx";
 import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
 import Team from "./Pages/Public/Team/Team.jsx"
@@ -26,6 +17,11 @@ import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
 import ScrollToTop from './components/Public/Footer/ScrollToTop'
+// context
+import { UserContext } from "./contexts/UserContext.js";
+import { AnimationContext } from "./contexts/AnimationContext.js";
+
+
 
 const theme = createTheme({
   palette: {
@@ -46,22 +42,26 @@ const theme = createTheme({
 });
 
 
-//Murad Testing Component
-import Loader from './Pages/Public/Main/Loader';
 
 export default function App() {
   const { isLogin } = useContext(UserContext);
-  const [loading, setLoading] = useState(true)
-  const { isNav } = useContext(AnimationContext);
+  const { isNav } = useContext(AnimationContext)
+  const [displayNav, setDisplayNav] = useState()
+
+  useEffect(() => {
+    const localDisplayNav = localStorage.getItem('showNav')
+    setDisplayNav(localDisplayNav)
+  }, [])
+  
 
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
 
+        {displayNav || isNav ? (isLogin ? <AppHeader /> : <Header /> ) : null}
+
         <ScrollToTop  />
 
-      {/* {isNav && (isLogin ? <AppHeader /> : <Header />)} */}
-      <AppHeader  />
 
         <Routes>
           {/* Public routes */}
