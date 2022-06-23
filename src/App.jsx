@@ -17,6 +17,7 @@ import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
 import ScrollToTop from './components/Public/Footer/ScrollToTop'
+import Create from "./Pages/Private/Create/Create.jsx";
 // context
 import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
@@ -73,6 +74,7 @@ export default function App() {
 
           {/* Private routes */}
           <Route path="/discover" element={<Discover/>} />
+          <Route path="/create" element={<Create />} />
 
           <Route path="/gardens" >
             <Route index element={<Gardens/>}/>

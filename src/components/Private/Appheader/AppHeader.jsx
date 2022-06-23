@@ -165,7 +165,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "arts-craft" }
                              value="arts-craft" onClick={() => setSearchCriteria("arts-craft")} />
-                      <label for="arts-craft"><p>arts-cr</p>aft</label>
+                      <label for="arts-craft"><p>arts-craft</p></label>
                     </div>
 
                     <div className="search-criterias">

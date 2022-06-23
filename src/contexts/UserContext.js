@@ -22,9 +22,7 @@ export const UserContextProvider = (props) => {
     isLogin, setIsLogin,
     isShowPassword, setIsShowPassword,
     showPasswordHandler
-  };
-
-
+  }
 
   return (
     <UserContext.Provider value={userContextValue}>
