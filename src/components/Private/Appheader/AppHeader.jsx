@@ -13,13 +13,10 @@ export const AppHeader = () => {
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
-
-
   // Search and Filter
   const [ searchCriteria, setSearchCriteria] = useState("criteria")
   console.log("dskfösk:", searchCriteria);
   // Search and Filter ends
-
 
   // refs to elements to be included in the animation
   const sideNavRef = useRef(null);
@@ -68,7 +65,6 @@ export const AppHeader = () => {
     }
   }, []);
   
-  
   // to check the screen size to display the corresponding navigation links
   useEffect(() => {
     const handleResize = () => {
@@ -93,7 +89,7 @@ export const AppHeader = () => {
     navItemsRef.current.push(link)
   }
 
-  //closing the siddebar on link click event
+  //closing the sidebar on link click event
   const {pathname} = useLocation()
   useEffect(() => {
     setBurgerMenu(false)
@@ -101,20 +97,6 @@ export const AppHeader = () => {
 
   return (
     <>
-
-      <header className="app-header">
-        <div className="app-header-logo">
-          <img src={Logo} alt="LOKA" />
-          <Link to="/main">Loka</Link>
-        </div>
-        {mobile ? (
-          <div className="mobile-toggle">
-            <div
-              className="mobile-toggle-icons"
-              onClick={() => setBurgerMenu(!burgerMenu)}
-            >
-              {/* burgerMenu && */}
-
     <header className="app-header">
       <div className="app-header-logo">
         <img src={Logo} alt="LOKA" /> 
@@ -123,15 +105,13 @@ export const AppHeader = () => {
       {mobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons">
-
               <Icons.MdMenu className="toggle-icon" />
-            </div>
           </div>
-
-            //desktop navbar
-
-          <nav className="navbar">
-            <ul className="nav-list">
+        </div>
+       ) : (
+        //desktop navbar
+        <nav className="navbar">
+          <ul className="nav-list">
               {links.map((link, i) => {
                 return (
                   <>
@@ -141,123 +121,81 @@ export const AppHeader = () => {
                   </>
                 )
               })}
-              <li className="nav-item">
 
-                <Link to="/discover">Discover</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/feed">Feed</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/profile">Profile</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/create">Create</Link>
-              </li>
-
-              {/* seatch bar */}
+              {/* search bar */}
               <li className="nav-item search-bar">
-                <input
-                  id="search-input"
-                  type="text"
-                  placeholder="Search"
-                  className="search"
-                />
+                {/* <input id="search-input" type="text" placeholder="Search" className="search" />
+                  <div className="dropdown-wrapper">
+                    <div className="search-criteria-select">
+                      <p>{searchCriteria}</p>
+                      <button>^</button>
+                    </div>
+                    <div class="dropdown-content">
 
-                <div className="dropdown-wrapper">
-
-                  <div className="search-criteria-select">
-                    <p>{searchCriteria}</p>
-                    <button>^</button>
-                  </div>
-
-                  <div class="dropdown-content">
-                    <div className="search-criterias">
-                      <input
-                        id="all-posts"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "all-posts" }
-                        value="all-posts" onClick={() => setSearchCriteria("all-posts")}
-                      />
+                      <div className="search-criterias">
+                      <input id="all-posts" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "all-posts" }
+                             value="all-posts" onClick={() => setSearchCriteria("all-posts")} />
                       <label for="all-posts"><p>all-pos</p>ts</label>
                     </div>
 
                     <div className="search-criterias">
-                      <input
-                        id="events"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "events" }
-                        value="events" onClick={() => setSearchCriteria("events")}
-                      />
+                      <input id="events" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "events" }
+                             value="events" onClick={() => setSearchCriteria("events")} />
                       <label for="events"><p>events</p></label>
                     </div>
 
                     <div className="search-criterias">
-                      <input
-                        id="recipes"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "recipes" }
-                        value="recipes" onClick={() => setSearchCriteria("recipes")}
-                      />
+                      <input id="recipes" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "recipes" }
+                             value="recipes" onClick={() => setSearchCriteria("recipes")}  />
                       <label for="recipes"><p>recipes</p></label>
                     </div>
 
                     <div className="search-criterias">
-                      <input
-                        id="arts-craft"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "arts-craft" }
-                        value="arts-craft" onClick={() => setSearchCriteria("arts-craft")}
-                      />
+                      <input id="arts-craft" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "arts-craft" }
+                             value="arts-craft" onClick={() => setSearchCriteria("arts-craft")} />
                       <label for="arts-craft"><p>arts-cr</p>aft</label>
                     </div>
 
                     <div className="search-criterias">
-                      <input
-                        id="beautie"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "beautie" }
-                        value="beautie" onClick={() => setSearchCriteria("beautie")}
-                      />
+                      <input id="beautie" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "beautie" }
+                             value="beautie" onClick={() => setSearchCriteria("beautie")}  />
                       <label for="beautie"><p>beautie</p></label>
                     </div>
 
                     <div className="search-criterias">
-                      <input
-                        id="garden"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "garden" }
-                        value="garden" onClick={() => setSearchCriteria("garden")}
-                      />
+                      <input id="garden" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "garden" }
+                             value="garden" onClick={() => setSearchCriteria("garden")} />
                       <label for="garden"><p>garden</p></label>
                     </div>
 
                     <div className="search-criterias">
-                      <input
-                        id="users"
-                        className="search-criteria-option"
-                        name="search-criteria-option"
-                        type="radio"
-                        checked={ searchCriteria === "users" }
-                        value="users" onClick={() => setSearchCriteria("users")}
-                      />
+                      <input id="users" type="radio"
+                             className="search-criteria-option"
+                             name="search-criteria-option"
+                             checked={ searchCriteria === "users" }
+                             value="users" onClick={() => setSearchCriteria("users")} />
                       <label for="users"><p>users</p></label>
                     </div>
                   </div>
-                </div>
-
+                </div> */}
                 <input type="" placeholder="Search" className="search"/>
 
                 <Icons.MdOutlineSearch className="search-icon" />
@@ -265,38 +203,10 @@ export const AppHeader = () => {
               {/* search bar end */}
             </ul>
           </nav>
-        )}
+      )}
       </header>
 
-
-
-    <div className={burgerMenu ? "burger-menu open" : "burger-menu"}>
-        <ul className="burger-menu-list">
-          <li className="burger-menu-list-item">
-            <Link to="/discover">Discover</Link>
-          </li>
-          <li className="burger-menu-list-item">
-            <Link to="/feed">Feed</Link>
-          </li>
-          <li className="burger-menu-list-item">
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li className="burger-menu-list-item">
-            <Link to="/create">Create</Link>
-          </li>
-          <li className="burger-menu-list-item">
-            <input type="" placeholder="Search" className="mobile-search" />
-            <Icons.MdOutlineSearch className="search-icon" />
-          </li>
-        </ul>
-
-        <Icons.MdClose
-          className="close-icon"
-          onClick={() => setBurgerMenu(false)}
-        />
-      </div>
-
-      //mobile navbar
+      {/* //mobile navbar */}
         <div ref={sideNavRef} className="burger-menu">
         <div ref={sideNavBgRef} className="burger-menu-inner">
           <ul className="burger-menu-list">
@@ -318,10 +228,9 @@ export const AppHeader = () => {
           <Icons.MdClose className='close-icon' onClick={() => setBurgerMenu(false)} />
           </div>
         </div>
-
     </>
-  );
-};
+  )
+}
 
 export default AppHeader;
 

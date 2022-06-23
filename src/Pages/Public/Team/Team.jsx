@@ -1,7 +1,4 @@
 import { useRef, useEffect, useState} from 'react'
-import team from './teamData.js'
-
-
 import gsap from 'gsap'
 // Icons
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
