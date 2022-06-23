@@ -105,7 +105,7 @@ export const AppHeader = () => {
       {mobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons">
-              <Icons.MdMenu className="toggle-icon" />
+              <Icons.MdMenu className="toggle-icon" onClick={() => setBurgerMenu(true)}/>
           </div>
         </div>
        ) : (
@@ -115,8 +115,8 @@ export const AppHeader = () => {
               {links.map((link, i) => {
                 return (
                   <>
-                    <li className="nav-item" onClick={() => setBurgerMenu(false)} >
-                      <Link to={link.path} key={link.name} ref={addToLinks} >{link.name}</Link>
+                    <li className="nav-item">
+                      <Link to={link.path} key={link.name} >{link.name}</Link>
                     </li>
                   </>
                 )
@@ -124,7 +124,7 @@ export const AppHeader = () => {
 
               {/* search bar */}
               <li className="nav-item search-bar">
-                {/* <input id="search-input" type="text" placeholder="Search" className="search" />
+                <input id="search-input" type="text" placeholder="Search" className="search" />
                   <div className="dropdown-wrapper">
                     <div className="search-criteria-select">
                       <p>{searchCriteria}</p>
@@ -195,7 +195,7 @@ export const AppHeader = () => {
                       <label for="users"><p>users</p></label>
                     </div>
                   </div>
-                </div> */}
+                </div>
                 <input type="" placeholder="Search" className="search"/>
 
                 <Icons.MdOutlineSearch className="search-icon" />

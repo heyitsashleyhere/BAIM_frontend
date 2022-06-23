@@ -58,7 +58,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <section className="App">
 
-        {displayNav || isNav ? (isLogin ? <Header /> : <Header /> ) : null}
+        {displayNav || isNav ? (isLogin ? <AppHeader /> : <Header /> ) : null}
 
         <ScrollToTop  />
 
