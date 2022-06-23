@@ -33,7 +33,7 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
 
     // avatar // profileName
     return (
-      <Link to={`${name}`} key={id} className="RoundAvatar"> 
+      <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
          <section className="imageAvatar">
               <img src={image}></img>           
          </section>

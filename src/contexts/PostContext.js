@@ -8,7 +8,7 @@ function PostsContextProvider({ children }){
     const [recipes, setRecipes]=useState([])
     const [inputValues, setInputValues] = useState({ title: "", description: "", link: "", tags: "" })
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
-
+    const [ users, setUsers]=useState([])
 
 
     useEffect(() => {
@@ -28,6 +28,11 @@ function PostsContextProvider({ children }){
         .then(response=>response.json())
         .then(result=>setRecipes(result))
         .catch(error=>console.log(error.message))
+
+        fetch("http://localhost:7000/user")
+        .then(response => response.json())
+        .then(result => setUsers(result))
+        .catch(error => console.log(error.message))
 
     }, [])
     
@@ -70,7 +75,8 @@ function PostsContextProvider({ children }){
         inputValues, setInputValues,
         address, setAddress,
         convertToBase64, handleFileUpload,
-        data, setData, recipes, setRecipes
+        data, setData, recipes, setRecipes,
+        users, setUsers
     }
 
     return (
