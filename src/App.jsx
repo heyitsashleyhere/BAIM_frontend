@@ -16,7 +16,7 @@ import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
-import ScrollToTop from './components/Public/Footer/ScrollToTop'
+import ScrollToTop from './components/Public/Footer/ScrollToTop.jsx'
 // context
 import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
@@ -41,7 +41,6 @@ const theme = createTheme({
     ].join(','),
   }
 });
-
 
 
 export default function App() {
