@@ -20,6 +20,7 @@ import ScrollToTop from './components/Public/Footer/ScrollToTop'
 // context
 import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
+import { Profile } from "./Pages/Private/Profile/Profile.jsx";
 
 
 
@@ -102,6 +103,11 @@ export default function App() {
           <Route path="/seasonal">
             <Route index element={<Seasonal/>}/>
             <Route path="/seasonal/:item" element={<p>seasonal post</p>}/>
+          </Route>
+
+          <Route path="/profile">
+            <Route index element={<Profile/>}/>
+            <Route path="/profile/:profileName" element={<Profile/>}/>
           </Route>
 
           <Route path="/*" element={<Main />} />
