@@ -2,10 +2,24 @@
 
 
 
-    .Pages{
+    .Collections{
 
-        .recipes{
+        .recipe{
             background: url(../../../assets/images/recipes.jpg);
+            background-position: center;
+            background-repeat: repeat;
+            background-size: cover;
+        }
+
+        .garden{
+            background: url(../../../assets/images/gardens.jpg);
+            background-position: center;
+            background-repeat: repeat;
+            background-size: cover;
+        }
+
+        .beauty{
+            background: url(../../../assets/images/beauty.jpg);
             background-position: center;
             background-repeat: repeat;
             background-size: cover;

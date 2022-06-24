@@ -11,11 +11,11 @@ function PostsContextProvider({ children }){
     
     
     const [ users, setUsers]=useState([])
-    const [beauties, setBeauties]=useState([])
+    const [beauty, setBeauty]=useState([])
     const [arts, setArts]=useState([])
-    const [gardens, setGardens]=useState([])
-    const [recipes, setRecipes]=useState([])
-    const [events, setEvents]=useState([])
+    const [garden, setGarden]=useState([])
+    const [recipe, setRecipe]=useState([])
+    const [event, setEvent]=useState([])
 
     useEffect(() => {
         // postCategories.map(category => {
@@ -37,7 +37,7 @@ function PostsContextProvider({ children }){
 
         fetch("http://localhost:7000/beauty")
         .then(response => response.json())
-        .then(result => setBeauties(result))
+        .then(result => setBeauty(result))
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/artsCraft")
@@ -47,17 +47,17 @@ function PostsContextProvider({ children }){
 
         fetch("http://localhost:7000/garden")
         .then(response => response.json())
-        .then(result => setGardens(result))
+        .then(result => setGarden(result))
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/recipe")
         .then(response=>response.json())
-        .then(result=>setRecipes(result))
+        .then(result=>setRecipe(result))
         .catch(error=>console.log(error.message))
 
         fetch("http://localhost:7000/event")
         .then(response=>response.json())
-        .then(result=>setEvents(result))
+        .then(result=>setEvent(result))
         .catch(error=>console.log(error.message))
 
      
@@ -103,9 +103,9 @@ function PostsContextProvider({ children }){
         inputValues, setInputValues,
         address, setAddress,
         convertToBase64, handleFileUpload,
-        data, setData, recipes, setRecipes,
-        users, setUsers, setBeauties, gardens, setGardens,
-        events, setEvents, arts, setArts,
+        data, setData, recipe, setRecipe,
+        users, setUsers, beauty, setBeauty, garden, setGarden,
+        event, setEvent, arts, setArts,
 
     }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import './avatars.scss'
 
@@ -6,31 +6,20 @@ import './avatars.scss'
 
 // general avatars for the App
 
-export const SeasonalAvatar = ({id, image, profileName}) => {
-    return (
-      <Link to={`discover/seasonal/${profileName}`} key={id} className="RoundAvatar">
-        <section className="imageAvatar">
-          <img src={image}></img>
-        </section> 
-        <h2>{profileName}</h2>
-      </Link>
-    )
-  }
 
-  export const RecipesAvatar = ({id, image, title, path}) => {
+  export const SquareAvatar = ({id, image, title, path}) => {
     return (
         <Link key={id} to={`${path}`} className="SquareAvatar">
              <section className="imageAvatar">
                 <img src={image}></img>
                 <h2>{title}</h2>
               </section> 
-              
-              
         </Link>
     )
   }
 
-  export const ProfileAvatar = ({id, name, image}) => {
+  export const RoundAvatar = ({id, name, image}) => {
+
     return (
       <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
          <section className="imageAvatar">
@@ -69,36 +58,34 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
   }
 
 
-  // AVATARS FOR PROFILE
+  // AVATARS FOR PROFILE PAGE // NEEDS TO BE DONE 
 
-  export const ProfileCollection=({category, id})=>{
+export const ProfileCollection=({category, id, name, image})=>{
     const [info, setInfo]=useState([])
 
-    fetch(`http://localhost:7000/${category}/${id}`)
-    .then(response => response.json())
-    .then(result => setInfo(result))
-    .catch(error => console.log(error.message))
+    // fetch(`http://localhost:7000/${category}/${id}`)
+    // .then(response => response.json())
+    // .then(result => setInfo(result))
+    // .catch(error => console.log(error.message))
     
     return(
       <section className="SquareAvatar">
         <section className="imageAvatar">
-         
+          <img src={image}></img>
+          <h2>{name}</h2>
         </section>
       </section>
       )
   }
 
+export const ProfileLibrary=({category, id, name, image})=>{
 
-
-  export const BeautyAvatar = ({id, name, title, image})=>{
-
-    return (
-        <Link to={`${name}`} key={id} className="SquareAvatar"> 
-          <section className="imageAvatar">
-              <img src={image}></img>
-              <h2>{title}</h2>
-          </section> 
-        </Link>
-        
-      )
-  }
+  return(
+    <section className="SquareAvatar">
+    <section className="imageAvatar">
+     <img src={image}></img>
+     <h2>{name}</h2>
+    </section>
+  </section>
+  )
+}
