@@ -16,6 +16,7 @@ function PostsContextProvider({ children }){
     const [garden, setGarden]=useState([])
     const [recipe, setRecipe]=useState([])
     const [event, setEvent]=useState([])
+    
 
     useEffect(() => {
         // postCategories.map(category => {

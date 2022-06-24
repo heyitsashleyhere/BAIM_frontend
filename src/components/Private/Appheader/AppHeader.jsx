@@ -122,7 +122,7 @@ export const AppHeader = () => {
     <header className="app-header">
       <div className="app-header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link to="/main">Loka</Link>
+        <Link  className="Loka" to="/main">Loka</Link>
       </div>
       {mobile ? (
         <div className="mobile-toggle">
@@ -140,14 +140,14 @@ export const AppHeader = () => {
                 return (
                   <>
                     <li className="nav-item" >
-                      <Link to={link.path} key={link.name}>{link.name}</Link>
+                      <Link className="Loka" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
                   </>
                 )
               })}
 
                 <li className="nav-item">
-                  <h1 className="btn" onClick={logoutUser} >Logout</h1>
+                  <h1 className="btn Loka" onClick={logoutUser} >Logout</h1>
                 </li>
 
 
@@ -201,7 +201,7 @@ export const AppHeader = () => {
                     </div>
 
                     <div className="search-criterias">
-                      <input id="beautie" type="radio"
+                      <input id="beauty" type="radio"
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "beautie" }

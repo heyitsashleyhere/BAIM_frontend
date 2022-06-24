@@ -85,7 +85,7 @@ export default function App() {
 
           <Route path="/gardens" >
             <Route index element={<Collections category={garden} type="garden"/>}/>
-            <Route path="/gardens/:title" element={<PostPage category={garden} />}/>
+            <Route path="/gardens/:title" element={<PostPage category={garden} type="garden" />}/>
           </Route>
 
           <Route path="/artsCraft">
