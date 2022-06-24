@@ -1,7 +1,7 @@
 import React , { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { PostsContext } from '../../../contexts/PostContext'
-import { CommentsAvatar, HeaderAvatar, ProfileAvatar } from '../Avatars-Links/Avatars'
+import { PostCommentsAvatar, PostHeaderAvatar, ProfileAvatar } from '../Avatars-Links/Avatars'
 
 import './recipePost.scss'
 
@@ -40,7 +40,7 @@ export const RecipePost = ({category}) => {
       </section>
 
       <section className="Post-header">
-        <HeaderAvatar name={selected.authorProfileName} image={selected.authorAvatar}></HeaderAvatar>
+        <PostHeaderAvatar name={selected.authorProfileName} image={selected.authorAvatar}></PostHeaderAvatar>
         <button className="Like-button">{selected.likes.length} Likes</button>
       </section>
        
@@ -63,7 +63,7 @@ export const RecipePost = ({category}) => {
       {selected.comments ? selected.comments.map(item => <section className="Comments-inner" key={item.author}>
       <p className="commentDate">{date(item.createdAt)}</p>
       <section className="comment">
-      <CommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></CommentsAvatar>
+      <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
       <p className="comment-text">{item.message}</p>
       </section>
       
