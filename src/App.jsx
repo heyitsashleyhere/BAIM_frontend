@@ -25,7 +25,7 @@ import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
-import ScrollToTop from './components/Public/Footer/ScrollToTop'
+import ScrollToTop from './components/Public/Footer/ScrollToTop';
 
 const theme = createTheme({
   palette: {
@@ -47,7 +47,7 @@ const theme = createTheme({
 
 
 //Murad Testing Component
-import Loader from './Pages/Public/Main/Loader';
+// import Loader from './Pages/Public/Main/Loader';
 
 export default function App() {
   const { isLogin } = useContext(UserContext);

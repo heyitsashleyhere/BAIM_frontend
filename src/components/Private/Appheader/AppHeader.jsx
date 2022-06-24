@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import {UserContext} from '../../../contexts/UserContext.js'
 
 import gsap from 'gsap'
 import * as Icons from "react-icons/md";
@@ -8,6 +9,7 @@ import './AppHeader.scss'
 import Logo from '../../../assets/logo/raspberry.png'
 
 export const AppHeader = () => {
+  const { setIsLogin } = useContext(UserContext)
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
@@ -15,6 +17,7 @@ export const AppHeader = () => {
   const sideNavRef = useRef(null);
   const sideNavBgRef = useRef(null);
   const searchRef = useRef(null);
+  const logoutRef = useRef(null);
 
   //the links ref array 
   const navItemsRef = useRef([])
@@ -35,7 +38,7 @@ export const AppHeader = () => {
       x: '100%',
       ease: 'power2.inOut'
     })
-    tl.current.fromTo([navItemsRef.current, searchRef.current], {
+    tl.current.fromTo([navItemsRef.current, searchRef.current, logoutRef.current], {
       opacity: 0
     }, {
       duration: 0.6,
@@ -61,6 +64,7 @@ export const AppHeader = () => {
   
   // to check the screen size to display the corresponding navigation links
   useEffect(() => {
+    // console.log(sideNavRef.current.style.display );
     const handleResize = () => {
       if (window.innerWidth <768) {
         setMobile(true);
@@ -85,9 +89,21 @@ export const AppHeader = () => {
 
   //closing the siddebar on link click event
   const {pathname} = useLocation()
-  useEffect(() => {
+
+  const onLinkClick = (link) => {
     setBurgerMenu(false)
-  }, [pathname])
+    sideNavRef.current.style.display = "none"
+  }
+  useEffect(() => {
+    onLinkClick()
+  }, [sideNavRef, pathname])
+
+  const navigate = useNavigate()
+  
+  const logoutUser = () => {
+    setIsLogin(false)
+    navigate('/main')
+  }
 
   return (
     <>
@@ -99,7 +115,7 @@ export const AppHeader = () => {
       {mobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons">
-              <Icons.MdMenu className="toggle-icon" />
+              <Icons.MdMenu className="toggle-icon" onClick={() => setBurgerMenu(true)} />
           </div>
         </div>
         ) : (
@@ -109,12 +125,15 @@ export const AppHeader = () => {
               {links.map((link, i) => {
                 return (
                   <>
-                    <li className="nav-item" onClick={() => setBurgerMenu(false)} >
-                      <Link to={link.path} key={link.name} ref={addToLinks} >{link.name}</Link>
+                    <li className="nav-item" >
+                      <Link to={link.path} key={link.name}>{link.name}</Link>
                     </li>
                   </>
                 )
               })}
+                <li className="nav-item">
+                  <h1 className="btn" onClick={logoutUser} >Logout</h1>
+                </li>
               <li className="nav-item">
                 <input type="" placeholder="Search" className="search"/>
                 <Icons.MdOutlineSearch className="search-icon" />
@@ -128,18 +147,21 @@ export const AppHeader = () => {
         <div ref={sideNavRef} className="burger-menu">
         <div ref={sideNavBgRef} className="burger-menu-inner">
           <ul className="burger-menu-list">
+            <li ref={searchRef} className="burger-menu-list-item">
+              <input type="" placeholder="Search" className="mobile-search"/>
+              <Icons.MdOutlineSearch className="search-icon" />
+            </li>
             {links.map((link, i) => {
               return (
                 <>
                   <li className="burger-menu-list-item">
-                    <Link to={link.path} key={i} ref={addToLinks} >{link.name}</Link>
+                    <Link to={link.path} key={i} ref={addToLinks} onClick={onLinkClick}>{link.name}</Link>
                   </li>
                 </>
               )
             })}
-            <li ref={searchRef} className="burger-menu-list-item">
-              <input type="" placeholder="Search" className="mobile-search"/>
-              <Icons.MdOutlineSearch className="search-icon" />
+            <li className="burger-menu-list-item">
+              <h1 ref={logoutRef} className="btn" onClick={logoutUser} >Logout</h1>
             </li>
           </ul>
           
