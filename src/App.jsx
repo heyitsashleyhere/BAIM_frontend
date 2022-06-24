@@ -1,27 +1,28 @@
 import { useContext, useEffect, useState } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-// components
+// Private components
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
-import Header from "./components/Public/header/Header.jsx";
 import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
-import Main from "./Pages/Public/Main/Main.jsx"
-import PromoVideo from "./Pages/PromoVideo/PromoVideo.jsx"
-import About from "./Pages/Public/About/About.jsx";
-import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
-import Team from "./Pages/Public/Team/Team.jsx"
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from './Pages/Private/Gardens/Gardens.jsx'
 import { Beauty } from "./Pages/Private/Beauty/Beauty.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { RecipePost } from "./components/Private/RecipePost.jsx/RecipePost.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
-import ScrollToTop from './components/Public/Footer/ScrollToTop'
+import { Profile } from "./Pages/Private/Profile/Profile.jsx";
 import Create from "./Pages/Private/Create/Create.jsx";
+// Public components
+import Header from "./components/Public/header/Header.jsx";
+import Main from "./Pages/Public/Main/Main.jsx"
+import PromoVideo from "./Pages/PromoVideo/PromoVideo.jsx"
+import About from "./Pages/Public/About/About.jsx";
+import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
+import Team from "./Pages/Public/Team/Team.jsx"
+import ScrollToTop from './components/Public/Footer/ScrollToTop.jsx'
 // context
 import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
-
 
 
 const theme = createTheme({
@@ -43,7 +44,6 @@ const theme = createTheme({
 });
 
 
-
 export default function App() {
   const { isLogin } = useContext(UserContext);
   const { isNav } = useContext(AnimationContext)
@@ -59,8 +59,8 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <section className="App">
 
-        {displayNav || isNav ? (isLogin ? <AppHeader /> : <Header /> ) : null}
-
+        {/* {displayNav || isNav ? (isLogin ? <AppHeader /> : <Header /> ) : null} */}
+        <AppHeader />
         <ScrollToTop  />
 
 
@@ -104,6 +104,11 @@ export default function App() {
           <Route path="/seasonal">
             <Route index element={<Seasonal/>}/>
             <Route path="/seasonal/:item" element={<p>seasonal post</p>}/>
+          </Route>
+
+          <Route path="/profile">
+            <Route index element={<Profile/>}/>
+            <Route path="/profile/:profileName" element={<Profile/>}/>
           </Route>
 
           <Route path="/*" element={<Main />} />

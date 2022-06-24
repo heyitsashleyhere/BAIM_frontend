@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useEffect, useRef, useContext } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+// contexts
+import {UserContext} from '../../../contexts/UserContext.js'
+import { DataContext } from "../../../contexts/dataContext.js"
 
 
 
@@ -10,18 +13,24 @@ import "./AppHeader.scss";
 import Logo from "../../../assets/logo/raspberry.png";
 
 export const AppHeader = () => {
+  const { setIsLogin } = useContext(UserContext)
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
-  // Search and Filter
-  const [ searchCriteria, setSearchCriteria] = useState("criteria")
-  console.log("dskfösk:", searchCriteria);
-  // Search and Filter ends
+  // Search and Filter /////////
+
+  const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
+
+  const [ dropdownOpen, setDropdownOpen ] = useState(false)
+  
+  
+  // Search and Filter ends /////////
 
   // refs to elements to be included in the animation
   const sideNavRef = useRef(null);
   const sideNavBgRef = useRef(null);
   const searchRef = useRef(null);
+  const logoutRef = useRef(null);
 
   //the links ref array 
   const navItemsRef = useRef([])
@@ -42,7 +51,7 @@ export const AppHeader = () => {
       x: '100%',
       ease: 'power2.inOut'
     })
-    tl.current.fromTo([navItemsRef.current, searchRef.current], {
+    tl.current.fromTo([navItemsRef.current, searchRef.current, logoutRef.current], {
       opacity: 0
     }, {
       duration: 0.6,
@@ -67,6 +76,7 @@ export const AppHeader = () => {
   
   // to check the screen size to display the corresponding navigation links
   useEffect(() => {
+    // console.log(sideNavRef.current.style.display );
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setMobile(true);
@@ -91,9 +101,21 @@ export const AppHeader = () => {
 
   //closing the sidebar on link click event
   const {pathname} = useLocation()
-  useEffect(() => {
+
+  const onLinkClick = (link) => {
     setBurgerMenu(false)
-  }, [pathname])
+    sideNavRef.current.style.display = "none"
+  }
+  useEffect(() => {
+    onLinkClick()
+  }, [sideNavRef, pathname])
+
+  const navigate = useNavigate()
+  
+  const logoutUser = () => {
+    setIsLogin(false)
+    navigate('/main')
+  }
 
   return (
     <>
@@ -105,7 +127,9 @@ export const AppHeader = () => {
       {mobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons">
+
               <Icons.MdMenu className="toggle-icon" onClick={() => setBurgerMenu(true)}/>
+
           </div>
         </div>
        ) : (
@@ -115,21 +139,29 @@ export const AppHeader = () => {
               {links.map((link, i) => {
                 return (
                   <>
-                    <li className="nav-item">
-                      <Link to={link.path} key={link.name} >{link.name}</Link>
+                    <li className="nav-item" >
+                      <Link to={link.path} key={link.name}>{link.name}</Link>
                     </li>
                   </>
                 )
               })}
 
-              {/* search bar */}
+                <li className="nav-item">
+                  <h1 className="btn" onClick={logoutUser} >Logout</h1>
+                </li>
+
+
+              {/* //////////////////////////search bar */}
+
               <li className="nav-item search-bar">
-                <input id="search-input" type="text" placeholder="Search" className="search" />
-                  <div className="dropdown-wrapper">
-                    <div className="search-criteria-select">
+                <input id="search-input" type="text" placeholder="Search" className="search" onChange={searchHandler} />
+                  <div className="search-criteria-select">
                       <p>{searchCriteria}</p>
-                      <button>^</button>
-                    </div>
+                      <button onClick={() => setDropdownOpen(!dropdownOpen)} >^</button>
+                  </div>
+                  
+                  <div className={ dropdownOpen ? "dropdown-wrapper drop-down-Open" : "dropdown-wrapper"}>
+                    
                     <div class="dropdown-content">
 
                       <div className="search-criterias">
@@ -137,8 +169,8 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "all-posts" }
-                             value="all-posts" onClick={() => setSearchCriteria("all-posts")} />
-                      <label for="all-posts"><p>all-pos</p>ts</label>
+                             value="all-posts" onChange={() => setSearchCriteria("all-posts")} />
+                      <label for="all-posts"><p>all-posts</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -146,7 +178,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "events" }
-                             value="events" onClick={() => setSearchCriteria("events")} />
+                             value="events" onChange={() => setSearchCriteria("events")} />
                       <label for="events"><p>events</p></label>
                     </div>
 
@@ -155,7 +187,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "recipes" }
-                             value="recipes" onClick={() => setSearchCriteria("recipes")}  />
+                             value="recipes" onChange={() => setSearchCriteria("recipes")}  />
                       <label for="recipes"><p>recipes</p></label>
                     </div>
 
@@ -164,7 +196,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "arts-craft" }
-                             value="arts-craft" onClick={() => setSearchCriteria("arts-craft")} />
+                             value="arts-craft" onChange={() => setSearchCriteria("arts-craft")} />
                       <label for="arts-craft"><p>arts-craft</p></label>
                     </div>
 
@@ -173,7 +205,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "beautie" }
-                             value="beautie" onClick={() => setSearchCriteria("beautie")}  />
+                             value="beautie" onChange={() => setSearchCriteria("beautie")}  />
                       <label for="beautie"><p>beautie</p></label>
                     </div>
 
@@ -182,7 +214,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "garden" }
-                             value="garden" onClick={() => setSearchCriteria("garden")} />
+                             value="garden" onChange={() => setSearchCriteria("garden")} />
                       <label for="garden"><p>garden</p></label>
                     </div>
 
@@ -191,12 +223,13 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "users" }
-                             value="users" onClick={() => setSearchCriteria("users")} />
+                             value="users" onChange={() => setSearchCriteria("users")} />
                       <label for="users"><p>users</p></label>
                     </div>
                   </div>
                 </div>
-                <input type="" placeholder="Search" className="search"/>
+                
+
 
                 <Icons.MdOutlineSearch className="search-icon" />
               </li>
@@ -210,18 +243,21 @@ export const AppHeader = () => {
         <div ref={sideNavRef} className="burger-menu">
         <div ref={sideNavBgRef} className="burger-menu-inner">
           <ul className="burger-menu-list">
+            <li ref={searchRef} className="burger-menu-list-item">
+              <input type="" placeholder="Search" className="mobile-search"/>
+              <Icons.MdOutlineSearch className="search-icon" />
+            </li>
             {links.map((link, i) => {
               return (
                 <>
                   <li className="burger-menu-list-item">
-                    <Link to={link.path} key={i} ref={addToLinks} >{link.name}</Link>
+                    <Link to={link.path} key={i} ref={addToLinks} onClick={onLinkClick}>{link.name}</Link>
                   </li>
                 </>
               )
             })}
-            <li ref={searchRef} className="burger-menu-list-item">
-              <input type="" placeholder="Search" className="mobile-search"/>
-              <Icons.MdOutlineSearch className="search-icon" />
+            <li className="burger-menu-list-item">
+              <h1 ref={logoutRef} className="btn" onClick={logoutUser} >Logout</h1>
             </li>
           </ul>
           

@@ -4,6 +4,7 @@ import './avatars.scss'
 
 
 
+// general avatars for the App
 
 export const SeasonalAvatar = ({id, image, profileName}) => {
     return (
@@ -30,10 +31,8 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
   }
 
   export const ProfileAvatar = ({id, name, image}) => {
-
-    // avatar // profileName
     return (
-      <Link to={`${name}`} key={id} className="RoundAvatar"> 
+      <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
          <section className="imageAvatar">
               <img src={image}></img>           
          </section>
@@ -43,7 +42,9 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
     )
   }
 
-  export const HeaderAvatar=({id, name, image})=>{
+
+  // AVATARS for POSTS
+  export const PostHeaderAvatar=({id, name, image})=>{
 
     return (
       <Link to={`/profile/${name}`} key={id} className="HeaderAvatar"> 
@@ -55,7 +56,7 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
     )
   }
 
-  export const CommentsAvatar=({id, name, image})=>{
+  export const PostCommentsAvatar=({id, name, image})=>{
 
     return (
       <Link to={`/profile/${name}`} key={id} className="CommentAvatar"> 
@@ -67,6 +68,25 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
     )
   }
 
+
+  // AVATARS FOR PROFILE
+
+  export const ProfileCollection=({category, id})=>{
+    const [info, setInfo]=useState([])
+
+    fetch(`http://localhost:7000/${category}/${id}`)
+    .then(response => response.json())
+    .then(result => setInfo(result))
+    .catch(error => console.log(error.message))
+    
+    return(
+      <section className="SquareAvatar">
+        <section className="imageAvatar">
+         
+        </section>
+      </section>
+      )
+  }
 
 
 

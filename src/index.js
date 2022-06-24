@@ -11,16 +11,20 @@ import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
 import DataContextProvider from "./contexts/dataContext.js";
 
+import TransitionPage from "./testing/TransitionPage.jsx";
+
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
-	<BrowserRouter>
-		<UserContextProvider>
-			<PostsContextProvider>
-				<AnimationContextProvider>
-					<App />
-				</AnimationContextProvider>
-			</PostsContextProvider>
-		</UserContextProvider>
-	</BrowserRouter>
+  <BrowserRouter>
+    <UserContextProvider>
+      <PostsContextProvider>
+        <DataContextProvider>
+          <AnimationContextProvider>
+            <App />
+          </AnimationContextProvider>
+        </DataContextProvider>
+      </PostsContextProvider>
+    </UserContextProvider>
+  </BrowserRouter>
 );
