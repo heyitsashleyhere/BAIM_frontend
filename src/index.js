@@ -14,13 +14,15 @@ import DataContextProvider from "./contexts/dataContext.js";
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
-	<BrowserRouter>
-		<UserContextProvider>
-			<PostsContextProvider>
-				<AnimationContextProvider>
-					<App />
-				</AnimationContextProvider>
-			</PostsContextProvider>
-		</UserContextProvider>
-	</BrowserRouter>
+  <BrowserRouter>
+    <UserContextProvider>
+      <PostsContextProvider>
+        <DataContextProvider>
+          <AnimationContextProvider>
+            <App />
+          </AnimationContextProvider>
+        </DataContextProvider>
+      </PostsContextProvider>
+    </UserContextProvider>
+  </BrowserRouter>
 );

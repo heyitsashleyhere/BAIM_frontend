@@ -2,11 +2,21 @@ import React, { useEffect, useState } from 'react'
 
 
 
-export const DataContext = React.createContext(null);
+export const DataContext = React.createContext("");
 
 export default function DataContextProvider(props){
 
-    const [recipes, setRecipes]=useState([])
+
+    const [ searchCriteria, setSearchCriteria] = useState("criteria")
+    console.log("searchCriteria",searchCriteria);
+    const [searchInput, setSearchInput ] = useState("")
+    console.log("searchInput",searchInput);
+
+    function searchHandler(e) {
+        setSearchInput(e.target.value.toLowerCase());
+      }
+
+    const [ recipes, setRecipes ] = useState([])
 
     useEffect(()=> {
     fetch("http://localhost:7000/recipe")
@@ -16,8 +26,8 @@ export default function DataContextProvider(props){
 
     },[])
 
-    const contextData={
-        recipes, setRecipes
+    const contextData = {
+        recipes, setRecipes, searchCriteria, setSearchCriteria, searchInput, setSearchInput, searchHandler   
     }
 
 

@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
+import { DataContext } from "../../../contexts/dataContext"
 
 
 import gsap from "gsap";
@@ -13,10 +13,14 @@ export const AppHeader = () => {
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
-  // Search and Filter
-  const [ searchCriteria, setSearchCriteria] = useState("criteria")
-  console.log("dskfösk:", searchCriteria);
-  // Search and Filter ends
+  // Search and Filter /////////
+
+  const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
+
+  const [ dropdownOpen, setDropdownOpen ] = useState(false)
+  
+  
+  // Search and Filter ends /////////
 
   // refs to elements to be included in the animation
   const sideNavRef = useRef(null);
@@ -122,14 +126,17 @@ export const AppHeader = () => {
                 )
               })}
 
-              {/* search bar */}
+              {/* //////////////////////////search bar */}
+
               <li className="nav-item search-bar">
-                <input id="search-input" type="text" placeholder="Search" className="search" />
-                  <div className="dropdown-wrapper">
-                    <div className="search-criteria-select">
+                <input id="search-input" type="text" placeholder="Search" className="search" onChange={searchHandler} />
+                  <div className="search-criteria-select">
                       <p>{searchCriteria}</p>
-                      <button>^</button>
+                      <button onClick={() => setDropdownOpen(!dropdownOpen)} >^</button>
                     </div>
+                  
+                  <div className={ dropdownOpen ? "dropdown-wrapper drop-down-Open" : "dropdown-wrapper"}>
+                    
                     <div class="dropdown-content">
 
                       <div className="search-criterias">
@@ -137,8 +144,8 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "all-posts" }
-                             value="all-posts" onClick={() => setSearchCriteria("all-posts")} />
-                      <label for="all-posts"><p>all-pos</p>ts</label>
+                             value="all-posts" onChange={() => setSearchCriteria("all-posts")} />
+                      <label for="all-posts"><p>all-posts</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -146,7 +153,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "events" }
-                             value="events" onClick={() => setSearchCriteria("events")} />
+                             value="events" onChange={() => setSearchCriteria("events")} />
                       <label for="events"><p>events</p></label>
                     </div>
 
@@ -155,7 +162,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "recipes" }
-                             value="recipes" onClick={() => setSearchCriteria("recipes")}  />
+                             value="recipes" onChange={() => setSearchCriteria("recipes")}  />
                       <label for="recipes"><p>recipes</p></label>
                     </div>
 
@@ -164,8 +171,8 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "arts-craft" }
-                             value="arts-craft" onClick={() => setSearchCriteria("arts-craft")} />
-                      <label for="arts-craft"><p>arts-cr</p>aft</label>
+                             value="arts-craft" onChange={() => setSearchCriteria("arts-craft")} />
+                      <label for="arts-craft"><p>arts-craft</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -173,7 +180,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "beautie" }
-                             value="beautie" onClick={() => setSearchCriteria("beautie")}  />
+                             value="beautie" onChange={() => setSearchCriteria("beautie")}  />
                       <label for="beautie"><p>beautie</p></label>
                     </div>
 
@@ -182,7 +189,7 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "garden" }
-                             value="garden" onClick={() => setSearchCriteria("garden")} />
+                             value="garden" onChange={() => setSearchCriteria("garden")} />
                       <label for="garden"><p>garden</p></label>
                     </div>
 
@@ -191,12 +198,12 @@ export const AppHeader = () => {
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "users" }
-                             value="users" onClick={() => setSearchCriteria("users")} />
+                             value="users" onChange={() => setSearchCriteria("users")} />
                       <label for="users"><p>users</p></label>
                     </div>
                   </div>
                 </div>
-                <input type="" placeholder="Search" className="search"/>
+                
 
                 <Icons.MdOutlineSearch className="search-icon" />
               </li>
