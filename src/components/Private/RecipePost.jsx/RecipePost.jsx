@@ -1,45 +1,83 @@
-import React from 'react'
+import React , { useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { PostsContext } from '../../../contexts/PostContext'
+import { PostCommentsAvatar, PostHeaderAvatar, ProfileAvatar } from '../Avatars-Links/Avatars'
+
+import './recipePost.scss'
 
 
-export const RecipePost = () => {
+export const RecipePost = ({category}) => {
 
-    // const recipe=[
-    //     {id:"01", title:'chicken', ingrediantes:['8grams'], author: 'Jack', type: 'soup',image:"https://images.unsplash.com/photo-1651222602706-420ee6ddcecd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"},
-    //     {id:"02", title:'falafel', ingrediantes:['8grams'], author: 'Hammad', type: 'soup', image:"https://images.unsplash.com/photo-1645432524528-ae76145f67b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
-    //     {id:"03", title:'stew', ingrediantes:['8grams'], author: 'Ivo', type:'main-dish', image:"https://images.unsplash.com/photo-1645432524528-ae76145f67b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
-    //     {id:"04", title:'chicken-teriaki', ingrediantes:['8grams'], author: 'Murad', image:"https://images.unsplash.com/photo-1645432524528-ae76145f67b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
-    //     {id:"05", title:'Chickem-Massala', ingrediantes:['8grams'], author: 'Jay', image:"https://images.unsplash.com/photo-1645432524528-ae76145f67b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"}]
-      
-        const recipes = useParams()      
-        console.log(recipes)
+ const {recipes, setRecipes}=useContext(PostsContext)
+
+
+        const { title } = useParams()
+
+        const selected = recipes.find(item=>item.title === title )
+        console.log(selected)
+
+        // array of avatars for related recipes
+        const matchRecipes= recipes.filter(item => item.tags === selected.tags)
+        console.log(matchRecipes)
+    
+        const date= item =>{
+          return new Date(item).toLocaleDateString("eu")
+        }
+        
        
 
 
   return (
-    <section className="Post-Page" key={recipes._id}>
+    <section className="Post-Page" key={selected._id}>
+    <section className="Post-Page-Inner">
     <section className="Post-Page-header">
-      <button>close</button>
+    <button>add</button>
+      <button>back</button>
     </section>
-        <section className="Post-header">
-        <img></img>
-        <h2></h2>
-        </section>
       <section className="Post-hero">
-        <img src=""></img>
-        <section>
-          <h1></h1>
+        <img src={selected.image}></img>
+        <h1>{selected.title}</h1>
+      </section>
+
+      <section className="Post-header">
+        <PostHeaderAvatar name={selected.authorProfileName} image={selected.authorAvatar}></PostHeaderAvatar>
+        <button className="Like-button">{selected.likes.length} Likes</button>
+      </section>
+       
+        <section className="Post-title">
+          <p>{selected.category.map(item => item.toUpperCase())}</p>
+          <p className="Post-date">{date(selected.createdAt)}</p>
         </section>
+        
+     
+        <section className="Post-description">
+          {selected.description.split(/\r?\n/).map(item=> <p>{item}</p>)}
+        </section>
+        <section className='Post-tags'>
+          {selected.tags.map(item => <p>{item}</p>)}
+        </section>
+      
+
+      <section className="Post-comments">
+      <p>Comments</p>
+      {selected.comments ? selected.comments.map(item => <section className="Comments-inner" key={item.author}>
+      <p className="commentDate">{date(item.createdAt)}</p>
+      <section className="comment">
+      <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
+      <p className="comment-text">{item.message}</p>
       </section>
-      <section className="Post-text">
-        <section></section>
-      </section>
-      <section className="Post-tags">
-        {/* {recipes.category.map(item => <p>{item}</p>)}
-        {recipes.tags.map(item => <p>{item}</p>)} */}
+      
+     
+      </section>) : null }
+      <section className="Leave-Comment">
+        <textarea placeholder='leave a comment'></textarea>
+        <button>leave a comment</button>
       </section>
 
+      </section>
 
+      </section> 
+  
     </section>
    
   )

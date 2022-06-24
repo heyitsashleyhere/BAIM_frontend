@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react'
-
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/src/all'
+// Styles
 import './main.scss'
-
 import '../../../../src/app.scss'
-
+// Logo
 import Logo from '../../../assets/pngLogo.png'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -77,7 +76,6 @@ const addToRefs = (el) => {
   videosRef.current.push(el)  
 }
 
-
   return (
   <>
     <section className="cta-container">
@@ -96,7 +94,7 @@ const addToRefs = (el) => {
     <section className="promo-vid-container">
       {ctaVideos.map((video, index) => {
         return (
-          <>
+          <div key={`video` + index}>
           <div className="promo-vid-overlay">
           <div className="promo-vid-overlay-content" key={index}>
             <h1 className="promo-vid-content-title">{video.text}</h1>
@@ -107,7 +105,7 @@ const addToRefs = (el) => {
               {/* <source  />
             </video> */}
             </div>
-          </>
+          </div>
         )
       })}
     </section>

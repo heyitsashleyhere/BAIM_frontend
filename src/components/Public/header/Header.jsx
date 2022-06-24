@@ -1,16 +1,15 @@
-
-import { useEffect, useRef, useContext } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { AnimationContext } from '../../../contexts/AnimationContext'
-
 import gsap from 'gsap'
-
+// context
+import { AnimationContext } from '../../../contexts/AnimationContext'
+// Styles
 import './header.scss'
 import Logo from '../../../assets/logo/raspberry.png'
 
 
 const Header = () => {
-  const { windowWidth } = useContext(AnimationContext)
+  const { windowWidth, setIsNav } = useContext(AnimationContext)
 
   const headerRef = useRef(null)
   const childrensRef = useRef([])
@@ -41,9 +40,16 @@ const Header = () => {
     <header ref={headerRef} className="header"
     style={{display: styling}}>
       <div ref={addToChildrens} className="header-logo">
-        <img src={Logo} alt="LOKA" /> 
+        <NavLink to="/" 
+                 onClick={ () => {
+                  setIsNav(false)
+                  localStorage.removeItem('showNav')
+                 }} >
+          <img src={Logo} alt="LOKA" /> 
+        </NavLink>
         <NavLink to="/main">Loka</NavLink>
       </div>
+
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">

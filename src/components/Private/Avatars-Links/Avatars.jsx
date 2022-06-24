@@ -4,6 +4,7 @@ import './avatars.scss'
 
 
 
+// general avatars for the App
 
 export const SeasonalAvatar = ({id, image, profileName}) => {
     return (
@@ -16,9 +17,9 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
     )
   }
 
-  export const RecipesAvatar = ({id, image, title}) => {
+  export const RecipesAvatar = ({id, image, title, path}) => {
     return (
-        <Link key={id} to={`${title}`} className="SquareAvatar">
+        <Link key={id} to={`${path}`} className="SquareAvatar">
              <section className="imageAvatar">
                 <img src={image}></img>
                 <h2>{title}</h2>
@@ -30,10 +31,8 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
   }
 
   export const ProfileAvatar = ({id, name, image}) => {
-
-    // avatar // profileName
     return (
-      <Link to={`${name}`} key={id} className="RoundAvatar"> 
+      <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
          <section className="imageAvatar">
               <img src={image}></img>           
          </section>
@@ -42,6 +41,54 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
       
     )
   }
+
+
+  // AVATARS for POSTS
+  export const PostHeaderAvatar=({id, name, image})=>{
+
+    return (
+      <Link to={`/profile/${name}`} key={id} className="HeaderAvatar"> 
+      <section className="headAvatar">
+           <img src={image}></img>           
+      </section>
+           <h2>{name}</h2> 
+   </Link>
+    )
+  }
+
+  export const PostCommentsAvatar=({id, name, image})=>{
+
+    return (
+      <Link to={`/profile/${name}`} key={id} className="CommentAvatar"> 
+      <section className="comAvatar">
+           <img src={image}></img>           
+      </section>
+           <h2>{name}</h2> 
+   </Link>
+    )
+  }
+
+
+  // AVATARS FOR PROFILE
+
+  export const ProfileCollection=({category, id})=>{
+    const [info, setInfo]=useState([])
+
+    fetch(`http://localhost:7000/${category}/${id}`)
+    .then(response => response.json())
+    .then(result => setInfo(result))
+    .catch(error => console.log(error.message))
+    
+    return(
+      <section className="SquareAvatar">
+        <section className="imageAvatar">
+         
+        </section>
+      </section>
+      )
+  }
+
+
 
   export const BeautyAvatar = ({id, name, title, image})=>{
 
