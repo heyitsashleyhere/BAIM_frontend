@@ -11,14 +11,12 @@ import './discover2.scss'
 
 import { useLocation } from 'react-router-dom'
 
-
 export const Discover = () => {
 
 
 
   return (
     <section className="Discover">
-    
        <section className="Wrapper" onClick={e => useLocation()}>
         <section className="wrapper-image d-gardens">
         {/* <img src={Gardens} alt="vegetables on the table"></img> */}
