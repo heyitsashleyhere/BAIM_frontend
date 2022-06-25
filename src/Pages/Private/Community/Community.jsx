@@ -9,7 +9,7 @@ export const Community = () => {
 
  const { users, setUsers}=useContext(PostsContext)
 
- console.log(users)
+
 
   return (
     <section className="Pages">

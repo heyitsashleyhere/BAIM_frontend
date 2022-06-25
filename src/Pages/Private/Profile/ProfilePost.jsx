@@ -1,21 +1,15 @@
-import React , { useContext } from 'react'
-import { useParams } from 'react-router-dom'
-import { PostsContext } from '../../../contexts/PostContext'
-import { PostCommentsAvatar, PostHeaderAvatar, ProfileAvatar } from '../Avatars-Links/Avatars'
+import React from 'react'
 
-import './postPage.scss'
+import { PostCommentsAvatar, PostHeaderAvatar } from '../../../components/Private/Avatars-Links/Avatars'
 
-
-export const PostPage = ({category}) => {
-
-//  const {recipes, setRecipes}=useContext(PostsContext)
-
- console.log(category)
+import '../../../components/Private/PostPage/postPage.scss'
 
 
-        const { title } = useParams()
+export const ProfilePost = ({data}) => {
 
-        const selected = category.find(item=>item.title === title )
+        
+
+        const selected = data
         console.log(selected)
 
         // array of avatars for related recipes

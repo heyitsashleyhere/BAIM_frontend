@@ -16,6 +16,8 @@ function PostsContextProvider({ children }){
     const [garden, setGarden]=useState([])
     const [recipe, setRecipe]=useState([])
     const [event, setEvent]=useState([])
+
+    const [ upgrade, setUpgrade]=useState(false)
     
 
     useEffect(() => {
@@ -63,7 +65,7 @@ function PostsContextProvider({ children }){
 
      
 
-    }, [])
+    }, [upgrade])
     
 
 
@@ -106,7 +108,7 @@ function PostsContextProvider({ children }){
         convertToBase64, handleFileUpload,
         data, setData, recipe, setRecipe,
         users, setUsers, beauty, setBeauty, garden, setGarden,
-        event, setEvent, arts, setArts,
+        event, setEvent, arts, setArts, upgrade , setUpgrade
 
     }
 

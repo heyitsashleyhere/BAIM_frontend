@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './avatars.scss'
 
@@ -60,13 +60,8 @@ import './avatars.scss'
 
   // AVATARS FOR PROFILE PAGE // NEEDS TO BE DONE 
 
-export const ProfileCollection=({category, id, name, image})=>{
-    const [info, setInfo]=useState([])
+export const ProfileCollection=({category, name, image})=>{
 
-    // fetch(`http://localhost:7000/${category}/${id}`)
-    // .then(response => response.json())
-    // .then(result => setInfo(result))
-    // .catch(error => console.log(error.message))
     
     return(
       <section className="SquareAvatar">
@@ -78,14 +73,4 @@ export const ProfileCollection=({category, id, name, image})=>{
       )
   }
 
-export const ProfileLibrary=({category, id, name, image})=>{
 
-  return(
-    <section className="SquareAvatar">
-    <section className="imageAvatar">
-     <img src={image}></img>
-     <h2>{name}</h2>
-    </section>
-  </section>
-  )
-}

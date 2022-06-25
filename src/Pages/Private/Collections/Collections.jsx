@@ -10,7 +10,7 @@ import './collections.scss'
 
 export const Collections = (props) => {
 
-  const {category, type} =props
+  const {data, type} =props
   console.log(props)
 
 
@@ -30,11 +30,11 @@ export const Collections = (props) => {
  
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">
-        <h2>Our collections</h2>
-        <p>items</p>
+        <h2>Our {type} collections</h2>
+        <p>{data.length}items</p>
       </section>
       <section className="Library-container">
-      {category.map(item =><SquareAvatar id={item._id} image={item.image} path={item.title} title={item.title}/>)}
+      {data.map(item =><SquareAvatar id={item._id} image={item.image} path={item.title} title={item.title}/>)}
     </section>
     </section> 
     

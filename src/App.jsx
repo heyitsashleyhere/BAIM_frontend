@@ -3,9 +3,9 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 // Private components
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
-
+import { Collections } from "./Pages/Private/Collections/Collections.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
-
+import { PostPage } from "./components/Private/PostPage/PostPage.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 
 import { Community } from "./Pages/Private/Community/Community.jsx";
@@ -22,9 +22,8 @@ import ScrollToTop from './components/Public/Footer/ScrollToTop.jsx'
 // context
 import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
-import { PostPage } from "./components/Private/PostPage.jsx/PostPage.jsx";
 import { PostsContext } from "./contexts/PostContext.js";
-import { Collections } from "./Pages/Private/Collections/Collections.jsx";
+
 
 
 const theme = createTheme({
@@ -52,7 +51,7 @@ export default function App() {
   const [displayNav, setDisplayNav] = useState()
   const { recipe, beauty, arts, garden } = useContext(PostsContext)
 
- console.log(recipe, beauty, arts, garden )
+
 
   useEffect(() => {
 
@@ -84,23 +83,23 @@ export default function App() {
           <Route path="/create" element={<Create />} />
 
           <Route path="/gardens" >
-            <Route index element={<Collections category={garden} type="garden"/>}/>
-            <Route path="/gardens/:title" element={<PostPage category={garden} type="garden" />}/>
+            <Route index element={<Collections data={garden} type="garden"/>}/>
+            <Route path="/gardens/:title" element={<PostPage data={garden} />}/>
           </Route>
 
           <Route path="/artsCraft">
-            <Route index  element={<Collections category={arts} type="arts"/>}/>
-            <Route path="/artsCraft/:title" element={<PostPage category={arts}/>}/>
+            <Route index  element={<Collections data={arts} type="arts"/>}/>
+            <Route path="/artsCraft/:title" element={<PostPage data={arts}/>}/>
           </Route>
 
           <Route path="/recipes">
-            <Route index element={<Collections category={recipe} type="recipe"/>}/>
-            <Route path="/recipes/:title" element={<PostPage category={recipe} /> }/>
+            <Route index element={<Collections data={recipe} type="recipe"/>}/>
+            <Route path="/recipes/:title" element={<PostPage data={recipe} /> }/>
           </Route>
 
           <Route path="/beauty">
-            <Route index element={<Collections category={beauty} type="beauty"/>}/>
-            <Route path="/beauty/:title" element={<PostPage category={beauty}/>}/>
+            <Route index element={<Collections data={beauty} type="beauty"/>}/>
+            <Route path="/beauty/:title" element={<PostPage data={beauty}/>}/>
           </Route>
 
           <Route path="/community">
