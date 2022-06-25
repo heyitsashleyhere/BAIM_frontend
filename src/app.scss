@@ -38,7 +38,7 @@ body {
   }
 
 
-  .Loka{
+  .LokaW{
     width:100%;
     position:relative;
     background-color: transparent;
@@ -49,7 +49,19 @@ body {
     mix-blend-mode: difference;
   }
 
-  .Loka:after {
+  .LokaB{
+    width:100%;
+    position:relative;
+    background-color: transparent;
+    border:none;
+    font-size: 1.6rem;
+    color:black;
+    cursor:pointer;
+    mix-blend-mode: difference;
+
+  }
+
+  .LokaW:after {
     content: "";
     position: absolute;
     display: inline;
@@ -62,10 +74,27 @@ body {
     background-color: rgb(255, 255, 255);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-    mix-blend-mode: difference;
+    
   }
 
-  .Loka:hover:after {
+  .LokaB:after{
+    content: "";
+    position: absolute;
+    display: inline;
+    top: 2rem;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  
+  }
+
+  .LokaW:hover:after, 
+  .LokaB:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
   }

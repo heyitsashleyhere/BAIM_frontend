@@ -122,7 +122,7 @@ export const AppHeader = () => {
     <header className="app-header">
       <div className="app-header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link  className="Loka" to="/main">Loka</Link>
+        <Link  className="LokaB" to="/main">Loka</Link>
       </div>
       {mobile ? (
         <div className="mobile-toggle">
@@ -140,14 +140,14 @@ export const AppHeader = () => {
                 return (
                   <>
                     <li className="nav-item" >
-                      <Link className="Loka" to={link.path} key={link.name}>{link.name}</Link>
+                      <Link className="LokaB" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
                   </>
                 )
               })}
 
                 <li className="nav-item">
-                  <h1 className="btn Loka" onClick={logoutUser} >Logout</h1>
+                  <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
                 </li>
 
 
