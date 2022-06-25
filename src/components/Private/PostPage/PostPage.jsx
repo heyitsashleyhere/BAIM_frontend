@@ -10,7 +10,7 @@ export const PostPage = ({data}) => {
         const { title } = useParams()
 
         const selected = data.find(item=>item.title === title )
-        console.log(selected)
+  
 
         // array of avatars for related recipes
         // const match = [category].filter(item => item.tags === selected.tags)

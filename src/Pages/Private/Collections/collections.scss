@@ -4,64 +4,54 @@
 
     .Collections{
         position:relative;
-        top:100px;
-
-        .recipe{
-            background: url(../../../assets/images/recipes.jpg);
-            background-position: center;
-            background-repeat: repeat;
-            background-size: cover;
-        }
-
-        .garden{
-            background: url(../../../assets/images/gardens.jpg);
-            background-position: center;
-            background-repeat: repeat;
-            background-size: cover;
-        }
-
-        .beauty{
-            background: url(../../../assets/images/beauty.jpg);
-            background-position: center;
-            background-repeat: repeat;
-            background-size: cover;
-        }
+        top:50px;
 
             width:100%;
-        
-            .Hero{
-                width:100%;
-        
-                .hero-image{
-                    position:relative;
-                    width:100%;
-                    height:50vh;
-                }
-        
-                .Hero-text{
-                    height:50vh;
-                    position:absolute;
-                    top:0;
-                    display:flex;
-                    justify-content: flex-end;
-                    flex-direction: column;
-        
-                    h1{
-                        margin:0rem 1rem;
-                        font-size: 7rem;
-                        color:white;
-                        
-                    }
-        
-                    p{
-                        margin:1rem 1rem;
-                        font-size:7rem;
-                        color:white;
-                    }
-        
+
             
         
+            .Slideshow{
+                margin:0 auto;
+                overflow:hidden;
+                width:100%;
+                
+                .slideShowSlider{
+                    white-space: nowrap;
+                    transition: ease 1000ms;
                 }
+
+                .slide{
+                    position:relative;
+                    display:inline-block;
+                    max-width:100%;
+                    height:200px;
+                    overflow: hidden;
+
+                    img{
+                      width:100%;
+                       object-fit: cover; 
+                    }
+
+                    .Hero-text{
+                        position:absolute;
+                        bottom:0;
+                        background-color: rgba(0, 0, 0, 0.247);
+                        font-weight: 800;
+                        width:100%;
+                        padding:0.5rem 0rem;
+                        color:white;
+
+                        h1{
+                            font-size: 5rem;
+                            
+                        }
+
+                       p{
+                           font-size: 3.5rem;
+                       }
+                    }
+                }
+        
             }
         
             .Library-wrapper{
@@ -117,26 +107,56 @@
                 display:grid;
                 grid-template-columns: repeat(8, 1fr);
                 gap:2.5rem;
-        
-                .Hero{
+
+                .Slideshow{
                     grid-column: 1/9;
-            
-                    .Hero-text{
-                        justify-content: flex-end;
-                       
-            
-                        h1{
-                            margin:0rem 2rem;
-                            font-size: 15rem;
-                            
+                    margin:0 auto;
+                    overflow:hidden;
+                    width:100%;
+                    
+                    .slideShowSlider{
+                        white-space: nowrap;
+                        transition: ease 1000ms;
+                    }
+    
+                    .slide{
+                        position:relative;
+                        display:inline-block;
+                        max-width:100%;
+                        height:440px;
+                        overflow: hidden;
+    
+                        img{
+                          width:100%;
+                           object-fit: cover; 
+                           object-position: bottom;
                         }
-            
-                        p{
-                            margin:0rem 2rem;
-                            font-size:10rem;
+    
+                        .Hero-text{
+                            height:170px;
+                            position:absolute;
+                            top:0;
+                            background-color: rgba(0, 0, 0, 0.247);
+                            font-weight: 800;
+                            width:100%;
+                            padding:1rem;
+                            color:white;
+    
+                            h1{
+                                font-size: 8rem;
+                                
+                            }
+    
+                           p{
+                               font-size: 5.5rem;
+                               margin:0rem 0.5rem;
+                           }
                         }
                     }
+            
                 }
+        
+              
         
                 .Library-wrapper{
                     grid-column: 1/9;
@@ -151,40 +171,119 @@
         
             @include media(">=desktop"){
                 grid-template-columns: repeat(12,1fr);
+                gap:2.5rem;
         
-                .Hero{
-                    grid-column: 2/12;
-        
-                    .hero-image{
-                        position:relative;
-                        width:100%;
-                        
-                       
+                .Slideshow{
+                    grid-column: 3/11;
+                    margin:0 auto;
+                    overflow:hidden;
+                    width:100%;
+                    
+                    .slideShowSlider{
+                        white-space: nowrap;
+                        transition: ease 1000ms;
                     }
-        
-                    .Hero-text{
-                        top:0rem;
-                        height:50vh;
-                        justify-content: flex-end;
-                       
-        
-                        h1{
-                            margin:0rem 2rem;
-                            font-size:15rem;
+    
+                    .slide{
+                        position:relative;
+                        display:inline-block;
+                        max-width:100%;
+                        height:43vh;
+                        overflow: hidden;
+    
+                        img{
+                          width:100%;
+                           object-fit: cover; 
+                           object-position: bottom;
                         }
-        
-                        p{
-                            margin:0rem 2rem;
-                            font-size: 10rem;
+    
+                        .Hero-text{
+                            height:20vh;
+                            position:absolute;
+                            top:0;
+                            background-color: rgba(0, 0, 0, 0.247);
+                            font-weight: 800;
+                            width:100%;
+                            padding:1rem;
+                            color:white;
+    
+                            h1{
+                                font-size: 10vw;
+                                
+                            }
+    
+                           p{
+                               font-size: 6vw;
+                               margin:0rem 0.5rem;
+                           }
                         }
                     }
                 }
-        
-                // .Main-wrapper
+          
         
                 .Library-wrapper{
-                    grid-column:2/12;
+                    grid-column:3/11;
                 }
+            }
+
+            @include media(">=widescreen"){
+                grid-template-columns: repeat(12,1fr);
+                gap:2.5rem;
+        
+                .Slideshow{
+                    grid-column: 3/11;
+                    margin:0 auto;
+                    overflow:hidden;
+                    width:100%;
+                    
+                    .slideShowSlider{
+                        white-space: nowrap;
+                        transition: ease 1000ms;
+                    }
+    
+                    .slide{
+                        
+                        position:relative;
+                        display:inline-block;
+                        max-width:100%;
+                        height:60vh;
+                        overflow: hidden;
+    
+                        img{
+                          width:100%;
+                           object-fit: cover; 
+                           object-position: bottom;
+                        }
+    
+                        .Hero-text{
+                            height:25vh;
+                            position:absolute;
+                            top:0;
+                            background-color: rgba(0, 0, 0, 0.247);
+                            font-weight: 800;
+                            width:100%;
+                            padding:1rem;
+                            color:white;
+    
+                            h1{
+                                font-size: 12rem;
+                                
+                            }
+    
+                           p{
+                               font-size:   8rem;
+                               margin:0rem 0.5rem;
+                           }
+                        }
+                    }
+                }
+          
+        
+                .Library-wrapper{
+                    grid-column:3/11;
+                }
+
+
             }
         
         
