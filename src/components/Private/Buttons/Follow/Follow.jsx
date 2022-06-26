@@ -1,20 +1,29 @@
 import React, { useContext } from 'react'
-import {AiOutlineDelete} from 'react-icons'
 import { PostsContext } from '../../../../contexts/PostContext'
 
-export const AddPost = (props) => {
-  const{upgrade, setUpgrade}=useContext(PostsContext)
+export const Follow = (props) => {
 
-const { category, id }=props
-const [error, setError]=useState()
+  const{ upgrade, setUpgrade }=useContext(PostsContext)
 
+  const {user, users}= props
+
+  const [error, setError]=useState()
+
+
+  // Check fetch and router
   function FollowUser(){
+
+    const payload ={ type:"follow", id:users}
+
     const config = {
         credentials: 'include', // specify this if you need cookies
-        method: "POST",
+        headers:{"Content-Type":"application/json"},
+        method: "DELETE",
+        body:JSON.stringify(payload)
+        
       };
       
-      fetch(`http://localhost:7000/user/follow/${id}`, config)
+      fetch(`http://localhost:7000/user/collection/${user}`, config)
         .then((response) => response.json())
         .then((result) => {
           if(result.errors){
@@ -27,7 +36,7 @@ const [error, setError]=useState()
 
   return (
     <section>
-       <button onClick={FollowUser}>follow</button>
+       <button onClick={FollowUser}>Follow</button>
        <p>{error}</p>
     </section>
     

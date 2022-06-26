@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { RoundAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { PostsContext } from '../../../contexts/PostContext'
+import { UserContext } from '../../../contexts/UserContext.js'
 
 import  './community.scss'
 
@@ -8,8 +9,9 @@ export const Community = () => {
 
 
  const { users, setUsers}=useContext(PostsContext)
+ const {user}=useContext(UserContext)
 
-
+console.log(users)
 
   return (
     <section className="Pages">

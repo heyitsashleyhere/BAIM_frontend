@@ -13,6 +13,8 @@ import "./AppHeader.scss";
 import Logo from "../../../assets/logo/raspberry.png";
 
 export const AppHeader = () => {
+
+
   const { setIsLogin } = useContext(UserContext)
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
@@ -21,7 +23,17 @@ export const AppHeader = () => {
 
   const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
 
+  const { user } = useContext(UserContext)
   const [ dropdownOpen, setDropdownOpen ] = useState(false)
+
+  //Links object
+  const links =
+    [
+      {path: '/discover', name: 'Discover'},
+      {path: '/feed', name: 'Feed'},
+      {path: `/profile/${user.profileName}`, name: 'Profile'},
+      {path: '/create', name: 'Create'}
+    ]
   
   
   // Search and Filter ends /////////
@@ -271,10 +283,10 @@ export const AppHeader = () => {
 export default AppHeader;
 
 //Links object
-const links =
-  [
-    {path: '/discover', name: 'Discover'},
-    {path: '/feed', name: 'Feed'},
-    {path: '/profile', name: 'Profile'},
-    {path: '/create', name: 'Create'}
-  ]
+// const links =
+//   [
+//     {path: '/discover', name: 'Discover'},
+//     {path: '/feed', name: 'Feed'},
+//     {path: '/profile', name: 'Profile'},
+//     {path: '/create', name: 'Create'}
+//   ]

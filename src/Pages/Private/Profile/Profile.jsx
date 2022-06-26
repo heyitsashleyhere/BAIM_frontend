@@ -6,15 +6,18 @@ import { PostsContext } from '../../../contexts/PostContext'
 
 
 import './profile.scss';
+import { UserContext } from '../../../contexts/UserContext.js'
 
 
 export const Profile = () => {
 
  const { users, setUsers, recipe, beauty, arts, garden }=useContext(PostsContext)
+ const {user}= useContext(UserContext)
  console.log(users)
+
  const { profileName } =useParams()
  
- const user = users.find(item => item.profileName === profileName)
+ const userProfile = users.find(item => item.profileName === profileName)
  console.log(user)
 
 
@@ -53,12 +56,12 @@ export const Profile = () => {
       <button>...</button>
 
        <section className="Profile-info">
-        <img src={user.avatar}></img>
+        <img src={userProfile.avatar}></img>
           <section className="Profile-text">
-          <h1>{user.profileName}</h1>
+          <h1>{userProfile.profileName}</h1>
           <p>Gardner</p>
           <p>Im all about plants, and herbs</p>
-          <h2>{user.userAddress.city} , {user.userAddress.country}</h2>
+          <h2>{userProfile.userAddress.city} , {userProfile.userAddress.country}</h2>
         </section>
       </section>
 
@@ -73,10 +76,10 @@ export const Profile = () => {
       <section className='Profile-Library'>
         <p>Library</p>
         <section>
-          {user.beauty.length > 0 ? <button onClick={e =>setLibBeauty(!libBeauty)}>beauty</button> : null }
-          {user.garden.length > 0 ? <button onClick={e=>setLibGarden(!libGarden)}>garden</button> : null }
-          {user.recipe.length > 0 ? <button onClick={e=>setLibRecipe(!libRecipe)}>recipe</button>: null }
-          {user.artsCraft.length > 0 ? <button onClick={e=>setLibArt(!libArt)}>arts & crafts</button> : null }
+          {userProfile.beauty.length > 0 ? <button onClick={e =>setLibBeauty(!libBeauty)}>beauty</button> : null }
+          {userProfile.garden.length > 0 ? <button onClick={e=>setLibGarden(!libGarden)}>garden</button> : null }
+          {userProfile.recipe.length > 0 ? <button onClick={e=>setLibRecipe(!libRecipe)}>recipe</button>: null }
+          {userProfile.artsCraft.length > 0 ? <button onClick={e=>setLibArt(!libArt)}>arts & crafts</button> : null }
         </section>
         <section>
 
