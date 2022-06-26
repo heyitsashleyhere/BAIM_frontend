@@ -1,15 +1,13 @@
-import React, { useContext } from 'react'
-import { useInRouterContext, useParams } from 'react-router-dom'
-import { UserContext } from '../../../contexts/UserContext'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 import { PostCommentsAvatar, PostHeaderAvatar } from '../Avatars-Links/Avatars'
-import { UserComment } from '../Buttons/Comment/UserComment'
 
 import './postPage.scss'
 
 
-export const PostPage = ({data}) => {
+// ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
-        const { user } =useContext(UserContext)
+export const PostPage = ({data}) => {
 
         const { title } = useParams()
 
@@ -58,9 +56,22 @@ export const PostPage = ({data}) => {
         </section>
       
 
+     
       <section className="Post-comments">
       <p>Comments</p>
-      {selected.comments ? selected.comments.map(item => <UserComment data={item} user={user._id}/>) : null }
+      {selected.comments ? selected.comments.map(item =>(
+
+      <section className="Comments-inner" key={item.author}>
+          <p className="commentDate">{date(item.createdAt)}</p>
+          <section className="comment">
+            <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
+            <p className="comment-text">{item.message}</p>
+          </section>
+      </section>
+      )) 
+      : 
+      null }
+
       <section className="Leave-Comment">
         <textarea placeholder='leave a comment'></textarea>
         <button>leave a comment</button>
