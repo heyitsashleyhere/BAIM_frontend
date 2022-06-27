@@ -35,7 +35,7 @@ export default function UserLogin() {
         .then((response) => response.json())
         .then((result) => {
             // console.log("UserLogin:", result);
-            if(!result.errors) {
+            if(!result.errors) { 
               setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
               setMessage(result.message)
               setIsLogin(true)
