@@ -5,7 +5,7 @@ const userTemplate = [];
 export const UserContext = React.createContext(userTemplate);
 
 export const UserContextProvider = (props) => {
-  const [user, setUser] = useState({ id: "", profileName: "", avatar: "" });
+  const [user, setUser] = useState({ _id: "62b1ab5ebdc67faca3f2d2e8", profileName: "NriabZZ", avatar: "" });
   const [inputValues, setInputValues] = useState({})
   const [message, setMessage] = useState("")
   const [isLogin, setIsLogin] = useState(true)

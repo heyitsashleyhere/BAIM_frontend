@@ -1,24 +1,22 @@
-import React , { useContext } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { PostsContext } from '../../../contexts/PostContext'
-import { PostCommentsAvatar, PostHeaderAvatar, ProfileAvatar } from '../Avatars-Links/Avatars'
+import { PostCommentsAvatar, PostHeaderAvatar } from '../Avatars-Links/Avatars'
 
-import './recipePost.scss'
+import './postPage.scss'
 
 
-export const RecipePost = ({category}) => {
+// ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
- const {recipes, setRecipes}=useContext(PostsContext)
-
+export const PostPage = ({data}) => {
 
         const { title } = useParams()
 
-        const selected = recipes.find(item=>item.title === title )
-        console.log(selected)
+        const selected = data.find(item=>item.title === title )
+  
 
         // array of avatars for related recipes
-        const matchRecipes= recipes.filter(item => item.tags === selected.tags)
-        console.log(matchRecipes)
+        // const match = [category].filter(item => item.tags === selected.tags)
+        // console.log(match)
     
         const date= item =>{
           return new Date(item).toLocaleDateString("eu")
@@ -58,17 +56,22 @@ export const RecipePost = ({category}) => {
         </section>
       
 
+     
       <section className="Post-comments">
       <p>Comments</p>
-      {selected.comments ? selected.comments.map(item => <section className="Comments-inner" key={item.author}>
-      <p className="commentDate">{date(item.createdAt)}</p>
-      <section className="comment">
-      <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
-      <p className="comment-text">{item.message}</p>
+      { selected.comments ? selected.comments.map(item =>(
+
+      <section className="Comments-inner" key={item.author}>
+          <p className="commentDate">{date(item.createdAt)}</p>
+          <section className="comment">
+            <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
+            <p className="comment-text">{item.message}</p>
+          </section>
       </section>
-      
-     
-      </section>) : null }
+      )) 
+      : 
+      null }
+
       <section className="Leave-Comment">
         <textarea placeholder='leave a comment'></textarea>
         <button>leave a comment</button>
