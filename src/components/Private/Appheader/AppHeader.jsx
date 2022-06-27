@@ -63,7 +63,7 @@ export const AppHeader = () => {
       x: '100%',
       ease: 'power2.inOut'
     })
-    tl.current.fromTo([navItemsRef.current, searchRef.current, logoutRef.current], {
+    tl.current.fromTo([searchRef.current, navItemsRef.current, logoutRef.current], {
       opacity: 0
     }, {
       duration: 0.6,
@@ -150,11 +150,9 @@ export const AppHeader = () => {
           <ul className="nav-list">
               {links.map((link, i) => {
                 return (
-                  <div key={i}>
-                    <li className="nav-item" >
+                    <li className="nav-item" key={i}>
                       <Link className="LokaB" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
-                  </div>
                 )
               })}
 
@@ -253,22 +251,20 @@ export const AppHeader = () => {
 
       {/* //mobile navbar */}
         <div ref={sideNavRef} className="burger-menu">
-        <div ref={sideNavBgRef} className="burger-menu-inner">
+        <div ref={sideNavBgRef} className="burger-menu-inner" key=''>
           <ul className="burger-menu-list">
-            <li ref={searchRef} className="burger-menu-list-item">
+            <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
               <input type="" placeholder="Search" className="mobile-search"/>
               <Icons.MdOutlineSearch className="search-icon" />
             </li>
             {links.map((link, i) => {
               return (
-                <>
-                  <li className="burger-menu-list-item">
-                    <Link to={link.path} key={i} ref={addToLinks} onClick={onLinkClick}>{link.name}</Link>
-                  </li>
-                </>
+                <li className="burger-menu-list-item" key={i}>
+                  <Link to={link.path} key={i} ref={addToLinks} onClick={onLinkClick}>{link.name}</Link>
+                </li>
               )
             })}
-            <li className="burger-menu-list-item">
+            <li className="burger-menu-list-item" key="mobile-logout">
               <h1 ref={logoutRef} className="btn" onClick={logoutUser} >Logout</h1>
             </li>
           </ul>

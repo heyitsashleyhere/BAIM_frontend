@@ -61,6 +61,7 @@ export default function App() {
 
         {displayNav || isNav ? (cookies.profileName ? <AppHeader /> : <Header /> ) : null}
         {/* <AppHeader /> */}
+
         <ScrollToTop  />
 
 

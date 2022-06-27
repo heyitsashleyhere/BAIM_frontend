@@ -18,6 +18,8 @@ function PostsContextProvider({ children }){
     const [events, setEvents]=useState([])
 
     const [ upgrade, setUpgrade]=useState(false)
+
+    // const [loading, setLoading]=useState(true)
     
 
     useEffect(() => {

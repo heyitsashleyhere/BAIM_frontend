@@ -42,7 +42,7 @@ export const PostPage = ({data}) => {
 
       <section className="Post-header">
         <PostHeaderAvatar name={selected.authorProfileName} image={selected.authorAvatar}></PostHeaderAvatar>
-        <button className="Like-button">{selected.likes.length} Likes</button>
+        <button className="Like-button">Likes</button>
       </section>
        
         <section className="Post-title">

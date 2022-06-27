@@ -1,11 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { PostsContext } from '../../../../contexts/PostContext'
 
 export const Follow = (props) => {
 
   const{ upgrade, setUpgrade }=useContext(PostsContext)
 
+  // user is user._id, users is
   const {user, users}= props
+
+  const author = user === users
+  console.log("follow", author)
 
   const [error, setError]=useState()
 
@@ -36,7 +40,7 @@ export const Follow = (props) => {
 
   return (
     <section>
-       <button onClick={FollowUser}>Follow</button>
+       {!author ? <button onClick={FollowUser}>Follow</button> : null}
        <p>{error}</p>
     </section>
     
