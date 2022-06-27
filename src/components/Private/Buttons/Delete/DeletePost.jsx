@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {AiOutlineDelete} from 'react-icons'
+
 import { PostsContext } from '../../../../contexts/PostContext'
 
 export const DeletePost = (props) => {
@@ -7,7 +7,7 @@ export const DeletePost = (props) => {
 
 const { category, id }=props
 const [error, setError]=useState()
-
+const [ preDelete, setPreDelete ]=useState(false)
   function deletePost(){
     const config = {
         credentials: 'include', // specify this if you need cookies
@@ -19,16 +19,26 @@ const [error, setError]=useState()
         .then((result) => {
           if(result.errors){
             setError(result.errors)
+            
           }
           setUpgrade(!upgrade)
+          setPreDelete(false)
         })
         .catch((error) => console.log(error));
       }
 
   return (
     <section>
-       <AiOutlineDelete onClick={deletePost}/>
-       <p>{error}</p>
+       <button onClick={e => setPreDelete(true)}/>
+
+       {preDelete ? 
+        <section>
+          <p>are you sure?</p>
+          <button onClick={deletePost}>YES</button>
+          <button onClick={e=> setPreDelete(false)}>No</button>
+        </section>
+        : null } 
+        
     </section>
     
   )

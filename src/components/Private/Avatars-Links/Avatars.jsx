@@ -7,18 +7,35 @@ import { Follow } from '../Buttons/Follow/Follow'
 import { UnFollow } from '../Buttons/Unfollow/Unfollow'
 import { UserContext } from '../../../contexts/UserContext'
 import { PostsContext } from '../../../contexts/PostContext'
+import { DeletePost } from '../Buttons/Delete/DeletePost'
 
 
 
 // general avatars for the App
-  export const SquareAvatar = ({id, image, title, path}) => {
+  export const SquareAvatar = ({id, image, title, path, author, type}) => {
+    const {user}=useContext(UserContext)
+    const { users}=useContext(PostsContext)
+    
+    const find = users.find(item => item === user._id)
+    const isUser = user._id === author
+
+    // logic to find in user collections the specific item so the add or remove buttons can appear
+    // const match = user.collections[type].find(item => item === author) 
+
+    console.log(isUser)
+
     return (
+      <section>
         <Link key={id} to={`${path}`} className="SquareAvatar">
              <section className="imageAvatar">
                 <img src={image}></img>
                 <h2>{title}</h2>
               </section> 
         </Link>
+        {isUser ? <section><button>edit</button><DeletePost/></section> : null }
+        {/* experimental logic for add remove to user collections */}
+
+      </section>
     )
   }
 
@@ -35,7 +52,7 @@ import { PostsContext } from '../../../contexts/PostContext'
     // const found = user.collection.follow.find(item => item === user._id)
 
     return (
-      <section>
+      <section className="AvatarR">
           <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
          <section className="imageAvatar">
               <img src={image}></img>           

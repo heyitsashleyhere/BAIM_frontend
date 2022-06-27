@@ -59,7 +59,7 @@ export const PostPage = ({data}) => {
      
       <section className="Post-comments">
       <p>Comments</p>
-      {selected.comments ? selected.comments.map(item =>(
+      { selected.comments ? selected.comments.map(item =>(
 
       <section className="Comments-inner" key={item.author}>
           <p className="commentDate">{date(item.createdAt)}</p>

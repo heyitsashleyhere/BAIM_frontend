@@ -11,8 +11,8 @@ export const UserComment = (props) => {
 const{upgrade, setUpgrade}=useContext(PostsContext)
 
 // user is the userLogin ID
-const {data , user} =props
-const [error, setError]=useState()
+const { data , user } = props
+const [ error, setError ]=useState()
 const [ edit, setEdit]=useState(true)
 const [ newComment, setNewComment]=useState('')
 

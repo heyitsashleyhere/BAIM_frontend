@@ -13,7 +13,7 @@ import './collections.scss'
 export const Collections = (props) => {
 
   const {data, type} =props
-  console.log(props)
+  console.log(data)
 
   const [index, setIndex]=useState(0)
   const delay= 5500
@@ -146,16 +146,6 @@ export const Collections = (props) => {
       </section>
       </section>
 
-      {/* <section className="Hero">
-         <section className={`hero-image ${type}`} ></section>
-          <section className="Hero-text">
-              <h1>hello</h1>
-              <p>YUMMY</p>
-          </section> 
-      </section>  */}
-
-
-
  
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">
@@ -163,7 +153,7 @@ export const Collections = (props) => {
         <p>{data.length}items</p>
       </section>
       <section className="Library-container">
-      {data.map(item =><SquareAvatar id={item._id} image={item.image} path={item.title} title={item.title}/>)}
+      {data.map(item =><SquareAvatar id={item._id} image={item.image} path={item.title} title={item.title} author={item.author}/>)}
     </section>
     </section> 
     
