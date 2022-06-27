@@ -16,15 +16,15 @@ import TransitionPage from "./testing/TransitionPage.jsx";
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
-  <BrowserRouter>
-    <UserContextProvider>
-      <PostsContextProvider>
-        <DataContextProvider>
-          <AnimationContextProvider>
-            <App />
-          </AnimationContextProvider>
-        </DataContextProvider>
-      </PostsContextProvider>
-    </UserContextProvider>
-  </BrowserRouter>
+	<BrowserRouter>
+		<UserContextProvider>
+			<PostsContextProvider>
+				<DataContextProvider>
+					<AnimationContextProvider>
+						<App />
+					</AnimationContextProvider>
+				</DataContextProvider>
+			</PostsContextProvider>
+		</UserContextProvider>
+	</BrowserRouter>
 );
