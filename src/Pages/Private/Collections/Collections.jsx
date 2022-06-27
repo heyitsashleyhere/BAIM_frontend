@@ -11,10 +11,9 @@ import './collections.scss'
 
 
 export const Collections = (props) => {
-
   const {data, type} =props
-  console.log(data)
-
+  console.log('data', data)
+  // animation
   const [index, setIndex]=useState(0)
   const delay= 5500
   const timeoutRef = useRef(null)

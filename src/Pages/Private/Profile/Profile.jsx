@@ -11,7 +11,7 @@ import { UserContext } from '../../../contexts/UserContext.js'
 
 export const Profile = () => {
 
- const { users, setUsers, recipe, beauty, arts, garden }=useContext(PostsContext)
+ const { users, setUsers, recipes, beauties, artsCrafts, gardens, events  }=useContext(PostsContext)
  const {user}= useContext(UserContext)
  console.log(users)
 
@@ -27,19 +27,18 @@ export const Profile = () => {
  const [ libArt, setLibArt]=useState(false)
 
  const [userLibrary, setUserLibrary]=useState({
-   arts:arts.filter((item,i)=> item._id === user.artsCraft[i]), 
-   beauty: beauty.filter((item,i)=> item._id === user.beauty[i]), 
-   recipes:recipe.filter((item, i)=> item._id === user.recipe[i]), 
-   gardens:garden.filter((item, i)=>item._id === user.garden[i]),
-   arts: arts.filter((item, i)=>item._id === user.artsCraft[i])
+   artsCraft:artsCrafts.filter((item,i)=> item._id === user.artsCraft[i]), 
+   beauty: beauties.filter((item,i)=> item._id === user.beauty[i]), 
+   recipe:recipes.filter((item, i)=> item._id === user.recipe[i]), 
+   garden:gardens.filter((item, i)=>item._id === user.garden[i]),
+   event: events.filter((item, i)=>item._id === user.event[i]),
   })
 
 
   function openPost(id, category){
 
     const post = (userLibrary[category]).find(post => post._id === id)
-    console.log(post)
-    
+    console.log(`post from Profile`, post)
 
   }
 

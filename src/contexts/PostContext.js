@@ -10,60 +10,46 @@ function PostsContextProvider({ children }){
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
     
     
-    const [ users, setUsers]=useState([])
-    const [beauty, setBeauty]=useState([])
-    const [arts, setArts]=useState([])
-    const [garden, setGarden]=useState([])
-    const [recipe, setRecipe]=useState([])
-    const [event, setEvent]=useState([])
+    const [users, setUsers]=useState([])
+    const [beauties, setBeauties]=useState([])
+    const [artsCrafts, setArtsCrafts]=useState([])
+    const [gardens, setGardens]=useState([])
+    const [recipes, setRecipes]=useState([])
+    const [events, setEvents]=useState([])
 
     const [ upgrade, setUpgrade]=useState(false)
     
 
     useEffect(() => {
-        // postCategories.map(category => {
-        //     let url = `http://localhost:7000/${category}`
-        //     const config = {
-        //       method: "GET"
-        //     }
-        
-        //     fetch(url, config)
-        //       .then(res => res.json())
-        //       .then(result => setData({...data, [`${category}`]: result}))
-        //       .catch(console.error)
-        // })
-
         fetch("http://localhost:7000/user")
         .then(response => response.json())
-        .then(result => setUsers(result))
+        .then(result => {setUsers(result)})
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/beauty")
         .then(response => response.json())
-        .then(result => setBeauty(result))
+        .then(result => setBeauties(result))
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/artsCraft")
         .then(response => response.json())
-        .then(result => setArts(result))
+        .then(result => setArtsCrafts(result))
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/garden")
         .then(response => response.json())
-        .then(result => setGarden(result))
+        .then(result => setGardens(result))
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/recipe")
         .then(response=>response.json())
-        .then(result=>setRecipe(result))
+        .then(result=>setRecipes(result))
         .catch(error=>console.log(error.message))
 
         fetch("http://localhost:7000/event")
         .then(response=>response.json())
-        .then(result=>setEvent(result))
+        .then(result=>setEvents(result))
         .catch(error=>console.log(error.message))
-
-     
 
     }, [upgrade])
     
@@ -106,9 +92,14 @@ function PostsContextProvider({ children }){
         inputValues, setInputValues,
         address, setAddress,
         convertToBase64, handleFileUpload,
-        data, setData, recipe, setRecipe,
-        users, setUsers, beauty, setBeauty, garden, setGarden,
-        event, setEvent, arts, setArts, upgrade , setUpgrade
+        data, setData, 
+        users, setUsers, 
+        recipes, setRecipes,
+        beauties, setBeauties, 
+        gardens, setGardens,
+        events, setEvents, 
+        artsCrafts, setArtsCrafts, 
+        upgrade, setUpgrade
 
     }
 

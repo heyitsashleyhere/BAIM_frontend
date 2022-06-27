@@ -7,7 +7,6 @@ import { Collections } from "./Pages/Private/Collections/Collections.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
 import { PostPage } from "./components/Private/PostPage/PostPage.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
-
 import { Community } from "./Pages/Private/Community/Community.jsx";
 import { Profile } from "./Pages/Private/Profile/Profile.jsx";
 import Create from "./Pages/Private/Create/Create.jsx";
@@ -49,7 +48,13 @@ export default function App() {
   const { isLogin } = useContext(UserContext);
   const { isNav } = useContext(AnimationContext)
   const [displayNav, setDisplayNav] = useState()
-  const { recipe, beauty, arts, garden } = useContext(PostsContext)
+  const { 
+    users,
+    recipes, 
+    beauties, 
+    gardens,
+    events, 
+    artsCrafts,  } = useContext(PostsContext)
 
 
 
@@ -82,24 +87,24 @@ export default function App() {
           <Route path="/discover" element={<Discover/>} />
           <Route path="/create" element={<Create />} />
 
-          <Route path="/gardens" >
-            <Route index element={<Collections data={garden} type="garden"/>}/>
-            <Route path="/gardens/:title" element={<PostPage data={garden} />}/>
+          <Route path="/garden" >
+            <Route index element={<Collections data={gardens} type="garden"/>}/>
+            <Route path="/garden/:title" element={<PostPage data={gardens} />}/>
           </Route>
 
           <Route path="/artsCraft">
-            <Route index  element={<Collections data={arts} type="arts"/>}/>
-            <Route path="/artsCraft/:title" element={<PostPage data={arts}/>}/>
+            <Route index  element={<Collections data={artsCrafts} type="arts"/>}/>
+            <Route path="/artsCraft/:title" element={<PostPage data={artsCrafts}/>}/>
           </Route>
 
-          <Route path="/recipes">
-            <Route index element={<Collections data={recipe} type="recipe"/>}/>
-            <Route path="/recipes/:title" element={<PostPage data={recipe} /> }/>
+          <Route path="/recipe">
+            <Route index element={<Collections data={recipes} type="recipe"/>}/>
+            <Route path="/recipe/:title" element={<PostPage data={recipes} /> }/>
           </Route>
 
           <Route path="/beauty">
-            <Route index element={<Collections data={beauty} type="beauty"/>}/>
-            <Route path="/beauty/:title" element={<PostPage data={beauty}/>}/>
+            <Route index element={<Collections data={beauties} type="beauty"/>}/>
+            <Route path="/beauty/:title" element={<PostPage data={beauties}/>}/>
           </Route>
 
           <Route path="/community">

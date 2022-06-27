@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { PostCommentsAvatar, PostHeaderAvatar } from '../Avatars-Links/Avatars'
 
 import './postPage.scss'
@@ -10,6 +10,7 @@ import './postPage.scss'
 export const PostPage = ({data}) => {
 
         const { title } = useParams()
+        let navigate = useNavigate()
 
         const selected = data.find(item=>item.title === title )
   
@@ -21,16 +22,18 @@ export const PostPage = ({data}) => {
         const date= item =>{
           return new Date(item).toLocaleDateString("eu")
         }
+
+        function backHandler(category) {
+          console.log('category', category)
+          navigate(`/${category}`)
+        }
         
-       
-
-
   return (
     <section className="Post-Page" key={selected._id}>
     <section className="Post-Page-Inner">
     <section className="Post-Page-header">
     <button>add</button>
-      <button>back</button>
+    <button onClick={() => backHandler(selected.type)}>back</button>
     </section>
       <section className="Post-hero">
         <img src={selected.image}></img>
