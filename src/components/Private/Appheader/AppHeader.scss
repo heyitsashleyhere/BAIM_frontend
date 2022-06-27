@@ -6,28 +6,28 @@
   left: 0;
   width: 100%;
   height: 4.5rem;
-  background: black;
+  background: #fff;
   padding-inline: 1rem;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 9998;
-
+  
   &-logo {
     display: flex;
     align-items: center;
     transition: 0.35s all ease-in-out;
-
+    
     img {
-      width: 2.2rem;
-      height: 2.2rem;
+      width: 2rem;
+      height: 2rem;
       margin-right: 0.5rem;
     }
-
+    
     a {
-      color: white;
-      // mix-blend-mode: difference;
+      
+      color: #000;
       text-decoration: none;
     }
   }
@@ -39,13 +39,13 @@
 
     &-icon {
       font-size: 2rem;
-      color: white;
+      color: #000;
       cursor: pointer;
     }
 
     .toggle-icon {
       font-size: 2rem;
-      color: white;
+      color: #000;
       cursor: pointer;
     }
   }
@@ -79,12 +79,12 @@
 
         li {
           display: flex;
-          margin-right: 2rem;
+          margin-right: 1rem;
 
           a {
-            color: white;
             text-decoration: none;
             transition: all 0.3s ease-in-out;
+            color: #000;
             // mix-blend-mode: difference;
           }
 
@@ -104,28 +104,52 @@
             .search {
               padding: 1rem !important;
               font-size: 1.8rem !important;
-              color: white;
+              color: black;
+              background-color: white;
             }
-
-            ::placeholder {
-              color: white !important;
-            }
-
-            .search-icon {
-              font-size: 2.25rem;
-              color: white;
+            
+            .btn{
               cursor: pointer;
-              position: absolute;
-              right: 0.5rem;
-              top: 50%;
-              transform: translateY(-50%);
-
+            }
+            
+            &:last-child {
+              width: 18rem;
+              min-width: 18rem;
+              margin-left: auto;
+              position: relative;
+              border: none;
+              
+              
+              .search {
+                padding: 1rem !important;
+                font-size: 1.8rem !important;
+                color: #000;
+                position: relative;
+                border-bottom: 2px solid #000;
+              }
+              
+              ::placeholder {
+                color: #000 !important;
+              }
+              
+              .search-icon {
+                font-size: 2.25rem;
+                color: #000;
+                cursor: pointer;
+                position: absolute;
+                right: 0.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                
+              }
             }
           }
         }
       }
     }
   }
+
+  
 
   @include media(">=desktop") {
     grid-template-columns: repeat(12, 1fr);
@@ -143,13 +167,14 @@
     }
 
     .navbar {
-      grid-column: 6/11;
+      grid-column: 5/11;
       padding-left: 0;
       transition: 0.35s all ease-in-out;
 
       ul {
         gap: 4rem;
         transition: 0.35s all ease-in-out;
+        display: flex;
 
         li {
           &:last-child {
@@ -157,12 +182,11 @@
             width: 4.2rem;
             min-width: 35rem;
             transition: 0.35s all ease-in-out;
-            //background-color: rgba(255, 255, 0, 0.329);
 
-            .search{
-              width: 50%;
-            }
-
+          &:last-child {
+            width: 30rem;
+            min-width: 27rem;
+            transition: 0.35s all ease-in-out;
           }
         }
       }
@@ -171,6 +195,7 @@
 
   }
 }
+
 
 .burger-menu {
   position: fixed;
@@ -212,7 +237,6 @@
         }
         
         .mobile-search {
-          // border-radius: 5rem !important;
           width: 30rem !important;
           border: none !important;
           padding: 2rem 1rem !important;
@@ -236,6 +260,7 @@
           color: white;
           font-size: 2.6rem;
           cursor: pointer;
+          position: relative;
 
         }
       }
@@ -263,21 +288,18 @@ overflow-x: hidden;
 
 
 // search bar dropdown
-
-
  .search-criteria-select{
-    width: 35%;
-    padding: 1rem;
+    // width: 35%;
     position: absolute;
     right: 3rem;
-    top: -5px;
+    top: 0.5rem;
     // background-color: indigo;
     display: flex;
     justify-content: space-between;
     
     p{
       
-      color: white;
+      color: #000;
 
     }
 
@@ -325,3 +347,4 @@ overflow-x: hidden;
 // search bar dropdown end
 
 
+}

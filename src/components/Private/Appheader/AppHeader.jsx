@@ -10,7 +10,7 @@ import gsap from "gsap";
 import * as Icons from "react-icons/md";
 
 import "./AppHeader.scss";
-import Logo from "../../../assets/logo/raspberry.png";
+import Logo from "../../../assets/logo/raspberry-black.png";
 
 export const AppHeader = () => {
 
@@ -74,7 +74,7 @@ export const AppHeader = () => {
   }, [])
   
   
-  //burgerMenu state triggers timeline back and forward
+  //burgerMenu state triggers timeline back and htmlForward
   useEffect(() => {
     burgerMenu ? tl.current.play() : tl.current.reverse();
   }, [burgerMenu])
@@ -150,11 +150,11 @@ export const AppHeader = () => {
           <ul className="nav-list">
               {links.map((link, i) => {
                 return (
-                  <>
+                  <div key={i}>
                     <li className="nav-item" >
                       <Link className="LokaB" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
-                  </>
+                  </div>
                 )
               })}
 

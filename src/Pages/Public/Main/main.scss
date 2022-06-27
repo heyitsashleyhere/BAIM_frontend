@@ -102,7 +102,10 @@
 
   width: 100%;
   height: 100vh;
-  position: relative;
+  
+  .promo-vid-wrapper{
+    position: relative;
+
 
   .promo-vid-overlay {
     position: absolute;
@@ -110,15 +113,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &-content {
-      padding: 3rem 2rem;
-      font-size: 3rem;
+      font-size: 5rem;
       font-weight: $font-weight-900;
       font-family: $font-family-Inter;
       color: $white;
       transition: 0.35s all ease-in-out;
     }
+        }
 
     @include media(">=tablet") {
       // top: 50%;

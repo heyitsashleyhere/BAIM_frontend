@@ -94,16 +94,14 @@ const addToRefs = (el) => {
     <section className="promo-vid-container">
       {ctaVideos.map((video, index) => {
         return (
-          <div key={`video` + index}>
+          <div key={`video` + index} className="promo-vid-wrapper">
           <div className="promo-vid-overlay">
-          <div className="promo-vid-overlay-content" key={index}>
-            <h1 className="promo-vid-content-title">{video.text}</h1>
+            <div className="promo-vid-overlay-content" key={index}>
+              <h1 className="promo-vid-content-title">{video.text}</h1>
             </div>
-            </div>
+          </div>
           <div className="promo-vid-wrapper" key={index}>
             <video ref={addToRefs} className="promo-vid" src={video.src} type="video/webm" autoPlay loop muted playsInline />
-              {/* <source  />
-            </video> */}
             </div>
           </div>
         )
