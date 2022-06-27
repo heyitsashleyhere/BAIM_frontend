@@ -7,6 +7,7 @@ import { PostsContext } from '../../../contexts/PostContext'
 
 import './profile.scss';
 import { UserContext } from '../../../contexts/UserContext.js'
+import { Follow } from '../../../components/Private/Buttons/Follow/Follow.jsx'
 
 
 export const Profile = () => {
@@ -18,7 +19,10 @@ export const Profile = () => {
  const { profileName } =useParams()
  
  const userProfile = users.find(item => item.profileName === profileName)
- console.log(user)
+
+ console.log("users", users)
+ console.log('profileName', profileName)
+ console.log("userProfile", userProfile)
 
 
  const [ libBeauty, setLibBeauty]=useState(false)
@@ -26,13 +30,16 @@ export const Profile = () => {
  const [ libRecipe, setLibRecipe]=useState(false)
  const [ libArt, setLibArt]=useState(false)
 
- const [userLibrary, setUserLibrary]=useState({
-   artsCraft:artsCrafts.filter((item,i)=> item._id === user.artsCraft[i]), 
-   beauty: beauties.filter((item,i)=> item._id === user.beauty[i]), 
-   recipe:recipes.filter((item, i)=> item._id === user.recipe[i]), 
-   garden:gardens.filter((item, i)=>item._id === user.garden[i]),
-   event: events.filter((item, i)=>item._id === user.event[i]),
-  })
+ const userLibrary={
+
+   artsCrafts:artsCrafts.filter((item,i)=> item._id === userProfile.artsCraft[i]), 
+   beauties: beauties.filter((item,i)=> item._id === userProfile.beauty[i]), 
+   recipe:recipes.filter((item, i)=> item._id === userProfile.recipe[i]), 
+   garden:gardens.filter((item, i)=>item._id === userProfile.garden[i]),
+   event: events.filter((item, i)=>item._id === userProfile.event[i]),
+  }
+
+  console.log(userLibrary)
 
 
   function openPost(id, category){
@@ -65,7 +72,7 @@ export const Profile = () => {
       </section>
 
       <section className="Profile-followers">
-      <button>follow</button>
+      <Follow user={user._id}  users={userProfile._id}/>
       <p>100 followers</p>
       <p>10 following</p>
       </section>
@@ -86,7 +93,7 @@ export const Profile = () => {
         { libGarden ? userLibrary.gardens.map(item => <ProfileCollection  category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
         { libBeauty ? userLibrary.beauty.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
         { libRecipe ? userLibrary.recipes.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
-        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }  
+        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null } 
 
         {/* <ProfilePost data={userLibrary} id={user._id}/> */}
 

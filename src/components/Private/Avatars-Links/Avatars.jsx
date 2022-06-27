@@ -45,8 +45,9 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
     const{user} = useContext(UserContext)
 
-    const auth = user._id === id
-    console.log('auth', auth)
+    
+    const author = user._id === id
+    console.log('auth', author)
 
     // needs to be done after collections api is done
     // const found = user.collection.follow.find(item => item === user._id)
@@ -61,7 +62,7 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
             
                  
       </Link>
-       {auth ? <p>hey its me</p> : <p>follow</p>}
+       {author ? <p>hey its me</p> : <p>follow</p>}
       {/* disable bellow comment after collections from backend are operative */}
       {/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
 
