@@ -28,7 +28,7 @@ export default function LoginRegister() {
         <video src={process.env.PUBLIC_URL + "/landingVideos/berriesWhite.webm"}
                autoPlay playsInline muted loop />
       </section>
-      {cookies.profileName ? (
+      {isLogin ? (
         <TransitionPage />
       ) : (
         <section className="login-page">

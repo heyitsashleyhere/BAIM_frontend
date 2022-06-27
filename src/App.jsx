@@ -22,6 +22,7 @@ import ScrollToTop from './components/Public/Footer/ScrollToTop.jsx'
 // context
 import { AnimationContext } from "./contexts/AnimationContext.js";
 import { PostsContext } from "./contexts/PostContext.js";
+import { UserContext } from "./contexts/UserContext.js";
 
 
 
@@ -45,6 +46,7 @@ const theme = createTheme({
 
 
 export default function App() {
+  const { isLogin } = useContext(UserContext);
   const { isNav } = useContext(AnimationContext);
   const [cookies] = useCookies();
   const [displayNav, setDisplayNav] = useState()
@@ -59,7 +61,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <section className="App">
 
-        {displayNav || isNav ? (cookies.profileName ? <AppHeader /> : <Header /> ) : null}
+        {displayNav || isNav ? (cookies.profileName || isLogin ? <AppHeader /> : <Header /> ) : null}
         {/* <AppHeader /> */}
 
         <ScrollToTop  />
