@@ -32,8 +32,6 @@
     }
   }
 
-  
-
   .mobile-toggle {
     width: 65vw;
     display: flex;
@@ -87,6 +85,27 @@
             text-decoration: none;
             transition: all 0.3s ease-in-out;
             color: #000;
+            // mix-blend-mode: difference;
+          }
+
+          .btn{
+            color: white;
+            cursor: pointer;
+          }
+
+          &:last-child {
+            width: 2.7rem;
+            min-width: 20rem;
+            margin-left: auto;
+            position: relative;
+            border: none;
+            border-bottom: 2px solid white;
+
+            .search {
+              padding: 1rem !important;
+              font-size: 1.8rem !important;
+              color: black;
+              background-color: white;
             }
             
             .btn{
@@ -99,6 +118,7 @@
               margin-left: auto;
               position: relative;
               border: none;
+              
               
               .search {
                 padding: 1rem !important;
@@ -127,6 +147,7 @@
         }
       }
     }
+  }
 
   
 
@@ -156,15 +177,16 @@
         display: flex;
 
         li {
+          &:last-child {
+            
+            width: 4.2rem;
+            min-width: 35rem;
+            transition: 0.35s all ease-in-out;
 
           &:last-child {
             width: 30rem;
             min-width: 27rem;
             transition: 0.35s all ease-in-out;
-            // .search{
-            //   width: 50%;
-            // }
-
           }
         }
       }
@@ -173,6 +195,7 @@
 
   }
 }
+
 
 .burger-menu {
   position: fixed;
@@ -324,3 +347,4 @@ overflow-x: hidden;
 // search bar dropdown end
 
 
+}

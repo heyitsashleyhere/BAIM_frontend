@@ -1,43 +1,76 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './avatars.scss'
+
+import berry from '../../../assets/logo/raspberry.png'
+import { Follow } from '../Buttons/Follow/Follow'
+import { UnFollow } from '../Buttons/Unfollow/Unfollow'
+import { UserContext } from '../../../contexts/UserContext'
+import { PostsContext } from '../../../contexts/PostContext'
+import { DeletePost } from '../Buttons/Delete/DeletePost'
 
 
 
 // general avatars for the App
+  export const SquareAvatar = ({id, image, title, path, author, type}) => {
+    const {user}=useContext(UserContext)
+    const { users}=useContext(PostsContext)
+    
+    const find = users.find(item => item === user._id)
+    const isUser = user._id === author
 
-export const SeasonalAvatar = ({id, image, profileName}) => {
-    return (
-      <Link to={`discover/seasonal/${profileName}`} key={id} className="RoundAvatar">
-        <section className="imageAvatar">
-          <img src={image}></img>
-        </section> 
-        <h2>{profileName}</h2>
-      </Link>
-    )
-  }
+    // logic to find in user collections the specific item so the add or remove buttons can appear
+    // const match = user.collections[type].find(item => item === author) 
 
-  export const RecipesAvatar = ({id, image, title, path}) => {
+    console.log(isUser)
+
     return (
+      <section>
         <Link key={id} to={`${path}`} className="SquareAvatar">
              <section className="imageAvatar">
                 <img src={image}></img>
                 <h2>{title}</h2>
               </section> 
-              
-              
         </Link>
+        {isUser ? <section><button>edit</button><DeletePost/></section> : null }
+        {/* experimental logic for add remove to user collections */}
+
+      </section>
     )
   }
 
-  export const ProfileAvatar = ({id, name, image}) => {
+  // Avatars used specially in community page and general search engines.
+  // this avatar uses nested components to fetch
+  export const RoundAvatar = ({name, id, image,}) => {
+
+    const{user} = useContext(UserContext)
+
+    const auth = user._id === id
+    console.log('auth', auth)
+
+    // needs to be done after collections api is done
+    // const found = user.collection.follow.find(item => item === user._id)
+
     return (
-      <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
+      <section className="AvatarR">
+          <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
          <section className="imageAvatar">
               <img src={image}></img>           
          </section>
-              <h2>{name}</h2> 
+              <h2>{name}</h2>
+            
+                 
       </Link>
+       {auth ? <p>hey its me</p> : <p>follow</p>}
+      {/* disable bellow comment after collections from backend are operative */}
+      {/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
+
+      </section>
+
+
+
+
+  
       
     )
   }
@@ -69,36 +102,19 @@ export const SeasonalAvatar = ({id, image, profileName}) => {
   }
 
 
-  // AVATARS FOR PROFILE
+  // AVATARS FOR PROFILE PAGE // NEEDS TO BE DONE 
 
-  export const ProfileCollection=({category, id})=>{
-    const [info, setInfo]=useState([])
+export const ProfileCollection=({category, name, image})=>{
 
-    fetch(`http://localhost:7000/${category}/${id}`)
-    .then(response => response.json())
-    .then(result => setInfo(result))
-    .catch(error => console.log(error.message))
     
     return(
       <section className="SquareAvatar">
         <section className="imageAvatar">
-         
+          <img src={image}></img>
+          <h2>{name}</h2>
         </section>
       </section>
       )
   }
 
 
-
-  export const BeautyAvatar = ({id, name, title, image})=>{
-
-    return (
-        <Link to={`${name}`} key={id} className="SquareAvatar"> 
-          <section className="imageAvatar">
-              <img src={image}></img>
-              <h2>{title}</h2>
-          </section> 
-        </Link>
-        
-      )
-  }

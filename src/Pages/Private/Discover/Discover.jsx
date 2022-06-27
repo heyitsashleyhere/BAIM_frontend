@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-
 import gsap from 'gsap'
-
+import { useNavigate } from "react-router-dom";
 // import Seasonal from '../../../assets/images/seasonal.jpg'
 // import Recept from '../../../assets/images/recipes.jpg'
 // import Beauty from '../../../assets/images/beauty.jpg'
@@ -9,15 +8,15 @@ import gsap from 'gsap'
 // import Gardens from '../../../assets/images/gardens.jpg'
 // import Markets from '../../../assets/images/markets.jpg'
 
+// Styles
 // import './discover.scss'
 // import './discover2.scss'
 import './discover3.scss'
 
 
-import { useLocation } from 'react-router-dom'
-
 export const Discover = () => {
   const [isMobile, setIsMobile] = useState(false)
+  let navigate = useNavigate()
 
   //* MOBILE //creating an array of refs to group all collection titles
   const titleRefs = useRef([])
@@ -109,10 +108,9 @@ export const Discover = () => {
   //* adding collections title to the titleRefs array
   const addToCollection = (title) => {
     titleRefs.current.push(title)
-  }
-
   //* Tablet & Desktop breakpoints
   //* adding images section to the imagesRef array
+  }
   const addToImages = (image) => {
     imageRefs.current.push(image)
   }
@@ -123,7 +121,7 @@ export const Discover = () => {
 
   const addToReveal = (el) => {
   revealRef.current.push(el);
-}
+  }
   
   return (
     <section className="discover">
@@ -133,7 +131,8 @@ export const Discover = () => {
         {
           discover.map(item => {
             return (
-              <section key={item.name} ref={addToCollection} className="mobile-wrapper-title">
+              <section key={item.name} ref={addToCollection} className="mobile-wrapper-title"
+                       onClick={() => navigate(collection.path)}>
                 <h1  key={item.id} className="title">{item.name}</h1>  
               </section>
               )
@@ -143,7 +142,7 @@ export const Discover = () => {
         <>
         {discover.map((collection, i) => {
           return (
-            <section key={i} className="wrapper">
+            <section key={i} className="wrapper" onClick={() => navigate(collection.path)}>
               <section ref={addToReveal}  className="wrapper-overlay">
                 <section ref={addToImages} className={`wrapper-image d-${collection.name}`}
                   style={{ backgroundImage: `url(${collection.src})` }}
@@ -164,8 +163,6 @@ export const Discover = () => {
             })}
             </>
       )}
-      
-
 
     </section>
 
@@ -178,7 +175,7 @@ const discover = [
       id: 1,
       name: 'Gardens',
       src: require('../../../assets/images/gardens.jpg'),
-      path: '/gardens',
+      path: '/garden',
       description: 'Curious about gardening? share your thoughts, ask  your questions, find your support',
       collection: '115 garderns'
     },
@@ -194,7 +191,7 @@ const discover = [
       id: 3,
       name: 'Recipes',
       src: require('../../../assets/images/recipes.jpg'),
-      path: '/recipes',
+      path: '/recipe',
       description: 'find your local Markets and sellers in your city and neighborhood',
       collection: '115 garderns'
     },
@@ -218,102 +215,8 @@ const discover = [
       id: 6,
       name: 'events',
       src: require('../../../assets/images/buy.jpg'),
-      path: '/events',
+      path: '/event',
       description: 'find your local Markets and sellers in your city and neighborhood',
       collection: '115 garderns'
     }
 ]
-  
-
-{/* <>
-       <section className="Wrapper" onClick={e => useLocation()}>
-        <section className="wrapper-image d-gardens">
-        <img src={Gardens} alt="vegetables on the table"></img>
-        </section>
-        <section className="wrapper-text">
-            <section className="wrapper-text-header">
-            <h2>Gardens</h2>
-            <p>Curious about gardening? share your thoughts, ask  your questions, find your support</p>
-            </section>
-            <section className="wrapper-text-footer">
-                <p>115 garderns</p>
-            </section>
-        </section>
-      </section>
-
-      <section className="Wrapper" onClick={e => useLocation()}>
-        <section className="wrapper-image d-seasonal">
-        <img src={Seasonal} alt="vegetables on the table"></img>
-        </section>
-        <section className="wrapper-text">
-            <section className="wrapper-text-header">
-            <h2>Seasonal</h2>
-            <p>find your local Markets and sellers in your city and neighborhood</p>
-            </section>
-            <section className="wrapper-text-footer">
-                <p>115 vegetables</p>
-            </section>
-        </section>
-      </section>
-
-      <section className="Wrapper" onClick={e => useLocation()}>
-        <section className="wrapper-image d-recipes">
-        <img src={Recept} alt="vegetables on the table"></img>
-        </section>
-        <section className="wrapper-text">
-            <section className="wrapper-text-header">
-            <h2>Recipes</h2>
-            <p>find your local Markets and sellers in your city and neighborhood</p>
-            </section>
-            <section className="wrapper-text-footer">
-                <p>115 vegetables</p>
-            </section>
-        </section>
-      </section>
-
-      <section className="Wrapper" onClick={e => useLocation()}>
-        <section className="wrapper-image d-beauty">
-        <img src={Beauty} alt="vegetables on the table"></img>
-        </section>
-        <section className="wrapper-text">
-            <section className="wrapper-text-header">
-            <h2>Beauty</h2>
-            <p>find your local Markets and sellers in your city and neighborhood</p>
-            </section>
-            <section className="wrapper-text-footer">
-                <p>115 vegetables</p>
-            </section>
-        </section>
-      </section>
-
-      <section className="Wrapper" onClick={e => useLocation()}>
-        <section className="wrapper-image d-community">
-        <img src={Community} alt="vegetables on the table"></img>
-        </section>
-        <section className="wrapper-text">
-            <section className="wrapper-text-header">
-            <h2>Community</h2>
-            <p>find your local Markets and sellers in your city and neighborhood</p>
-            </section>
-            <section className="wrapper-text-footer">
-                <p>115 vegetables</p>
-            </section>
-        </section>
-      </section>
-
-      <section className="Wrapper" onClick={e => useLocation()}>
-        <section className="wrapper-image d-events">
-        <img src={Markets} alt="vegetables on the table"></img>
-        </section>
-        <section className="wrapper-text">
-            <section className="wrapper-text-header">
-            <h2>Events</h2>
-            <p>find your local Markets and sellers in your city and neighborhood</p>
-            </section>
-            <section className="wrapper-text-footer">
-                <p>115 vegetables</p>
-            </section>
-        </section>
-      </section>
-     
-      </> */}

@@ -27,7 +27,7 @@ export default function DataContextProvider(props){
     },[])
 
     const contextData = {
-        recipes, setRecipes, searchCriteria, setSearchCriteria, searchInput, setSearchInput, searchHandler   
+       searchCriteria, setSearchCriteria, searchInput, setSearchInput, searchHandler   
     }
 
 

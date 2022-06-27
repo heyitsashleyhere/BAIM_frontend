@@ -13,6 +13,8 @@ import "./AppHeader.scss";
 import Logo from "../../../assets/logo/raspberry-black.png";
 
 export const AppHeader = () => {
+
+
   const { setIsLogin } = useContext(UserContext)
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
@@ -21,7 +23,17 @@ export const AppHeader = () => {
 
   const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
 
+  const { user } = useContext(UserContext)
   const [ dropdownOpen, setDropdownOpen ] = useState(false)
+
+  //Links object
+  const links =
+    [
+      {path: '/discover', name: 'Discover'},
+      {path: '/feed', name: 'Feed'},
+      {path: `/profile/${user.profileName}`, name: 'Profile'},
+      {path: '/create', name: 'Create'}
+    ]
   
   
   // Search and Filter ends /////////
@@ -122,7 +134,7 @@ export const AppHeader = () => {
     <header className="app-header">
       <div className="app-header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link to="/main">Loka</Link>
+        <Link  className="LokaB" to="/main">Loka</Link>
       </div>
       {mobile ? (
         <div className="mobile-toggle">
@@ -140,14 +152,14 @@ export const AppHeader = () => {
                 return (
                   <div key={i}>
                     <li className="nav-item" >
-                      <Link to={link.path} key={link.name}><p>{link.name}</p></Link>
+                      <Link className="LokaB" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
                   </div>
                 )
               })}
 
                 <li className="nav-item">
-                  <h1 className="btn" onClick={logoutUser} >Logout</h1>
+                  <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
                 </li>
 
 
@@ -201,7 +213,7 @@ export const AppHeader = () => {
                     </div>
 
                     <div className="search-criterias">
-                      <input id="beautie" type="radio"
+                      <input id="beauty" type="radio"
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "beautie" }
@@ -271,10 +283,10 @@ export const AppHeader = () => {
 export default AppHeader;
 
 //Links object
-const links =
-  [
-    {path: '/discover', name: 'Discover'},
-    {path: '/feed', name: 'Feed'},
-    {path: '/profile', name: 'Profile'},
-    {path: '/create', name: 'Create'}
-  ]
+// const links =
+//   [
+//     {path: '/discover', name: 'Discover'},
+//     {path: '/feed', name: 'Feed'},
+//     {path: '/profile', name: 'Profile'},
+//     {path: '/create', name: 'Create'}
+//   ]

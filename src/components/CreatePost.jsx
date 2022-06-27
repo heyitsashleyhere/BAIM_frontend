@@ -9,7 +9,7 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 // context
 import { PostsContext } from "../contexts/PostContext.js";
 
-export default function Post({ category }) {
+export default function CreatePost({ category }) {
   const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')

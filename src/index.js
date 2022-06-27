@@ -6,9 +6,7 @@ import { UserContextProvider } from "./contexts/UserContext.js";
 import { AnimationContextProvider } from "./contexts/AnimationContext.js";
 // Components
 import App from "./App.jsx";
-import { Recipes } from "./Pages/Private/Recipes/Recipes.jsx";
-import { Discover } from "./Pages/Private/Discover/Discover.jsx";
-import { Gardens } from "./Pages/Private/Gardens/Gardens.jsx";
+
 import DataContextProvider from "./contexts/dataContext.js";
 
 import TransitionPage from "./testing/TransitionPage.jsx";

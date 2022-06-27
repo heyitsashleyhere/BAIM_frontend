@@ -1,24 +1,20 @@
-import React , { useContext } from 'react'
-import { useParams } from 'react-router-dom'
-import { PostsContext } from '../../../contexts/PostContext'
-import { PostCommentsAvatar, PostHeaderAvatar, ProfileAvatar } from '../Avatars-Links/Avatars'
+import React from 'react'
 
-import './recipePost.scss'
+import { PostCommentsAvatar, PostHeaderAvatar } from '../../../components/Private/Avatars-Links/Avatars'
 
-
-export const RecipePost = ({category}) => {
-
- const {recipes, setRecipes}=useContext(PostsContext)
+import '../../../components/Private/PostPage/postPage.scss'
 
 
-        const { title } = useParams()
+export const ProfilePost = ({data}) => {
 
-        const selected = recipes.find(item=>item.title === title )
+        
+
+        const selected = data
         console.log(selected)
 
         // array of avatars for related recipes
-        const matchRecipes= recipes.filter(item => item.tags === selected.tags)
-        console.log(matchRecipes)
+        // const match = [category].filter(item => item.tags === selected.tags)
+        // console.log(match)
     
         const date= item =>{
           return new Date(item).toLocaleDateString("eu")
