@@ -20,7 +20,7 @@ export default function Create() {
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                       options={postCategories}
-                      value={category}
+                    //   value={category}
                       onInputChange={(event, value) => setCategory(value)}
                       renderInput={(params) => (
                         <TextField

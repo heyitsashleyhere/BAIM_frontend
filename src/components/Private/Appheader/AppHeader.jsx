@@ -162,7 +162,7 @@ export const AppHeader = () => {
                   
                   <div className={ dropdownOpen ? "dropdown-wrapper drop-down-Open" : "dropdown-wrapper"}>
                     
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
 
                       <div className="search-criterias">
                       <input id="all-posts" type="radio"
@@ -170,7 +170,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "all-posts" }
                              value="all-posts" onChange={() => setSearchCriteria("all-posts")} />
-                      <label for="all-posts"><p>all-posts</p></label>
+                      <label htmlFor="all-posts"><p>all-posts</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -179,7 +179,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "events" }
                              value="events" onChange={() => setSearchCriteria("events")} />
-                      <label for="events"><p>events</p></label>
+                      <label htmlFor="events"><p>events</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -188,7 +188,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "recipes" }
                              value="recipes" onChange={() => setSearchCriteria("recipes")}  />
-                      <label for="recipes"><p>recipes</p></label>
+                      <label htmlFor="recipes"><p>recipes</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -197,7 +197,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "arts-craft" }
                              value="arts-craft" onChange={() => setSearchCriteria("arts-craft")} />
-                      <label for="arts-craft"><p>arts-craft</p></label>
+                      <label htmlFor="arts-craft"><p>arts-craft</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -206,7 +206,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "beautie" }
                              value="beautie" onChange={() => setSearchCriteria("beautie")}  />
-                      <label for="beautie"><p>beautie</p></label>
+                      <label htmlFor="beautie"><p>beautie</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -215,7 +215,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "garden" }
                              value="garden" onChange={() => setSearchCriteria("garden")} />
-                      <label for="garden"><p>garden</p></label>
+                      <label htmlFor="garden"><p>garden</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -224,7 +224,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "users" }
                              value="users" onChange={() => setSearchCriteria("users")} />
-                      <label for="users"><p>users</p></label>
+                      <label htmlFor="users"><p>users</p></label>
                     </div>
                   </div>
                 </div>
