@@ -1,15 +1,17 @@
 import { useState, useContext } from "react";
-import { Link } from "@mui/material";
+import { useCookies } from "react-cookie";
 // contexts
 import { UserContext } from "../../../contexts/UserContext.js";
 // components
 import UserLogin from "../../../components/Public/LoginRegister/UserLogin/UserLogin.jsx";
 import UserRegistration from "../../../components/Public/LoginRegister/UserRegistration/UserRegistration.jsx";
+import TransitionPage from '../../TransitionPage/TransitionPage.jsx';
 // styles
 import "./loginRegister.scss";
 
 export default function LoginRegister() {
   const [isRegister, setIsRegister] = useState(false);
+  const [cookies] = useCookies();
   const { message, setMessage, user, setUser, isLogin, showPasswordHandler } =
     useContext(UserContext);
 
@@ -26,11 +28,8 @@ export default function LoginRegister() {
         <video src={process.env.PUBLIC_URL + "/landingVideos/berriesWhite.webm"}
                autoPlay playsInline muted loop />
       </section>
-      {isLogin ? (
-      <section className="welcome-page">
-        <img src={user.avatar} alt="avatar" width="100" height="100" />
-        <p>{message}</p>
-      </section>
+      {cookies.profileName ? (
+        <TransitionPage />
       ) : (
         <section className="login-page">
           {isRegister ? <UserRegistration /> : <UserLogin />}

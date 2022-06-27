@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useCookies } from "react-cookie";
 // Private components
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import { Collections } from "./Pages/Private/Collections/Collections.jsx";
@@ -19,7 +20,6 @@ import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
 import Team from "./Pages/Public/Team/Team.jsx"
 import ScrollToTop from './components/Public/Footer/ScrollToTop.jsx'
 // context
-import { UserContext } from "./contexts/UserContext.js";
 import { AnimationContext } from "./contexts/AnimationContext.js";
 import { PostsContext } from "./contexts/PostContext.js";
 
@@ -45,32 +45,21 @@ const theme = createTheme({
 
 
 export default function App() {
-  const { isLogin } = useContext(UserContext);
-  const { isNav } = useContext(AnimationContext)
+  const { isNav } = useContext(AnimationContext);
+  const [cookies] = useCookies();
   const [displayNav, setDisplayNav] = useState()
-  const { 
-    users,
-    recipes, 
-    beauties, 
-    gardens,
-    events, 
-    artsCrafts,  } = useContext(PostsContext)
-
-
+  const { users, recipes, beauties, gardens, events, artsCrafts } = useContext(PostsContext)
 
   useEffect(() => {
-
     const localDisplayNav = localStorage.getItem('showNav')
     setDisplayNav(localDisplayNav)
-
   }, [])
-  
 
   return (
     <ThemeProvider theme={theme}>
       <section className="App">
 
-        {displayNav || isNav ? (isLogin ? <AppHeader /> : <Header /> ) : null}
+        {displayNav || isNav ? (cookies.profileName ? <AppHeader /> : <Header /> ) : null}
         {/* <AppHeader /> */}
         <ScrollToTop  />
 

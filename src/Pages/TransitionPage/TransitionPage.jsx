@@ -1,17 +1,21 @@
 import { useState, useEffect, useRef } from 'react'
-import gsap, {Back, Expo, Quart, Quint, Strong} from 'gsap'
+import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
+import gsap, {Quint} from 'gsap'
+// styles
 import './transitionPage.scss'
-// import Logo from './logo-black.png'
-import Logo from '../assets/pngLogo.png'
+import Logo from './logo-black.png'
+// import Logo from '../../assets/logo/'
 
 
 const TransitionPage = () => {
+  const [cookies] = useCookies();
   const [isOverlay, setIsOverlay] = useState(true)
-
   const overlayPathIn = useRef(null);
   const overlayPathOut = useRef(null);
   const textRef = useRef(null);
   const textRef2 = useRef(null);
+  let navigate = useNavigate()
 
   
   useEffect(() => {
@@ -96,10 +100,9 @@ const TransitionPage = () => {
 
   const hideOverlay = () => {
     setIsOverlay(false)
+    navigate(`/profile/${cookies.profileName}`, { replace: true });
   }
 
-
-  const image = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80";
 
   return (
   <>
@@ -111,12 +114,12 @@ const TransitionPage = () => {
 		</svg>
       <div className="transition-page-content">
         <div ref={textRef} className="user">
-          <img src={image} alt="" />
-          <h1 >Hello Ivo Serra</h1>
+          <img src={cookies.avatar} alt="user avatar" />
+          <h1 >Hello {cookies.profileName}</h1>
         </div>
         <div ref={textRef2} className="loka">
           {/* <h1>Welcome to</h1> */}
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="lokal" />
         </div>
       </div>
       <span>
