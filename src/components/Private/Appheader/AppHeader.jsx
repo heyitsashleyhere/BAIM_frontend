@@ -150,11 +150,11 @@ export const AppHeader = () => {
           <ul className="nav-list">
               {links.map((link, i) => {
                 return (
-                  <div key={i}>
+                  
                     <li className="nav-item" >
                       <Link className="LokaB" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
-                  </div>
+                  
                 )
               })}
 
