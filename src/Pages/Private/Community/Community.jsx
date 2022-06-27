@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
-import { ProfileAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
+import { RoundAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { PostsContext } from '../../../contexts/PostContext'
-import user from '../../../Pages/Public/Team/teamData.js'
+import { UserContext } from '../../../contexts/UserContext.js'
+
 import  './community.scss'
 
 export const Community = () => {
 
 
  const { users, setUsers}=useContext(PostsContext)
+ const {user}=useContext(UserContext)
 
- console.log(users)
+console.log(users)
 
   return (
     <section className="Pages">
@@ -27,7 +29,7 @@ export const Community = () => {
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">
-      {users.map(item =><ProfileAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
+      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
     </section>
     </section>
 
@@ -37,7 +39,7 @@ export const Community = () => {
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">
-      {users.map(item =><ProfileAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
+      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
     </section>
     </section>
 
@@ -47,7 +49,7 @@ export const Community = () => {
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">
-      {users.map(item =><ProfileAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
+      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
     </section>
     </section>
 
@@ -57,7 +59,7 @@ export const Community = () => {
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">
-      {users.map(item =><ProfileAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
+      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
     </section>
     </section>
 
@@ -67,7 +69,7 @@ export const Community = () => {
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">
-      {users.map(item =><ProfileAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
+      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
     </section>
     </section>
 

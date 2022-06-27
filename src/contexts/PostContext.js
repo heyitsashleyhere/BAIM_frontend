@@ -10,29 +10,22 @@ function PostsContextProvider({ children }){
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
     
     
-    const [ users, setUsers]=useState([])
+    const [users, setUsers]=useState([])
     const [beauties, setBeauties]=useState([])
-    const [arts, setArts]=useState([])
+    const [artsCrafts, setArtsCrafts]=useState([])
     const [gardens, setGardens]=useState([])
     const [recipes, setRecipes]=useState([])
     const [events, setEvents]=useState([])
 
-    useEffect(() => {
-        // postCategories.map(category => {
-        //     let url = `http://localhost:7000/${category}`
-        //     const config = {
-        //       method: "GET"
-        //     }
-        
-        //     fetch(url, config)
-        //       .then(res => res.json())
-        //       .then(result => setData({...data, [`${category}`]: result}))
-        //       .catch(console.error)
-        // })
+    const [ upgrade, setUpgrade]=useState(false)
 
+    // const [loading, setLoading]=useState(true)
+    
+
+    useEffect(() => {
         fetch("http://localhost:7000/user")
         .then(response => response.json())
-        .then(result => setUsers(result))
+        .then(result => {setUsers(result)})
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/beauty")
@@ -42,7 +35,7 @@ function PostsContextProvider({ children }){
 
         fetch("http://localhost:7000/artsCraft")
         .then(response => response.json())
-        .then(result => setArts(result))
+        .then(result => setArtsCrafts(result))
         .catch(error => console.log(error.message))
 
         fetch("http://localhost:7000/garden")
@@ -60,9 +53,7 @@ function PostsContextProvider({ children }){
         .then(result=>setEvents(result))
         .catch(error=>console.log(error.message))
 
-     
-
-    }, [])
+    }, [upgrade])
     
 
 
@@ -103,9 +94,14 @@ function PostsContextProvider({ children }){
         inputValues, setInputValues,
         address, setAddress,
         convertToBase64, handleFileUpload,
-        data, setData, recipes, setRecipes,
-        users, setUsers, setBeauties, gardens, setGardens,
-        events, setEvents, arts, setArts,
+        data, setData, 
+        users, setUsers, 
+        recipes, setRecipes,
+        beauties, setBeauties, 
+        gardens, setGardens,
+        events, setEvents, 
+        artsCrafts, setArtsCrafts, 
+        upgrade, setUpgrade
 
     }
 

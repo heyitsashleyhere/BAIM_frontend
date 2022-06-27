@@ -3,7 +3,7 @@ import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow }
 // context
 import { PostsContext } from "../../../contexts/PostContext";
 // components
-import Post from "../../../components/Post.jsx";
+import CreatePost from "../../../components/CreatePost.jsx";
 // style
 import './Create.scss'
 
@@ -20,7 +20,7 @@ export default function Create() {
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                       options={postCategories}
-                      value={category}
+                    //   value={category}
                       onInputChange={(event, value) => setCategory(value)}
                       renderInput={(params) => (
                         <TextField
@@ -32,7 +32,7 @@ export default function Create() {
             </Grid>
         </Grid>           
             {category && (
-                <Post category={category} />
+                <CreatePost category={category} />
             )}
 
     </section>
