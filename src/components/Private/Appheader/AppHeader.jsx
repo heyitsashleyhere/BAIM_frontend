@@ -13,6 +13,8 @@ import "./AppHeader.scss";
 import Logo from "../../../assets/logo/raspberry.png";
 
 export const AppHeader = () => {
+
+
   const { setIsLogin } = useContext(UserContext)
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
@@ -21,7 +23,17 @@ export const AppHeader = () => {
 
   const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
 
+  const { user } = useContext(UserContext)
   const [ dropdownOpen, setDropdownOpen ] = useState(false)
+
+  //Links object
+  const links =
+    [
+      {path: '/discover', name: 'Discover'},
+      {path: '/feed', name: 'Feed'},
+      {path: `/profile/${user.profileName}`, name: 'Profile'},
+      {path: '/create', name: 'Create'}
+    ]
   
   
   // Search and Filter ends /////////
@@ -122,7 +134,7 @@ export const AppHeader = () => {
     <header className="app-header">
       <div className="app-header-logo">
         <img src={Logo} alt="LOKA" /> 
-        <Link to="/main">Loka</Link>
+        <Link  className="LokaB" to="/main">Loka</Link>
       </div>
       {mobile ? (
         <div className="mobile-toggle">
@@ -140,14 +152,14 @@ export const AppHeader = () => {
                 return (
                   <>
                     <li className="nav-item" >
-                      <Link to={link.path} key={link.name}>{link.name}</Link>
+                      <Link className="LokaB" to={link.path} key={link.name}>{link.name}</Link>
                     </li>
                   </>
                 )
               })}
 
                 <li className="nav-item">
-                  <h1 className="btn" onClick={logoutUser} >Logout</h1>
+                  <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
                 </li>
 
 
@@ -162,7 +174,7 @@ export const AppHeader = () => {
                   
                   <div className={ dropdownOpen ? "dropdown-wrapper drop-down-Open" : "dropdown-wrapper"}>
                     
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
 
                       <div className="search-criterias">
                       <input id="all-posts" type="radio"
@@ -170,7 +182,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "all-posts" }
                              value="all-posts" onChange={() => setSearchCriteria("all-posts")} />
-                      <label for="all-posts"><p>all-posts</p></label>
+                      <label htmlFor="all-posts"><p>all-posts</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -179,7 +191,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "events" }
                              value="events" onChange={() => setSearchCriteria("events")} />
-                      <label for="events"><p>events</p></label>
+                      <label htmlFor="events"><p>events</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -188,7 +200,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "recipes" }
                              value="recipes" onChange={() => setSearchCriteria("recipes")}  />
-                      <label for="recipes"><p>recipes</p></label>
+                      <label htmlFor="recipes"><p>recipes</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -197,16 +209,16 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "arts-craft" }
                              value="arts-craft" onChange={() => setSearchCriteria("arts-craft")} />
-                      <label for="arts-craft"><p>arts-craft</p></label>
+                      <label htmlFor="arts-craft"><p>arts-craft</p></label>
                     </div>
 
                     <div className="search-criterias">
-                      <input id="beautie" type="radio"
+                      <input id="beauty" type="radio"
                              className="search-criteria-option"
                              name="search-criteria-option"
                              checked={ searchCriteria === "beautie" }
                              value="beautie" onChange={() => setSearchCriteria("beautie")}  />
-                      <label for="beautie"><p>beautie</p></label>
+                      <label htmlFor="beautie"><p>beautie</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -215,7 +227,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "garden" }
                              value="garden" onChange={() => setSearchCriteria("garden")} />
-                      <label for="garden"><p>garden</p></label>
+                      <label htmlFor="garden"><p>garden</p></label>
                     </div>
 
                     <div className="search-criterias">
@@ -224,7 +236,7 @@ export const AppHeader = () => {
                              name="search-criteria-option"
                              checked={ searchCriteria === "users" }
                              value="users" onChange={() => setSearchCriteria("users")} />
-                      <label for="users"><p>users</p></label>
+                      <label htmlFor="users"><p>users</p></label>
                     </div>
                   </div>
                 </div>
@@ -271,10 +283,10 @@ export const AppHeader = () => {
 export default AppHeader;
 
 //Links object
-const links =
-  [
-    {path: '/discover', name: 'Discover'},
-    {path: '/feed', name: 'Feed'},
-    {path: '/profile', name: 'Profile'},
-    {path: '/create', name: 'Create'}
-  ]
+// const links =
+//   [
+//     {path: '/discover', name: 'Discover'},
+//     {path: '/feed', name: 'Feed'},
+//     {path: '/profile', name: 'Profile'},
+//     {path: '/create', name: 'Create'}
+//   ]

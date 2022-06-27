@@ -47,19 +47,19 @@ const Header = () => {
                  }} >
           <img src={Logo} alt="LOKA" /> 
         </NavLink>
-        <NavLink to="/main">Loka</NavLink>
+        <NavLink className="LokaW" to="/main">Loka</NavLink>
       </div>
 
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <NavLink to="/team">team</NavLink> 
+            <NavLink className="LokaW" to="/team">team</NavLink> 
           </li>
           <li className="nav-item">
-            <NavLink to='/about'>about</NavLink>  
+            <NavLink className="LokaW" to='/about'>about</NavLink>  
           </li>
           <li className="nav-item">
-            <NavLink to='/auth'>login</NavLink>
+            <NavLink className="LokaW" to='/auth'>login</NavLink>
           </li>
         </ul>
       </nav>

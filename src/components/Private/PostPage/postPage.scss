@@ -1,6 +1,8 @@
 @import '../../../styles/breakpoints';
 
 .Post-Page{
+    position:relative;
+    top:100px;
     
 
     .Post-Page-Inner{
@@ -27,8 +29,7 @@
 
         img{
             width:100%;
-            object-fit: cover;
-            object-position:bottom;
+            
           
         }
 
@@ -159,8 +160,7 @@
                 height:45vh;
                 
                 img{
-                    object-fit: none;
-
+                    width:100%;
                 }
 
                 h1{
@@ -184,7 +184,7 @@
             
                 img{
                     width:100%;
-                    object-position: bottom;
+                   
                 }
 
                 h1{

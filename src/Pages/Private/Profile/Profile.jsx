@@ -1,23 +1,50 @@
 import React, { useContext, useState} from 'react'
 import { useParams } from 'react-router-dom'
+import { ProfileCollection } from '../../../components/Private/Avatars-Links/Avatars.jsx'
+import { ProfilePost } from './ProfilePost'
 import { PostsContext } from '../../../contexts/PostContext'
-import './profile.scss'
+
+
+import './profile.scss';
+import { UserContext } from '../../../contexts/UserContext.js'
+
 
 export const Profile = () => {
 
- const { users, setUsers, recipes, beauty, arts, gardens }=useContext(PostsContext)
+ const { users, setUsers, recipe, beauty, arts, garden }=useContext(PostsContext)
+ const {user}= useContext(UserContext)
  console.log(users)
+
  const { profileName } =useParams()
  
- const user = users.find(item => item.profileName === profileName)
+ const userProfile = users.find(item => item.profileName === profileName)
  console.log(user)
+
 
  const [ libBeauty, setLibBeauty]=useState(false)
  const [ libGarden, setLibGarden]=useState(false)
  const [ libRecipe, setLibRecipe]=useState(false)
  const [ libArt, setLibArt]=useState(false)
 
- function getAvatar(){}
+ const [userLibrary, setUserLibrary]=useState({
+   arts:arts.filter((item,i)=> item._id === user.artsCraft[i]), 
+   beauty: beauty.filter((item,i)=> item._id === user.beauty[i]), 
+   recipes:recipe.filter((item, i)=> item._id === user.recipe[i]), 
+   gardens:garden.filter((item, i)=>item._id === user.garden[i]),
+   arts: arts.filter((item, i)=>item._id === user.artsCraft[i])
+  })
+
+
+  function openPost(id, category){
+
+    const post = (userLibrary[category]).find(post => post._id === id)
+    console.log(post)
+    
+
+  }
+
+
+
 
 
   return (
@@ -29,12 +56,12 @@ export const Profile = () => {
       <button>...</button>
 
        <section className="Profile-info">
-        <img src={user.avatar}></img>
+        <img src={userProfile.avatar}></img>
           <section className="Profile-text">
-          <h1>{user.profileName}</h1>
+          <h1>{userProfile.profileName}</h1>
           <p>Gardner</p>
           <p>Im all about plants, and herbs</p>
-          <h2>{user.userAddress.city} , {user.userAddress.country}</h2>
+          <h2>{userProfile.userAddress.city} , {userProfile.userAddress.country}</h2>
         </section>
       </section>
 
@@ -49,16 +76,20 @@ export const Profile = () => {
       <section className='Profile-Library'>
         <p>Library</p>
         <section>
-          {user.beauty.length > 0 ? <button onClick={e =>setBeauty(!libBeauty)}>beauty</button> : null }
-          {user.garden.length > 0 ? <button onClick={e=>setGarden(!libGarden)}>garden</button> : null }
-          {user.recipe.length > 0 ? <button onClick={e=>setRecipe(!libRecipe)}>recipe</button>: null }
-          {user.artsCraft.length > 0 ? <button onClick={e=>setArt(!libArt)}>arts & crafts</button> : null }
+          {userProfile.beauty.length > 0 ? <button onClick={e =>setLibBeauty(!libBeauty)}>beauty</button> : null }
+          {userProfile.garden.length > 0 ? <button onClick={e=>setLibGarden(!libGarden)}>garden</button> : null }
+          {userProfile.recipe.length > 0 ? <button onClick={e=>setLibRecipe(!libRecipe)}>recipe</button>: null }
+          {userProfile.artsCraft.length > 0 ? <button onClick={e=>setLibArt(!libArt)}>arts & crafts</button> : null }
         </section>
         <section>
 
-        {/* { beauty ? user.beauty.map(item => item)} */}
-        { libGarden ? <button>garden</button> : null }
+      
+        { libGarden ? userLibrary.gardens.map(item => <ProfileCollection  category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
+        { libBeauty ? userLibrary.beauty.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
+        { libRecipe ? userLibrary.recipes.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
+        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }  
 
+        {/* <ProfilePost data={userLibrary} id={user._id}/> */}
 
         </section>
       </section>
