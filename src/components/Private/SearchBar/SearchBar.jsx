@@ -104,7 +104,7 @@ export function MobileSearchBar() {
     }
   }
   return (
-     <Stack direction="row" className='SearchBar' sx={{ color: 'white' }}>
+      <Stack direction="row" className='SearchBar' sx={{ color: 'white' }}>
         <Select variant='standard' displayEmpty color='secondary'
                 value={searchCat} className="select-input" sx={{ color: 'white', borderColor: 'white', zIndex: 999999 }}
                 onChange={(e) => setSearchCat(e.target.value) }>
@@ -123,9 +123,10 @@ export function MobileSearchBar() {
               ))}
             </Select>
          }
-        <TextField placeholder="Search" variant="standard" className='search-input' sx={{ color: 'white' }}
-                   onChange={(e) => setSearchInput(e.target.value)} color='secondary'
-                   InputProps={{
+
+      <TextField variant="standard" placeholder='Search...' className='search-input' sx={{ color: 'white' }}
+                 onChange={(e) => setSearchInput(e.target.value)} color='secondary'
+                 InputProps={{
                       endAdornment: (
                             <InputAdornment>
                               <IconButton onClick={handleSearch} size='large'>
@@ -135,6 +136,7 @@ export function MobileSearchBar() {
                           )
                       }} />
       </Stack>
+
   )
 }
 
