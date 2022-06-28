@@ -25,14 +25,15 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
     console.log(isUser)
 
     return (
-      <section>
-        <Link key={id} to={`${path}`} className="SquareAvatar">
+      <section className="SquareAvatars">
+      {isUser ? <section className="Avatar-Buttons"><button>edit</button> <DeletePost /> </section> : null }
+        <Link key={id} to={`${path}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={image}></img>
                 <h2>{title}</h2>
               </section> 
         </Link>
-        {isUser ? <section><button>edit</button><DeletePost/></section> : null }
+        {isUser ? <section className="Avatar-Buttons"><button>edit</button> <DeletePost /> </section> : null }
         {/* experimental logic for add remove to user collections */}
 
       </section>
