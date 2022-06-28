@@ -15,7 +15,7 @@ import Logo from "../../../assets/logo/raspberry-black.png";
 export const AppHeader = () => {
 
 
-  const { setIsLogin } = useContext(UserContext)
+  const { setIsLogin, user } = useContext(UserContext)
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
@@ -23,7 +23,6 @@ export const AppHeader = () => {
 
   const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
 
-  const { user } = useContext(UserContext)
   const [ dropdownOpen, setDropdownOpen ] = useState(false)
 
   //Links object
@@ -165,82 +164,6 @@ export const AppHeader = () => {
 
               <li className="nav-item search-bar">
                 <input id="search-input" type="text" placeholder="Search" className="search" onChange={searchHandler} />
-                  <div className="search-criteria-select">
-                      <p>{searchCriteria}</p>
-                      <button onClick={() => setDropdownOpen(!dropdownOpen)} >^</button>
-                  </div>
-                  
-                  <div className={ dropdownOpen ? "dropdown-wrapper drop-down-Open" : "dropdown-wrapper"}>
-                    
-                    <div className="dropdown-content">
-
-                      <div className="search-criterias">
-                      <input id="all-posts" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "all-posts" }
-                             value="all-posts" onChange={() => setSearchCriteria("all-posts")} />
-                      <label htmlFor="all-posts"><p>all-posts</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="events" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "events" }
-                             value="events" onChange={() => setSearchCriteria("events")} />
-                      <label htmlFor="events"><p>events</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="recipes" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "recipes" }
-                             value="recipes" onChange={() => setSearchCriteria("recipes")}  />
-                      <label htmlFor="recipes"><p>recipes</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="arts-craft" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "arts-craft" }
-                             value="arts-craft" onChange={() => setSearchCriteria("arts-craft")} />
-                      <label htmlFor="arts-craft"><p>arts-craft</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="beauty" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "beautie" }
-                             value="beautie" onChange={() => setSearchCriteria("beautie")}  />
-                      <label htmlFor="beautie"><p>beautie</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="garden" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "garden" }
-                             value="garden" onChange={() => setSearchCriteria("garden")} />
-                      <label htmlFor="garden"><p>garden</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="users" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "users" }
-                             value="users" onChange={() => setSearchCriteria("users")} />
-                      <label htmlFor="users"><p>users</p></label>
-                    </div>
-                  </div>
-                </div>
-                
-
-
                 <Icons.MdOutlineSearch className="search-icon" />
               </li>
               {/* search bar end */}
@@ -251,7 +174,7 @@ export const AppHeader = () => {
 
       {/* //mobile navbar */}
         <div ref={sideNavRef} className="burger-menu">
-        <div ref={sideNavBgRef} className="burger-menu-inner" key=''>
+        <div ref={sideNavBgRef} className="burger-menu-inner" >
           <ul className="burger-menu-list">
             <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
               <input type="" placeholder="Search" className="mobile-search"/>

@@ -1,16 +1,56 @@
-.scroll-btn-container{
+@import "../../../styles/_breakpoints.scss";
 
-  .scroll-btn{
-    position: fixed;
-    bottom: 4rem;
-    right: 8rem;
-    cursor: pointer;
-    z-index: 1450;
+.scroll-btn-container {
+  position: fixed;
+  bottom: 4rem;
+  right: 2rem;
+  cursor: pointer;
+  z-index: 1450;
+  width: 2.4rem;
+  height: 2.4rem;
 
-    stroke: white;
-    fill: white;
+  .scroll{
+    .scroll-btn {
+      width: 100%;
+      height: 100%;
+      mix-blend-mode: difference;
+      stroke: #fff;
+      fill: #fff;
+      transition: 0.35s all ease;
+    }
+    
+    .scroll-btn-hover {
+      width: 100%;
+      height: 100%;
+      display: none;
+      mix-blend-mode: difference;
+      fill: #fff;
+      stroke: #fff;
+      transition: 0.35s all ease;
+    }
+    
+    &:hover {
+        .scroll-btn {
+          display: none;
+        }
+      
+        .scroll-btn-hover {
+          display: block;
+        }
+    }
+  }
+
+    
+
+  @include media(">=tablet") {
+    right: 4rem;
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  @include media(">=desktop") {
+    right: 12rem;
     width: 3rem;
     height: 3rem;
-
   }
 }
