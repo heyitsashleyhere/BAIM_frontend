@@ -1,42 +1,33 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-// contexts
-import {UserContext} from '../../../contexts/UserContext.js'
-import { DataContext } from "../../../contexts/dataContext.js"
-
-
-
+import { useCookies } from "react-cookie";
 import gsap from "gsap";
+// contexts
+import { UserContext } from '../../../contexts/UserContext.js'
+// component
+import { MobileSearchBar, SearchBar } from '../SearchBar/SearchBar.jsx';
+// styles and icons
 import * as Icons from "react-icons/md";
-
 import "./AppHeader.scss";
 import Logo from "../../../assets/logo/raspberry-black.png";
 
+
 export const AppHeader = () => {
-
-
-  const { setIsLogin } = useContext(UserContext)
+  let navigate = useNavigate()
+  const [cookies] = useCookies();
+  const { setIsLogin, user } = useContext(UserContext)
+  
   const [mobile, setMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
-
-  // Search and Filter /////////
-
-  const { searchCriteria, setSearchCriteria, searchHandler } = useContext(DataContext)
-
-  const { user } = useContext(UserContext)
-  const [ dropdownOpen, setDropdownOpen ] = useState(false)
 
   //Links object
   const links =
     [
       {path: '/discover', name: 'Discover'},
       {path: '/feed', name: 'Feed'},
-      {path: `/profile/${user.profileName}`, name: 'Profile'},
+      {path: `/profile/${cookies.profileName}`, name: 'Profile'},
       {path: '/create', name: 'Create'}
-    ]
-  
-  
-  // Search and Filter ends /////////
+  ]
 
   // refs to elements to be included in the animation
   const sideNavRef = useRef(null);
@@ -122,12 +113,31 @@ export const AppHeader = () => {
     onLinkClick()
   }, [sideNavRef, pathname])
 
-  const navigate = useNavigate()
+
   
-  const logoutUser = () => {
-    setIsLogin(false)
-    navigate('/main')
+  function logoutUser() {
+    const config = {
+      method: "POST",
+      credentials: 'include', // specify this if you need cookies
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch("http://localhost:7000/user/logout", config)
+    .then((response) => response.json())
+    .then((result) => {
+        // console.log("UserLogin:", result);
+        if(!result.errors) { 
+          console.log('result.message :>> ', result.message);
+          setIsLogin(false)
+          localStorage.clear()
+          navigate('/main')
+        } else {
+          console.log('errors :>> ', result.errors);
+        }
+      })
+    .catch((error) => console.log(error));
+
   }
+
 
   return (
     <>
@@ -139,9 +149,7 @@ export const AppHeader = () => {
       {mobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons">
-
               <Icons.MdMenu className="toggle-icon" onClick={() => setBurgerMenu(true)}/>
-
           </div>
         </div>
        ) : (
@@ -160,90 +168,10 @@ export const AppHeader = () => {
                   <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
                 </li>
 
-
-              {/* //////////////////////////search bar */}
-
               <li className="nav-item search-bar">
-                <input id="search-input" type="text" placeholder="Search" className="search" onChange={searchHandler} />
-                  <div className="search-criteria-select">
-                      <p>{searchCriteria}</p>
-                      <button onClick={() => setDropdownOpen(!dropdownOpen)} >^</button>
-                  </div>
-                  
-                  <div className={ dropdownOpen ? "dropdown-wrapper drop-down-Open" : "dropdown-wrapper"}>
-                    
-                    <div className="dropdown-content">
-
-                      <div className="search-criterias">
-                      <input id="all-posts" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "all-posts" }
-                             value="all-posts" onChange={() => setSearchCriteria("all-posts")} />
-                      <label htmlFor="all-posts"><p>all-posts</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="events" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "events" }
-                             value="events" onChange={() => setSearchCriteria("events")} />
-                      <label htmlFor="events"><p>events</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="recipes" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "recipes" }
-                             value="recipes" onChange={() => setSearchCriteria("recipes")}  />
-                      <label htmlFor="recipes"><p>recipes</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="arts-craft" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "arts-craft" }
-                             value="arts-craft" onChange={() => setSearchCriteria("arts-craft")} />
-                      <label htmlFor="arts-craft"><p>arts-craft</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="beauty" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "beautie" }
-                             value="beautie" onChange={() => setSearchCriteria("beautie")}  />
-                      <label htmlFor="beautie"><p>beautie</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="garden" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "garden" }
-                             value="garden" onChange={() => setSearchCriteria("garden")} />
-                      <label htmlFor="garden"><p>garden</p></label>
-                    </div>
-
-                    <div className="search-criterias">
-                      <input id="users" type="radio"
-                             className="search-criteria-option"
-                             name="search-criteria-option"
-                             checked={ searchCriteria === "users" }
-                             value="users" onChange={() => setSearchCriteria("users")} />
-                      <label htmlFor="users"><p>users</p></label>
-                    </div>
-                  </div>
-                </div>
-                
-
-
-                <Icons.MdOutlineSearch className="search-icon" />
+                  <SearchBar />
               </li>
-              {/* search bar end */}
+
             </ul>
           </nav>
       )}
@@ -254,8 +182,7 @@ export const AppHeader = () => {
         <div ref={sideNavBgRef} className="burger-menu-inner" key=''>
           <ul className="burger-menu-list">
             <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
-              <input type="" placeholder="Search" className="mobile-search"/>
-              <Icons.MdOutlineSearch className="search-icon" />
+              <MobileSearchBar />
             </li>
             {links.map((link, i) => {
               return (
@@ -277,12 +204,3 @@ export const AppHeader = () => {
 }
 
 export default AppHeader;
-
-//Links object
-// const links =
-//   [
-//     {path: '/discover', name: 'Discover'},
-//     {path: '/feed', name: 'Feed'},
-//     {path: '/profile', name: 'Profile'},
-//     {path: '/create', name: 'Create'}
-//   ]
