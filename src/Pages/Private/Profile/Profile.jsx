@@ -1,6 +1,5 @@
 import React, { useContext, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import { ProfileCollection } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { ProfilePost } from './ProfilePost'
 import { PostsContext } from '../../../contexts/PostContext'
 
@@ -79,7 +78,7 @@ export const Profile = () => {
 
       </section>
 
-      <section className='Profile-Library'>
+      {/* <section className='Profile-Library'>
         <p>Library</p>
         <section>
           {userProfile.beauty.length > 0 ? <button onClick={e =>setLibBeauty(!libBeauty)}>beauty</button> : null }
@@ -93,12 +92,12 @@ export const Profile = () => {
         { libGarden ? userLibrary.gardens.map(item => <ProfileCollection  category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
         { libBeauty ? userLibrary.beauty.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
         { libRecipe ? userLibrary.recipes.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
-        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null } 
+        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }  */}
 
         {/* <ProfilePost data={userLibrary} id={user._id}/> */}
 
-        </section>
-      </section>
+        {/* </section>
+      </section> */}
     </section>
 
     </section>

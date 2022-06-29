@@ -10,7 +10,7 @@
 
   &-container {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     white-space: nowrap;
     transition: ease 1000ms;
 
@@ -20,7 +20,7 @@
       display: inline-block;
       
       .slide{
-        width: 100%;
+        // width: 100%;
         height: 100%;
         background-size: cover;
         background-repeat: no-repeat;
@@ -58,8 +58,8 @@
 
   @include media(">=desktop") {
     width: 66%;
-    height: calc(100vh - 18.5rem);
-    top: 13.5rem;
+    height: calc(100vh - 10.5rem);
+    top: 22rem;
     margin: 0 auto;
 
     &-container {

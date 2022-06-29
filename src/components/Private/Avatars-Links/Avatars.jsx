@@ -185,18 +185,19 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
 
   // AVATARS FOR PROFILE PAGE // NEEDS TO BE DONE 
-
-export const ProfileCollection=({category, name, image})=>{
-
-    
-    return(
-      <section className="SquareAvatar">
-        <section className="imageAvatar">
-          <img src={image}></img>
-          <h2>{name}</h2>
-        </section>
+  export const SeasonalAvatar = ({name, id, image,}) => {
+    // needs to be done after collections api is done
+    // const found = user.collection.follow.find(item => item === user._id)
+    return (
+      <section className="AvatarR">
+          <Link to={`/seasonal/${name}`} key={id} className="RoundAvatar">
+         <section className="imageAvatar">
+              <img src={image}></img>
+         </section>
+              <h2>{name}</h2>
+           </Link>
       </section>
       )
-  }
+    }
 
 

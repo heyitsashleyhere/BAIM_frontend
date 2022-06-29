@@ -198,7 +198,7 @@ export const AppHeader = () => {
           
           <Icons.MdClose className='close-icon' onClick={() => setBurgerMenu(false)} />
           </div>
-        </div>
+      </div>
     </>
   )
 }
