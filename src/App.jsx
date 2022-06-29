@@ -11,6 +11,7 @@ import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
 import { Profile } from "./Pages/Private/Profile/Profile.jsx";
 import Create from "./Pages/Private/Create/Create.jsx";
+import Search from "./Pages/Private/Search/Search.jsx";
 // Public components
 import Header from "./components/Public/header/Header.jsx";
 import Main from "./Pages/Public/Main/Main.jsx"
@@ -62,10 +63,8 @@ export default function App() {
       <section className="App">
 
         {displayNav || isNav ? (cookies.profileName || isLogin ? <AppHeader /> : <Header /> ) : null}
-        {/* <AppHeader /> */}
 
         <ScrollToTop  />
-
 
         <Routes>
           {/* Public routes */}
@@ -78,6 +77,8 @@ export default function App() {
           {/* Private routes */}
           <Route path="/discover" element={<Discover/>} />
           <Route path="/create" element={<Create />} />
+          <Route path="/search" element={<Search />} />
+          
 
           <Route path="/garden" >
             <Route index element={<Collections data={gardens} type="garden"/>}/>

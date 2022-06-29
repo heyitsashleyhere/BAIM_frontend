@@ -5,7 +5,7 @@ import gsap from "gsap";
 // contexts
 import { UserContext } from '../../../contexts/UserContext.js'
 // component
-import { MobileSearchBar, SearchBar } from '../SearchBar/SearchBar.jsx';
+import SearchBar from '../SearchBar/SearchBar.jsx';
 // styles and icons
 import * as Icons from "react-icons/md";
 import "./AppHeader.scss";
@@ -169,7 +169,7 @@ export const AppHeader = () => {
                 </li>
 
               <li className="nav-item search-bar">
-                  <SearchBar />
+                  <SearchBar display="desktop"/>
               </li>
 
             </ul>
@@ -182,7 +182,7 @@ export const AppHeader = () => {
         <div ref={sideNavBgRef} className="burger-menu-inner" key=''>
           <ul className="burger-menu-list">
             <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
-              <MobileSearchBar />
+              <SearchBar display="mobile"/>
             </li>
             {links.map((link, i) => {
               return (

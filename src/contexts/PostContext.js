@@ -8,6 +8,9 @@ function PostsContextProvider({ children }){
     
     const [inputValues, setInputValues] = useState({ title: "", description: "", link: "", tags: "" })
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
+
+    // search filter
+    const [searchResult, setSearchResult] = useState([])
     
     
     const [users, setUsers]=useState([])
@@ -101,8 +104,8 @@ function PostsContextProvider({ children }){
         gardens, setGardens,
         events, setEvents, 
         artsCrafts, setArtsCrafts, 
-        upgrade, setUpgrade
-
+        upgrade, setUpgrade,
+        searchResult, setSearchResult
     }
 
     return (
