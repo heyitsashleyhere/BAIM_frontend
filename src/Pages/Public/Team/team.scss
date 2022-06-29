@@ -51,12 +51,12 @@ display: grid;
           transition: 0.8s all cubic-bezier(.25, .77, .68, .99);
           cursor: pointer;
         }
-        &:hover {
+        &:focus {
           img{
             filter: grayscale(0%);
             transform: scale(1.4) !important;
           }
-        }       
+        }
 
         h2{
           color: #fff;
@@ -112,7 +112,7 @@ display: grid;
     .contact{
       display: flex;
       align-items: center;
-      gap: 1.8rem;
+      gap: 1rem;
       span{
         display: flex;
         align-items: center;
