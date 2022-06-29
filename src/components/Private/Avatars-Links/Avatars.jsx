@@ -1,6 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useCookies } from "react-cookie";
 import './avatars.scss'
+
+import { Modal, IconButton, Button, Typography, Menu, MenuItem, Popover, Box} from '@mui/material'
+
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CloseIcon from '@mui/icons-material/Close';
 
 import berry from '../../../assets/logo/raspberry.png'
 import { Follow } from '../Buttons/Follow/Follow'
@@ -12,29 +21,104 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
 
 // general avatars for the App
-  export const SquareAvatar = ({id, image, title, path, author, type}) => {
+  export const SquareAvatar = ({ data }) => {
+    const [cookies] = useCookies();
     const {user}=useContext(UserContext)
-    const { users}=useContext(PostsContext)
-    
-    const find = users.find(item => item === user._id)
-    const isUser = user._id === author
+    const [message, setMessage] = useState('')
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    console.log('user', user)
+    // MUI popper START
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
+    const openFeatures = Boolean(anchorEl);
+    const openPopper = Boolean(deleteAnchorEl);
+  
+    const handlePopper = (event) => {
+      setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
+    };
+  
+    const popperId = openPopper ? 'simple-popper' : undefined;
+  
+    const handleFeatures = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+      setDeleteAnchorEl(null)
+    };
+    // MUI popper END 
 
-    // logic to find in user collections the specific item so the add or remove buttons can appear
-    // const match = user.collections[type].find(item => item === author) 
+    function handleEdit() {
 
-    console.log(isUser)
+    }
+
+    function handleDelete(type) {
+      // console.log('type :>> ', type);
+      // setMessage('your post is deleted');
+      // setIsModalOpen(true)
+      const config = {
+        method: "DELETE",
+        credentials: 'include', 
+        headers: { "Content-Type": "application/json" },
+      };
+  
+      fetch(`http://localhost:7000/${type}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+          if (!result.errors) {
+            setMessage(result.message);
+            setIsModalOpen(true)
+          }
+        })
+        .catch((error) => console.log(error));
+
+    }
+
+
+    console.log('data', data)
 
     return (
-      <section className="SquareAvatars">
-      {/* {isUser ? <section className="Avatar-Buttons"><button>edit</button> <DeletePost /> </section> : null } */}
-        <Link key={id} to={`${path}`} className="InnerSquareAvatar">
+      <section>
+        <Link to={`${data.title}`} className="SquareAvatar">
              <section className="imageAvatar">
-                <img src={image}></img>
-                <h2>{title}</h2>
+                <img src={data.image}></img>
+                <h2>{data.title}</h2>
               </section> 
         </Link>
-        {/* {isUser ? <section className="Avatar-Buttons"><button>edit</button> <DeletePost /> </section> : null } */}
-        {/* logic for add remove to user collections */}
+        {cookies.profileName === data.authorProfileName && 
+         <>
+         <IconButton aria-label="edit"
+                     aria-controls={openFeatures ? 'basic-menu' : undefined}
+                     aria-haspopup="true"
+                     aria-expanded={openFeatures ? 'true' : undefined}
+                     onClick={handleFeatures}>
+           <MoreVertIcon />
+         </IconButton>
+         <Menu anchorEl={anchorEl}
+               open={openFeatures}
+               onClose={handleClose}>
+           <MenuItem onClick={handleEdit} ><EditIcon fontSize="small" sx={{ mr: 2 }} color="primary"/>Edit</MenuItem>
+           <MenuItem onClick={handlePopper}><DeleteIcon fontSize="small" sx={{ mr: 2 }} color="primary"/>Delete</MenuItem>
+           <Popover id={popperId} open={openPopper} anchorEl={deleteAnchorEl} 
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+                   <Typography sx={{ p: 2 }}>Want this gone forever ever?</Typography>
+                   <Box sx={{ textAlign: 'center' }}>
+                     <Button variant="outlined" color="success" 
+                             startIcon={<CheckCircleIcon/>} sx={{ mb: 1 }}
+                             onClick={() => handleDelete(data.type)} >YES</Button>
+                     <Button variant="outlined" color="error" 
+                             startIcon={<CloseIcon/>} sx={{ mb: 1 }}
+                             onClick={() => setDeleteAnchorEl(null)} >NO</Button>
+                   </Box>     
+           </Popover>
+         </Menu>
+       </> }
+
+       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} >
+          <p>{message}</p>
+       </Modal>
+        {/* experimental logic for add remove to user collections */}
 
       </section>
     )
@@ -69,10 +153,6 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
       </section>
 
-
-
-
-  
       
     )
   }

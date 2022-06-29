@@ -152,7 +152,7 @@ export const Collections = (props) => {
         <p>{data.length}items</p>
       </section>
       <section className="Library-container">
-      {data.map(item =><SquareAvatar id={item._id} image={item.image} path={item.title} title={item.title} author={item.author}/>)}
+      {data.map(item =><SquareAvatar data={item} />)}
     </section>
     </section> 
     
