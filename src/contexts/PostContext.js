@@ -11,8 +11,16 @@ function PostsContextProvider({ children }){
 
     // Search filter
     const [searchResult, setSearchResult] = useState([])
+    const [searchCat, setSearchCat] = useState("")
+    const [searchOpt, setSearchOpt] = useState("")
+    const [searchInput, setSearchInput] = useState("")
+
     // Profile filter
     const [currentUserLibrary, setCurrentUserLibrary] = useState({beauty: [], artsCraft: [], garden: [], recipe: [], event: []})
+
+    // ProduceAPI
+    const [seasonal, setSeasonal]=useState([])
+    
     
     // ! maybe we don't need this anymore
     const [users, setUsers]=useState([])
@@ -21,9 +29,8 @@ function PostsContextProvider({ children }){
     const [gardens, setGardens]=useState([])
     const [recipes, setRecipes]=useState([])
     const [events, setEvents]=useState([])
-
     const [ upgrade, setUpgrade]=useState(false)
-
+    
     // const [loading, setLoading]=useState(true)
     
     // ! maybe we don't need this anymore
@@ -58,8 +65,15 @@ function PostsContextProvider({ children }){
         .then(result=>setEvents(result))
         .catch(error=>console.log(error.message))
 
+        fetch("https://lokalseasons.herokuapp.com/produce")
+        .then(response=>response.json())
+        .then(result => setSeasonal(result))
+        .catch(error => console.log(error.message))
+
     }, [upgrade])
     
+    console.log(seasonal)
+
 
 
     function convertToBase64(file) {
@@ -108,6 +122,10 @@ function PostsContextProvider({ children }){
         artsCrafts, setArtsCrafts, 
         upgrade, setUpgrade,
         searchResult, setSearchResult,
+        searchCat, setSearchCat,
+        searchOpt, setSearchOpt,
+        searchInput, setSearchInput,
+        seasonal, setSeasonal,
         currentUserLibrary, setCurrentUserLibrary
     }
 
@@ -116,6 +134,7 @@ function PostsContextProvider({ children }){
             {children}
         </PostsContext.Provider>
     )
+
 }
 
-export default PostsContextProvider
+export default PostsContextProvider;

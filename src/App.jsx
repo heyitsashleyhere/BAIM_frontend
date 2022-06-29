@@ -24,6 +24,7 @@ import ScrollToTop from './components/Public/Footer/ScrollToTop.jsx'
 import { AnimationContext } from "./contexts/AnimationContext.js";
 import { PostsContext } from "./contexts/PostContext.js";
 import { UserContext } from "./contexts/UserContext.js";
+import { SectionNav } from "./components/Private/section-header/SectionNav.jsx";
 
 
 
@@ -67,8 +68,13 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <section className="App">
 
-        {displayNav || isNav ? (cookies.profileName || isLogin ? <AppHeader /> : <Header /> ) : null}
-
+        {displayNav || isNav ? (cookies.profileName || isLogin ? (
+          <>
+        <AppHeader />
+            <SectionNav />
+            </>
+        ) : <Header />) : null}
+        
         <ScrollToTop  />
 
         <Routes>
@@ -112,7 +118,7 @@ export default function App() {
 
           <Route path="/seasonal">
             <Route index element={<Seasonal/>}/>
-            <Route path="/seasonal/:item" element={<PostPage/>}/>
+            <Route path="/seasonal/:name" element={<PostPage/>}/>
           </Route>
 
           <Route path="/profile">

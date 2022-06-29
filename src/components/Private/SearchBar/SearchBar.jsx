@@ -8,10 +8,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 export default function SearchBar({ display }) {
-  const [searchCat, setSearchCat] = useState("")
-  const [searchOpt, setSearchOpt] = useState("")
-  const [searchInput, setSearchInput] = useState("")
-  const { searchResult, setSearchResult } = useContext(PostsContext);
+  // filter 
+  const { searchResult, setSearchResult, searchCat, setSearchCat, searchOpt, setSearchOpt, searchInput, setSearchInput } = useContext(PostsContext);
   const filterCat = ["user", "beauty", "artsCraft", "garden", "recipe", "event"]
   const filterOpt = ["authorProfileName", "title", "description", "category", "tags"]
   let navigate = useNavigate()

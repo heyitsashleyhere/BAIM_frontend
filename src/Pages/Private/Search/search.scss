@@ -1,0 +1,48 @@
+@import '../../../styles/breakpoints';
+
+
+
+.Search{
+    position:relative;
+    top:100px;
+
+    .search-wrapper{
+        border:1px solid blue;
+
+        .search-info{
+            margin:1rem;
+            h2{
+                font-size: 2rem;
+            }
+            p{
+                margin:1rem 0rem;
+            }
+        }
+
+    }
+
+    @include media(">tablet"){
+        display:grid;
+        grid-template-columns: repeat(8,1fr);
+        gap:2.5rem;
+
+        .search-wrapper{
+            grid-column: 1/9;
+        }
+
+        .search-collection{
+            display:flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    @include media(">desktop"){
+         grid-template-columns:repeat(12, 1fr);
+
+         .search-wrapper{
+            grid-column: 3/11;
+         }
+    }
+
+}
+

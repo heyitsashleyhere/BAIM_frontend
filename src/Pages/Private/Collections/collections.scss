@@ -158,8 +158,10 @@
                     grid-column: 1/9;
         
                     .Library-container{
-                        overflow: hidden;
-                        overflow-x: scroll;
+                        margin:1rem 0rem;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        
                     }
         
                 }
@@ -219,6 +221,13 @@
         
                 .Library-wrapper{
                     grid-column:3/11;
+
+                    .Library-container{
+                        margin:2rem 0rem;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        
+                    }
                 }
             }
 
@@ -242,7 +251,7 @@
                         position:relative;
                         display:inline-block;
                         max-width:100%;
-                        height:65vh;
+                        height:55vh;
                         overflow: hidden;
     
                         img{
