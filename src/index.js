@@ -5,7 +5,6 @@ import { CookiesProvider } from "react-cookie";
 import PostsContextProvider from "./contexts/PostContext.js";
 import { UserContextProvider } from "./contexts/UserContext.js";
 import { AnimationContextProvider } from "./contexts/AnimationContext.js";
-import DataContextProvider from "./contexts/dataContext.js";
 // Components
 import App from "./App.jsx";
 
@@ -15,12 +14,10 @@ root.render(
 	<BrowserRouter>
 		<CookiesProvider>
 			<UserContextProvider>
-				<PostsContextProvider>
-					<DataContextProvider>
-						<AnimationContextProvider>
-							<App />
-						</AnimationContextProvider>
-					</DataContextProvider>
+				<PostsContextProvider>		
+					<AnimationContextProvider>
+						<App />
+					</AnimationContextProvider>
 				</PostsContextProvider>
 			</UserContextProvider>
 		</CookiesProvider>
