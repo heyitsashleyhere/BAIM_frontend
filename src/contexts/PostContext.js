@@ -11,6 +11,9 @@ function PostsContextProvider({ children }){
 
     // search filter
     const [searchResult, setSearchResult] = useState([])
+    const [searchCat, setSearchCat] = useState("")
+    const [searchOpt, setSearchOpt] = useState("")
+    const [searchInput, setSearchInput] = useState("")
     
     
     const [users, setUsers]=useState([])
@@ -19,6 +22,7 @@ function PostsContextProvider({ children }){
     const [gardens, setGardens]=useState([])
     const [recipes, setRecipes]=useState([])
     const [events, setEvents]=useState([])
+    const [ seasonal, setSeasonal]=useState([])
 
     const [ upgrade, setUpgrade]=useState(false)
 
@@ -56,8 +60,15 @@ function PostsContextProvider({ children }){
         .then(result=>setEvents(result))
         .catch(error=>console.log(error.message))
 
+        fetch("https://lokalseasons.herokuapp.com/produce")
+        .then(response=>response.json())
+        .then(result => setSeasonal(result))
+        .catch(error => console.log(error.message))
+
     }, [upgrade])
     
+    console.log(seasonal)
+
 
 
     function convertToBase64(file) {
@@ -105,7 +116,10 @@ function PostsContextProvider({ children }){
         events, setEvents, 
         artsCrafts, setArtsCrafts, 
         upgrade, setUpgrade,
-        searchResult, setSearchResult
+        searchResult, setSearchResult,
+        searchCat, setSearchCat,
+        searchOpt, setSearchOpt,
+        searchInput, setSearchInput 
     }
 
     return (

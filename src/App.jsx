@@ -107,7 +107,7 @@ export default function App() {
 
           <Route path="/seasonal">
             <Route index element={<Seasonal/>}/>
-            <Route path="/seasonal/:item" element={<PostPage/>}/>
+            <Route path="/seasonal/:name" element={<PostPage/>}/>
           </Route>
 
           <Route path="/profile">
