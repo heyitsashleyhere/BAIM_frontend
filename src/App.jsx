@@ -59,6 +59,11 @@ export default function App() {
     setDisplayNav(localDisplayNav)
   }, [])
 
+  // ! try to do 'checkLogin' endpoint
+  // if (!initialized) {
+  //   return "Loading ;)"
+  // }
+
   return (
     <ThemeProvider theme={theme}>
       <section className="App">

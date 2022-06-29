@@ -4,32 +4,36 @@ export const PostsContext = React.createContext(null)
 
 function PostsContextProvider({ children }){
     const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"] 
+    // creating a post
     const [data, setData] = useState({})
-    
     const [inputValues, setInputValues] = useState({ title: "", description: "", link: "", tags: "" })
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
 
-    // search filter
+    // Search filter
     const [searchResult, setSearchResult] = useState([])
     const [searchCat, setSearchCat] = useState("")
     const [searchOpt, setSearchOpt] = useState("")
     const [searchInput, setSearchInput] = useState("")
+
+    // Profile filter
+    const [currentUserLibrary, setCurrentUserLibrary] = useState({beauty: [], artsCraft: [], garden: [], recipe: [], event: []})
+
+    // ProduceAPI
+    const [seasonal, setSeasonal]=useState([])
     
     
+    // ! maybe we don't need this anymore
     const [users, setUsers]=useState([])
     const [beauties, setBeauties]=useState([])
     const [artsCrafts, setArtsCrafts]=useState([])
     const [gardens, setGardens]=useState([])
     const [recipes, setRecipes]=useState([])
     const [events, setEvents]=useState([])
-    // ProduceAPI
-    const [seasonal, setSeasonal]=useState([])
-
     const [ upgrade, setUpgrade]=useState(false)
-
+    
     // const [loading, setLoading]=useState(true)
     
-
+    // ! maybe we don't need this anymore
     useEffect(() => {
         fetch("http://localhost:7000/user")
         .then(response => response.json())
@@ -121,7 +125,8 @@ function PostsContextProvider({ children }){
         searchCat, setSearchCat,
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
-        seasonal, setSeasonal
+        seasonal, setSeasonal,
+        currentUserLibrary, setCurrentUserLibrary
     }
 
     return (

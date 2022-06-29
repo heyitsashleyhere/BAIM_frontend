@@ -22,7 +22,7 @@ export default function SearchBar({ display }) {
         if(!result.errors) { 
           setSearchResult(result)
         } else {
-          console.log('errors :>> ', errors);
+          console.log('errors :>> ', result.errors);
         }
       })
       .catch(error => console.log(error.message))
@@ -43,7 +43,7 @@ export default function SearchBar({ display }) {
   return (
      <Stack direction="row" className='SearchBar'>
         <Select variant='standard' displayEmpty color={display === 'mobile' ? 'secondary' : 'primary'}
-                value={searchCat} className="select-input" sx={ display === 'mobile' && { color: 'white', borderColor: 'white' }}
+                value={searchCat} className="select-input" sx={ display === 'mobile' ? { color: 'white', borderColor: 'white' } : {}}
                 onChange={(e) => setSearchCat(e.target.value) }>
             <MenuItem disabled value=""><em>category</em></MenuItem>
             {filterCat.map(cat => (
@@ -51,7 +51,7 @@ export default function SearchBar({ display }) {
              ))}
          </Select>
          { searchCat !== 'user' &&
-            <Select variant='standard' displayEmpty sx={ display === 'mobile' && { color: 'white' }}
+            <Select variant='standard' displayEmpty sx={ display === 'mobile' ? { color: 'white' } : {}}
                     value={searchOpt} className="select-input"
                     onChange={(e) => setSearchOpt(e.target.value) }>
               <MenuItem disabled value=""><em>filter</em></MenuItem>
@@ -60,11 +60,11 @@ export default function SearchBar({ display }) {
               ))}
             </Select>
          }
-        <TextField placeholder="Search" variant="standard" className='search-input' sx={ display === 'mobile' && { color: 'white' }}
+        <TextField placeholder="Search" variant="standard" className='search-input' sx={ display === 'mobile' ? { color: 'white' } : {}}
                    onChange={(e) => setSearchInput(e.target.value)}
-                  InputProps={{
+                   InputProps={{
                       endAdornment: (
-                            <InputAdornment>
+                            <InputAdornment position='end'>
                               <IconButton onClick={handleSearch}>
                                 <SearchIcon />
                               </IconButton>
