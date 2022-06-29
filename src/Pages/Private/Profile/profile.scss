@@ -1,4 +1,4 @@
-
+@import '../../../styles/breakpoints';
 
 .Profile{
     border:1px solid red;
@@ -53,5 +53,8 @@
             align-items: center;
             font-size: 1.2rem;
         }
+    }
+    @include media(">=desktop") {
+    top:35rem;
     }
 }

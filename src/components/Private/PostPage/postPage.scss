@@ -204,6 +204,7 @@
 
 
     @include media(">=tablet"){
+        top:35rem;
         display:grid;
         grid-template-columns: repeat(8, 1fr);
         gap: 2.5rem;

@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import gsap from "gsap";
 // contexts
 import { UserContext } from '../../../contexts/UserContext.js'
+import {AnimationContext} from '../../../contexts/AnimationContext'
 // component
 import SearchBar from '../SearchBar/SearchBar.jsx';
 // styles and icons
@@ -17,7 +18,7 @@ export const AppHeader = () => {
   const [cookies] = useCookies();
   const { setIsLogin, user } = useContext(UserContext)
   
-  const [mobile, setMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
   //Links object
@@ -32,7 +33,6 @@ export const AppHeader = () => {
   // refs to elements to be included in the animation
   const sideNavRef = useRef(null);
   const sideNavBgRef = useRef(null);
-  const searchRef = useRef(null);
   const logoutRef = useRef(null);
 
   //the links ref array 
@@ -54,7 +54,7 @@ export const AppHeader = () => {
       x: '100%',
       ease: 'power2.inOut'
     })
-    tl.current.fromTo([searchRef.current, navItemsRef.current, logoutRef.current], {
+    tl.current.fromTo([navItemsRef.current, logoutRef.current], {
       opacity: 0
     }, {
       duration: 0.6,
@@ -70,32 +70,16 @@ export const AppHeader = () => {
     burgerMenu ? tl.current.play() : tl.current.reverse();
   }, [burgerMenu])
 
-  // if the screen size is less than 768px then setState to true and then display burger menu;
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setMobile(true);
-    }
-  }, []);
-  
-  // to check the screen size to display the corresponding navigation links
-  useEffect(() => {
-    // console.log(sideNavRef.current.style.display );
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setMobile(true);
-      } else {
-        setMobile(false);
-        setBurgerMenu(false);
-      }
-    };
 
-    //listening on the window resize event
-    window.addEventListener("resize", handleResize);
+    //to handle window.width and render the produce navbar only for desktop
+  const { windowWidth } = useContext(AnimationContext)
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  console.log(windowWidth)
+  useEffect(() => {
+    setIsMobile(windowWidth < 768 ? true : false)
+    setBurgerMenu(false)
+  }, [windowWidth])
+
 
   // a function to add multiple refs to an array to animate them together
   const addToLinks = (link) => {
@@ -146,7 +130,7 @@ export const AppHeader = () => {
         <img src={Logo} alt="LOKA" /> 
         <Link  className="LokaB" to="/main">Loka</Link>
       </div>
-      {mobile ? (
+      {isMobile ? (
         <div className="mobile-toggle">
           <div className="mobile-toggle-icons">
               <Icons.MdMenu className="toggle-icon" onClick={() => setBurgerMenu(true)}/>
@@ -168,10 +152,6 @@ export const AppHeader = () => {
                   <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
                 </li>
 
-              <li className="nav-item search-bar">
-                  <SearchBar display="desktop"/>
-              </li>
-
             </ul>
           </nav>
       )}
@@ -181,9 +161,6 @@ export const AppHeader = () => {
         <div ref={sideNavRef} className="burger-menu">
         <div ref={sideNavBgRef} className="burger-menu-inner" >
           <ul className="burger-menu-list">
-            <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
-              <SearchBar display="mobile"/>
-            </li>
             {links.map((link, i) => {
               return (
                 <li className="burger-menu-list-item" key={i}>

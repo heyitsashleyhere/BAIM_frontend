@@ -68,12 +68,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <section className="App">
 
-        {displayNav || isNav ? (cookies.profileName || isLogin ? (
-          <>
-        <AppHeader />
-            <SectionNav />
-            </>
-        ) : <Header />) : null}
+        {displayNav || isNav ? (cookies.profileName || isLogin ? <AppHeader /> : <Header />) : null}
         
         <ScrollToTop  />
 
