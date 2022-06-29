@@ -90,10 +90,10 @@ export const Profile = () => {
         <section>
 
       
-        { libGarden ? userLibrary.gardens.map(item => <ProfileCollection  category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
+        {/* { libGarden ? userLibrary.gardens.map(item => <ProfileCollection  category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
         { libBeauty ? userLibrary.beauty.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
         { libRecipe ? userLibrary.recipes.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }
-        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null } 
+        { libArt ? userLibrary.arts.map(item => <ProfileCollection category={item.category} image={item.image} name={item.title}></ProfileCollection>) : null }  */}
 
         {/* <ProfilePost data={userLibrary} id={user._id}/> */}
 
