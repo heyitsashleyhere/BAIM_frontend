@@ -179,7 +179,7 @@ export const AppHeader = () => {
 
       {/* //mobile navbar */}
         <div ref={sideNavRef} className="burger-menu">
-        <div ref={sideNavBgRef} className="burger-menu-inner" key=''>
+        <div ref={sideNavBgRef} className="burger-menu-inner" >
           <ul className="burger-menu-list">
             <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
               <MobileSearchBar />

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PostsContext } from '../../../../contexts/PostContext'
 
+
+
 export const Comment = (props) => {
   const{upgrade, setUpgrade}=useContext(PostsContext)
 

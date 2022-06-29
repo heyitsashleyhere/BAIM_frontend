@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { PostsContext } from '../../../../contexts/PostContext'
 import { PostCommentsAvatar } from '../../Avatars-Links/Avatars'
-
+import { FiEdit2,FiSend } from 'react-icons/fi'
+import {AiOutlineDelete} from 'react-icons/ai'
+import {FcCancel} from 'react-icons/fc'
 
 
 // Here write the logic and fetch for every button.
@@ -16,7 +18,12 @@ const [ error, setError ]=useState()
 const [ edit, setEdit]=useState(true)
 const [ newComment, setNewComment]=useState('')
 
-const auth = user  === data.author
+ 
+const date = item => new Date(item).toLocaleDateString("eu")
+
+
+
+const author = user  === data.author
 
   function editComment(){
 
@@ -61,25 +68,29 @@ const auth = user  === data.author
 
 
   return (
-    <section key={data.author}>
-
        <section className="Comments-inner" key={data.author}>
+       <section className="comments-header">
             <p className="commentDate">{date(data.createdAt)}</p>
-            { auth ? 
-                <section>  
-                { edit  ? <button onClick={e=>setEdit(!edit)}>edit</button> : <button onClick={editComment}>send</button> }
-                <button onClick={deleteComment}>delete</button>
+            { author ? 
+                <section className="comment-editors">  
+                { edit  ? <FiEdit2 onClick={e=>setEdit(!edit)}  className="editor-icon"/>  
+                : <><FiSend onClick={editComment} className="editor-icon"/> <FcCancel onClick={e =>setEdit(!edit)} className="editor-icon"/></>
+                }
+
+                <AiOutlineDelete onClick={deleteComment} className="editor-icon"/>
                 </section>
                 :
                 null }
+        </section>
 
             <section className="comment">
-                <PostCommentsAvatar id={data._id} name={data.authorProfileName} image={data.authorAvatar}></PostCommentsAvatar>
-                { !edit ? <p className="comment-text">{item.message}</p> : <input text={item.message} onChange={e=>setNewComment(e.target.value)}></input> }
+                <PostCommentsAvatar id={data._id} name={data.authorProfileName} image={data.authorAvatar}/>
+                { edit ? <p className="comment-text">{data.message}</p> 
+                : 
+                <input  placeholder={data.message} onChange={e=>setNewComment(e.target.value)}></input> }
             </section>
         </section>
 
-    </section>
     
   )
 

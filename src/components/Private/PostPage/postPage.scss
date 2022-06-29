@@ -12,20 +12,36 @@
     }
 
     .Post-Page-header{
+        position:absolute;
+        top:10;
         width:100%;
         display:flex;
         justify-content: space-between;
         align-items: center;
 
-        button{
-            width:100px;
-            height:30px;
-        }
     }
 
     .Post-hero{
         position: relative;
         overflow: hidden;
+
+        .Post-Page-header{
+            position:absolute;
+            top:10;
+            width:100%;
+            display:flex;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.144);
+            padding:2rem;
+           
+            .Post-Page-Header-icons{
+                color:white;
+                font-size: 4rem;
+
+            }
+
+    
+        }
 
         img{
             width:100%;
@@ -67,6 +83,11 @@
             margin:0rem 1rem;
         }
 
+    }
+
+    .Post-video{
+        width:100%;
+       
     }
 
     .Post-date{
@@ -113,16 +134,42 @@
             width:100%;
             display:flex;
             flex-direction: column;
-            background-color: whitesmoke;
+            background-color: rgb(252, 252, 252);
+            border:1px solid gray;
             border-radius: 10px;
             margin:1rem 0rem;
 
-            .commentDate{
-                margin: 0.5rem;
-                font-size:1rem;
-                align-self: flex-end;
-                
+            .comments-header{
+                width:100%;
+                display:flex;
+                justify-content: space-between;
+
+                .commentDate{
+                    margin: 0.5rem;
+                    font-size:1.5rem;
+                }
+
+
+            .comment-editors{
+               
+                width:40%;
+                display:flex;
+                justify-content: right;
+
+                .editor-icon{
+                    align-self: flex-end;
+                    font-size: 2rem;
+                    margin:0rem 0.5rem;
+                    cursor:pointer;
+
+                }
             }
+            
+
+
+            }
+
+
         }
 
         .comment{
@@ -135,6 +182,14 @@
             .comment-text{
                 font-size: 1.3rem;
             }
+
+
+            input{
+                border:1px solid gray;
+                width:90%;
+                border-radius: 10px;
+            }
+            
 
         }
 

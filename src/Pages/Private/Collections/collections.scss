@@ -7,8 +7,6 @@
         top:50px;
 
             width:100%;
-
-            
         
             .Slideshow{
                 margin:0 auto;
@@ -24,7 +22,7 @@
                     position:relative;
                     display:inline-block;
                     max-width:100%;
-                    height:200px;
+                    height:250px;
                     overflow: hidden;
 
                     img{
@@ -42,7 +40,7 @@
                         color:white;
 
                         h1{
-                            font-size: 5rem;
+                            font-size: 4rem;
                             
                         }
 
@@ -78,10 +76,8 @@
                 .Library-container{
                     width:100%;
                     display:flex;
-                    flex-wrap:wrap;
-                    align-content: center;
-                    justify-content:flex-start;
-                    padding:1rem;
+                    flex-direction: column;
+                    
                     
                 }
         

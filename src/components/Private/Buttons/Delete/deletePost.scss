@@ -1,0 +1,22 @@
+
+
+
+.DeletePost{
+   width:100%;
+
+    .delete-icon{
+        font-size: 3rem;
+        
+    }
+
+    .deleteMessage{
+        width:21vw;
+        height:110px;
+        position:absolute;
+        top:40px;
+        left:-30px;
+        background-color:white;
+        z-index:1
+
+    }
+}

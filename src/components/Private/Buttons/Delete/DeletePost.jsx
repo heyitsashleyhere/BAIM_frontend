@@ -1,8 +1,14 @@
 import React, { useContext, useState } from 'react'
+import {FcCancel} from 'react-icons/fc'
+import {AiOutlineDelete} from 'react-icons/ai'
+
+import './deletePost.scss'
+
 
 import { PostsContext } from '../../../../contexts/PostContext'
 
 export const DeletePost = (props) => {
+
   const{upgrade, setUpgrade}=useContext(PostsContext)
 
 const { category, id }=props
@@ -28,11 +34,10 @@ const [ preDelete, setPreDelete ]=useState(false)
       }
 
   return (
-    <section>
-       <button onClick={e => setPreDelete(true)}/>
-
+    <section className="DeletePost">
+       <AiOutlineDelete onClick={e => setPreDelete(true)} className="delete-icon"/>
        {preDelete ? 
-        <section>
+        <section className="deleteMessage">
           <p>are you sure?</p>
           <button onClick={deletePost}>YES</button>
           <button onClick={e=> setPreDelete(false)}>No</button>
