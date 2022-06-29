@@ -4,15 +4,17 @@ export const PostsContext = React.createContext(null)
 
 function PostsContextProvider({ children }){
     const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"] 
+    // creating a post
     const [data, setData] = useState({})
-    
     const [inputValues, setInputValues] = useState({ title: "", description: "", link: "", tags: "" })
     const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
 
-    // search filter
+    // Search filter
     const [searchResult, setSearchResult] = useState([])
+    // Profile filter
+    const [currentUserLibrary, setCurrentUserLibrary] = useState({beauty: [], artsCraft: [], garden: [], recipe: [], event: []})
     
-    
+    // ! maybe we don't need this anymore
     const [users, setUsers]=useState([])
     const [beauties, setBeauties]=useState([])
     const [artsCrafts, setArtsCrafts]=useState([])
@@ -24,7 +26,7 @@ function PostsContextProvider({ children }){
 
     // const [loading, setLoading]=useState(true)
     
-
+    // ! maybe we don't need this anymore
     useEffect(() => {
         fetch("http://localhost:7000/user")
         .then(response => response.json())
@@ -105,7 +107,8 @@ function PostsContextProvider({ children }){
         events, setEvents, 
         artsCrafts, setArtsCrafts, 
         upgrade, setUpgrade,
-        searchResult, setSearchResult
+        searchResult, setSearchResult,
+        currentUserLibrary, setCurrentUserLibrary
     }
 
     return (
