@@ -15,7 +15,7 @@ export const SectionNav = () => {
 
   const date = new Date();
   let currentMonth = date.toLocaleString('default', { month: 'long' }).split(" ")[0].toLowerCase();
-  console.log(currentMonth);
+  // console.log(currentMonth);
   
   const inSeason = seasonal.filter(produce => {
     // produce.in_season.includes(currentMonth)
@@ -24,7 +24,7 @@ export const SectionNav = () => {
   })
 
   const firstSeven = inSeason.filter((month,idx) => idx < 7)
-  console.log('firstSeven :>> ', firstSeven);
+  // console.log('firstSeven :>> ', firstSeven);
 
 
 
@@ -85,7 +85,7 @@ export const SectionNav = () => {
   ]
 
   useEffect(() => {
-    console.log(location.pathname)
+    // console.log(location.pathname)
     if (location.pathname === '/discover') {
       setShow(false)
     }

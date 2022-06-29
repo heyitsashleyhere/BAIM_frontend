@@ -55,17 +55,18 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
     }
 
-    function handleDelete(type) {
+    function handleDelete(type, id) {
+      // console.log('id :>> ', id);
       // console.log('type :>> ', type);
       // setMessage('your post is deleted');
       // setIsModalOpen(true)
       const config = {
-        method: "DELETE",
+        method: "delete",
         credentials: 'include', 
         headers: { "Content-Type": "application/json" },
       };
   
-      fetch(`http://localhost:7000/${type}`, config)
+      fetch(`http://localhost:7000/${type}/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -102,7 +103,7 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
                     <Box sx={{ textAlign: 'center' }}>
                       <Button variant="outlined" color="success" 
                               startIcon={<CheckCircleIcon/>} sx={{ mb: 1 }}
-                              onClick={() => handleDelete(data.type)} >YES</Button>
+                              onClick={() => handleDelete(data.type, data._id)} >YES</Button>
                       <Button variant="outlined" color="error" 
                               startIcon={<CloseIcon/>} sx={{ mb: 1 }}
                               onClick={() => setDeleteAnchorEl(null)} >NO</Button>

@@ -1,41 +1,96 @@
 import React, { useContext, useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import { ProfileCollection } from '../../../components/Private/Avatars-Links/Avatars.jsx'
-import { ProfilePost } from './ProfilePost'
-import { PostsContext } from '../../../contexts/PostContext'
-
-
-import './profile.scss';
+// context
+import { PostsContext } from '../../../contexts/PostContext.js'
+// components
+import { SquareAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { Follow } from '../../../components/Private/Buttons/Follow/Follow.jsx'
+// style
+import './profile.scss';
+
 
 
 export const Profile = () => {
- const { postCategories, currentUserLibrary, setCurrentUserLibrary } = useContext(PostsContext)
- const { profileName } = useParams()
- const currentUser = JSON.parse(localStorage.getItem('user'))
-//  console.log(currentUser)
- const readablePostCategories = ["beauty", "arts and craft", "garden", "recipe", "event"]
-//  const currentUserLibrary = {
-//   beauty: [], artsCraft: [], garden: [], recipe: [], event: []
-//  }
+  const { postCategories } = useContext(PostsContext)
+  const { profileName } = useParams()
+  const currentUser = JSON.parse(localStorage.getItem('user'))
+
+  const [beauties, setBeauties]=useState([])
+  const [artsCrafts, setArtsCrafts]=useState([])
+  const [gardens, setGardens]=useState([])
+  const [recipes, setRecipes]=useState([])
+  const [events, setEvents]=useState([])
+
+  const [display, setDisplay] = useState(null)
+
+  useEffect(() => {
+    const config = {
+      method: "GET",
+      credentials: 'include', // specify this if you need cookies
+      headers: { "Content-Type": "application/json" }
+    };
+    // const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
+    // Promise.all(promises)
+    //        .then(responses => Promise.all( responses.map(r => r.json())) )
+    //        .then(result =>  {
+    //         result.forEach(cat => currentUserLibrary[cat[0].type] = cat) 
+    //         setTest(result)
+    //       }) // result.forEach(catArr =>  setCurrentUserLibrary({...currentUserLibrary, [catArr[0].type]: catArr})) 
+    //        .catch(err => console.error(`from Promise all`, err))
+  
+    //       console.log('currentUserLibrary :>> ', currentUserLibrary);
+    //       console.log('typeof test :>> ', typeof test);
+    postCategories.map(cat => {
+      fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
+      .then((response) => response.json())
+      .then((result) => {
+          if(!result.errors) { 
+            switch (cat) {
+              case 'beauty':
+                setBeauties(result);
+                break;
+              case 'artsCraft':
+                setArtsCrafts(result);
+                break;
+              case 'garden':
+                setGardens(result);
+                break;
+              case 'recipe':
+                setRecipes(result);
+                break;
+              case 'event':
+                setEvents(result);
+                break;
+            }
+          } else {
+            console.log('profile PostCategory fetch errors :>> ', result.errors);
+          }
+        })
+      .catch((error) => console.log(error));
+    })
+  }, [])
+
+
+  function showPostCategoryButton(Category) {
+    if(Category.length > 0) {
+      return <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+    }
+  }
  
-
- useEffect(() => {
-  const config = {
-    method: "GET",
-    credentials: 'include', // specify this if you need cookies
-    headers: { "Content-Type": "application/json" }
-  };
-  const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
-  Promise.all(promises)
-         .then(responses => Promise.all( responses.map(r => r.json())) )
-         .then(result =>  setCurrentUserLibrary(result)) // result.forEach(catArr =>  setCurrentUserLibrary({...currentUserLibrary, [catArr[0].type]: catArr})) //currentUserLibrary[cat[0].type] = cat
-         .catch(err => console.error(`from Promise all`, err))
-
-        console.log('currentUserLibrary :>> ', currentUserLibrary);
- }, [])
-
- 
+  function displayAvatars(type) {
+    switch (type) {
+      case 'beauty':
+        return beauties.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+      case 'artsCraft':
+        return artsCrafts.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+      case 'garden':
+        return gardens.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+      case 'recipe':
+        return recipes.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+      case 'event':
+        return events.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+    }
+  }
  
   return (
     <section className="Profile">
@@ -67,12 +122,15 @@ export const Profile = () => {
         <section className='Profile-Library'>
           <p>Library</p>
           <section>
-
+            {showPostCategoryButton(beauties)}
+            {showPostCategoryButton(artsCrafts)}
+            {showPostCategoryButton(gardens)}
+            {showPostCategoryButton(recipes)}
+            {showPostCategoryButton(events)}
           </section>
         
           <section>
-
-
+              {display && displayAvatars(display)}
           </section>
         </section>
 
@@ -80,14 +138,3 @@ export const Profile = () => {
     </section>
   )
 }
-
-// {console.log('currentUserLibrary from return', Object.values(currentUserLibrary))}
-// {Object.entries(currentUserLibrary).map((postCat, i) => (
-//   console.log('postCat',postCat)
-//   postCat[postCategories[i]].length > 0 && <button>{readablePostCategories[i]}</button>
-// ))}
-// {
-//   postCategories.map((postCat, i) => (
-//     console.log('currentUserLibrary[`${postCat}`]', currentUserLibrary[`${postCat}`])
-//   ) )
-// }
