@@ -1,6 +1,10 @@
-import React from 'react'
+import React , {useContext}from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PostCommentsAvatar, PostHeaderAvatar } from '../Avatars-Links/Avatars'
+import { UserContext } from '../../../contexts/UserContext'
+import { PostHeaderAvatar } from '../Avatars-Links/Avatars'
+import { UserComment } from '../Buttons/Comment/UserComment'
+import {MdOutlineArrowBack} from 'react-icons/md'
+import {BsHeart} from 'react-icons/bs'
 
 import './postPage.scss'
 
@@ -9,19 +13,16 @@ import './postPage.scss'
 
 export const PostPage = ({data}) => {
 
+  const {user}= useContext(UserContext)
+
+  // const video =`${process.env.PUBLIC_URL}/landingVideos/mainVideo.webm`
+
         const { title } = useParams()
         let navigate = useNavigate()
 
         const selected = data.find(item=>item.title === title )
-  
-
-        // array of avatars for related recipes
-        // const match = [category].filter(item => item.tags === selected.tags)
-        // console.log(match)
-    
-        const date= item =>{
-          return new Date(item).toLocaleDateString("eu")
-        }
+        const date = item => new Date(item).toLocaleDateString("eu")
+   
 
         function backHandler(category) {
           console.log('category', category)
@@ -31,11 +32,15 @@ export const PostPage = ({data}) => {
   return (
     <section className="Post-Page" key={selected._id}>
     <section className="Post-Page-Inner">
-    <section className="Post-Page-header">
-    <button>add</button>
-    <button onClick={() => backHandler(selected.type)}>back</button>
-    </section>
+    {/* <section className="Post-Page-header">
+    <BsHeart className="Post-Page-Header-icons"/>
+    <MdOutlineArrowBack onClick={() => backHandler(selected.type)} className="Post-Page-Header-icons"/>
+    </section> */}
       <section className="Post-hero">
+      <section className="Post-Page-header">
+    <BsHeart className="Post-Page-Header-icons"/>
+    <MdOutlineArrowBack onClick={() => backHandler(selected.type)} className="Post-Page-Header-icons"/>
+    </section>
         <img src={selected.image}></img>
         <h1>{selected.title}</h1>
       </section>
@@ -57,23 +62,17 @@ export const PostPage = ({data}) => {
         <section className='Post-tags'>
           {selected.tags.map(item => <p>{item}</p>)}
         </section>
+
+        <section className="Post-video">
+         { selected.video ?  <video src={selected.video} controls width="100%"></video> : null }
+        </section>
       
 
      
       <section className="Post-comments">
       <p>Comments</p>
       { selected.comments ? selected.comments.map(item =>(
-
-      <section className="Comments-inner" key={item.author}>
-          <p className="commentDate">{date(item.createdAt)}</p>
-          <section className="comment">
-            <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
-            <p className="comment-text">{item.message}</p>
-          </section>
-      </section>
-      )) 
-      : 
-      null }
+        <UserComment data={item} user={user._id}></UserComment>)) : null }
 
       <section className="Leave-Comment">
         <textarea placeholder='leave a comment'></textarea>
@@ -88,3 +87,12 @@ export const PostPage = ({data}) => {
    
   )
 }
+
+
+      {/* <section className="Comments-inner" key={item.author}>
+          <p className="commentDate">{date(item.createdAt)}</p>
+          <section className="comment">
+            <PostCommentsAvatar name={item.authorProfileName} image={item.authorAvatar}></PostCommentsAvatar>
+            <p className="comment-text">{item.message}</p>
+          </section>
+      </section> */}

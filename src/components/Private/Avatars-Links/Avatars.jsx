@@ -153,10 +153,6 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
       </section>
 
-
-
-
-  
       
     )
   }
