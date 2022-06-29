@@ -26,6 +26,10 @@
         grid-template-columns: repeat(8,1fr);
         gap:2.5rem;
 
+        .search-filter{
+            grid-column: 2/8;
+        }
+
         .search-wrapper{
             grid-column: 1/9;
         }
@@ -38,6 +42,11 @@
 
     @include media(">desktop"){
          grid-template-columns:repeat(12, 1fr);
+
+         .search-filter{
+            grid-column: 3/11;
+
+         }
 
          .search-wrapper{
             grid-column: 3/11;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { ProfileCollection } from '../../../components/Private/Avatars-Links/Avatars.jsx'
-import { ProfilePost } from './ProfilePost'
+
 import { PostsContext } from '../../../contexts/PostContext'
 
 

@@ -26,7 +26,8 @@ export const AppHeader = () => {
       {path: '/discover', name: 'Discover'},
       {path: '/feed', name: 'Feed'},
       {path: `/profile/${cookies.profileName}`, name: 'Profile'},
-      {path: '/create', name: 'Create'}
+      {path: '/create', name: 'Create'},
+
   ]
 
   // refs to elements to be included in the animation
@@ -163,13 +164,11 @@ export const AppHeader = () => {
                     </li>
                 )
               })}
-
-                <li className="nav-item">
-                  <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
-                </li>
-
               <li className="nav-item search-bar">
-                  <SearchBar display="desktop"/>
+                 <Link to='/search'>Search</Link>
+              </li>
+              <li className="nav-item">
+                  <h1 className="btn LokaB" onClick={logoutUser} >Logout</h1>
               </li>
 
             </ul>
@@ -182,7 +181,7 @@ export const AppHeader = () => {
         <div ref={sideNavBgRef} className="burger-menu-inner" >
           <ul className="burger-menu-list">
             <li ref={searchRef} key='mobile-search' className="burger-menu-list-item">
-              <SearchBar display="mobile"/>
+            <Link to='/search'>Search</Link>
             </li>
             {links.map((link, i) => {
               return (
