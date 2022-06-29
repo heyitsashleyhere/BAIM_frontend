@@ -22,7 +22,8 @@ function PostsContextProvider({ children }){
     const [gardens, setGardens]=useState([])
     const [recipes, setRecipes]=useState([])
     const [events, setEvents]=useState([])
-    const [ seasonal, setSeasonal]=useState([])
+    // ProduceAPI
+    const [seasonal, setSeasonal]=useState([])
 
     const [ upgrade, setUpgrade]=useState(false)
 
@@ -119,7 +120,8 @@ function PostsContextProvider({ children }){
         searchResult, setSearchResult,
         searchCat, setSearchCat,
         searchOpt, setSearchOpt,
-        searchInput, setSearchInput 
+        searchInput, setSearchInput,
+        seasonal, setSeasonal
     }
 
     return (
@@ -127,6 +129,7 @@ function PostsContextProvider({ children }){
             {children}
         </PostsContext.Provider>
     )
+
 }
 
-export default PostsContextProvider
+export default PostsContextProvider;

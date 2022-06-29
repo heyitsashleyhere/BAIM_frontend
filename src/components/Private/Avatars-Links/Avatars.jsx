@@ -202,7 +202,6 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
   }
 
 
-  // AVATARS FOR PROFILE PAGE // NEEDS TO BE DONE 
 
 
 

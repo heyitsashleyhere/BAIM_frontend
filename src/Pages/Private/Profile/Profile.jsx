@@ -1,6 +1,5 @@
 import React, { useContext, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import { ProfileCollection } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { ProfilePost } from './ProfilePost'
 import { PostsContext } from '../../../contexts/PostContext'
 
@@ -79,7 +78,7 @@ export const Profile = () => {
 
       </section>
 
-      <section className='Profile-Library'>
+      {/* <section className='Profile-Library'>
         <p>Library</p>
         <section>
           {userProfile.beauty.length > 0 ? <button onClick={e =>setLibBeauty(!libBeauty)}>beauty</button> : null }
@@ -97,8 +96,8 @@ export const Profile = () => {
 
         {/* <ProfilePost data={userLibrary} id={user._id}/> */}
 
-        </section>
-      </section>
+        {/* </section>
+      </section> */}
     </section>
 
     </section>

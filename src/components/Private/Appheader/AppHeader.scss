@@ -164,7 +164,7 @@
     }
 
     .navbar {
-      grid-column: 3/11;
+      grid-column: 5/11;
       padding-left: 0;
       transition: 0.35s all ease-in-out;
 
@@ -175,10 +175,11 @@
         display: flex;
 
         .search-bar {
+          // margin-left: auto;
           width: 300px;
           transition: 0.35s all ease-in-out;
           .search-input {
-            width: 150px;
+            width: 200px;
           }
           .select-input {
             width: 100px;
