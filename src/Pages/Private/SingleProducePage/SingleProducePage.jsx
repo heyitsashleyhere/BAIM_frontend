@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { PostsContext } from '../../../contexts/PostContext'
+import {MdOutlineArrowBack} from 'react-icons/md'
 
 import './singleProducePage.scss';
 
@@ -13,15 +14,23 @@ export const SingleProducePage = () => {
     const { name }= useParams()
 
     const data = seasonal.find(item => item.name === name)
-console.log(data)
+
     const date = new Date();
     let currentMonth = date.toLocaleString('default', { month: 'long' }).split(" ")[0].toLowerCase();
+
+    let navigate = useNavigate()
     
+
 
 
   return (
     <section className="Seasonal-page">
+
       <section className="Seasonal-page-inner">
+
+        <section className="Seasonal-back-button">
+        <MdOutlineArrowBack onClick={()=>navigate('/seasonal')} className="Seasonal-button"/>
+        </section>
       
         <section className="Seasonal-page-hero">
         <section className="Seasonal-hero-image">
@@ -40,34 +49,34 @@ console.log(data)
           </section>
 
           <section className="Seasonal-optimal">
-              <p>Optimal sun: {data.optimal_sun}</p>
-              <p>Optimal soil: {data.optimal_soil}</p>
+              <h3>Optimal sun: {data.optimal_sun}</h3>
+              <h3>Optimal soil: {data.optimal_soil}</h3>
           </section>
 
           <section className="Seasonal-dual">
             
           <section className="Seasonal-schedule">
             <span>
-              <h3>Planting:</h3>
+              <h3>Planting</h3>
               <section className="Seasonal-Month">
               {data.planting_time.map(item => <p >{item.substring(0,3).toUpperCase()}</p>)}
               </section>
               </span>
               <span>
-              <h3>Seeding Indoor:</h3>
+              <h3>Seeding Indoor</h3>
                 <section className="Seasonal-Month">
                 {data.seeding_indoor.map(item => <p>{item.substring(0,3).toUpperCase()}</p>)}
                 </section>
               </span>
 
               <span>
-              <h3>Seeding Outdoor:</h3>
+              <h3>Seeding Outdoor</h3>
               <section className="Seasonal-Month">
               {data.seeding_outdoor.map(item => <p>{item.substring(0,3).toUpperCase()}</p>)}
               </section>
               </span>
               <span className="Seasonal-days">
-              <h3>Harvesting time: {data.harvest_time} days</h3>
+              <h3>Harvesting time {data.harvest_time} days</h3>
               </span>
           </section>
 
@@ -90,27 +99,27 @@ console.log(data)
 
           <section className="Seasonal-planting">
               <section className="Seasonal-plant-map">
-                <h3>Planting consideration:</h3>
+                <h3>Planting consideration</h3>
                 {data.planting_considerations.split('.').map(item=><p>{item}.</p>)}
               </section>
               <section className="Seasonal-plant-map">
-                <h3>When to Plant:</h3>
+                <h3>When to Plant</h3>
                 {data.when_to_plant.split('.').map(item=><p>{item}.</p>)}
               </section>
               <section className="Seasonal-plant-map">
-                <h3>Growing from seed:</h3>
+                <h3>Growing from seed</h3>
                 {data.growing_from_seed.split('.').map(item=><p>{item}.</p>)}
               </section>
               <section className="Seasonal-plant">
-                <h3>Transplanting:</h3>
+                <h3>Transplanting</h3>
               <p>{data.transplanting}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Spacing:</h3>
+                <h3>Spacing</h3>
               <p>{data.spacing}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Watering:</h3>
+                <h3>Watering</h3>
               <p>{data.watering}</p>
               </section>
               <section className="Seasonal-plant">
@@ -133,11 +142,11 @@ console.log(data)
 
           <section className="Seasonal-harvest">
             <section className="Seasonal-plant-map">
-                <h3>Harvesting:</h3>
+                <h3>Harvesting</h3>
                 {data.harvesting.split('.').map(item=><p>{item}.</p>)}
               </section>
             <section className="Seasonal-plant-map">
-                <h3>Storage:</h3>
+                <h3>Storage</h3>
                 {data.storage.split('.').map(item=><p>{item}.</p>)}
                 </section>
             

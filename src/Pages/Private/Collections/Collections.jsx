@@ -160,7 +160,7 @@ export const Collections = (props) => {
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">
         <h2>Our {type} collections</h2>
-        <p>{data.length}items</p>
+        <p>items</p>
       </section>
       <section className="Library-container">
       {data.map(item =><SquareAvatar data={item} />)}
