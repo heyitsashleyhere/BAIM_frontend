@@ -32,6 +32,7 @@ export const Profile = () => {
   const [events, setEvents]=useState([])
 
   const [display, setDisplay] = useState(null)
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     const config = {
@@ -54,8 +55,12 @@ export const Profile = () => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
       .then((response) => response.json())
       .then((result) => {
+        console.log('result :>> ', result);
           if(!result.errors) { 
-            switch (cat) {
+            if(result === []) {
+              currentUser.profileName === profileName ? setMessage('You have not posted anything yet') : setMessage('This person has not posted anything yet')
+            } else {
+                          switch (cat) {
               case 'beauty':
                 setBeauties(result);
                 break;
@@ -72,18 +77,24 @@ export const Profile = () => {
                 setEvents(result);
                 break;
             }
+            }
+
           } else {
             console.log('profile PostCategory fetch errors :>> ', result.errors);
           }
         })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('profile PostCategory fetch errors :>> ', error));
     })
   }, [])
 
 
   function showPostCategoryButton(Category) {
     if(Category.length > 0) {
-      return <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+      return (
+      <div className='posts-btn-wrapper'>
+        <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+        <p>{Category.length} items</p>
+      </div>)
     }
   }
  
