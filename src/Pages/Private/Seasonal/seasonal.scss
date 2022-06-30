@@ -1,12 +1,51 @@
+@import "../../../styles/breakpoints";
 
-
-.Pages{
+.Seasonal{
+    position:relative;
+    top:100px;
     width:100%;
 
-    .seasonal{
-        background: url(../../../assets/images/seasonal.jpg);
-        background-position: center;
-        background-repeat: repeat;
-        background-size: cover;
+    .Seasonal-inner{
+        border:1px solid red;
+        display:flex;
+        flex-direction: column;
+        align-content: center;
     }
+
+    .Seasonal-wrapper{
+        margin:0rem 0rem;
+
+        h1{
+            text-align: center;
+            font-size: 3.5rem;
+        }
+
+        .Seasonal-wrapper-collection{
+            margin:5rem 0.5rem;
+            display:flex;
+            flex-wrap: wrap;
+        }
+    }
+
+
+    @include media(">=tablet"){
+        display:grid;
+        grid-template-columns: repeat(8,1fr);
+        gap:2.5rem;
+
+        .Seasonal-inner{
+            grid-column: 1/9;
+        }
+    }
+
+
+    @include media(">=desktop"){
+        grid-template-columns: repeat(12,1fr);
+        gap:2.5rem;
+
+        .Seasonal-inner{
+            grid-column: 3/11;
+        }
+    }
+
 }

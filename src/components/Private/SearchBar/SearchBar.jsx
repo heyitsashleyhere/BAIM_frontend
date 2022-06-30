@@ -42,8 +42,8 @@ export default function SearchBar({ display }) {
   }
   return (
      <Stack direction="row" className='SearchBar'>
-        <Select variant='standard' displayEmpty color={display === 'mobile' ? 'secondary' : 'primary'}
-                value={searchCat} className="select-input" sx={ display === 'mobile' ? { color: 'white', borderColor: 'white' } : {}}
+        <Select variant='standard' displayEmpty fullWidth
+                value={searchCat} className="select-input" 
                 onChange={(e) => setSearchCat(e.target.value) }>
             <MenuItem disabled value=""><em>category</em></MenuItem>
             {filterCat.map(cat => (
@@ -51,8 +51,8 @@ export default function SearchBar({ display }) {
              ))}
          </Select>
          { searchCat !== 'user' &&
-            <Select variant='standard' displayEmpty sx={ display === 'mobile' ? { color: 'white' } : {}}
-                    value={searchOpt} className="select-input"
+            <Select variant='standard' displayEmpty 
+                    value={searchOpt} className="select-input" fullWidth
                     onChange={(e) => setSearchOpt(e.target.value) }>
               <MenuItem disabled value=""><em>filter</em></MenuItem>
               {filterOpt.map(cat => (
@@ -60,7 +60,7 @@ export default function SearchBar({ display }) {
               ))}
             </Select>
          }
-        <TextField placeholder="Search" variant="standard" className='search-input' sx={ display === 'mobile' ? { color: 'white' } : {}}
+        <TextField placeholder="Search" variant="standard" className='search-input' fullWidth
                    onChange={(e) => setSearchInput(e.target.value)}
                    InputProps={{
                       endAdornment: (
