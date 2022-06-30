@@ -24,6 +24,7 @@ export const AppHeader = () => {
   //Links object
   const links =
     [
+      {path: '/search', name: 'Search'},
       {path: '/discover', name: 'Discover'},
       {path: '/feed', name: 'Feed'},
       {path: `/profile/${cookies.profileName}`, name: 'Profile'},
