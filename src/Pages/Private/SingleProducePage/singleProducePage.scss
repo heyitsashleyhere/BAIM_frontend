@@ -8,8 +8,8 @@
     position:relative;
     top:100px;
 
+
     .Seasonal-page-inner{
-        border:1px solid red;
 
         .Seasonal-page-hero{
           width:100%;
@@ -48,18 +48,174 @@
            
         }
 
-        .Seasonal-description{
+        .Seasonal-text{
+            padding:1rem;
+            margin-bottom: 1rem;
 
-            border:1px solid red;
-
-            p{
+            h3{
+                font-weight: 700;
                 margin-bottom:1rem;
+            }
 
-                &:last-child{
-                    display:none;
+            .Seasonal-description{
+                margin:1rem 0rem;
+                padding:1rem;
+
+                p{
+                    margin-bottom:1rem;
+
+                    &:last-child{
+                        display:none;
+                    }
+                }
+                
+            }
+
+            .Seasonal-optimal{
+                padding:1rem;
+
+                p{
+                    margin:1rem 0rem;
+                    font-size: 1.5rem;
                 }
             }
-            
+
+            .Seasonal-schedule{
+                padding:1rem;
+
+                span{
+                     h3{
+                        margin:2rem 0rem;
+                     }
+
+                    .Seasonal-Month{
+                        display:flex;
+                        flex-wrap: wrap;
+
+                        p{
+                            padding:1rem;
+                            margin: 1rem;
+                            background-color: black;
+                            color:white;
+                            border-radius:10%;
+                        }
+
+
+                    }
+                }
+            }
+
+            .Seasonal-nutrition{
+                border:1px solid rgba(0, 0, 0, 0.5);
+                padding:1rem;
+                margin:1rem 0rem;
+                border-radius: 10px;
+
+                .nutrition-board{
+
+                     p{
+                        margin:1rem 0rem;
+                     }
+                }
+            }
+
+            .Seasonal-planting{
+                padding:1rem;
+            }
+
+
+            .Seasonal-plant-map{
+                margin-top:3rem;
+
+                p{
+                    margin:1rem 0rem;
+
+                    &:last-child{
+                        display:none;
+                    }
+                }
+
+                
+            }
+
+            .Seasonal-plant{
+                margin-top:3rem;
+
+                p{
+                    margin:1rem 0rem;
+
+                   
+                }
+
+                
+            }
+
+            .Seasonal-harvest{
+                padding:1rem;
+                margin:1rem 0rem;
+
+            }
+
+
         }
     }
+
+
+    @include media(">=tablet"){
+        display: grid;
+        grid-template-columns: repeat(8,1fr);
+        gap:2.5rem;
+
+        .Seasonal-page-inner{
+           grid-column: 2/8;
+
+            .Seasonal-page-hero{
+                margin-bottom:1.5rem;
+            }
+
+            .Seasonal-nutrition{
+                font-size: 2rem;
+
+                h3{
+                    font-size: 3rem;
+                    margin:1.5rem 0rem;
+                }
+
+            
+            }
+     
+        }
+
+
+    }
+
+    @include media(">=desktop"){
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        gap:2.5rem;
+
+        .Seasonal-page-inner{
+            grid-column: 3/11;
+            display: grid;
+            grid-template-columns: repeat(8,1fr);
+            gap:2.5rem;
+
+            .Seasonal-page-hero{
+                grid-column: 3/7;
+                grid-row: 1/2;
+                margin-bottom: 12rem;
+
+            }
+
+            .Seasonal-text{
+                grid-column: 2/8;
+                
+            }
+      
+         }
+
+
+    }
+
+    
 }
