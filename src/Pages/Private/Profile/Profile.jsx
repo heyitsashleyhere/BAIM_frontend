@@ -9,14 +9,25 @@ import { Follow } from '../../../components/Private/Buttons/Follow/Follow.jsx'
 import { SectionNav } from '../../../components/Private/section-header/SectionNav.jsx'
 // style
 import './profile.scss';
+import { PostPage } from '../PostPage/PostPage.jsx'
 
 
 
 export const Profile = () => {
-  const { postCategories } = useContext(PostsContext)
+  const { postCategories, onProfile } = useContext(PostsContext)
   const { windowWidth } = useContext(AnimationContext)
   const { profileName } = useParams()
-  
+
+  const [display, setDisplay] = useState(null)
+  const [message, setMessage] = useState(null)
+  // category data from currentUser
+  const [beauties, setBeauties]=useState([])
+  const [artsCrafts, setArtsCrafts]=useState([])
+  const [gardens, setGardens]=useState([])
+  const [recipes, setRecipes]=useState([])
+  const [events, setEvents]=useState([])
+
+  // for sectionNav
   const [isMobile, setIsMobile] = useState(false)
   console.log(windowWidth)
   useEffect(() => {
@@ -25,13 +36,7 @@ export const Profile = () => {
 
   const currentUser = JSON.parse(localStorage.getItem('user'))
 
-  const [beauties, setBeauties]=useState([])
-  const [artsCrafts, setArtsCrafts]=useState([])
-  const [gardens, setGardens]=useState([])
-  const [recipes, setRecipes]=useState([])
-  const [events, setEvents]=useState([])
 
-  const [display, setDisplay] = useState(null)
 
   useEffect(() => {
     const config = {
@@ -54,51 +59,86 @@ export const Profile = () => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
       .then((response) => response.json())
       .then((result) => {
+        console.log('result :>> ', result);
           if(!result.errors) { 
-            switch (cat) {
-              case 'beauty':
-                setBeauties(result);
-                break;
-              case 'artsCraft':
-                setArtsCrafts(result);
-                break;
-              case 'garden':
-                setGardens(result);
-                break;
-              case 'recipe':
-                setRecipes(result);
-                break;
-              case 'event':
-                setEvents(result);
-                break;
+            if(result === []) {
+              currentUser.profileName === profileName ? setMessage('You have not posted anything yet') : setMessage('This person has not posted anything yet')
+            } else {
+              switch (cat) {
+                case 'beauty':
+                  setBeauties(result);
+                  break;
+                case 'artsCraft':
+                  setArtsCrafts(result);
+                  break;
+                case 'garden':
+                  setGardens(result);
+                  break;
+                case 'recipe':
+                  setRecipes(result);
+                  break;
+                case 'event':
+                  setEvents(result);
+                  break;
+              }
             }
+
           } else {
             console.log('profile PostCategory fetch errors :>> ', result.errors);
           }
         })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('profile PostCategory fetch errors :>> ', error));
     })
   }, [])
 
 
   function showPostCategoryButton(Category) {
     if(Category.length > 0) {
-      return <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+      return (
+      <div className='posts-btn-wrapper'>
+        <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+        <p>{Category.length} items</p>
+      </div>)
     }
   }
  
   function displayAvatars(type) {
     switch (type) {
       case 'beauty':
-        return beauties.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+        return beauties.map((data, i) => 
+          <section key={'profilePage-avatar'+ i}>
+            <SquareAvatar data={data} isOnProfile={true} />
+            {onProfile && (<PostPage data={data} onProfile/>)}
+          </section>
+        );
       case 'artsCraft':
-        return artsCrafts.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+        return artsCrafts.map((data, i) => 
+          <section key={'profilePage-avatar'+ i}>
+            <SquareAvatar data={data} isOnProfile={true} />
+            {onProfile && (<PostPage data={data} onProfile/>)}
+          </section>
+        );
       case 'garden':
-        return gardens.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+        return gardens.map((data, i) => 
+          <section key={'profilePage-avatar'+ i}>
+            <SquareAvatar data={data} isOnProfile={true} />
+            {onProfile && (<PostPage data={data} onProfile/>)}
+          </section>
+        );
       case 'recipe':
-        return recipes.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+        return recipes.map((data, i) => 
+          <section key={'profilePage-avatar'+ i}>
+            <SquareAvatar data={data} isOnProfile={true} />
+            {onProfile && (<PostPage data={data} onProfile/>)}
+          </section>
+        );
       case 'event':
-        return events.map((data, i) => <SquareAvatar key={'profilePage-avatar'+ i} data={data} />);
+        return events.map((data, i) => 
+          <section key={'profilePage-avatar'+ i}>
+            <SquareAvatar data={data} isOnProfile={true} />
+            {onProfile && (<PostPage data={data} onProfile/>)}
+          </section>
+        );
     }
   }
  
@@ -143,6 +183,7 @@ export const Profile = () => {
           <section>
               {display && displayAvatars(display)}
           </section>
+
         </section>
 
       </section>

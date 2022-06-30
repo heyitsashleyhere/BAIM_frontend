@@ -1,33 +1,33 @@
 import React, { useContext, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useCookies } from "react-cookie";
-import './avatars.scss'
-
 import { Modal, IconButton, Button, Typography, Menu, MenuItem, Popover, Box} from '@mui/material'
-
+// components
+import { Follow } from '../Buttons/Follow/Follow'
+import { UnFollow } from '../Buttons/Unfollow/Unfollow'
+import { DeletePost } from '../Buttons/Delete/DeletePost'
+// contexts
+import { UserContext } from '../../../contexts/UserContext.js'
+import { PostsContext } from '../../../contexts/PostContext.js'
+// style and icons
+import './avatars.scss'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
-
 import berry from '../../../assets/logo/raspberry.png'
-import { Follow } from '../Buttons/Follow/Follow'
-import { UnFollow } from '../Buttons/Unfollow/Unfollow'
-import { UserContext } from '../../../contexts/UserContext'
-import { PostsContext } from '../../../contexts/PostContext'
-import { DeletePost } from '../Buttons/Delete/DeletePost'
 
 
 
 // general avatars for the App
-  export const SquareAvatar = ({ data }) => {
+  export const SquareAvatar = ({ data , isOnProfile }) => {
     const [cookies] = useCookies();
-    const {user}=useContext(UserContext)
+    const {setOnProfile}=useContext(PostsContext)
+    let navigate = useNavigate()
+
     const [message, setMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-    // let navigate = useNavigate()
-   
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
     const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
@@ -111,13 +111,13 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
             </Popover>
           </Menu>
         </section> }
-    
-        <NavLink to={`${data.type}/${data.title}`} className="InnerSquareAvatar">
+        {/* to={`/${data.type}/${data.title}`}  */}
+        <div onClick={ () => {isOnProfile ? setOnProfile(true) : navigate(`/${data.type}/${data.title}`)}} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={data.image}></img>
                 <h2>{data.title}</h2>
               </section> 
-        </NavLink>
+        </div>
     
        <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} >
           <p>{message}</p>

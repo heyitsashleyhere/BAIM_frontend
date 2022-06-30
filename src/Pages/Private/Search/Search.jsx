@@ -25,7 +25,7 @@ export default function Search() {
             </section>
          { isEmpty ? <section className="search-collection">
            {searchResult.map(post => (
-                    <SquareAvatar data={post} key={post._id}/>
+                    <SquareAvatar data={post} key={post._id} isOnProfile={false}/>
                 ))}
             </section> : null }
         </section> 
