@@ -166,8 +166,8 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
 
     return (
       <section className="AvatarR">
-          <Link to={`/seasonal/${name}`} key={id} className="RoundAvatar"> 
-         <section className="imageAvatar">
+          <Link to={`/seasonal/${name}`} key={id} className="RoundAvatar "> 
+         <section className="imageAvatar produceIcon">
               <img src={image}></img>           
          </section>
               <h2>{name}</h2>

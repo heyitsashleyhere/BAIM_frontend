@@ -4,16 +4,26 @@ import { UserContext } from '../../../contexts/UserContext'
 import { PostHeaderAvatar } from '../../../components/Private/Avatars-Links/Avatars'
 import { UserComment } from '../../../components/Private/Buttons/Comment/UserComment'
 import {MdOutlineArrowBack} from 'react-icons/md'
-import {BsHeart} from 'react-icons/bs'
+import { BsHeart } from 'react-icons/bs'
+import {AnimationContext} from '../../../contexts/AnimationContext.js'
 
 import './postPage.scss'
+import { SectionNav } from '../section-header/SectionNav'
 
 
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({data}) => {
+  const { user } = useContext(UserContext)
+  
+  //to handle window.width and render the produce navbar only for desktop
+  const { windowWidth } = useContext(AnimationContext)
+  const [isMobile, setIsMobile] = useState(false)
 
-  const {user}= useContext(UserContext)
+  console.log(windowWidth)
+  useEffect(() => {
+    setIsMobile(windowWidth > 1024 ? true : false)
+  }, [windowWidth])
 
   // const video =`${process.env.PUBLIC_URL}/landingVideos/mainVideo.webm`
 
@@ -30,6 +40,8 @@ export const PostPage = ({data}) => {
         }
         
   return (
+    <>
+      {isMobile && <SectionNav  />}
     <section className="Post-Page" key={selected._id}>
     <section className="Post-Page-Inner">
     {/* <section className="Post-Page-header">
@@ -84,7 +96,7 @@ export const PostPage = ({data}) => {
       </section> 
   
     </section>
-   
+   </>
   )
 }
 

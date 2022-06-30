@@ -11,6 +11,9 @@ export const SectionNav = () => {
   const [isScrolled, setIsScrolled] = useState(null);
   const [show, setShow] = useState(true);
   const location = useLocation();
+  const [isMobile, setIsMobile] = useState(true);
+
+
 
 
   const date = new Date();
@@ -18,27 +21,19 @@ export const SectionNav = () => {
   // console.log(currentMonth);
   
   const inSeason = seasonal.filter(produce => {
-    // produce.in_season.includes(currentMonth)
-      return produce.in_season.filter(month => month === currentMonth).length
-      // return produce.in_season.some(month => month === currentMonth)
+    // return produce.in_season.filter(month => month === currentMonth).length
+    return produce.in_season.some(month => month === currentMonth)
   })
 
   const firstSeven = inSeason.filter((month,idx) => idx < 7)
   // console.log('firstSeven :>> ', firstSeven);
 
-
-
-
-
-
-  
-
   const discover = [
   {
       id: 1,
-      name: 'Gardens',
+      name: 'Garden',
       src: require('../../../assets/images/gardens.jpg'),
-      path: '/gardens',
+      path: '/garden',
       description: 'Curious about gardening? share your thoughts, ask  your questions, find your support',
       collection: '115 garderns'
     },
@@ -92,22 +87,44 @@ export const SectionNav = () => {
     
   }, [location])
 
+  const [position, setPosition] = useState(window.screenY)
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let scrolling = window.scrollY
+
+      setVisible(position > scrolling)
+      setPosition(scrolling)
+    }
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  })
+
+  const cls = visible ? 'visible' : 'hidden'
+
+
+  console.log('position', position)
+
+
+
   return (
     <section className="section-nav">
       <section className="section-nav-container">
-        <section className="avatars">
-          <ul>
+        <section className={` ${visible ? 'avatars' : 'hidden'}`}>
           {firstSeven.map(({id, name, image}, index) => (
             <SeasonalAvatar id={id} name={name} image={image}  />
           ))}
-          </ul>
         </section>
         {show &&(
           <section className="categories">
           <ul>
           {discover.map((category, index) => (
             <li key={category.id} className="category">
-              <Link to={category.path}><p>{ category.name }</p></Link>
+              <Link to={category.path}><p className="LokaB">{ category.name }</p></Link>
             </li>
           ))}
           </ul>

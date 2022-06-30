@@ -168,6 +168,7 @@
             }
         
             @include media(">=desktop"){
+                top:35rem;
                 grid-template-columns: repeat(12,1fr);
                 gap:2.5rem;
         

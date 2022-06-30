@@ -1,17 +1,26 @@
-
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import {AnimationContext} from '../../../contexts/AnimationContext'
 
 
 import {SquareAvatar} from '../../../components/Private/Avatars-Links/Avatars'
+import { SectionNav } from '../../../components/Private/section-header/SectionNav'
 
 
 import './collections.scss'
-
 //(userLibrary[category]).find(post => post._id === id)
 
 
 export const Collections = (props) => {
-  const {data, type} =props
+  const { data, type } = props
+  
+//to handle window.width and render the produce navbar only for desktop
+  const { windowWidth } = useContext(AnimationContext)
+  const [isMobile, setIsMobile] = useState(false)
+
+  console.log(windowWidth)
+  useEffect(() => {
+    setIsMobile(windowWidth > 1024 ? true : false)
+  }, [windowWidth])
   
   // animation
   const [index, setIndex]=useState(0)
@@ -129,6 +138,8 @@ export const Collections = (props) => {
 
 
   return (
+    <>
+      {isMobile && <SectionNav  />}
     <section className="Collections">
     <section className='Slideshow'>
       <section className="Hero slideShowSlider" style={{transform:`translate3d(${-index * 100}%, 0, 0)`}}>
@@ -156,8 +167,7 @@ export const Collections = (props) => {
     </section>
     </section> 
     
-</section>
-
-
+      </section>
+      </>
   )
 }
