@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import { AppHeader } from "./components/Private/Appheader/AppHeader.jsx";
 import { Collections } from "./Pages/Private/Collections/Collections.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";
-import { PostPage } from "./components/Private/PostPage/PostPage.jsx";
+import { PostPage } from "./Pages/Private/PostPage/PostPage.jsx";
 import { Seasonal } from "./Pages/Private/Seasonal/Seasonal.jsx";
 import { Community } from "./Pages/Private/Community/Community.jsx";
 import { Profile } from "./Pages/Private/Profile/Profile.jsx";
@@ -25,6 +25,7 @@ import { AnimationContext } from "./contexts/AnimationContext.js";
 import { PostsContext } from "./contexts/PostContext.js";
 import { UserContext } from "./contexts/UserContext.js";
 import { SectionNav } from "./components/Private/section-header/SectionNav.jsx";
+import { SingleProducePage } from "./Pages/Private/SingleProducePage/SingleProducePage.jsx";
 
 
 
@@ -71,7 +72,7 @@ export default function App() {
         {displayNav || isNav ? (cookies.profileName || isLogin ? (
           <>
         <AppHeader />
-            <SectionNav />
+            {/* <SectionNav /> */}
             </>
         ) : <Header />) : null}
         
@@ -118,7 +119,7 @@ export default function App() {
 
           <Route path="/seasonal">
             <Route index element={<Seasonal/>}/>
-            <Route path="/seasonal/:name" element={<PostPage/>}/>
+            <Route path="/seasonal/:name" element={<SingleProducePage/>}/>
           </Route>
 
           <Route path="/profile">

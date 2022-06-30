@@ -1,0 +1,65 @@
+
+@import '../../../styles/breakpoints';
+
+
+
+.Seasonal-page{
+
+    position:relative;
+    top:100px;
+
+    .Seasonal-page-inner{
+        border:1px solid red;
+
+        .Seasonal-page-hero{
+          width:100%;
+          padding:2rem;
+
+            .Seasonal-hero-image{
+                border-radius: 50%;
+
+                img{
+                    width:100%;
+                }
+            }
+
+            .Seasonal-hero-title{
+                margin-top:3rem;
+    
+                display:flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                h2{
+                    align-self: center;
+                    font-size: 4.5rem;
+                    
+                }
+
+                p{
+                    align-self: center;
+                    font-size: 2rem;
+                    margin:1rem 
+                 
+                    
+                }
+
+            }
+           
+        }
+
+        .Seasonal-description{
+
+            border:1px solid red;
+
+            p{
+                margin-bottom:1rem;
+
+                &:last-child{
+                    display:none;
+                }
+            }
+            
+        }
+    }
+}
