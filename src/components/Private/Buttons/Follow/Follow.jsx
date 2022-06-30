@@ -1,46 +1,42 @@
 import React, { useContext, useState } from 'react'
-import { PostsContext } from '../../../../contexts/PostContext'
+import { useParams } from 'react-router-dom'
+import { PostsContext } from '../../../../contexts/PostContext.js'
 
-export const Follow = (props) => {
+export const Follow = () => {
+  const { upgrade, setUpgrade, users }=useContext(PostsContext)
+  const { profileName } = useParams()
+  const [ error, setError ] = useState(null)
 
-  const{ upgrade, setUpgrade }=useContext(PostsContext)
-
-  // user is user._id, users is
-  const {user, users}= props
-
-  const author = user === users
-  // console.log("follow", author)
-
-  const [error, setError]=useState()
+  // we can use the localStorage data to check author
+  const currentUser = JSON.parse(localStorage.getItem('user'))
+  const isAuthor = currentUser.profileName === profileName
+  const author = users.find(user => user.profileName === profileName)
 
 
-  // Check fetch and router
+
+
   function FollowUser(){
 
     const payload ={ type:"follow", id:users}
-
     const config = {
-        credentials: 'include', // specify this if you need cookies
-        headers:{"Content-Type":"application/json"},
-        method: "DELETE",
-        body:JSON.stringify(payload)
-        
-      };
-      
-      fetch(`http://localhost:7000/user/collection/${user}`, config)
-        .then((response) => response.json())
-        .then((result) => {
-          if(result.errors){
-            setError(result.errors)
-          }
-          setUpgrade(!upgrade)
-        })
-        .catch((error) => console.log(error));
-      }
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" }
+    }
+       
+    fetch(`http://localhost:7000/user/${author._id}/following`, config)
+      .then((response) => response.json())
+      .then((result) => {
+             if(result.errors){
+                    setError(result.errors)
+             }
+             setUpgrade(!upgrade)
+      })
+      .catch((error) => console.log(`error from Follow request`, error));
+    }
 
   return (
     <section>
-       {!author ? <button onClick={FollowUser}>Follow</button> : null}
+       {!isAuthor ? <button onClick={FollowUser}>Follow</button> : null}
        <p>{error}</p>
     </section>
     

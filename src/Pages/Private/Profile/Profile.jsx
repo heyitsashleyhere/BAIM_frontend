@@ -136,7 +136,7 @@ export const Profile = () => {
           </section>
 
           <section className="Profile-followers">
-            <Follow user={currentUser._id} users={currentUser._id} />
+            <Follow />
             <p>100 followers</p>
             <p>10 following</p>
           </section>
