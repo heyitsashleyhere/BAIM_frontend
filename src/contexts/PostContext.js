@@ -15,55 +15,21 @@ function PostsContextProvider({ children }){
     const [searchOpt, setSearchOpt] = useState("")
     const [searchInput, setSearchInput] = useState("")
 
-    // Profile filter
-    const [currentUserLibrary, setCurrentUserLibrary] = useState({beauty: [], artsCraft: [], garden: [], recipe: [], event: []})
-
     // ProduceAPI
     const [seasonal, setSeasonal]=useState([])
     
     
-    // ! maybe we don't need this anymore
-    const [users, setUsers]=useState([])
-    const [beauties, setBeauties]=useState([])
-    const [artsCrafts, setArtsCrafts]=useState([])
-    const [gardens, setGardens]=useState([])
-    const [recipes, setRecipes]=useState([])
-    const [events, setEvents]=useState([])
-    const [ upgrade, setUpgrade]=useState(false)
+    // dependency for fetches
+    const [ users, setUsers ] = useState([])
+    const [ upgrade, setUpgrade ] = useState(false)
     
     // const [loading, setLoading]=useState(true)
     
-    // ! maybe we don't need this anymore
     useEffect(() => {
         fetch("http://localhost:7000/user")
         .then(response => response.json())
         .then(result => {setUsers(result)})
         .catch(error => console.log(error.message))
-
-        fetch("http://localhost:7000/beauty")
-        .then(response => response.json())
-        .then(result => setBeauties(result))
-        .catch(error => console.log(error.message))
-
-        fetch("http://localhost:7000/artsCraft")
-        .then(response => response.json())
-        .then(result => setArtsCrafts(result))
-        .catch(error => console.log(error.message))
-
-        fetch("http://localhost:7000/garden")
-        .then(response => response.json())
-        .then(result => setGardens(result))
-        .catch(error => console.log(error.message))
-
-        fetch("http://localhost:7000/recipe")
-        .then(response=>response.json())
-        .then(result=>setRecipes(result))
-        .catch(error=>console.log(error.message))
-
-        fetch("http://localhost:7000/event")
-        .then(response=>response.json())
-        .then(result=>setEvents(result))
-        .catch(error=>console.log(error.message))
 
         fetch("https://lokalseasons.herokuapp.com/produce")
         .then(response=>response.json())
@@ -72,8 +38,7 @@ function PostsContextProvider({ children }){
 
     }, [upgrade])
     
-    console.log(seasonal)
-
+    // console.log(`seasonal`, seasonal)
 
 
     function convertToBase64(file) {
@@ -115,18 +80,12 @@ function PostsContextProvider({ children }){
         convertToBase64, handleFileUpload,
         data, setData, 
         users, setUsers, 
-        recipes, setRecipes,
-        beauties, setBeauties, 
-        gardens, setGardens,
-        events, setEvents, 
-        artsCrafts, setArtsCrafts, 
         upgrade, setUpgrade,
         searchResult, setSearchResult,
         searchCat, setSearchCat,
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
         seasonal, setSeasonal,
-        currentUserLibrary, setCurrentUserLibrary
     }
 
     return (
