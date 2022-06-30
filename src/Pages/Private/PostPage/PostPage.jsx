@@ -6,9 +6,8 @@ import { UserComment } from '../../../components/Private/Buttons/Comment/UserCom
 import {MdOutlineArrowBack} from 'react-icons/md'
 import { BsHeart } from 'react-icons/bs'
 import {AnimationContext} from '../../../contexts/AnimationContext.js'
-
+import { SectionNav } from '../../../components/Private/section-header/SectionNav.jsx'
 import './postPage.scss'
-import { SectionNav } from '../section-header/SectionNav'
 
 
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
