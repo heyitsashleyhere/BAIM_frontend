@@ -119,7 +119,7 @@ function PostsContextProvider({ children }){
         address, setAddress,
         convertToBase64, handleFileUpload,
         data, setData, 
-        users, 
+        users, setUsers, 
         allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost,
         upgrade, setUpgrade,
         searchResult, setSearchResult,

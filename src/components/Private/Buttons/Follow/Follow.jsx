@@ -17,7 +17,6 @@ export const Follow = () => {
 
   function FollowUser(){
 
-    const payload ={ type:"follow", id:users}
     const config = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" }

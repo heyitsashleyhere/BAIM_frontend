@@ -13,7 +13,7 @@ import './profile.scss';
 
 
 export const Profile = () => {
-  const { postCategories } = useContext(PostsContext)
+  const { postCategories, users, setUsers } = useContext(PostsContext)
   const { windowWidth } = useContext(AnimationContext)
   const { profileName } = useParams()
   
@@ -34,7 +34,24 @@ export const Profile = () => {
   const [display, setDisplay] = useState(null)
   const [message, setMessage] = useState(null)
 
-  useEffect(() => {
+  const [followers, setFollowers] = useState([])
+  const [following, setFollowing] = useState([])
+
+  const profileUser = users.find(user => user.profileName === profileName)
+
+  useEffect(() => {   
+    fetch(`http://localhost:7000/user/${profileUser._id}`, { method: "GET", headers: { "Content-Type": "application/json" } })
+    .then((response) => response.json())
+    .then((result) => {
+           if(result.errors){
+              console.log('errors from Profile GET user :>> ', result.errors);
+           } else {
+            setFollowers(result.followers)
+            setFollowing(result.following)
+           }
+    })
+    .catch((error) => console.log(`error from Follow request`, error));
+
     const config = {
       method: "GET",
       credentials: 'include', // specify this if you need cookies
@@ -60,7 +77,7 @@ export const Profile = () => {
             if(result === []) {
               currentUser.profileName === profileName ? setMessage('You have not posted anything yet') : setMessage('This person has not posted anything yet')
             } else {
-                          switch (cat) {
+            switch (cat) {
               case 'beauty':
                 setBeauties(result);
                 break;
@@ -85,7 +102,7 @@ export const Profile = () => {
         })
       .catch((error) => console.log('profile PostCategory fetch errors :>> ', error));
     })
-  }, [])
+  }, [users])
 
 
   function showPostCategoryButton(Category) {
@@ -137,8 +154,8 @@ export const Profile = () => {
 
           <section className="Profile-followers">
             <Follow />
-            <p>100 followers</p>
-            <p>10 following</p>
+            <p>{followers.length} followers</p>
+            <p>{following.length} following</p>
           </section>
         </section>
 
