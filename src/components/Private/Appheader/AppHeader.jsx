@@ -27,7 +27,8 @@ export const AppHeader = () => {
       {path: '/discover', name: 'Discover'},
       {path: '/feed', name: 'Feed'},
       {path: `/profile/${cookies.profileName}`, name: 'Profile'},
-      {path: '/create', name: 'Create'}
+      {path: '/create', name: 'Create'},
+
   ]
 
   // refs to elements to be included in the animation

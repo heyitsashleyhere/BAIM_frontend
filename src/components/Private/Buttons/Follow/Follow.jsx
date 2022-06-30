@@ -9,7 +9,7 @@ export const Follow = (props) => {
   const {user, users}= props
 
   const author = user === users
-  console.log("follow", author)
+  // console.log("follow", author)
 
   const [error, setError]=useState()
 
