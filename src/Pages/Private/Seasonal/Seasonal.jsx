@@ -40,35 +40,35 @@ export const Seasonal = () => {
         <section className="Seasonal-wrapper">
           <h1>{currentMonth[0].toUpperCase() + currentMonth.substring(1)} In season</h1>
           <section className="Seasonal-wrapper-collection">
-          { inSeason.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image}/>)}
+          { inSeason.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
           </section>
         </section>
 
         <section className="Seasonal-wrapper">
           <h1>Seeding Indoor</h1>
           <section className="Seasonal-wrapper-collection">
-            {seedingIndoor.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image}/>)}
+            {seedingIndoor.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
           </section>
         </section>
 
         <section className="Seasonal-wrapper">
           <h1>Seeding Outdoor</h1>
           <section className="Seasonal-wrapper-collection">
-            {seedingOutdoor.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image}/>)}
+            {seedingOutdoor.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
           </section>
         </section>
 
         <section className="Seasonal-wrapper">
           <h1>Planting season</h1>
           <section className="Seasonal-wrapper-collection">
-            {planting.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image}/>)}
+            {planting.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
           </section>
         </section>
 
         <section className="Seasonal-wrapper">
           <h1>library</h1>
           <section className="Seasonal-wrapper-collection">
-            { seasonal.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image}/>)}
+            { seasonal.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
           </section>
         </section>
 
