@@ -140,14 +140,14 @@ export const Profile = () => {
           <button>...</button>
 
           <section className="Profile-info">
-            <img src={currentUser.avatar}></img>
+            <img src={profileUser.avatar}></img>
             <section className="Profile-text">
-              <h1>{currentUser.profileName}</h1>
+              <h1>{profileUser.profileName}</h1>
               <p>Gardner</p>
               <p>I'm all about plants, and herbs</p>
               <h2>
-                {currentUser.userAddress.city} ,{" "}
-                {currentUser.userAddress.country}
+                {profileUser.userAddress.city} ,{" "}
+                {profileUser.userAddress.country}
               </h2>
             </section>
           </section>
