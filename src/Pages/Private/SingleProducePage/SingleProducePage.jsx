@@ -16,10 +16,11 @@ export const SingleProducePage = () => {
     const data = seasonal.find(item => item.name === name)
 
     const date = new Date();
-    let currentMonth = date.toLocaleString('default', { month: 'long' }).split(" ")[0].toLowerCase();
+    let currentMonth = date.toLocaleString('default', { month: 'short' }).split(" ")[0].toLowerCase();
 
     let navigate = useNavigate()
     
+    console.log(data)
 
 
 
@@ -45,7 +46,7 @@ export const SingleProducePage = () => {
         <section className="Seasonal-text">
           <section className="Seasonal-description">
               <h3>Description</h3>
-              {data.description.split('.').map(item => <p>{item} .</p>)}
+              {data.description.split('.').map(item => <p>{item}.</p>)}
           </section>
 
           <section className="Seasonal-optimal">
@@ -59,7 +60,7 @@ export const SingleProducePage = () => {
             <span>
               <h3>Planting</h3>
               <section className="Seasonal-Month">
-              {data.planting_time.map(item => <p >{item.substring(0,3).toUpperCase()}</p>)}
+              {data.planting_time.map(item => <p>{item.substring(0,3).toUpperCase()}</p>)}
               </section>
               </span>
               <span>
@@ -76,7 +77,7 @@ export const SingleProducePage = () => {
               </section>
               </span>
               <span className="Seasonal-days">
-              <h3>Harvesting time {data.harvest_time} days</h3>
+              <h3>Harvesting time: {data.harvest_time} days.</h3>
               </span>
           </section>
 
@@ -145,9 +146,9 @@ export const SingleProducePage = () => {
                 <h3>Harvesting</h3>
                 {data.harvesting.split('.').map(item=><p>{item}.</p>)}
               </section>
-            <section className="Seasonal-plant-map">
+            <section className="Seasonal-plant">
                 <h3>Storage</h3>
-                {data.storage.split('.').map(item=><p>{item}.</p>)}
+                <p>{data.storage}</p>
                 </section>
             
             {/* <section className="Seasonal-harvest">

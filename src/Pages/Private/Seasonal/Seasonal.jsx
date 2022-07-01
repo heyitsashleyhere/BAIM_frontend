@@ -15,23 +15,31 @@ export const Seasonal = () => {
   let currentMonth = date.toLocaleString('default', { month: 'long' }).split(" ")[0].toLowerCase();
   console.log(currentMonth);
 
+  let shortMonth = date.toLocaleString('default', { month: 'short' }).split(" ")[0].toLowerCase();
+
   const library = seasonal.sort((a,b)=>{
     let textA = a.name
     let textB= b.name
     return (textA < textB ? -1 : (textA > textB) ? 1 : 0)
    })
   
-  const inSeason = library.filter(produce => {
+  const inSeason = seasonal.filter(produce => {
     // produce.in_season.includes(currentMonth)
       return produce.in_season.filter(month => month === currentMonth).length
       // return produce.in_season.some(month => month === currentMonth)
   })
 
+  console.log(seasonal)
 
 
  const planting = library.filter(produce => produce.planting_time.filter(month => month === currentMonth).length)
 
+ console.log(planting)
+
  const seedingIndoor = library.filter(produce=> produce.seeding_indoor.filter(month => month === currentMonth).length )
+
+ console.log(seedingIndoor)
+
  const seedingOutdoor = library.filter(produce => produce.seeding_outdoor.filter(month=> month === currentMonth).length) 
 
 

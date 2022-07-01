@@ -242,6 +242,7 @@
                     }
     
                     &:hover{
+                        background-color: black;
                         border:1px solid rgba(128, 128, 128, 0.486);
                         transform: scale(0.5);
                         transition: 0.35s all ease-in-out;
