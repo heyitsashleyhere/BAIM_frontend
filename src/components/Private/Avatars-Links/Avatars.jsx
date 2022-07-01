@@ -112,7 +112,7 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
           </Menu>
         </section> }
     
-        <NavLink to={`${data.type}/${data.title}`} className="InnerSquareAvatar">
+        <NavLink to={`/${data.type}/${data.title}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={data.image}></img>
                 <h2>{data.title}</h2>

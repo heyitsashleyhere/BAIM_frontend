@@ -116,7 +116,7 @@ export const SectionNav = () => {
       <section className="section-nav-container">
         <section className={` ${visible ? 'avatars' : 'hidden'}`}>
           {firstSeven.map(({id, name, image}, index) => (
-            <SeasonalAvatar id={id} name={name} image={image}  />
+            <SeasonalAvatar id={id} name={name} image={image} key={'sectionNav-'+index} />
           ))}
         </section>
         {show &&(
