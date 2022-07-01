@@ -11,7 +11,7 @@ export const Community = () => {
  const { users, setUsers}=useContext(PostsContext)
  const {user}=useContext(UserContext)
 
-console.log(users)
+  console.log("users", JSON.stringify(users, null, '  '));
 
   return (
     <section className="Pages">
@@ -29,8 +29,17 @@ console.log(users)
         <p>{users.length} users</p>
       </section>
       <section className="Library-container">
-      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName}/>)}
-    </section>
+        { users.map(item => (
+            <RoundAvatar
+              key={item.id}
+              id={item._id}
+              image={item.avatar}
+              name={item.profileName}
+            />
+            )
+          )
+        }
+      </section>
     </section>
 
     <section className="Library-wrapper">
@@ -75,9 +84,9 @@ console.log(users)
 
     <section>
     </section>
-   
+
 </section>
-    
-   
+
+
   )
 }

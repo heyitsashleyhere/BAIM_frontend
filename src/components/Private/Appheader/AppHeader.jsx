@@ -76,7 +76,7 @@ export const AppHeader = () => {
     //to handle window.width and render the produce navbar only for desktop
   const { windowWidth } = useContext(AnimationContext)
 
-  console.log(windowWidth)
+  // console.log("windowWidth",windowWidth)
   useEffect(() => {
     setIsMobile(windowWidth < 768 ? true : false)
     setBurgerMenu(false)

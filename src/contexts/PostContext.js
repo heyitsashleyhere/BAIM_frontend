@@ -33,7 +33,9 @@ function PostsContextProvider({ children }){
     useEffect(() => {
         fetch("http://localhost:7000/user")
         .then(response => response.json())
-        .then(result => {setUsers(result)})
+        .then(result => {
+          setUsers(result)
+        })
         .catch(error => console.log(error.message))
 
         fetch("https://lokalseasons.herokuapp.com/produce")

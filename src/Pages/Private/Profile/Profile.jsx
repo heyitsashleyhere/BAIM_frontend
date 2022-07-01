@@ -39,15 +39,27 @@ export const Profile = () => {
 
   const profileUser = users.find(user => user.profileName === profileName)
 
-  useEffect(() => {   
+  useEffect(() => { 
+    console.log("profileName:", profileName);
+    console.log("profileUser", JSON.stringify(profileUser, null, '  '));
+    
+    
     fetch(`http://localhost:7000/user/${profileUser._id}`, { method: "GET", headers: { "Content-Type": "application/json" } })
     .then((response) => response.json())
     .then((result) => {
            if(result.errors){
               console.log('errors from Profile GET user :>> ', result.errors);
            } else {
-            setFollowers(result.followers)
-            setFollowing(result.following)
+            // <<< JAMES's SOLUTION (AT LEAST HE THINKS SO)
+            // setFollowers(result.followers)
+            // setFollowing(result.following)
+
+            // result.followers/ing may be undefined: provide default
+            // or, better, ensure that result.followers/ing is always
+            // an array, even if it is empty.
+            setFollowers(result.followers || [])
+            setFollowing(result.following || [])
+            // JAMES's SOLUTION >>>
            }
     })
     .catch((error) => console.log(`error from Follow request`, error));
@@ -69,6 +81,8 @@ export const Profile = () => {
     //       console.log('currentUserLibrary :>> ', currentUserLibrary);
     //       console.log('typeof test :>> ', typeof test);
     postCategories.map(cat => {
+      console.log("cat:", cat, "profileName:", profileName);
+      
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
       .then((response) => response.json())
       .then((result) => {
@@ -100,7 +114,9 @@ export const Profile = () => {
             console.log('profile PostCategory fetch errors :>> ', result.errors);
           }
         })
-      .catch((error) => console.log('profile PostCategory fetch errors :>> ', error));
+      .catch((error) => {
+        console.log('profile PostCategory fetch errors :>> ', error)
+      });
     })
   }, [users])
 
