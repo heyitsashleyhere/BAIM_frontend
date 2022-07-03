@@ -8,7 +8,7 @@ const Loader = ({setLoading}) => {
     const { show, setShow, windowWidth } = useContext(AnimationContext)
 
   //to change the CTA section video based on the window width
-  const desktopVideo = `${process.env.PUBLIC_URL}/landingVideos/mainVideo.webm`
+  const desktopVideo = `${process.env.PUBLIC_URL}/landingVideos/commercialTitles.webm`
   const tabletVideo = `${process.env.PUBLIC_URL}/landingVideos/raspberrie.mp4`
 
   const videoUrl = windowWidth >= 992 ? desktopVideo : tabletVideo;
