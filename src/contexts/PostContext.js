@@ -3,6 +3,7 @@ import React, { useState, useEffect }  from 'react'
 export const PostsContext = React.createContext(null)
 
 function PostsContextProvider({ children }){
+
     const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"] 
     // creating a post
     const [data, setData] = useState({})
@@ -18,14 +19,20 @@ function PostsContextProvider({ children }){
     // ProduceAPI
     const [seasonal, setSeasonal]=useState([])
     
-    
-    // dependency for fetches
+    // General ALL posts fetches
     const [ users, setUsers ] = useState([])
+    const [ allBeautyPost, setAllBeautyPost ] = useState([])
+    const [ allArtsCraftPost, setArtsCraftPost ] = useState([])
+    const [ allGardenPost, setGardenPost ] = useState([])
+    const [ allRecipePost, setAllRecipePost ] = useState([])
+    const [ allEventPost, setAllEventPost ] = useState([])
+    // dependency for fetches
     const [ upgrade, setUpgrade ] = useState(false)
     
     // const [loading, setLoading]=useState(true)
     
     useEffect(() => {
+        
         fetch("http://localhost:7000/user")
         .then(response => response.json())
         .then(result => {setUsers(result)})
@@ -35,6 +42,41 @@ function PostsContextProvider({ children }){
         .then(response=>response.json())
         .then(result => setSeasonal(result))
         .catch(error => console.log(error.message))
+
+        // const config = {
+        //     method: "GET",
+        //     credentials: 'include', // specify this if you need cookies
+        //     headers: { "Content-Type": "application/json" }
+        //   };
+
+        postCategories.map(cat => {
+            fetch(`http://localhost:7000/${cat}/`)
+            .then((response) => response.json())
+            .then((result) => {
+                if(!result.errors) { 
+                  switch (cat) {
+                    case 'beauty':
+                      setAllBeautyPost(result);
+                      break;
+                    case 'artsCraft':
+                      setArtsCraftPost(result);
+                      break;
+                    case 'garden':
+                      setGardenPost(result);
+                      break;
+                    case 'recipe':
+                      setAllRecipePost(result);
+                      break;
+                    case 'event':
+                      setAllEventPost(result);
+                      break;
+                  }
+                } else {
+                  console.log('fetch from PostContext :>> ', result.errors);
+                }
+              })
+            .catch((error) => console.log('fetch from PostContext :>> ', error));
+          })
 
     }, [upgrade])
     
@@ -80,6 +122,7 @@ function PostsContextProvider({ children }){
         convertToBase64, handleFileUpload,
         data, setData, 
         users, setUsers, 
+        allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost,
         upgrade, setUpgrade,
         searchResult, setSearchResult,
         searchCat, setSearchCat,

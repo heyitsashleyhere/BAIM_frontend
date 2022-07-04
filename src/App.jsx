@@ -13,6 +13,8 @@ import { Community } from "./Pages/Private/Community/Community.jsx";
 import { Profile } from "./Pages/Private/Profile/Profile.jsx";
 import Create from "./Pages/Private/Create/Create.jsx";
 import Search from "./Pages/Private/Search/Search.jsx";
+import { SingleProducePage } from "./Pages/Private/SingleProducePage/SingleProducePage.jsx";
+import Footer from "./components/Public/Footer/Footer.jsx";
 // Public components
 import Header from "./components/Public/header/Header.jsx";
 import Main from "./Pages/Public/Main/Main.jsx";
@@ -22,12 +24,9 @@ import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
 import Team from "./Pages/Public/Team/Team.jsx";
 import ScrollToTop from "./components/Public/Footer/ScrollToTop.jsx";
 // context
-import { AnimationContext } from "./contexts/AnimationContext.js";
+import { AnimationContext } from "./contexts/AnimationContext.js"; //TODO help to make it NONEED
 import { PostsContext } from "./contexts/PostContext.js";
 import { UserContext } from "./contexts/UserContext.js";
-import { ProduceNav } from "./components/Private/section-header/ProduceNav.jsx";
-import { SingleProducePage } from "./Pages/Private/SingleProducePage/SingleProducePage.jsx";
-import Footer from "./components/Public/Footer/Footer.jsx";
 
 const theme = createTheme({
 	palette: {
@@ -45,12 +44,11 @@ const theme = createTheme({
 });
 
 export default function App() {
-	const { isLogin } = useContext(UserContext);
-	const { isNav } = useContext(AnimationContext);
-	const [cookies] = useCookies();
-	const [displayNav, setDisplayNav] = useState();
-	const { users, recipes, beauties, gardens, events, artsCrafts } =
-		useContext(PostsContext);
+  const { isLogin } = useContext(UserContext);
+  const { isNav } = useContext(AnimationContext);
+  const [cookies] = useCookies();
+  const [displayNav, setDisplayNav] = useState()
+  const { users, allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost, } = useContext(PostsContext)
 
 	useEffect(() => {
 		const localDisplayNav = localStorage.getItem("showNav");
@@ -63,106 +61,68 @@ export default function App() {
 	// }
 
 	return (
-		<ThemeProvider theme={theme}>
-			<section className="App">
-				{displayNav || isNav ? (
-					cookies.profileName || isLogin ? (
-						<>
-							<PrivateHeader />
-						</>
-					) : (
-						<Header />
-					)
-				) : null}
+    <ThemeProvider theme={theme}>
+      <section className="App">
+        {displayNav || isNav ? (
+          cookies.profileName || isLogin ? (
+            <>
+              <PrivateHeader />
+            </>
+          ) : (
+            <Header />
+          )
+        ) : null}
 
-				<ScrollToTop />
+        <ScrollToTop />
 
-				<Routes>
-					{/* Public routes */}
-					<Route path="/" element={<PromoVideo />} />
-					<Route path="/main" element={<Main />} />
-					<Route path="/about" element={<About />} />
-					<Route path="/team" element={<Team />} />
-					<Route path="/auth" element={<LoginRegister />} />
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<PromoVideo />} />
+          <Route path="/main" element={<Main />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/auth" element={<LoginRegister />} />
 
-					{/* Private routes */}
-					<Route path="/discover" element={<Discover />} />
-					<Route path="/create" element={<Create />} />
-					<Route path="/search" element={<Search />} />
+          {/* Private routes */}
+          <Route path="/discover" element={<Discover />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/search" element={<Search />} />
 
-					<Route path="/garden">
-						<Route
-							index
-							element={<Collections data={gardens} type="garden" />}
-						/>
-						<Route
-							path="/garden/:title"
-							element={<PostPage data={gardens} />}
-						/>
-					</Route>
+          <Route path="/garden" element={<Collections data={allGardenPost} type="garden" />} />
+          <Route path="/garden/:title" element={<PostPage data={allGardenPost} />} />
 
-					<Route path="/artsCraft">
-						<Route
-							index
-							element={<Collections data={artsCrafts} type="arts" />}
-						/>
-						<Route
-							path="/artsCraft/:title"
-							element={<PostPage data={artsCrafts} />}
-						/>
-					</Route>
+          <Route path="/artsCraft" element={<Collections data={allArtsCraftPost} type="arts" />} />
+          <Route path="/artsCraft/:title" element={<PostPage data={allArtsCraftPost} />} />
 
-					<Route path="/recipe">
-						<Route
-							index
-							element={<Collections data={recipes} type="recipe" />}
-						/>
-						<Route
-							path="/recipe/:title"
-							element={<PostPage data={recipes} />}
-						/>
-					</Route>
+          <Route path="/recipe" element={<Collections data={allRecipePost} type="recipe" />} />
+          <Route path="/recipe/:title" element={<PostPage data={allRecipePost} />} />
 
-					<Route path="/beauty">
-						<Route
-							index
-							element={<Collections data={beauties} type="beauty" />}
-						/>
-						<Route
-							path="/beauty/:title"
-							element={<PostPage data={beauties} />}
-						/>
-					</Route>
+          <Route path="/beauty" element={<Collections data={allBeautyPost} type="beauty" />} />
+          <Route path="/beauty/:title" element={<PostPage data={allBeautyPost} />} />
 
-					<Route path="/community">
-						<Route index element={<Community />} />
-						<Route path="/community/:title" element={<PostPage />} />
-					</Route>
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/:title" element={<PostPage />} />
 
-					<Route path="/seasonal">
-						<Route index element={<Seasonal />} />
-						<Route path="/seasonal/:name" element={<SingleProducePage />} />
-					</Route>
+          <Route path="/seasonal" element={<Seasonal />} />
+          <Route path="/seasonal/:name" element={<SingleProducePage />} />
 
-					<Route path="/profile">
-						<Route index element={<Profile />} />
-						<Route path="/profile/:profileName" element={<Profile />} />
-					</Route>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:profileName" element={<Profile />} />
 
-					<Route path="/*" element={<Main />} />
-				</Routes>
-				{/* {isLogin ? <Footer /> : null} */}
+          <Route path="/*" element={<Main />} />
+        </Routes>
+        {/* {isLogin ? <Footer /> : null} */}
 
-				{displayNav ? (
-					cookies.profileName || isLogin ? (
-						<>
-							<Footer />
-						</>
-					) : null
-				) : null}
+        {displayNav ? (
+          cookies.profileName || isLogin ? (
+            <>
+              <Footer />
+            </>
+          ) : null
+        ) : null}
 
-				{/* <Footer /> */}
-			</section>
-		</ThemeProvider>
-	);
+        {/* <Footer /> */}
+      </section>
+    </ThemeProvider>
+  )
 }

@@ -14,6 +14,14 @@ export const Seasonal = () => {
   const date = new Date();
   let currentMonth = date.toLocaleString('default', { month: 'long' }).split(" ")[0].toLowerCase();
   console.log(currentMonth);
+
+  let shortMonth = date.toLocaleString('default', { month: 'short' }).split(" ")[0].toLowerCase();
+
+  const library = seasonal.sort((a,b)=>{
+    let textA = a.name
+    let textB= b.name
+    return (textA < textB ? -1 : (textA > textB) ? 1 : 0)
+   })
   
   const inSeason = seasonal.filter(produce => {
     // produce.in_season.includes(currentMonth)
@@ -21,12 +29,22 @@ export const Seasonal = () => {
       // return produce.in_season.some(month => month === currentMonth)
   })
 
- const planting = seasonal.filter(produce => produce.planting_time.filter(month => month === currentMonth).length)
+  console.log(seasonal)
 
- const seedingIndoor = seasonal.filter(produce=> produce.seeding_indoor.filter(month => month === currentMonth).length )
- const seedingOutdoor = seasonal.filter(produce => produce.seeding_outdoor.filter(month=> month === currentMonth).length) 
+
+ const planting = library.filter(produce => produce.planting_time.filter(month => month === currentMonth).length)
+
+ console.log(planting)
+
+ const seedingIndoor = library.filter(produce=> produce.seeding_indoor.filter(month => month === currentMonth).length )
+
+ console.log(seedingIndoor)
+
+ const seedingOutdoor = library.filter(produce => produce.seeding_outdoor.filter(month=> month === currentMonth).length) 
+
+
  
- console.log("seedingIndoor",seedingIndoor)
+
  
  
  return (
@@ -68,7 +86,7 @@ export const Seasonal = () => {
         <section className="Seasonal-wrapper">
           <h1>library</h1>
           <section className="Seasonal-wrapper-collection">
-            { seasonal.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
+            { library.map(item => <SeasonalAvatar name={item.name} id={item._id} image={item.image} key={item._id}/>)}
           </section>
         </section>
 
