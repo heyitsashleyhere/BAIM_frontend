@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export const AnimationContext = React.createContext();
 
 export const AnimationContextProvider = ({ children }) => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const [ isNav, setIsNav ] = useState(false)
+	const [isNav, setIsNav] = useState(false);
 
 	useEffect(() => {
 		const handleWindowResize = () => {
@@ -17,11 +17,8 @@ export const AnimationContextProvider = ({ children }) => {
 		};
 	}, []);
 
-
-
 	return (
-		<AnimationContext.Provider value={{ windowWidth, isNav, setIsNav  }}
-		>
+		<AnimationContext.Provider value={{ windowWidth, isNav, setIsNav }}>
 			{children}
 		</AnimationContext.Provider>
 	);

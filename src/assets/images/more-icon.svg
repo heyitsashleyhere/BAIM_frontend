@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 630" width="630" height="630">
+	<title>New Project</title>
+	<style>
+		.s0 {
+			fill: #ffffff;
+			stroke: #222222;
+			stroke-width: 8;
+		}
+	</style>
+	<path id="Shape 5" class="s0" d="m290.2 175.1h49.6v114.2h114.2v49.6h-114.2v115h-49.6v-115h-114.2v-49.6h114.2z" />
+</svg>
