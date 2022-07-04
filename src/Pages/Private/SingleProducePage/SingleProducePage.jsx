@@ -101,15 +101,15 @@ export const SingleProducePage = () => {
           <section className="Seasonal-planting">
               <section className="Seasonal-plant-map">
                 <h3>Planting consideration</h3>
-                {data.planting_considerations.split('.').map(item=><p>{item}.</p>)}
+                {data.planting_considerations.map(item=><p>{item}.</p>)}
               </section>
               <section className="Seasonal-plant-map">
                 <h3>When to Plant</h3>
-                {data.when_to_plant.split('.').map(item=><p>{item}.</p>)}
+                {data.when_to_plant.map(item=><p>{item}.</p>)}
               </section>
               <section className="Seasonal-plant-map">
                 <h3>Growing from seed</h3>
-                {data.growing_from_seed.split('.').map(item=><p>{item}.</p>)}
+                {data.growing_from_seed.map(item=><p>{item}.</p>)}
               </section>
               <section className="Seasonal-plant">
                 <h3>Transplanting</h3>
@@ -144,7 +144,7 @@ export const SingleProducePage = () => {
           <section className="Seasonal-harvest">
             <section className="Seasonal-plant-map">
                 <h3>Harvesting</h3>
-                {data.harvesting.split('.').map(item=><p>{item}.</p>)}
+                {data.harvesting.map(item=><p>{item}.</p>)}
               </section>
             <section className="Seasonal-plant">
                 <h3>Storage</h3>

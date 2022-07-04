@@ -24,6 +24,7 @@ const date = item => new Date(item).toLocaleDateString("eu")
 
 
 const author = user  === data.author
+console.log('comments', user)
 
   function editComment(){
 

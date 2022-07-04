@@ -14,7 +14,6 @@ export default function ImageInput({imageUsage}){
     function fileHandler(e) {
         e.preventDefault()
         setImageUrl(URL.createObjectURL(img.current.files[0]))
-
         const url = uploadFile(img.current.files[0])
     }
 
@@ -36,7 +35,7 @@ export default function ImageInput({imageUsage}){
     function deleteFile(file){
         if(inputValues[`${imageUsage}`]){
             const storage = getStorage()
-            const imageRef = ref(storage, `${inputValues[`${imageUsage}`]}`)
+            const imageRef = ref(storage, `/files/image/${imageUsage}`)
 
             deleteObject(imageRef).then(()=>{
                 console.log('imageRef', img)
