@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { AnimationContext } from "../../../contexts/AnimationContext";
 
 import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
-import { SectionNav } from "../../../components/Private/section-header/SectionNav.jsx";
+import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx"
 
 import "./collections.scss";
 //(userLibrary[category]).find(post => post._id === id)

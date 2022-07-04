@@ -165,12 +165,12 @@ export const RoundAvatar = ({ name, id, image }) => {
 export const SeasonalAvatar = ({ name, id, image }) => {
 	return (
 		<section className="AvatarR">
-			<Link to={`/seasonal/${name}`} key={id} className="RoundAvatar ">
+			<NavLink to={name === 'More' ? `/seasonal`: `/seasonal/${name}`} key={id} className="RoundAvatar ">
 				<section className="imageAvatar produceIcon">
 					<img src={image}></img>
 				</section>
 				<h2>{name}</h2>
-			</Link>
+			</NavLink>
 		</section>
 	);
 };
