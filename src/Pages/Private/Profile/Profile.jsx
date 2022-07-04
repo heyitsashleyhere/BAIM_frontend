@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-// context
 import { PostsContext } from '../../../contexts/PostContext.js'
 import { AnimationContext } from '../../../contexts/AnimationContext.js'
-// components
 import { SquareAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { Follow } from '../../../components/Private/Buttons/Follow/Follow.jsx'
 import { SectionNav } from '../../../components/Private/section-header/SectionNav.jsx'
-// style
 import './profile.scss';
 
 
@@ -46,8 +43,8 @@ export const Profile = () => {
            if(result.errors){
               console.log('errors from Profile GET user :>> ', result.errors);
            } else {
-            setFollowers(result.followers)
-            setFollowing(result.following)
+            setFollowers(result.followers || [])
+            setFollowing(result.following || [])
            }
     })
     .catch((error) => console.log(`error from Follow request`, error));
