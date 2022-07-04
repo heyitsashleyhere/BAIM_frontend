@@ -15,7 +15,7 @@ export const Profile = () => {
   const { profileName } = useParams()
   
   const [isMobile, setIsMobile] = useState(false)
-  console.log(windowWidth)
+
   useEffect(() => {
     setIsMobile(windowWidth > 1024 ? true : false)
   }, [windowWidth])
@@ -69,7 +69,6 @@ export const Profile = () => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
       .then((response) => response.json())
       .then((result) => {
-        console.log('result :>> ', result);
           if(!result.errors) { 
             if(result === []) {
               currentUser.profileName === profileName ? setMessage('You have not posted anything yet') : setMessage('This person has not posted anything yet')
