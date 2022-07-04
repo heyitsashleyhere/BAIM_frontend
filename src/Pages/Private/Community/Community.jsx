@@ -1,27 +1,26 @@
 import React, { useContext } from 'react'
 import { RoundAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
-import { PostsContext } from '../../../contexts/PostContext'
+import { PostsContext } from '../../../contexts/PostContext.js'
 import { UserContext } from '../../../contexts/UserContext.js'
 
 import  './community.scss'
 
 export const Community = () => {
 
-
- const { users, setUsers}=useContext(PostsContext)
+ const { users }=useContext(PostsContext)
  const {user}=useContext(UserContext)
 
 console.log(users)
 
   return (
     <section className="Pages">
-    <section className="Hero">
-        <section className="hero-image community"></section>
-        <section className="Hero-text">
-            <h1>Community</h1>
-            <p>Connect</p>
-        </section>
-    </section>
+      <section className="Hero">
+          <section className="hero-image community"></section>
+          <section className="Hero-text">
+              <h1>Community</h1>
+              <p>Connect</p>
+          </section>
+      </section>
 
     <section className="Library-wrapper">
       <section className="lib-wrapper-header">

@@ -1,19 +1,16 @@
 import React, { useContext, useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-// context
 import { PostsContext } from '../../../contexts/PostContext.js'
 import { AnimationContext } from '../../../contexts/AnimationContext.js'
-// components
 import { SquareAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 import { Follow } from '../../../components/Private/Buttons/Follow/Follow.jsx'
 import { SectionNav } from '../../../components/Private/section-header/SectionNav.jsx'
-// style
 import './profile.scss';
 
 
 
 export const Profile = () => {
-  const { postCategories } = useContext(PostsContext)
+  const { postCategories, users, setUsers } = useContext(PostsContext)
   const { windowWidth } = useContext(AnimationContext)
   const { profileName } = useParams()
   
@@ -32,8 +29,26 @@ export const Profile = () => {
   const [events, setEvents]=useState([])
 
   const [display, setDisplay] = useState(null)
+  const [message, setMessage] = useState(null)
 
-  useEffect(() => {
+  const [followers, setFollowers] = useState([])
+  const [following, setFollowing] = useState([])
+
+  const profileUser = users.find(user => user.profileName === profileName)
+
+  useEffect(() => {   
+    fetch(`http://localhost:7000/user/${profileUser._id}`, { method: "GET", headers: { "Content-Type": "application/json" } })
+    .then((response) => response.json())
+    .then((result) => {
+           if(result.errors){
+              console.log('errors from Profile GET user :>> ', result.errors);
+           } else {
+            setFollowers(result.followers || [])
+            setFollowing(result.following || [])
+           }
+    })
+    .catch((error) => console.log(`error from Follow request`, error));
+
     const config = {
       method: "GET",
       credentials: 'include', // specify this if you need cookies
@@ -54,7 +69,11 @@ export const Profile = () => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
       .then((response) => response.json())
       .then((result) => {
+        console.log('result :>> ', result);
           if(!result.errors) { 
+            if(result === []) {
+              currentUser.profileName === profileName ? setMessage('You have not posted anything yet') : setMessage('This person has not posted anything yet')
+            } else {
             switch (cat) {
               case 'beauty':
                 setBeauties(result);
@@ -72,18 +91,24 @@ export const Profile = () => {
                 setEvents(result);
                 break;
             }
+            }
+
           } else {
             console.log('profile PostCategory fetch errors :>> ', result.errors);
           }
         })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('profile PostCategory fetch errors :>> ', error));
     })
-  }, [])
+  }, [users])
 
 
   function showPostCategoryButton(Category) {
     if(Category.length > 0) {
-      return <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+      return (
+      <div className='posts-btn-wrapper'>
+        <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>{Category[0].type === 'artsCraft' ? 'arts and crafts' :  Category[0].type}</button>
+        <p>{Category.length} items</p>
+      </div>)
     }
   }
  
@@ -112,22 +137,22 @@ export const Profile = () => {
           <button>...</button>
 
           <section className="Profile-info">
-            <img src={currentUser.avatar}></img>
+            <img src={profileUser.avatar}></img>
             <section className="Profile-text">
-              <h1>{currentUser.profileName}</h1>
+              <h1>{profileUser.profileName}</h1>
               <p>Gardner</p>
               <p>I'm all about plants, and herbs</p>
               <h2>
-                {currentUser.userAddress.city} ,{" "}
-                {currentUser.userAddress.country}
+                {profileUser.userAddress.city} ,{" "}
+                {profileUser.userAddress.country}
               </h2>
             </section>
           </section>
 
           <section className="Profile-followers">
-            <Follow user={currentUser._id} users={currentUser._id} />
-            <p>100 followers</p>
-            <p>10 following</p>
+            <Follow />
+            <p>{followers.length} followers</p>
+            <p>{following.length} following</p>
           </section>
         </section>
 
