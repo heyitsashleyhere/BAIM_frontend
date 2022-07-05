@@ -22,7 +22,7 @@ export const ProfileFeed = (props) => {
 
       
   })
-  console.log(123123123123, myFeed)
+ 
 
   return (
     <section>

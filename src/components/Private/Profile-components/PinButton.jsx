@@ -3,8 +3,8 @@ import { PostsContext } from '../../../contexts/PostContext'
 
 export const PinButton = (props) => {
 
-  const { display, setDisplay , myPin}=useContext(PostsContext)
-  console.log('myPin',myPin)
+  const { display, setDisplay , myPin , setMyPin}=useContext(PostsContext)
+
 
         const {profileUser, Category} = props
        
@@ -25,12 +25,12 @@ export const PinButton = (props) => {
           let found = Category.find(object =>object._id === item)
     
           if(found){
-            myPin.push(found)
+            setMyPin([found])
           }
-          console.log('myPin',myPin)
+         
         
         })
-    
+      
    
     
         if(myPin.length > 0){
