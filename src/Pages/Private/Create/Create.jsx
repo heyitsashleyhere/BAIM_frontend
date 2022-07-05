@@ -1,10 +1,7 @@
 import { useContext, useState } from "react";
 import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow } from "@mui/material";
-// context
 import { PostsContext } from "../../../contexts/PostContext";
-// components
-import CreatePost from "../../../components/CreatePost.jsx";
-// style
+import CreatePost from "../../../components/Private/Forms/CreatePost/CreatePost.jsx";
 import './Create.scss'
 
 export default function Create() {
@@ -32,7 +29,7 @@ export default function Create() {
             </Grid>
         </Grid>           
             {category && (
-                <CreatePost category={category} />
+                <CreatePost category={category} setCategory={setCategory}/>
             )}
 
     </section>

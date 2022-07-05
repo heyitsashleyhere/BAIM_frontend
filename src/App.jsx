@@ -3,7 +3,6 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useCookies } from "react-cookie";
 // Private components
-// import { AppHeader } from "./components/Private/private-header/AppHeader.jsx";
 import { PrivateHeader } from "./components/Private/private-header/PrivateHeader.jsx";
 import { Collections } from "./Pages/Private/Collections/Collections.jsx";
 import { Discover } from "./Pages/Private/Discover/Discover.jsx";

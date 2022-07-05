@@ -1,11 +1,13 @@
 import { ref,uploadBytesResumable, getDownloadURL, getStorage, deleteObject } from 'firebase/storage'
 import { useState, useRef, useContext } from 'react'
-import { storage } from "../firebase.js"
-import { PostsContext } from '../contexts/PostContext.js'
-import { UserContext } from '../contexts/UserContext.js'
+import { storage } from "../../../firebase.js"
+import { PostsContext } from '../../../contexts/PostContext.js'
+import { UserContext } from '../../../contexts/UserContext.js'
+import { Grid, TextField, Box, Typography, Button, LinearProgress, Grow, Modal, ButtonBase } from "@mui/material";
+import ImageIcon from '@mui/icons-material/Image';
 
 
-export default function ImageInput({imageUsage}){
+export default function ImageInput({ imageUsage, oldUrl }){
     const { inputValues, setInputValues } = useContext(UserContext)
     const [ progress, setProgress ] = useState(0)
     const [ imageUrl, setImageUrl ] = useState()
@@ -55,32 +57,51 @@ export default function ImageInput({imageUsage}){
     function updateFile(file){
 
         if(inputValues.image){
-            const storage=getStorage()
+            const storage = getStorage()
             const imageRef = ref(storage,`${inputValues[`${imageUsage}`]}`)
 
         }
 
     }
 
+    function LinearProgressWithLabel(props) {
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ width: '100%', mr: 1 }}>
+              <LinearProgress variant="determinate" {...props} />
+            </Box>
+            <Box sx={{ minWidth: 35 }}>
+              <Typography variant="body2" color="text.secondary">{`${Math.round(
+                props.value,
+              )}%`}</Typography>
+            </Box>
+          </Box>
+        );
+      }
+
 
 
     return(
-        <section className="image">
-            <section className="image-container">
-                { inputValues[`${imageUsage}`] ? <img src={inputValues[`${imageUsage}`] || ""} width="620" /> : null }
+        <div className="image">
+            <div className="image-container">
+                <img src={inputValues[`${imageUsage}`] || oldUrl} width="30%" style={{borderRadius: '50%'}}/> 
+            </div>
+
+            <section className="input-image" style={{marginTop: '2rem'}}>
+                <label htmlFor="imageInput-input">
+                    <input ref={img} type="file" accept="image/*" style={{display: 'none'}} id='imageInput-input' />
+                    <Button variant="contained" endIcon={<ImageIcon />} size="large" component="span">
+                        Choose file
+                    </Button>
+                </label>
+                <Button type="submit" onClick={fileHandler} variant="outlined" size="large">Upload</Button>
+                <Button onClick={deleteFile} variant="outlined" size="large">Delete</Button>
             </section>
-            <section className="input-image">
-            <input ref={img} type="file" accept="image/*" className="input"/>
-            <button type="submit" onClick={fileHandler}>Upload</button>
-            <button onClick={deleteFile}>Delete</button>
 
-            </section>
-
-            <p>{progress}</p>
-
-        </section>
+            <Box sx={{ width: '100%' }}>
+                <LinearProgressWithLabel value={progress} />
+            </Box>
+        </div>
     )
-
-
 
 }

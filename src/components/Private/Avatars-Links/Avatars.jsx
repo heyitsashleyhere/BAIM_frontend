@@ -3,17 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
 
-import {
-	Modal,
-	IconButton,
-	Button,
-	Typography,
-	Menu,
-	MenuItem,
-	Popover,
-	Box,
-} from "@mui/material";
-
+import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box,} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -22,7 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import berry from "../../../assets/logo/raspberry.png";
 import { Follow } from "../Buttons/Follow/Follow";
-import { UnFollow } from "../Buttons/Unfollow/Unfollow";
+import { UnFollow } from "../Buttons/NONEEDUnfollow/Unfollow";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import { DeletePost } from "../Buttons/Delete/DeletePost";
@@ -30,17 +20,15 @@ import { DeletePost } from "../Buttons/Delete/DeletePost";
 // general avatars for the App
 export const SquareAvatar = ({ data }) => {
     const [cookies] = useCookies();
-    const {user}=useContext(UserContext)
+    const {upgrade, setUpgrade}=useContext(PostsContext)
     const [message, setMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-    // let navigate = useNavigate()
    
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
     const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
     const openFeatures = Boolean(anchorEl);
     const openPopper = Boolean(deleteAnchorEl);
-
   
     const handlePopper = (event) => {
       setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
@@ -63,10 +51,6 @@ export const SquareAvatar = ({ data }) => {
     }
 
     function handleDelete(type, id) {
-      // console.log('id :>> ', id);
-      // console.log('type :>> ', type);
-      // setMessage('your post is deleted');
-      // setIsModalOpen(true)
       const config = {
         method: "delete",
         credentials: 'include', 
@@ -82,7 +66,6 @@ export const SquareAvatar = ({ data }) => {
           }
         })
         .catch((error) => console.log(error));
-
     }
 
 
@@ -126,7 +109,7 @@ export const SquareAvatar = ({ data }) => {
               </section> 
         </NavLink>
     
-       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} >
+       <Modal open={isModalOpen} onClose={() => {setIsModalOpen(false); setUpgrade(!upgrade)}} >
           <p>{message}</p>
        </Modal>
         {/* experimental logic for add remove to user collections */}
