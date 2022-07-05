@@ -31,7 +31,6 @@ export const Profile = () => {
   const [recipes, setRecipes] = useState([]);
   const [events, setEvents] = useState([]);
   // user data
-  // const [profileData, setProfileData] = useState(null)
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([])
   const [display, setDisplay] = useState(null);
@@ -40,6 +39,10 @@ export const Profile = () => {
   // pop up Modals
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
+  // toggle
+  const [ showMyPosts, setShowMyPosts ]= useState(false)
+  const [ showMyPins, setShowMyPins ]= useState(false)
+  const [ showCatPosts, setShowCatPosts] = useState(false)
 
   useEffect(() => {
     const config = {
@@ -123,6 +126,7 @@ export const Profile = () => {
       .catch((error) => console.log(error));
   }
 
+
   return (
     <>
       <ProduceNav />
@@ -177,22 +181,27 @@ export const Profile = () => {
               </section>
             </div>
 
-            <section className="Profile-Collection-Nav">
-            <button >Posts</button> 
-            <button >Pins</button>
-          </section>
+            <div className="Profile-Collection-Nav">
+              <button onClick={ () => { setShowMyPosts(!showMyPosts) ; setShowMyPins(false) ; setShowCatPosts(false)} }>Posts</button> 
+              <button onClick={ () => { setShowMyPosts(false) ; setShowMyPins(!showMyPins)} }>Pins</button>
+            </div>
 
-            <section className="Profile-Library">
-              <div>
-                {showPostCategoryButton(beauties, setDisplay)}
-                {showPostCategoryButton(artsCrafts, setDisplay)}
-                {showPostCategoryButton(gardens, setDisplay)}
-                {showPostCategoryButton(recipes, setDisplay)}
-                {showPostCategoryButton(events, setDisplay)}
+            <div className="Profile-Collection">
+            { showMyPosts &&       
+              <div className="Profile-Library">
+                {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
+                {showPostCategoryButton(artsCrafts, display, setDisplay, showCatPosts, setShowCatPosts)}
+                {showPostCategoryButton(gardens, display, setDisplay, showCatPosts, setShowCatPosts)}
+                {showPostCategoryButton(recipes, display, setDisplay, showCatPosts, setShowCatPosts)}
+                {showPostCategoryButton(events, display, setDisplay, showCatPosts, setShowCatPosts)}
+              </div>}
+            </div>
 
-                {display && displayAvatars(display, beauties, artsCrafts, gardens, recipes, events)}
-              </div>
-            </section>
+            <div className="Profile-Own-Collection">
+              {display && showCatPosts && displayAvatars(display, beauties, artsCrafts, gardens, recipes, events)}
+            </div>
+
+
 
             {postMessage && <p>{postMessage}</p>}
           </div>
