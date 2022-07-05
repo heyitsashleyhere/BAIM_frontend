@@ -1,0 +1,33 @@
+import React, { useContext } from 'react'
+import { PostsContext } from '../../../contexts/PostContext'
+import { SquareAvatar } from '../Avatars-Links/Avatars'
+
+export const ProfileFeed = (props) => {
+    const { data } = props;
+    console.log(data)
+
+    const { allArtsCraftPost, allBeautyPost,allGardenPost,allRecipePost}=useContext(PostsContext)
+
+    const allCollections = [allArtsCraftPost,allBeautyPost,allRecipePost,allGardenPost] 
+
+    let myFeed = []
+
+    data.forEach(item => {
+
+      let match = allCollections.map(coll => coll.filter(one => one.type === item))
+      match = match.filter(item => item.length)
+      if (match[0]) {
+        myFeed = myFeed.concat(match[0]).sort((objA, objB)=> new Date(objB.updatedAt) - new Date(objA.updatedAt))
+      }
+
+      
+  })
+  console.log(123123123123, myFeed)
+
+  return (
+    <section>
+        { myFeed.map((item, i) => <SquareAvatar data={item} key={i} />)}
+    </section>
+   
+  )
+}

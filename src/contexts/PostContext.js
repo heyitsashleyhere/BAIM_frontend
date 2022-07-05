@@ -28,6 +28,9 @@ function PostsContextProvider({ children }){
     const [ allEventPost, setAllEventPost ] = useState([])
     // dependency for fetches
     const [ upgrade, setUpgrade ] = useState(false)
+
+    //dependency for display in profile
+    const [display, setDisplay] = useState(null);
     
     // const [loading, setLoading]=useState(true)
     
@@ -129,6 +132,7 @@ function PostsContextProvider({ children }){
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
         seasonal, setSeasonal,
+        display, setDisplay
     }
 
     return (
