@@ -5,7 +5,7 @@ import { PostsContext } from '../../../../contexts/PostContext.js'
 import { Modal } from "@mui/material";
 
 
-export const Follow = () => {
+export const Follow = ({name}) => {
   const { upgrade, setUpgrade, users }=useContext(PostsContext)
   const { profileName } = useParams()
   const [ error, setError ] = useState(null)
@@ -20,16 +20,31 @@ export const Follow = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:7000/user/${profileName}`)
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.errors) {
-        console.log("errors from Profile GET user :>> ", result.errors);
-      } else {
-        setProfileData(result)
-      }
-    })
-    .catch((error) => console.log(`error from profileName request in Profile`, error));
+    if(profileName) {
+      fetch(`http://localhost:7000/user/${profileName}`)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.errors) {
+          console.log("errors from Profile GET user :>> ", result.errors);
+        } else {
+          setProfileData(result)
+        }
+      })
+      .catch((error) => console.log(`error from profileName request in Profile`, error));
+    } else {
+      fetch(`http://localhost:7000/user/${name}`)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.errors) {
+          console.log("errors from Profile GET user :>> ", result.errors);
+        } else {
+          setProfileData(result)
+        }
+      })
+      .catch((error) => console.log(`error from profileName request in Profile`, error));
+    }
+
+
   }, [isModalOpen])
   
 
@@ -47,6 +62,7 @@ export const Follow = () => {
                     setError(result.errors)
              } else {
               setIsModalOpen(true)
+              setUpgrade(!upgrade)
              }
       })
       .catch((error) => console.log(`error from Follow request`, error));

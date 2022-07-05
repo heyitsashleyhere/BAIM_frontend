@@ -5,6 +5,9 @@ import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import UserEdit from "../../../components/Private/Forms/UserEdit/UserEdit.jsx";
+import showPostCategoryButton from "../../../components/Private/Profile-components/showPostCategoryButton.jsx";
+import displayAvatars from "../../../components/Private/Profile-components/displayAvatars.jsx";
+import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
 import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box, Paper} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,23 +19,27 @@ import "./profile.scss";
 
 
 export const Profile = () => {
-  const { postCategories, upgrade, setUpgrade } = useContext(PostsContext);
+  const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
   const { profileName } = useParams();
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
+  // user library
   const [beauties, setBeauties] = useState([]);
   const [artsCrafts, setArtsCrafts] = useState([]);
   const [gardens, setGardens] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [events, setEvents] = useState([]);
-
-  const [profileData, setProfileData] = useState(null)
+  // user data
+  // const [profileData, setProfileData] = useState(null)
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([])
   const [display, setDisplay] = useState(null);
   const [message, setMessage] = useState(null);
   const [postMessage, setPostMessage] = useState(null)
+  // pop up Modals
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isUserEditOpen, setUserEditOpen] = useState(false)
 
   useEffect(() => {
     const config = {
@@ -94,70 +101,6 @@ export const Profile = () => {
     });
   }, []);
 
-  function showPostCategoryButton(Category) {
-    if (Category.length > 0) {
-      return (
-        <div className="posts-btn-wrapper">
-          <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>
-            {Category[0].type === "artsCraft"
-              ? "arts and crafts"
-              : Category[0].type}
-          </button>
-          <p>{Category.length} items</p>
-        </div>
-      );
-    }
-  }
-
-  function displayAvatars(type) {
-    switch (type) {
-      case "beauty":
-        return beauties.map((data, i) => (
-          <SquareAvatar key={"profilePage-avatar" + i} data={data} />
-        ));
-      case "artsCraft":
-        return artsCrafts.map((data, i) => (
-          <SquareAvatar key={"profilePage-avatar" + i} data={data} />
-        ));
-      case "garden":
-        return gardens.map((data, i) => (
-          <SquareAvatar key={"profilePage-avatar" + i} data={data} />
-        ));
-      case "recipe":
-        return recipes.map((data, i) => (
-          <SquareAvatar key={"profilePage-avatar" + i} data={data} />
-        ));
-      case "event":
-        return events.map((data, i) => (
-          <SquareAvatar key={"profilePage-avatar" + i} data={data} />
-        ));
-    }
-  }
-
-  // MUI popper START
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
-  const openFeatures = Boolean(anchorEl);
-  const openPopper = Boolean(deleteAnchorEl);
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isUserEditOpen, setUserEditOpen] = useState(false)
-
-  const handlePopper = (event) => {
-    setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
-  };
-
-  const popperId = openPopper ? 'simple-popper' : undefined;
-
-  const handleFeatures = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setDeleteAnchorEl(null)
-  };
-  // MUI popper END 
-
   function handleEdit() {
     setUserEditOpen(true)
   }
@@ -187,71 +130,8 @@ export const Profile = () => {
         {profileData && (
           <div className="Profile-inner">
             <div className="Profile-header">
-              {profileData.profileName === profileName && (
-                <section className="Profile-Controllers">
-                  <IconButton
-                    aria-label="edit"
-                    aria-controls={openFeatures ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={openFeatures ? "true" : undefined}
-                    onClick={handleFeatures}
-                    className="editor-icon"
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
-                  <Menu
-                    anchorEl={anchorEl}
-                    open={openFeatures}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={handleEdit}>
-                      <EditIcon
-                        fontSize="small"
-                        sx={{ mr: 2 }}
-                        color="primary"
-                      />
-                      Edit
-                    </MenuItem>
-                    <MenuItem onClick={handlePopper}>
-                      <DeleteIcon
-                        fontSize="small"
-                        sx={{ mr: 2 }}
-                        color="primary"
-                      />
-                      Delete
-                    </MenuItem>
-                    <Popover
-                      id={popperId}
-                      open={openPopper}
-                      anchorEl={deleteAnchorEl}
-                      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    >
-                      <Typography sx={{ p: 2 }}>
-                        Want to delete your account forever ever?
-                      </Typography>
-                      <Box sx={{ textAlign: "center" }}>
-                        <Button
-                          variant="outlined"
-                          color="success"
-                          startIcon={<CheckCircleIcon />}
-                          sx={{ mb: 1 }}
-                          onClick={() => handleDelete(profileData._id)}
-                        >
-                          YES
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          startIcon={<CloseIcon />}
-                          sx={{ mb: 1 }}
-                          onClick={() => setDeleteAnchorEl(null)}
-                        >
-                          NO
-                        </Button>
-                      </Box>
-                    </Popover>
-                  </Menu>
-                </section>
+              {currentUser.profileName === profileName && (
+                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete}/>
               )}
 
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
@@ -272,7 +152,7 @@ export const Profile = () => {
                            justifyContent: 'center',
                            alignItems: 'center'
                         }}>
-                <UserEdit profileData={profileData} />
+                <UserEdit />
               </Modal>
 
               <div className="Profile-info">
@@ -297,15 +177,20 @@ export const Profile = () => {
               </section>
             </div>
 
+            <section className="Profile-Collection-Nav">
+            <button >Posts</button> 
+            <button >Pins</button>
+          </section>
+
             <section className="Profile-Library">
               <div>
-                {showPostCategoryButton(beauties)}
-                {showPostCategoryButton(artsCrafts)}
-                {showPostCategoryButton(gardens)}
-                {showPostCategoryButton(recipes)}
-                {showPostCategoryButton(events)}
+                {showPostCategoryButton(beauties, setDisplay)}
+                {showPostCategoryButton(artsCrafts, setDisplay)}
+                {showPostCategoryButton(gardens, setDisplay)}
+                {showPostCategoryButton(recipes, setDisplay)}
+                {showPostCategoryButton(events, setDisplay)}
 
-                {display && displayAvatars(display)}
+                {display && displayAvatars(display, beauties, artsCrafts, gardens, recipes, events)}
               </div>
             </section>
 
@@ -316,7 +201,6 @@ export const Profile = () => {
     </>
   );
 }
-
 
     // const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
     // Promise.all(promises)

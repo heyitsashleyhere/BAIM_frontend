@@ -22,10 +22,12 @@ function PostsContextProvider({ children }){
     // General ALL posts fetches
     const [ users, setUsers ] = useState([])
     const [ allBeautyPost, setAllBeautyPost ] = useState([])
-    const [ allArtsCraftPost, setArtsCraftPost ] = useState([])
-    const [ allGardenPost, setGardenPost ] = useState([])
+    const [ allArtsCraftPost, setAllArtsCraftPost ] = useState([])
+    const [ allGardenPost, setAllGardenPost ] = useState([])
     const [ allRecipePost, setAllRecipePost ] = useState([])
     const [ allEventPost, setAllEventPost ] = useState([])
+    // Profile Page
+    const [profileData, setProfileData] = useState(null)
     // dependency for fetches
     const [ upgrade, setUpgrade ] = useState(false)
     
@@ -60,10 +62,10 @@ function PostsContextProvider({ children }){
                       setAllBeautyPost(result);
                       break;
                     case 'artsCraft':
-                      setArtsCraftPost(result);
+                      setAllArtsCraftPost(result);
                       break;
                     case 'garden':
-                      setGardenPost(result);
+                      setAllGardenPost(result);
                       break;
                     case 'recipe':
                       setAllRecipePost(result);
@@ -130,6 +132,7 @@ function PostsContextProvider({ children }){
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
         seasonal, setSeasonal,
+        profileData, setProfileData
     }
 
     return (

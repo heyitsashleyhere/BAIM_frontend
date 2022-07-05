@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
+import { PostsContext } from "../../../../contexts/PostContext.js";
 import { Typography, TextField, Autocomplete, Paper, Button, FormHelperText, Grow, MenuItem, Grid } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ImageInput from "../ImageInput.jsx";
 
-export default function UserEdit({ profileData }) {
+export default function UserEdit() {
   const [userAddress, setUserAddress] = useState({});
   const [errors, setErrors] = useState([]);
   const { inputValues, setInputValues, setMessage, isShowPassword, showPasswordHandler } = useContext(UserContext);
+  const { profileData } = useContext(PostsContext)
   const [country, setCountry] = useState('')
   const countryList = [
     "Afghanistan",

@@ -11,8 +11,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
 import berry from "../../../assets/logo/raspberry.png";
-import { Follow } from "../Buttons/Follow/Follow";
-import { UnFollow } from "../Buttons/NONEEDUnfollow/Unfollow";
+import { Follow } from "../Buttons/Follow/Follow.jsx";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import { DeletePost } from "../Buttons/Delete/DeletePost";
@@ -121,10 +120,9 @@ export const SquareAvatar = ({ data }) => {
 // Avatars used specially in community page and general search engines.
 // this avatar uses nested components to fetch
 export const RoundAvatar = ({ name, id, image }) => {
-	const { user } = useContext(UserContext);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
-	const author = user._id === id;
-	console.log("auth", author);
+	const author = currentUser._id === id;
 
 	// needs to be done after collections api is done
 	// const found = user.collection.follow.find(item => item === user._id)
@@ -137,7 +135,7 @@ export const RoundAvatar = ({ name, id, image }) => {
 				</section>
 				<h2>{name}</h2>
 			</Link>
-			{author ? <p>hey its me</p> : <p>follow</p>}
+			{author ? <p>hey its me</p> : <Follow name={name} />}
 			{/* disable bellow comment after collections from backend are operative */}
 			{/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
 		</section>
