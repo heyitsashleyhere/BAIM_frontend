@@ -31,6 +31,9 @@ function PostsContextProvider({ children }){
 
     //dependency for display in profile
     const [display, setDisplay] = useState(null);
+
+    // my pin Object for profile
+    const myPin=[]
     
     // const [loading, setLoading]=useState(true)
     
@@ -132,7 +135,7 @@ function PostsContextProvider({ children }){
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
         seasonal, setSeasonal,
-        display, setDisplay
+        display, setDisplay, myPin
     }
 
     return (

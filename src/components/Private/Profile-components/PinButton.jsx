@@ -3,15 +3,17 @@ import { PostsContext } from '../../../contexts/PostContext'
 
 export const PinButton = (props) => {
 
-  const { display, setDisplay }=useContext(PostsContext)
+  const { display, setDisplay , myPin}=useContext(PostsContext)
+  console.log('myPin',myPin)
 
         const {profileUser, Category} = props
        
+      
 
-        let myPin=[]
-
+       
         function openCollection(category){
-            if(display === category){
+          console.log('open-collection',category)
+            if(display){
               setDisplay(null)
             }else{
               setDisplay(category)
@@ -25,10 +27,11 @@ export const PinButton = (props) => {
           if(found){
             myPin.push(found)
           }
+          console.log('myPin',myPin)
         
         })
     
-        if(!Category){return}
+   
     
         if(myPin.length > 0){
     

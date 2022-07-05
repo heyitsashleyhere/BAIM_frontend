@@ -5,20 +5,12 @@ import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import "./profile.scss";
-import { requirePropFactory } from "@mui/material";
-import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
-import { DisplayAvatars } from "../../../components/Private/Profile-components/DisplayAvatars.jsx";
-import { PinButton } from "../../../components/Private/Profile-components/PinButton";
-import { DisplayPins } from "../../../components/Private/Profile-components/DisplayPins.jsx";
 
 
 
 export const Profile = () => {
-  const { postCategories, users, setUsers,  allBeautyPost, allArtsCraftPost, allGardenPost, 
-    allRecipePost, display, setDisplay} = useContext(PostsContext);
+  const { postCategories, users, setUsers } = useContext(PostsContext);
   const { profileName } = useParams();
-
- console.log('users in Profile', users)
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
@@ -28,10 +20,8 @@ export const Profile = () => {
   const [recipes, setRecipes] = useState([]);
   const [events, setEvents] = useState([]);
 
-  // const [display, setDisplay] = useState(null);
+  const [display, setDisplay] = useState(null);
   const [message, setMessage] = useState(null);
-  const [ showMyPosts, setShowMyPosts]=useState(false)
-  const [ showMyPins, setShowMyPins ]=useState(false)
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -39,7 +29,6 @@ export const Profile = () => {
   const profileUser = users.find((user) => user.profileName === profileName);
 
   useEffect(() => {
-    console.log(8888888)
     fetch(`http://localhost:7000/user/${profileUser._id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -112,71 +101,16 @@ export const Profile = () => {
     });
   }, [users]);
 
-
-  // function that show pin 
-  function showPost(){
-  
-    if (showMyPins === true){
-      setShowMyPins(false)
-      setShowMyPosts(!showMyPosts)
-
-    }else{
-      setShowMyPosts(!showMyPosts)
-    }
-  }
-
-  function showPin(){
-    if(showMyPosts === true ){
-      setShowMyPosts(false)
-      setShowMyPins(!showMyPins)
-    }else{
-      setShowMyPins(!showMyPins)
-    }
-  }
-
-  function showPinCategoryButton(Category){
-    console.log(profileUser)
-    
-    let myPin=[]
-
-    profileUser.pin.forEach(item => {
-      let found = Category.find(object =>object._id === item)
-
-      if(found){
-        myPin.push(found)
-      }
-    
-    })
-
-    if(!Category){return}
-
-    if(myPin.length > 0){
-
-      return (
-          <div className="posts-btn-wrapper">
-            <div className={`${myPin[0].type} post-btn-container`} onClick={e=> openCollection(myPin[0].type)} data={myPin}></div>
-            {myPin[0].type === "artsCraft"
-                ? <p>artsCraft</p>
-                : <p>{myPin[0].type}</p>}
-          </div>
-        );
-      
-
-    }
-
-  }
-
   function showPostCategoryButton(Category) {
-
     if (Category.length > 0) {
       return (
         <div className="posts-btn-wrapper">
-          <div className={`${Category[0].type} post-btn-container`} onClick={e => openCollection(Category[0].type)} data={Category}></div>
-          {Category[0].type === "artsCraft"
-              ? <p>artsCraft</p>
-              : <p>{Category[0].type}</p>}
-  
-        
+          <button onClick={(e) => setDisplay(Category[0].type)} data={Category}>
+            {Category[0].type === "artsCraft"
+              ? "arts and crafts"
+              : Category[0].type}
+          </button>
+          <p>{Category.length} items</p>
         </div>
       );
     }
@@ -207,22 +141,6 @@ export const Profile = () => {
     }
   }
 
-
-  function openCollection(category){
-    console.log('opencollection',category)
-    if(display === category){
-      setDisplay(null)
-    }else{
-      setDisplay(category)
-    }
-   
-  }
-
-
-
-
-
-
   return (
     <>
       <ProduceNav />
@@ -238,8 +156,8 @@ export const Profile = () => {
                 <p>Gardner</p>
                 <p>I'm all about plants, and herbs</p>
                 <h2>
-                  {/* {profileUser.userAddress.city} ,
-                  {profileUser.userAddress.country} */}
+                  {profileUser.userAddress.city} ,{" "}
+                  {profileUser.userAddress.country}
                 </h2>
               </section>
             </section>
@@ -251,52 +169,26 @@ export const Profile = () => {
             </section>
           </section>
 
-          <section className="Profile-Collection-Nav">
-            <button onClick={showPost}>Posts</button> 
-            <button onClick={showPin}>Pins</button>
-          </section>
-
-          <section className="Profile-Collection">
-             
-           { showMyPosts &&  <div className="Profile-Library">
+          <section className="Profile-Library">
+            <section>
               {showPostCategoryButton(beauties)}
               {showPostCategoryButton(artsCrafts)}
               {showPostCategoryButton(gardens)}
               {showPostCategoryButton(recipes)}
               {showPostCategoryButton(events)}
-            </div> }
+            </section>
 
-            { showMyPins &&  <div className="Profile-Library">
-             {/* <PinButton profileUser={profileUser} Category={allBeautyPost} /> */}
-           
-              {showPinCategoryButton(allBeautyPost)}
-              {showPinCategoryButton(allArtsCraftPost)}
-              {showPinCategoryButton(allGardenPost)}
-              {showPinCategoryButton(allRecipePost)}
-            </div> }
+            <section>{display && displayAvatars(display)}</section>
+
+
 
           </section>
-          {/* <section>{display && displayAvatars(display)}</section> */}
-
-          <section className="Profile-Own-Collection">
-  
-           {display && <DisplayAvatars 
-          
-          beauties={beauties}
-          artsCrafts={artsCrafts}
-          gardens={gardens}
-          recipes={recipes}
-          events={events}
-          /> } 
-
-          </section>
-
-          <section className="Profile-Pin-Collection">{display && <DisplayPins display={display}/>}</section>
 
           <section className="Profile-Feed">
-            <h2>My Feed: {profileName}</h2>
+            <h2>My Feed</h2>
             <ProfileFeed data={profileUser.interests}/>
           </section>
+
 
         </section>
       </section>

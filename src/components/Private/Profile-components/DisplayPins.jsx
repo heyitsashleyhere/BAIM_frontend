@@ -3,32 +3,32 @@ import { PostsContext } from '../../../contexts/PostContext'
 
 import { SquareAvatar } from '../Avatars-Links/Avatars'
 
-export const DisplayAvatars = (props) => {
+export const DisplayPins = (props) => {
 
 
-  const { display }=useContext(PostsContext)
+  const { myPin }=useContext(PostsContext)
 
-  const { beauties, artsCrafts,gardens,recipes,events } = props
+  const { display } = props
   
     switch (display) {
         case "beauty":
-          return beauties.map((data, i) => (
+          return myPin.map((data, i) => (
             <SquareAvatar key={"profilePage-avatar" + i} data={data} />
           ));
         case "artsCraft":
-          return artsCrafts.map((data, i) => (
+          return myPin.map((data, i) => (
             <SquareAvatar key={"profilePage-avatar" + i} data={data} />
           ));
         case "garden":
-          return gardens.map((data, i) => (
+          return myPin.map((data, i) => (
             <SquareAvatar key={"profilePage-avatar" + i} data={data} />
           ));
         case "recipe":
-          return recipes.map((data, i) => (
+          return myPin.map((data, i) => (
             <SquareAvatar key={"profilePage-avatar" + i} data={data} />
           ));
         case "event":
-          return events.map((data, i) => (
+          return myPin.map((data, i) => (
             <SquareAvatar key={"profilePage-avatar" + i} data={data} />
           ));
       }
