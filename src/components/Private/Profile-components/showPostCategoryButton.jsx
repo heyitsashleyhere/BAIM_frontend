@@ -10,7 +10,7 @@ export default function showPostCategoryButton(Category, display, setDisplay, sh
       }
       return (
         <div className="posts-btn-wrapper">
-          <div onClick={handleClick} data={Category}
+          <div onClick={handleClick}
                className={`${Category[0].type} post-btn-container`} >
             {Category[0].type === "artsCraft"
               ? "arts and crafts"

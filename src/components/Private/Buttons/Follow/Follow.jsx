@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PostsContext } from '../../../../contexts/PostContext.js'
 
-import { Modal } from "@mui/material";
+import { Modal, Button } from "@mui/material";
 
 
 export const Follow = ({name}) => {
@@ -71,7 +71,7 @@ export const Follow = ({name}) => {
   return (
     <section>
       {profileData && (
-          !isAuthor && <button onClick={FollowUser}>{profileData.followers.find(objId => objId == currentUser._id) ? 'Unfollow': 'Follow'}</button>
+          !isAuthor && <Button variant={profileData.followers.find(objId => objId == currentUser._id) ? 'outlined': 'contained'} onClick={FollowUser}>{profileData.followers.find(objId => objId == currentUser._id) ? 'Unfollow': 'Follow'}</Button>
       )}
       <p>{error}</p>
       {profileData && (
