@@ -17,7 +17,6 @@ export const Follow = ({name}) => {
   // pop up if follow/unfollow
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-
   useEffect(() => {
     if(profileName) {
       fetch(`http://localhost:7000/user/${profileName}`)
@@ -73,7 +72,8 @@ export const Follow = ({name}) => {
         !isAuthor && <Button 
         style={{ Width:'80px'}}
         variant={profileData.followers.find(objId => objId == currentUser._id) ? 'outlined': 'contained'} 
-        onClick={FollowUser}>{profileData.followers.find(objId => objId == currentUser._id) ? 'Unfollow': 'Follow'}
+        onClick={FollowUser}>
+          {profileData.followers.find(objId => objId == currentUser._id) ? 'Unfollow': 'Follow'}
         </Button>
       )}
       <p>{error}</p>
