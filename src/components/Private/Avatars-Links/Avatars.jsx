@@ -1,39 +1,33 @@
-import React, { useContext, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import './avatars.scss'
+import "./avatars.scss";
 
-import { Modal, IconButton, Button, Typography, Menu, MenuItem, Popover, Box} from '@mui/material'
+import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box,} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CloseIcon from "@mui/icons-material/Close";
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CloseIcon from '@mui/icons-material/Close';
-
-import berry from '../../../assets/logo/raspberry.png'
-import { Follow } from '../Buttons/Follow/Follow'
-import { UnFollow } from '../Buttons/Unfollow/Unfollow'
-import { UserContext } from '../../../contexts/UserContext'
-import { PostsContext } from '../../../contexts/PostContext'
-import { DeletePost } from '../Buttons/Delete/DeletePost'
-
-
+import berry from "../../../assets/logo/raspberry.png";
+import { Follow } from "../Buttons/Follow/Follow.jsx";
+import { UserContext } from "../../../contexts/UserContext";
+import { PostsContext } from "../../../contexts/PostContext";
+import { DeletePost } from "../Buttons/Delete/DeletePost";
 
 // general avatars for the App
-  export const SquareAvatar = ({ data }) => {
+export const SquareAvatar = ({ data }) => {
     const [cookies] = useCookies();
-    const {user}=useContext(UserContext)
+    const {upgrade, setUpgrade}=useContext(PostsContext)
     const [message, setMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-    // let navigate = useNavigate()
    
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
     const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
     const openFeatures = Boolean(anchorEl);
     const openPopper = Boolean(deleteAnchorEl);
-
   
     const handlePopper = (event) => {
       setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
@@ -56,10 +50,6 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
     }
 
     function handleDelete(type, id) {
-      // console.log('id :>> ', id);
-      // console.log('type :>> ', type);
-      // setMessage('your post is deleted');
-      // setIsModalOpen(true)
       const config = {
         method: "delete",
         credentials: 'include', 
@@ -75,7 +65,6 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
           }
         })
         .catch((error) => console.log(error));
-
     }
 
 
@@ -119,7 +108,7 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
               </section> 
         </NavLink>
     
-       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} >
+       <Modal open={isModalOpen} onClose={() => {setIsModalOpen(false); setUpgrade(!upgrade)}} >
           <p>{message}</p>
        </Modal>
         {/* experimental logic for add remove to user collections */}
@@ -128,82 +117,64 @@ import { DeletePost } from '../Buttons/Delete/DeletePost'
     )
   }
 
-  // Avatars used specially in community page and general search engines.
-  // this avatar uses nested components to fetch
-  export const RoundAvatar = ({name, id, image,}) => {
+// Avatars used specially in community page and general search engines.
+// this avatar uses nested components to fetch
+export const RoundAvatar = ({ name, id, image }) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
-    const{user} = useContext(UserContext)
+	const author = currentUser._id === id;
 
-    
-    const author = user._id === id
-    console.log('auth', author)
+	// needs to be done after collections api is done
+	// const found = user.collection.follow.find(item => item === user._id)
 
-    // needs to be done after collections api is done
-    // const found = user.collection.follow.find(item => item === user._id)
+	return (
+		<section className="AvatarR">
+			<Link to={`/profile/${name}`} key={id} className="RoundAvatar">
+				<section className="imageAvatar">
+					<img src={image}></img>
+				</section>
+				<h2>{name}</h2>
+			</Link>
+			{author ? <p>hey its me</p> : <Follow name={name} />}
+			{/* disable bellow comment after collections from backend are operative */}
+			{/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
+		</section>
+	);
+};
 
-    return (
-      <section className="AvatarR">
-          <Link to={`/profile/${name}`} key={id} className="RoundAvatar"> 
-         <section className="imageAvatar">
-              <img src={image}></img>           
-         </section>
-              <h2>{name}</h2>
-            
-                 
-      </Link>
-       {author ? <p>hey its me</p> : <p>follow</p>}
-      {/* disable bellow comment after collections from backend are operative */}
-      {/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
+// Seasonal avatar
+export const SeasonalAvatar = ({ name, id, image }) => {
+	return (
+		<section className="AvatarR">
+			<NavLink to={name === 'More' ? `/seasonal`: `/seasonal/${name}`} key={id} className="RoundAvatar ">
+				<section className="imageAvatar produceIcon">
+					<img src={image}></img>
+				</section>
+				<h2>{name}</h2>
+			</NavLink>
+		</section>
+	);
+};
 
-      </section>
+// AVATARS for POSTS
+export const PostHeaderAvatar = ({ id, name, image }) => {
+	return (
+		<Link to={`/profile/${name}`} key={id} className="HeaderAvatar">
+			<section className="headAvatar">
+				<img src={image}></img>
+			</section>
+			<h2>{name}</h2>
+		</Link>
+	);
+};
 
-      
-    )
-  }
-
-  // Seasonal avatar
-  export const SeasonalAvatar = ({name, id, image,}) => {
-
-    return (
-      <section className="AvatarR">
-          <Link to={`/seasonal/${name}`} key={id} className="RoundAvatar "> 
-         <section className="imageAvatar produceIcon">
-              <img src={image}></img>           
-         </section>
-              <h2>{name}</h2>
-           </Link>   
-      </section> 
-      )
-    }
-
-
-  // AVATARS for POSTS
-  export const PostHeaderAvatar=({id, name, image})=>{
-
-    return (
-      <Link to={`/profile/${name}`} key={id} className="HeaderAvatar"> 
-      <section className="headAvatar">
-           <img src={image}></img>           
-      </section>
-           <h2>{name}</h2> 
-   </Link>
-    )
-  }
-
-  export const PostCommentsAvatar=({id, name, image})=>{
-
-    return (
-      <Link to={`/profile/${name}`} key={id} className="CommentAvatar"> 
-      <section className="comAvatar">
-           <img src={image}></img>           
-      </section>
-           <h2>{name}</h2> 
-   </Link>
-    )
-  }
-
-
-
-
-
-
+export const PostCommentsAvatar = ({ id, name, image }) => {
+	return (
+		<Link to={`/profile/${name}`} key={id} className="CommentAvatar">
+			<section className="comAvatar">
+				<img src={image}></img>
+			</section>
+			<h2>{name}</h2>
+		</Link>
+	);
+};

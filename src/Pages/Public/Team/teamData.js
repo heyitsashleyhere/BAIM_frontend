@@ -40,7 +40,7 @@ const team = [
 	{
 		id: 3,
 		name: "Murad Muqbel",
-		image: "../../../assets/team-images/murad.jpg",
+		image: require("../../../assets/team-images/profile-image.jpg"),
 		bio: "My name isMurad Muqbel, i am originally from Jordan, currently based in Berlin Germany.",
 		role: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, id nostrum! Consequatur ab quas perspiciatis.",
 		contact: {

@@ -5,29 +5,18 @@ import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avat
 import { UserComment } from "../../../components/Private/Buttons/Comment/UserComment";
 import { MdOutlineArrowBack } from "react-icons/md";
 import { BsHeart } from "react-icons/bs";
-import { AnimationContext } from "../../../contexts/AnimationContext.js";
-import { SectionNav } from "../../../components/Private/section-header/SectionNav.jsx";
+import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import "./postPage.scss";
 
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({ data }) => {
-  const { user } = useContext(UserContext);
+	const { user } = useContext(UserContext);
   const { title } = useParams();
   let navigate = useNavigate();
 
   const selected = data.find((item) => item.title === title);
 
-  //to handle window.width and render the produce navbar only for desktop
-  const { windowWidth } = useContext(AnimationContext);
-  const [isMobile, setIsMobile] = useState(false);
-
-  console.log(windowWidth);
-  useEffect(() => {
-    setIsMobile(windowWidth > 1024 ? true : false);
-  }, [windowWidth]);
-
-  // const video =`${process.env.PUBLIC_URL}/landingVideos/mainVideo.webm`
 
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
@@ -35,7 +24,7 @@ export const PostPage = ({ data }) => {
 
   return (
     <>
-      {isMobile && <SectionNav />}
+      <ProduceNav />
       <section className="Post-Page" key={selected._id}>
         <section className="Post-Page-Inner">
           {/* <section className="Post-Page-header">

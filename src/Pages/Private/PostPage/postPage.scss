@@ -37,7 +37,9 @@
             .Post-Page-Header-icons{
                 color:white;
                 font-size: 4rem;
-
+                &:hover {
+                    cursor: pointer;
+                }
             }
 
     

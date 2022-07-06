@@ -1,155 +1,135 @@
-@import '../../../styles/variables';
-@import '../../../styles/breakpoints';
+@import "../../../styles/breakpoints";
 
-.cta-container {
-  width: 100%;
-  height: 100vh;
-  background: #000;
+.main {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background: #000;
 
-  .cta-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    opacity: 0;
+	.cta-section {
+		width: 100%;
+		height: 100vh;
+		position: relative;
 
-    .cta-content {
-      position: absolute;
-      top: 70%;
-      left: 2rem;
-      overflow: hidden;
+		&-content {
+			position: absolute;
+			top: 70%;
+			left: 2rem;
+			overflow: hidden;
 
-      .logo {
-        transform: translateY(120%);
-        transition: all .5s ease-in-out;
-        width: 30rem;
-      }
+			.logo {
+				transform: translateY(120%);
+				width: 30rem;
+			}
 
-      .slogan {
-        padding-left: 7px;
-        z-index: 3;
-        overflow: hidden;
+			.slogan {
+				padding-left: 7px;
+				overflow: hidden;
 
-        h1 {
-          transform: translateY(-100%);
-          letter-spacing: 4px;
-          color: $white;
-          font-family: $font-family-Varela;
-          font-size: $font-size-lg;
-          font-weight: 700;
-          transition: 0.35s all ease-in-out;
-        }
-      }
-    }
-  }
+				h1 {
+					transform: translateY(-100%);
+					letter-spacing: 4px;
+					color: #fff;
+					font-size: 2.2rem;
+				}
+			}
+		}
+	}
 
-  @include media(">=tablet") {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
+	.promo-section {
+		width: 100%;
+		height: 100vh;
 
-    .cta-wrapper {
-      grid-column: 2/8;
+		&-content {
+			width: 100%;
+			height: 100%;
+			position: relative;
 
-      .cta-content {
-        transition: 0.35s all ease-in-out;
-        top: 65%;
-        left: 0;
+			&-text {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 10;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 
-        .logo {
-          width: 40rem;
-          transition: 0.35s all ease-in-out;
-        }
+				.text {
+					font-size: 3rem;
+					color: #fff;
 
-        .slogan {
-          h1 {
-            letter-spacing: 5px;
-            font-size: 3rem;
-          }
-        }
-      }
-    }
-  }
+					@include media(">=tablet") {
+						font-size: 5rem;
+					}
+				}
+			}
+			&-media {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				video {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+			}
+		}
+	}
 
-  @include media(">=desktop") {
-    grid-template-columns: repeat(12, 1fr);
-    transition: 0.35s all ease-in-out;
+	@include media(">=tablet") {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
 
-    .cta-wrapper {
-      grid-column: 3/11;
+		.cta-section {
+			grid-column: 2/8;
 
-      .cta-content {
-        top: 60%;
-        transition: 0.35s all ease-in-out;
+			&-content {
+				top: 65%;
+				left: 0;
 
-        .logo {
-          width: 50rem;
-          transition: 0.35s all ease-in-out;
-        }
+				.logo {
+					width: 40rem;
+				}
 
-        .slogan {
+				.slogan {
+					h1 {
+						letter-spacing: 5px;
+						font-size: 3rem;
+					}
+				}
+			}
+		}
+		.promo-section {
+			grid-column: 1/9;
+		}
+	}
 
-          h1 {
-            transform: translateY(-200%);
-            letter-spacing: 7px;
-            font-size: 3.8rem;
-          }
-        }
-      }
-    }
-  }
-}
+	@include media(">=desktop") {
+		grid-template-columns: repeat(12, 1fr);
 
-.promo-vid-container {
+		.cta-section {
+			grid-column: 3/11;
 
-  width: 100%;
-  height: 100vh;
-  
-  .promo-vid-wrapper{
-    position: relative;
+			&-content {
+				top: 60%;
 
+				.logo {
+					width: 50rem;
+				}
 
-  .promo-vid-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &-content {
-      font-size: 3rem;
-      font-weight: $font-weight-900;
-      font-family: $font-family-Inter;
-      color: $white;
-      transition: 0.35s all ease-in-out;
-    }
-        }
-
-    @include media(">=tablet") {
-      // top: 50%;
-      // left: 50%;
-      // transform: translate(-50%, -50%);
-      // padding: 25rem 15rem;
-
-      &-content {
-        padding: 0;
-        font-size: 5rem;
-        transition: 0.35s all ease-in-out;
-      }
-    }
-
-  }
-
-  .promo-vid-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-  }
+				.slogan {
+					h1 {
+						transform: translateY(-200%);
+						letter-spacing: 7px;
+						font-size: 3.8rem;
+					}
+				}
+			}
+		}
+		.promo-section {
+			grid-column: 1/13;
+		}
+	}
 }

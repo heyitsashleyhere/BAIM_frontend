@@ -42,6 +42,11 @@
             img{
                 width:100%;
                 object-fit: cover;
+
+                &:hover{
+                    transform: scale(2);
+                    transition: 0.35s all ease-in-out;
+                }
             }
         
         
@@ -262,8 +267,8 @@
     @include media(">=desktop"){
 
         .imageAvatar{
-            width:110px;
-            height: 110px;
+            width:60%;
+            height: 60%;
         }
 
     }
