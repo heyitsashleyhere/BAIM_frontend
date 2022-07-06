@@ -28,45 +28,12 @@ export const Community = () => {
     </section>
     </section>
 
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>Gardners</h2>
-        <p>{users.length} users</p>
-      </section>
-      <section className="Library-container">
-      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName} key={'community-gardeners-roundAvatar'+ item._id}/>)}
-    </section>
-    </section>
 
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>Farmers</h2>
-        <p>{users.length} users</p>
-      </section>
-      <section className="Library-container">
-      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName} key={'community-farmers-roundAvatar'+ item._id}/>)}
-    </section>
-    </section>
+ 
 
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>sellers</h2>
-        <p>{users.length} users</p>
-      </section>
-      <section className="Library-container">
-      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName} key={'community-sellers-roundAvatar'+ item._id}/>)}
-    </section>
-    </section>
+  
 
-    <section className="Library-wrapper">
-      <section className="lib-wrapper-header">
-        <h2>bloggers</h2>
-        <p>{users.length} users</p>
-      </section>
-      <section className="Library-container">
-      {users.map(item =><RoundAvatar id={item._id} image={item.avatar} name={item.profileName} key={'community-bloggers-roundAvatar'+ item._id}/>)}
-    </section>
-    </section>
+  
 
     <section>
     </section>

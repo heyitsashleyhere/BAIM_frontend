@@ -10,11 +10,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
+
 import berry from "../../../assets/logo/raspberry.png";
 import { Follow } from "../Buttons/Follow/Follow.jsx";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import { DeletePost } from "../Buttons/Delete/DeletePost";
+
+
 
 // general avatars for the App
 export const SquareAvatar = ({ data }) => {
@@ -124,20 +127,17 @@ export const RoundAvatar = ({ name, id, image }) => {
 
 	const author = currentUser._id === id;
 
-	// needs to be done after collections api is done
-	// const found = user.collection.follow.find(item => item === user._id)
 
 	return (
-		<section className="AvatarR">
+		<section className="AvatarR AvatarProfile">
 			<Link to={`/profile/${name}`} key={id} className="RoundAvatar">
 				<section className="imageAvatar">
 					<img src={image}></img>
 				</section>
 				<h2>{name}</h2>
 			</Link>
-			{author ? <p>hey its me</p> : <Follow name={name} />}
-			{/* disable bellow comment after collections from backend are operative */}
-			{/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
+			{author ? <Button disabled >hey its me</Button> : <Follow name={name} />}
+		
 		</section>
 	);
 };
