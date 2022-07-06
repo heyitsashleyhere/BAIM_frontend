@@ -26,15 +26,15 @@ const team = [
 		bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, id nostrum! Consequatur ab quas perspiciatis, fugit, consequuntur itaque tempora reiciendis ex cupiditate, voluptas quia molestiae nihil saepe magni voluptatum illum numquam. Sint necessitatibus soluta porro rerum sit fugit, qui facilis nisi enim provident excepturi magni beatae tempore sequi. Quam, tempore.",
 		role: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, id nostrum! Consequatur ab quas perspiciatis.",
 		contact: {
-			email: "aria_stark@gmail.com",
-			phone: "+491-1234-5678",
+			email: "ashleyjiang4@gmail.com",
+			phone: "+49 176-7334-2675",
 		},
 		social: {
-			facebook: "https://www.facebook.com/aria_stark",
-			twitter: "https://www.twitter.com/aria_stark",
-			instagram: "https://www.instagram.com/aria_stark",
-			linkedin: "https://www.linkedin.com/aria_stark",
-			github: "https://www.github.com/aria_stark",
+			facebook: "https://www.facebook.com/jiangsterYELHSA",
+			twitter: "https://twitter.com/ashhhleyhere",
+			instagram: "https://www.instagram.com/heyitsjustashleyhere/",
+			linkedin: "https://www.linkedin.com/in/ashley-jiang-b623a9ab/",
+			github: "https://github.com/heyitsashleyhere",
 		},
 	},
 	{

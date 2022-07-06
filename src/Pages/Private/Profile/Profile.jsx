@@ -200,8 +200,7 @@ export const Profile = () => {
                 <img src={profileData.avatar}></img>
                 <section className="Profile-text">
                   <h1>{profileData.profileName}</h1>
-                  <p>Gardner</p>
-                  <p>I'm all about plants, and herbs</p>
+                  <p>"{profileData.status}"</p>
                   { profileData.userAddress && (
                   <h2>
                     {profileData.userAddress.city} ,{" "}
