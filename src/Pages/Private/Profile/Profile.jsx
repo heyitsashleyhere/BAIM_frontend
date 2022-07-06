@@ -8,12 +8,8 @@ import UserEdit from "../../../components/Private/Forms/UserEdit/UserEdit.jsx";
 import showPostCategoryButton from "../../../components/Private/Profile-components/showPostCategoryButton.jsx";
 import displayAvatars from "../../../components/Private/Profile-components/displayAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
-import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box, Paper} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CloseIcon from "@mui/icons-material/Close";
+import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
+import { Modal,	Typography, Paper} from "@mui/material";
 import "./profile.scss";
 
 
@@ -36,13 +32,14 @@ export const Profile = () => {
   const [display, setDisplay] = useState(null);
   const [message, setMessage] = useState(null);
   const [postMessage, setPostMessage] = useState(null)
+  const [pinsId, setPinsId] = useState([])
   // pop up Modals
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
   // toggle
-  const [ showMyPosts, setShowMyPosts ]= useState(false)
-  const [ showMyPins, setShowMyPins ]= useState(false)
-  const [ showCatPosts, setShowCatPosts] = useState(false)
+  const [showMyPosts, setShowMyPosts]= useState(false)
+  const [showMyPins, setShowMyPins]= useState(false)
+  const [showCatPosts, setShowCatPosts] = useState(false)
 
   useEffect(() => {
     const config = {
@@ -63,6 +60,7 @@ export const Profile = () => {
             : setPostMessage("This person has not posted anything yet");
           }
           setProfileData(result)
+          setPinsId(result.pin)
           setFollowers(result.followers);
           setFollowing(result.following);
         }
@@ -187,23 +185,42 @@ export const Profile = () => {
             </div>
 
             <div className="Profile-Collection">
-            { showMyPosts &&       
-              <div className="Profile-Library">
-                {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
-                {showPostCategoryButton(artsCrafts, display, setDisplay, showCatPosts, setShowCatPosts)}
-                {showPostCategoryButton(gardens, display, setDisplay, showCatPosts, setShowCatPosts)}
-                {showPostCategoryButton(recipes, display, setDisplay, showCatPosts, setShowCatPosts)}
-                {showPostCategoryButton(events, display, setDisplay, showCatPosts, setShowCatPosts)}
-              </div>}
+              { showMyPosts &&       
+                <div className="Profile-Library">
+                   {postMessage && <p>{postMessage}</p>}
+                  {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(artsCrafts, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(gardens, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(recipes, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(events, display, setDisplay, showCatPosts, setShowCatPosts)}
+                </div>}
+
+              { showMyPins &&       
+                <div className="Profile-Library">
+                  {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(artsCrafts, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(gardens, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(recipes, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {showPostCategoryButton(events, display, setDisplay, showCatPosts, setShowCatPosts)}
+                </div>}
             </div>
 
             <div className="Profile-Own-Collection">
               {display && showCatPosts && displayAvatars(display, beauties, artsCrafts, gardens, recipes, events)}
             </div>
 
+            <div className="Profile-Pin-Collection">
+              {/* {display && <DisplayPins display={display}/>} */}
+            </div>
+
+            <section className="Profile-Feed">
+              <h2>My Feed: {profileName}</h2>
+              <ProfileFeed data={profileData.interests}/>
+            </section>
 
 
-            {postMessage && <p>{postMessage}</p>}
+
+           
           </div>
         )}
       </section>

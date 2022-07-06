@@ -20,4 +20,4 @@ export default function showPostCategoryButton(Category, display, setDisplay, sh
         </div>
       );
     }
-}
+  }
