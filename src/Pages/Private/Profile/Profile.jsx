@@ -6,7 +6,9 @@ import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import UserEdit from "../../../components/Private/Forms/UserEdit/UserEdit.jsx";
 import showPostCategoryButton from "../../../components/Private/Profile-components/showPostCategoryButton.jsx";
+import showPinCategoryButton from "../../../components/Private/Profile-components/showPinCategoryButton.jsx";
 import displayAvatars from "../../../components/Private/Profile-components/displayAvatars.jsx";
+import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
 import { Modal,	Typography, Paper} from "@mui/material";
@@ -29,10 +31,16 @@ export const Profile = () => {
   // user data
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([])
-  const [display, setDisplay] = useState(null);
-  const [message, setMessage] = useState(null);
+  const [display, setDisplay] = useState(null)
+  const [message, setMessage] = useState(null)
   const [postMessage, setPostMessage] = useState(null)
-  const [pinsId, setPinsId] = useState([])
+  const [pinMessage, setPinMessage] = useState(null)
+  const [pins, setPins] = useState([])
+  const [beautyPins, setBeautyPins] = useState([])
+  const [artsCraftPins, setArtsCraftsPins] = useState([])
+  const [gardenPins, setGardenPins] = useState([])
+  const [recipePins, setRecipePins] = useState([])
+  const [eventPins, setEventPins] = useState([])
   // pop up Modals
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
@@ -60,8 +68,15 @@ export const Profile = () => {
             ? setPostMessage("You have not posted anything yet")
             : setPostMessage("This person has not posted anything yet");
           }
+          
+          if (result.pin.length == 0) {
+            currentUser.profileName === profileName
+            ? setPinMessage("You have not pinned anything yet")
+            : setPinMessage("This person has not pinned anything yet");
+          }
+          
           setProfileData(result)
-          setPinsId(result.pin)
+          setPins(result.pin)
           setFollowers(result.followers);
           setFollowing(result.following);
         }
@@ -102,6 +117,28 @@ export const Profile = () => {
         );
     });
   }, [profileName]);
+
+  useEffect(() => {
+    pins.forEach(pin => {   
+      switch (pin.postType) {
+        case "beauty":
+          setBeautyPins([...beautyPins, pin]);
+          break;
+        case "artsCraft":
+          setArtsCraftsPins([...artsCraftPins, pin]);
+          break;
+        case "garden":
+          setGardenPins([...gardenPins, pin]);
+          break;
+        case "recipe":
+          setRecipePins([...recipePins, pin]);
+          break;
+        case "event":
+          setEventPins([...eventPins, pin]);
+          break;
+      }
+    })
+  }, [pins])
 
   function handleEdit() {
     setUserEditOpen(true)
@@ -173,11 +210,11 @@ export const Profile = () => {
                 </section>
               </div>
 
-              <section className="Profile-followers">
+              <div className="Profile-followers">
                 <Follow />
                 <p>{followers.length} followers</p>
                 <p>{following.length} following</p>
-              </section>
+              </div>
             </div>
 
             <div className="Profile-Collection-Nav">
@@ -198,11 +235,12 @@ export const Profile = () => {
 
               { showMyPins &&       
                 <div className="Profile-Library">
-                  {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
-                  {showPostCategoryButton(artsCrafts, display, setDisplay, showCatPosts, setShowCatPosts)}
-                  {showPostCategoryButton(gardens, display, setDisplay, showCatPosts, setShowCatPosts)}
-                  {showPostCategoryButton(recipes, display, setDisplay, showCatPosts, setShowCatPosts)}
-                  {showPostCategoryButton(events, display, setDisplay, showCatPosts, setShowCatPosts)}
+                  {pinMessage && <p>{pinMessage}</p>}
+                  {showPinCategoryButton(beautyPins, display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(artsCraftPins, display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(gardenPins, display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(recipePins, display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(eventPins, display, setDisplay, showCatPins, setShowCatPins)}
                 </div>}
             </div>
 
@@ -211,7 +249,7 @@ export const Profile = () => {
             </div>
 
             <div className="Profile-Pin-Collection">
-              {/* {display && <DisplayPins display={display}/>} */}
+              {display && showCatPins && displayPinAvatars(display, beautyPins, artsCraftPins, gardenPins, recipePins, eventPins)}
             </div>
 
             <section className="Profile-Feed">

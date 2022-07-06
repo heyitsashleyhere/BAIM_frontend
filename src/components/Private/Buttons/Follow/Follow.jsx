@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PostsContext } from '../../../../contexts/PostContext.js'
-import { Button } from "@mui/material"
-import { Modal } from "@mui/material";
-
-//scss file
+import { Modal, Button } from "@mui/material";
 
 
 export const Follow = ({name}) => {

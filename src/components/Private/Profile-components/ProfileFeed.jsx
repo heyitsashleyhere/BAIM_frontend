@@ -4,7 +4,6 @@ import { SquareAvatar } from '../Avatars-Links/Avatars.jsx'
 
 export const ProfileFeed = (props) => {
     const { data } = props;
-    console.log(data)
 
     const { allArtsCraftPost, allBeautyPost,allGardenPost,allRecipePost}=useContext(PostsContext)
 
