@@ -12,6 +12,8 @@ export const Discover = () => {
 	const [index, setIndex] = useState(0);
 	const delay = 2500;
 	const timeoutRef = useRef(null);
+	const itemRef = useRef();
+	const imageRef = useRef();
 
 	const navigate = useNavigate();
 	const discover = [
@@ -27,7 +29,7 @@ export const Discover = () => {
 		{
 			id: 2,
 			name: "Seasonal",
-			src: require("../../../assets/images/seasonal.jpg"),
+			src: require("../../../assets/images/Seasonal.jpg"),
 			path: "/seasonal",
 			description:
 				"find your local Markets and sellers in your city and neighborhood",
@@ -64,12 +66,13 @@ export const Discover = () => {
 			id: 6,
 			name: "events",
 			src: require("../../../assets/images/buy.jpg"),
-			path: "/event",
+			path: "/events",
 			description:
 				"find your local Markets and sellers in your city and neighborhood",
 			collection: "115 garderns",
 		},
 	];
+
 	function resetTimeout() {
 		if (timeoutRef.current) {
 			clearTimeout(timeoutRef.current);
@@ -89,6 +92,19 @@ export const Discover = () => {
 		};
 	}, [index]);
 
+	const handleMouseOver = (e, idx) => {
+		clearTimeout(timeoutRef.current);
+		setIndex(idx);
+		resetTimeout();
+		e.target.className += " hovered";
+	};
+
+	const handleMouseLeave = (e) => {
+		e.target.className -= " hovered";
+		// timeoutRef.current;
+		setIndex(0);
+	};
+
 	return (
 		<>
 			<ProduceNav />
@@ -102,6 +118,7 @@ export const Discover = () => {
 							return (
 								<section className="slides-wrapper" key={image.id}>
 									<section
+										ref={imageRef}
 										className="slide"
 										key={index}
 										style={{ backgroundImage: `url(${image.src})` }}
@@ -115,10 +132,15 @@ export const Discover = () => {
 							return (
 								<section
 									key={idx}
-									className={`title ${index === idx ? "active" : ""}`}
+									className="title"
 									onClick={() => navigate(collection.path)}
+									ref={itemRef}
+									onMouseOver={(e) => handleMouseOver(e, idx)}
+									onMouseLeave={(e) => handleMouseLeave(e)}
 								>
-									<h1>{collection.name}</h1>
+									<h1 className={`${idx === index ? "active" : ""}`}>
+										{collection.name}
+									</h1>
 								</section>
 							);
 						})}

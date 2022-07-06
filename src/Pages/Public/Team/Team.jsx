@@ -96,7 +96,7 @@ const Team = () => {
 										src={member.image}
 										alt={`${member.name.split(" ")[0]} image`}
 										onClick={() => handleMemberComponent(member)}
-										className="team_member-img"
+										className={`${member.name.split(" ")[0]}-img`}
 									/>
 									<h2 ref={addToNames}>
 										<span className="name">{member.name.split(" ")[0]}</span>

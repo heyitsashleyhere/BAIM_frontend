@@ -22,9 +22,19 @@
 			margin: 1rem 0rem;
 
 			img {
-				width: 10%;
+				width: 7rem;
+				height: 7rem;
 				border: 1px solid rgb(34, 34, 34);
 				border-radius: 50%;
+
+				@include media(">tablet") {
+					width: 9rem;
+					height: 9rem;
+				}
+				@include media(">desktop") {
+					width: 12rem;
+					height: 12rem;
+				}
 			}
 
 			.Profile-text {
