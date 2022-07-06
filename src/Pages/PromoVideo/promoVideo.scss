@@ -49,17 +49,28 @@
 			object-position: center;
 		}
 	}
-	// @include media(">=tablet") {
-	// 	.skip-btn {
-	// 		position: absolute;
-	// 		right: 15rem;
-	// 	}
-	// }
+	@include media(">=tablet") {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		.skip-btn {
+			grid-column: 6/8;
+			position: absolute;
+		}
+		.promo-video-wrapper {
+			grid-column: 1/13;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+	}
 
 	@include media(">desktop") {
+		grid-template-columns: repeat(12, 1fr);
 		.skip-btn {
-			position: absolute;
-			right: 4rem;
+			grid-column: 10/11;
+		}
+		.promo-video-wrapper {
+			grid-column: 1/13;
 		}
 	}
 }

@@ -11,10 +11,10 @@
 		position: fixed;
 		top: 5.5rem;
 		z-index: 10;
+		background: #fff;
 
 		&-container {
 			grid-column: 3/11;
-			background: #fff;
 
 			.avatars {
 				display: flex;

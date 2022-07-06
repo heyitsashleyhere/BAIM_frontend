@@ -78,7 +78,6 @@ const Team = () => {
 	};
 
 	const handleMemberComponent = (data) => {
-		// console.log(data);
 		setMemberData(data);
 		setIsClicked(true);
 	};
@@ -185,9 +184,6 @@ const Team = () => {
 export default Team;
 
 const Member = ({ memberData }) => {
-	console.log("memberData :>> ", memberData);
-	console.log(memberData.social.github);
-
 	return (
 		<>
 			<section className="team_logo member_details">

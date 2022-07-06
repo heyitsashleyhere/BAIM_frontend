@@ -25,9 +25,6 @@ const ScrollToTop = () => {
 			setIconColor(false);
 		}
 	}, [pathname, iconColor]);
-	console.log("pathname :>> ", pathname);
-
-	console.log("iconColor :>> ", iconColor);
 
 	const scrollToTop = () => {
 		window.scrollTo({
