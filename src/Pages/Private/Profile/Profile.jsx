@@ -101,7 +101,7 @@ export const Profile = () => {
           console.log(`profile ${cat} fetch errors :>> `, error)
         );
     });
-  }, []);
+  }, [profileName]);
 
   function handleEdit() {
     setUserEditOpen(true)

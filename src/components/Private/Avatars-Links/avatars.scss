@@ -3,18 +3,15 @@
 .SquareAvatar{
     position:relative;
     display:flex;
+    border:1px solid red;
+    margin:1rem 0rem;
     
 
 
     .Avatar-Controllers{
         position:absolute;
-        right:0;
-        top:0;
-        border:1px solid rgba(128, 128, 128, 0.342);
-        background-color: rgba(255, 255, 255, 0.836);
-        border-radius: 50%;
-        margin:1rem;
-        width:10%;
+        right:1vw;
+        top:1vh;
         z-index:1;
 
 
@@ -71,24 +68,9 @@
     
     
         @include media(">=tablet"){
-            width:30.5vw;
-            margin:1rem;
+            max-width:30vw;
+            margin:1rem 1.2rem;
 
-    
-            .Avatar-Controllers{
-                position:absolute;
-                right:0;
-                top:0;
-                border:1px solid rgba(128, 128, 128, 0.342);
-                background-color: rgba(255, 255, 255, 0.836);
-                border-radius: 50%;
-                margin:1rem;
-                width:4vw;
-                z-index:1;
-        
-        
-                
-            };
 
             .InnerSquareAvatar{
                 display:flex;
@@ -99,7 +81,7 @@
     
                     .imageAvatar{
                         // width:200px;
-                        height:150px;
+                        height:145px;
                         cursor:pointer;
                         margin:0.3rem 0.5rem;
                 
@@ -116,33 +98,29 @@
     }
     
         @include media(">=desktop"){
-            width:19.9vw;
+            // width: 23%;
+            margin:1rem 0.4rem;
 
-            .Avatar-Controllers{
-                position:absolute;
-                right:0;
-                top:0;
-                border:1px solid rgba(128, 128, 128, 0.342);
-                background-color: rgba(255, 255, 255, 0.836);
-                border-radius: 50%;
-                margin:1rem;
-                width:16%;
-                z-index:1; 
-            };
     
-
             .InnerSquareAvatar{
                 display:flex;
-                width:100%;
+                // width:20vw;
                 text-decoration: none;
                 margin:0.2rem 0.2rem;
                 cursor: pointer;
     
                     .imageAvatar{
-                        // width:200px;
+                        border:1px solid red;
+                        width:200px;
                         height:125px;
                         cursor:pointer;
                         margin:0.3rem 0.5rem;
+
+
+                        img:hover{
+                            transform: scale(2);
+                            transition: 0.35s all ease-in-out;
+                        }
                 
                 
                         h2{
@@ -150,60 +128,70 @@
                             
                         }
                 
-                
+
                     }
 
         }
     
         }
 
-        @include media(">widescreen"){
+        // @include media(">widescreen"){
             
-            width:12vw;
+        //     width:12vw;
 
-            .Avatar-Controllers{
-                position:absolute;
-                right:0;
-                top:0;
-                border:1px solid rgba(128, 128, 128, 0.342);
-                background-color: rgba(255, 255, 255, 0.836);
-                border-radius: 50%;
-                margin:1rem;
-                text-align: center;
-                z-index:1;
-                width:15%; 
-            };
     
 
-            .InnerSquareAvatar{
-                display:flex;
-                width:100%;
-                text-decoration: none;
-                margin:0.2rem 0.2rem;
-                cursor: pointer;
+        //     .InnerSquareAvatar{
+        //         display:flex;
+        //         width:100%;
+        //         text-decoration: none;
+        //         margin:0.2rem 0.2rem;
+        //         cursor: pointer;
     
-                    .imageAvatar{
-                        // width:200px;
-                        height:120px;
-                        cursor:pointer;
-                        margin:0.3rem 0.5rem;
+        //             .imageAvatar{
+                  
+        //                 height:120px;
+        //                 cursor:pointer;
+        //                 margin:0.3rem 0.5rem;
                 
                 
-                        h2{
-                            font-size: 1.5rem;
+        //                 h2{
+        //                     font-size: 1.5rem;
                             
-                        }
+        //                 }
                 
                 
-                    }
+        //             }
 
-        }
-        }
+        // }
+        // }
     
     }
 
 
+.AvatarProfile{
+    width:120px;
+    padding:1rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:1rem 1rem;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0px 10px 13px -7px #000000, 1px -1px 15px 0px rgba(0,0,0,0.35);
 
+
+    @include media(">=tablet"){
+        padding:1rem;
+        margin:1rem 1rem;
+        width:145px;
+    }
+
+    @include media(">=desktop"){
+       width:145px;
+      
+    }
+}
     
     .RoundAvatar{
         text-decoration: none;
@@ -253,9 +241,11 @@
     @include media(">=tablet"){
         margin:1rem 0.6rem;
 
+      
+
         .imageAvatar{
-            width:100px;
-            height:100px;
+            width:100%;
+            height:100%;
         }
 
         h2{
@@ -267,8 +257,8 @@
     @include media(">=desktop"){
 
         .imageAvatar{
-            width:60%;
-            height: 60%;
+            width:75%;
+            height: 75%;
         }
 
     }
