@@ -5,7 +5,7 @@ import { Modal, Button } from "@mui/material";
 
 
 export const Follow = ({name}) => {
-  const { upgrade, setUpgrade, users }=useContext(PostsContext)
+  const { upgrade, setUpgrade }=useContext(PostsContext)
   const { profileName } = useParams()
   const [ error, setError ] = useState(null)
 

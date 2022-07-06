@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Typography, TextField, Autocomplete, Paper, Button, FormHelperText, Grow, MenuItem, Grid } from "@mui/material";
+import { Typography, TextField, Autocomplete, Paper, Button, FormHelperText, Grow, MenuItem, Grid, Divider } from "@mui/material";
 import ImageInput from "../ImageInput.jsx";
 
 export default function UserEdit() {
@@ -383,7 +383,9 @@ export default function UserEdit() {
                         />
                       )}
                     />
-            </Grid>
+          </Grid>
+
+          
 
           <Grid item xs={12}>
             <Typography>Email</Typography>
@@ -403,8 +405,8 @@ export default function UserEdit() {
             )}
           </Grid>
 
-          <Grid item xs={12}>
-            <Typography variant="h4">Address</Typography>
+          <Grid item xs={12}>      
+            <Divider>Address</Divider>
           </Grid>
 
           <Grid item xs={12} sm={8}>

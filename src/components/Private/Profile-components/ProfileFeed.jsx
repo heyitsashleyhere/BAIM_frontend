@@ -3,7 +3,7 @@ import { PostsContext } from '../../../contexts/PostContext.js'
 import { SquareAvatar } from '../Avatars-Links/Avatars.jsx'
 
 export const ProfileFeed = (props) => {
-    const { data } = props;
+    const { data } = props; //data is the interest
 
     const { allArtsCraftPost, allBeautyPost,allGardenPost,allRecipePost}=useContext(PostsContext)
 
