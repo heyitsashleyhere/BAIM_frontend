@@ -1,7 +1,6 @@
 @import "../../../styles/breakpoints";
 
 .Profile {
-
 	position: relative;
 	top: 1rem;
 
@@ -13,26 +12,28 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+		box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
 
-		button {
+		.Profile-editor{
 			align-self: flex-end;
 		}
+
 
 		.Profile-info {
 			justify-content: space-evenly;
 			display: flex;
 			align-items: center;
 			width: 100%;
-			margin: 1rem 0rem;
+			margin: 2rem 0rem;
 
 			img {
-				width: 25%;
+				width: 22%;
 				border: 1px solid rgb(34, 34, 34);
 				border-radius: 50%;
 			}
 
 			.Profile-text {
-				font-size: 1.2rem;
+				font-size: 1.6rem;
 				color: black;
 
 				h1 {
@@ -63,10 +64,11 @@
 
 	.Profile-Collection-Nav {
 		padding: 0.5rem;
-		margin: 1rem 0.5rem;
+		margin: 2rem 0.5rem;
 
 		button {
-			margin: 0rem 0.5rem;
+			font-size: 2rem;
+			margin: 0rem 3rem;
 			cursor: pointer;
 			border: none;
 			background-color: white;
@@ -75,36 +77,47 @@
 	}
 
 	.Profile-Collection {
-		margin: 1rem;
+		
+		display:flex;
+		justify-content: center;
+		margin:1rem 1rem;
 
-		h2 {
-			font-size: 1rem;
-			margin-left: 1rem;
-		}
-
+		
 		.Profile-Library {
+		
 			margin: 2rem 0rem;
 			width: 100%;
 			display: flex;
-			flex-wrap: nowrap;
-
+			align-items: flex-start;
+			
+ // card of each collection
 			.posts-btn-wrapper {
-				width: 100%;
-
+			
+				width: 20%;
 				display: flex;
 				flex-direction: column;
+				justify-content: left;
 				align-items: center;
-				justify-content: space-between;
+				
 
-				p {
+				p{
 					margin-top: 1rem;
 					font-size: 1rem;
+				}
+				p:nth-child(2){
+					font-size:1.3rem;
+				}
+
+				p:nth-child(3){
+					color:red;
+					font-size:0.9rem;
 				}
 
 				.post-btn-container {
 					width: 50px;
 					height: 50px;
 					border-radius: 50%;
+					border:1px solid rgba(128, 128, 128, 0.452);
 					background-position: center;
 					background-repeat: no-repeat;
 					background-size: cover;
@@ -130,14 +143,68 @@
 				}
 
 				.artsCraft {
-					background-image: url('../../../assets/images/DIY.jpg');
+					background-image: url('../../../assets/images/pots.jpg');
 
+				}
+
+				.event{
+					background-image: url('../../../assets/images/calendar.jpg');
 				}
 
 			}
 		}
 
 	}
+
+	.Profile-Lib-Collection{
+		
+		margin:1rem;
+		
+	}
+
+
+	@include media(">=tablet"){
+		display:grid;
+		grid-template-columns: repeat(8,1fr);
+		gap:2.5rem;
+
+
+		.Profile-inner{
+			grid-column: 2/8;
+
+
+			.Profile-header{
+				box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
+
+				.Profile-info{
+					
+					
+					img{
+						width:18%;
+					}
+
+					.Profile-text{
+						font-size:2.5vw;
+					}
+				}
+
+				.Profile-followers{
+					justify-content: space-evenly;
+					
+				}
+			
+			}
+
+			.Profile-Lib-Collection{
+				border:1px solid blue;
+				display: flex;
+				flex-wrap: wrap;
+			}
+		}
+	}
+
+
+
 
 }
 

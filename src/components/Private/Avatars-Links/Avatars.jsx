@@ -129,9 +129,9 @@ export const RoundAvatar = ({ name, id, image }) => {
 
 
 	return (
-		<section className="AvatarR AvatarProfile">
-			<Link to={`/profile/${name}`} key={id} className="RoundAvatar">
-				<section className="imageAvatar">
+		<section className="ProfileAvatar-CARD">
+			<Link to={`/profile/${name}`} key={id} className="RoundAvatarProfile">
+				<section className="ImageAvatarProfile">
 					<img src={image}></img>
 				</section>
 				<h2>{name}</h2>
@@ -146,7 +146,7 @@ export const RoundAvatar = ({ name, id, image }) => {
 export const SeasonalAvatar = ({ name, id, image }) => {
 	return (
 		<section className="AvatarR">
-			<NavLink to={name === 'More' ? `/seasonal`: `/seasonal/${name}`} key={id} className="RoundAvatar ">
+			<NavLink to={name === 'More' ? `/seasonal`: `/seasonal/${name}`} key={id} className="RoundAvatar">
 				<section className="imageAvatar produceIcon">
 					<img src={image}></img>
 				</section>

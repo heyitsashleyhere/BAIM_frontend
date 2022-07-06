@@ -30,13 +30,6 @@ function PostsContextProvider({ children }){
     const [profileData, setProfileData] = useState(null)
     // dependency for fetches
     const [ upgrade, setUpgrade ] = useState(false)
-
-    //dependency for display in profile
-    const [display, setDisplay] = useState(null);
-
-    // my pin Object for profile to hold data of API that matches objects id from profileUser.pin.
-    // this is being used in components PinButton, and displayPin for profile
-    const [myPin, setMyPin]=useState()
     
     
     // const [loading, setLoading]=useState(true)
@@ -139,7 +132,7 @@ function PostsContextProvider({ children }){
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
         seasonal, setSeasonal,
-        display, setDisplay, myPin, setMyPin,
+        profileData, setProfileData
     }
 
     return (
@@ -151,3 +144,4 @@ function PostsContextProvider({ children }){
 }
 
 export default PostsContextProvider;
+
