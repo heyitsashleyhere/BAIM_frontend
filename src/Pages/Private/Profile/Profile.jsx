@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
-import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import UserEdit from "../../../components/Private/Forms/UserEdit/UserEdit.jsx";
@@ -51,6 +50,8 @@ export const Profile = () => {
   const [showCatPins, setShowCatPins] = useState(false)
 
   useEffect(() => {
+    setPostMessage(null)
+    setPinMessage(null)
     const config = {
       method: "GET",
       credentials: "include", // specify this if you need cookies

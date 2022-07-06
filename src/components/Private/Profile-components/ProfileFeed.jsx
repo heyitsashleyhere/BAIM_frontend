@@ -3,8 +3,8 @@ import { PostsContext } from '../../../contexts/PostContext'
 import { SquareAvatar } from '../Avatars-Links/Avatars'
 
 export const ProfileFeed = (props) => {
-    const { data } = props;
-    
+    const { data } = props; //data is the interest
+
     const { allArtsCraftPost, allBeautyPost,allGardenPost,allRecipePost}=useContext(PostsContext)
 
     const allCollections = [allArtsCraftPost,allBeautyPost,allRecipePost,allGardenPost] 
