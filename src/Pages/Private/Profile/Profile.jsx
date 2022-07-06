@@ -40,6 +40,7 @@ export const Profile = () => {
   const [showMyPosts, setShowMyPosts]= useState(false)
   const [showMyPins, setShowMyPins]= useState(false)
   const [showCatPosts, setShowCatPosts] = useState(false)
+  const [showCatPins, setShowCatPins] = useState(false)
 
   useEffect(() => {
     const config = {
@@ -187,7 +188,7 @@ export const Profile = () => {
             <div className="Profile-Collection">
               { showMyPosts &&       
                 <div className="Profile-Library">
-                   {postMessage && <p>{postMessage}</p>}
+                  {postMessage && <p>{postMessage}</p>}
                   {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
                   {showPostCategoryButton(artsCrafts, display, setDisplay, showCatPosts, setShowCatPosts)}
                   {showPostCategoryButton(gardens, display, setDisplay, showCatPosts, setShowCatPosts)}
