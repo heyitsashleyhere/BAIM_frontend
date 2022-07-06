@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import { UserContext } from "../contexts/UserContext.js";
-import ImageInput from "./ImageInput.jsx";
+import { UserContext } from "../../../../contexts/UserContext.js";
+import ImageInput from "../ImageInput.jsx";
 
 
 export default function UserRegistration() {

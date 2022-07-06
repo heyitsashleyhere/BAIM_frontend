@@ -155,9 +155,11 @@
               
         
                 .Library-wrapper{
+                    border:1px solid blue;
                     grid-column: 1/9;
         
                     .Library-container{
+                        display:flex;
                         margin:1rem 0rem;
                         flex-direction: row;
                         flex-wrap: wrap;
