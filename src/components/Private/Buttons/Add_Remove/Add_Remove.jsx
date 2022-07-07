@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import {AiOutlineDelete} from 'react-icons'
+import {BsPinAngleFill, BsPinAngle} from 'react-icons/bs'
 import { PostsContext } from '../../../../contexts/PostContext'
 
-export const AddPost = (props) => {
+export const Add_Remove = (props) => {
   const{upgrade, setUpgrade}=useContext(PostsContext)
 
 const { category, id }=props
@@ -14,7 +14,7 @@ const [error, setError]=useState()
         method: "POST",
       };
       
-      fetch(`http://localhost:7000/user/collection/${id}`, config)
+      fetch(`http://localhost:7000/user//${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if(result.errors){
@@ -27,8 +27,10 @@ const [error, setError]=useState()
 
   return (
     <section>
-       <button onClick={AddPost}>remove</button>
-       <p>{error}</p>
+    
+    <BsPinAngleFill onClick={AddPost}/>
+      
+       
     </section>
     
   )

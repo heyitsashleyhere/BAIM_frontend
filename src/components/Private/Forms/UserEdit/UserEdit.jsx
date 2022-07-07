@@ -1,18 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
-// mui
-import { TextField, InputAdornment, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Stack } from "@mui/material";
+import { PostsContext } from "../../../../contexts/PostContext.js";
+import { Typography, TextField, Autocomplete, Paper, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Divider, Modal, InputAdornment, Stack } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-// import ImageInput from "../../../ImageInput.jsx";
-// import "./userRegistration.scss";
+import ImageInput from "../ImageInput.jsx";
 
-export default function UserRegistration() {
+export default function UserEdit() {
   const [userAddress, setUserAddress] = useState({});
   const [errors, setErrors] = useState([]);
-  const { inputValues, setInputValues, 
-          setMessage, setUser, setIsLogin,
-          isShowPassword, showPasswordHandler } = useContext(UserContext);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [message, setMessage] = useState(null)
+  const { inputValues, setInputValues, isShowPassword, showPasswordHandler } = useContext(UserContext);
+  const { profileData, upgrade, setUpgrade } = useContext(PostsContext)
   const [country, setCountry] = useState('')
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
@@ -438,6 +438,7 @@ export default function UserRegistration() {
     { code: 'ZM', label: 'Zambia', phone: '260' },
     { code: 'ZW', label: 'Zimbabwe', phone: '263' },
   ]
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     setInputValues({ ...inputValues, userAddress });
@@ -460,43 +461,48 @@ export default function UserRegistration() {
     setErrors([]);
 
     const config = {
-      method: "POST",
-      credentials: 'include', // specify this if you need cookies
+      method: "PATCH",
+      credentials: 'include', 
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputValues),
     };
 
-    fetch("http://localhost:7000/user/register", config)
+    fetch(`http://localhost:7000/user/${currentUser._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)
         if (result.errors) {
           setErrors(result.errors);
         } else {
-          setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
-          setMessage(result.message)
-          setIsLogin(true)
-          localStorage.setItem('user', JSON.stringify(result.user))
+          setMessage(result.message);
+          setIsModalOpen(true)
         }
-        
       })
       .catch((error) => console.log(error));
   }
 
   return (
-    <section className="RegisterForm">
+    <Paper elevation={3} className="ProfileEdit-form" sx={{ width: '80%', margin: '2rem'}}>
     <Grow in>
-      <form onSubmit={handleUserRegistration}>
+      <form onSubmit={handleUserRegistration} style={{ padding: '1rem 2rem'}}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <h1>Register</h1>
+          <Grid item xs={12} sx={{ textAlign: 'center '}}>
+            <Typography variant="h1">Edit Profile</Typography>
           </Grid>
+
+          <Grid item xs={12} sx={{ textAlign: 'center '}}>
+            <Typography variant="h4">Profile Picture</Typography>
+            <ImageInput imageUsage="avatar" oldUrl={profileData.avatar}/>
+          </Grid>
+
           <Grid item xs={12} sm={6}>
-            <TextField name="firstName" label="First Name"
-              fullWidth required
-              margin="dense" type="text"
+            <Typography>First Name</Typography>
+            <Typography name="firstName" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.firstName)}
-              onChange={handleChange} />
+              onInput={e => setInputValues({ ...inputValues, firstName: e.currentTarget.textContent}) } >
+                {profileData.firstName}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error.firstName && (
@@ -507,11 +513,13 @@ export default function UserRegistration() {
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="lastName" label="Last Name"
-              fullWidth required
-              margin="dense" type="text"
+            <Typography>Last Name</Typography>
+            <Typography name="lastName" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.lastName)}
-              onChange={handleChange} />
+              onInput={e => setInputValues({ ...inputValues, lastName: e.currentTarget.textContent}) } >
+              {profileData.lastName}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error.lastName && (
@@ -521,12 +529,14 @@ export default function UserRegistration() {
                 )
             )}
           </Grid>
-          <Grid item xs={12}>
-            <TextField name="profileName" label="Profile Name"
-              fullWidth required
-              margin="dense" type="text"
+          <Grid item xs={12} sm={6}>
+            <Typography>Profile Name</Typography>
+            <Typography name="profileName" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.profileName)}
-              onChange={handleChange} />
+              onInput={e => setInputValues({ ...inputValues, profileName: e.currentTarget.textContent}) } >
+              {profileData.profileName}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error.profileName && (
@@ -536,12 +546,31 @@ export default function UserRegistration() {
                 )
             )}
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField name="email" label="Email"
-              fullWidth required
-              margin="dense" type="email"
+
+          <Grid item xs={12} sm={6}>
+              <Autocomplete multiple
+                      options={["arts-and-craft", "beauty", "event", "garden", "recipe"]}
+                      getOptionLabel={(option) => option}
+                      defaultValue={profileData.interests || []}
+                      onChange={(event, value) => setInputValues({ ...inputValues, interests: value })}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          name="interests"
+                          label="interests"
+                        />
+                      )}
+                    />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Typography>Status</Typography>
+            <Typography name="status" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.email)}
-              onChange={handleChange} />
+              onInput={e => setInputValues({ ...inputValues, status: e.currentTarget.textContent}) } >
+              {profileData.status}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error.email && (
@@ -551,9 +580,29 @@ export default function UserRegistration() {
                 )
             )}
           </Grid>
+
+
+          <Grid item xs={12}>
+            <Typography>Email</Typography>
+            <Typography name="email" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
+              error={errors.find((error) => error.email)}
+              onInput={e => setInputValues({ ...inputValues, email: e.currentTarget.textContent}) } >
+              {profileData.email}
+            </Typography>
+            {errors.map(
+              (error, i) =>
+                error.email && (
+                  <FormHelperText error key={"emailError" + i}>
+                    {error.email}
+                  </FormHelperText>
+                )
+            )}
+          </Grid>
+
           <Grid item xs={12} sm={12}>
             <TextField name="password" label="Password"
-              fullWidth required
+              fullWidth
               margin="dense" type={isShowPassword ? "text" : "password"}
               error={errors.find((error) => error.password)}
               onChange={handleChange}
@@ -576,7 +625,7 @@ export default function UserRegistration() {
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField name="confirmPassword" label="Confirm Password"
-              fullWidth required
+              fullWidth
               margin="dense" type="password"
               error={errors.find((error) => error.confirmPassword)} 
               onChange={handleChange} />
@@ -590,16 +639,18 @@ export default function UserRegistration() {
             )}
           </Grid>
 
-          <Grid item xs={12}>
-            <h2>Address</h2>
+          <Grid item xs={12}>      
+            <Divider>Address</Divider>
           </Grid>
 
-          <Grid item xs={12} sm={12}>
-            <TextField name="street" label="Street"
-              fullWidth 
-              margin="dense" type="text"
+          <Grid item xs={12} sm={8}>
+            <Typography>Street</Typography>
+            <Typography name="street" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.street"])}
-              onChange={handleAddressChange} />
+              onInput={e => setUserAddress({ ...userAddress, street: e.currentTarget.textContent}) } >
+              {profileData.userAddress && (profileData.userAddress.street)}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error["userAddress.street"] && (
@@ -609,12 +660,14 @@ export default function UserRegistration() {
                 )
             )}
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField name="streetNumber" label="Street Number"
-              fullWidth 
-              margin="dense" type="text"
+          <Grid item xs={12} sm={4}>
+            <Typography>Street Number</Typography>
+            <Typography name="streetNumber" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.streetNumber"])}
-              onChange={handleAddressChange} />
+              onInput={e => setUserAddress({ ...userAddress, streetNumber: e.currentTarget.textContent}) } >
+              {profileData.userAddress && (profileData.userAddress.streetNumber)}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error["userAddress.streetNumber"] && (
@@ -625,11 +678,13 @@ export default function UserRegistration() {
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="city" label="City"
-              fullWidth required
-              margin="dense" type="text"
+            <Typography>City</Typography>
+            <Typography name="city" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.city"])}
-              onChange={handleAddressChange} />
+              onInput={e => setUserAddress({ ...userAddress, city: e.currentTarget.textContent}) } >
+              {profileData.userAddress && (profileData.userAddress.city)}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error["userAddress.city"] && (
@@ -640,11 +695,13 @@ export default function UserRegistration() {
             )}
          </Grid>
          <Grid item xs={12} sm={6}>
-            <TextField name="zip" label="Zip Code"
-              fullWidth 
-              margin="dense" type="text"
+            <Typography>Zip Code</Typography>
+            <Typography name="zip" variant="h4"
+              contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.zip"])}
-              onChange={handleAddressChange} />
+              onInput={e => setUserAddress({ ...userAddress, zip: e.currentTarget.textContent}) } >
+              {profileData.userAddress && (profileData.userAddress.zip)}
+            </Typography>
             {errors.map(
               (error, i) =>
                 error["userAddress.zip"] && (
@@ -656,22 +713,22 @@ export default function UserRegistration() {
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField name="country" label="Country"
-              fullWidth required
+              fullWidth 
               margin="dense" select
-              value={country}
+              value={ profileData.userAddress ? profileData.userAddress.country : country}
               error={errors.find((error) => error["userAddress.country"])}
               onChange={handleAddressChange}>
               {countries.map(option => (
-                        <MenuItem key={option.label} value={option.label}>
-                          <Stack direction="row" spacing={1} alignItems='center'>
-                            <img loading="lazy" width="20"
-                                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                                  alt={option.label} 
-                              />
-                            <p>{option.label}</p>
-                          </Stack>
-                        </MenuItem>
+                    <MenuItem key={option.label} value={option.label}>
+                        <Stack direction="row" spacing={1} alignItems='center'>
+                          <img loading="lazy" width="20"
+                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                                alt={option.label} 
+                            />
+                          <p>{option.label}</p>
+                        </Stack>
+                    </MenuItem>
               ))}
             </TextField>
             {errors.map(
@@ -685,11 +742,24 @@ export default function UserRegistration() {
           </Grid>
 
           <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
-            <Button variant="contained" type="submit" size="large">Register</Button>
+            <Button variant="contained" type="submit" size="large">Confirm</Button>
           </Grid>
         </Grid>
       </form>
     </Grow>
-    </section>
+
+    <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
+        <Paper elevation={3} className="ProfileEdit-form" 
+               sx={{ width: '80%', padding: '2rem',
+                     position: 'absolute', top: '50%', left: '50%',
+                     transform: 'translate(-50%, -50%)'
+                   }}>
+              <Typography variant="h3" textAlign='center'>
+                  {message}
+              </Typography> 
+        </Paper>
+    </Modal>
+
+    </Paper>
   )
 }

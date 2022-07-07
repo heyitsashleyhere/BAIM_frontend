@@ -8,10 +8,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function UserLogin() {
     const [errors, setErrors] = useState([])
-    const { user, setUser, 
+    const { setUser, setMessage, setIsLogin,
             inputValues, setInputValues,
-            message, setMessage,
-            setIsLogin,
             isShowPassword, showPasswordHandler } = useContext(UserContext)
     
 

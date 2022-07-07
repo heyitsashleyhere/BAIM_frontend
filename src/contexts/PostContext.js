@@ -1,170 +1,148 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect }  from 'react'
 
-export const PostsContext = React.createContext(null);
+export const PostsContext = React.createContext(null)
 
-function PostsContextProvider({ children }) {
-	const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"];
-	// creating a post
-	const [data, setData] = useState({});
-	const [inputValues, setInputValues] = useState({
-		title: "",
-		description: "",
-		link: "",
-		tags: "",
-	});
-	const [address, setAddress] = useState({
-		street: "",
-		streetNumber: "",
-		zip: "",
-		city: "",
-		country: "",
-	});
+function PostsContextProvider({ children }){
+    const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"] 
+    // creating a post
+    const [data, setData] = useState({})
+    const [inputValues, setInputValues] = useState({ title: "", description: "", link: "", tags: "" })
+    const [address, setAddress] = useState({ street: "", streetNumber: "", zip: "", city: "", country: ""})
 
-	// Search filter
-	const [searchResult, setSearchResult] = useState([]);
-	const [searchCat, setSearchCat] = useState("");
-	const [searchOpt, setSearchOpt] = useState("");
-	const [searchInput, setSearchInput] = useState("");
+    // Search filter
+    const [searchResult, setSearchResult] = useState([])
+    const [searchCat, setSearchCat] = useState("")
+    const [searchOpt, setSearchOpt] = useState("")
+    const [searchInput, setSearchInput] = useState("")
 
-	// ProduceAPI
-	const [seasonal, setSeasonal] = useState([]);
+    // ProduceAPI
+    const [seasonal, setSeasonal]=useState([])
+    
+    // General ALL posts fetches
+    const [ users, setUsers ] = useState([])
+    const [ allBeautyPost, setAllBeautyPost ] = useState([])
+    const [ allArtsCraftPost, setAllArtsCraftPost ] = useState([])
+    const [ allGardenPost, setAllGardenPost ] = useState([])
+    const [ allRecipePost, setAllRecipePost ] = useState([])
+    const [ allEventPost, setAllEventPost ] = useState([])
+    // Profile Page
+    const [profileData, setProfileData] = useState(null)
+    // dependency for fetches
+    const [ upgrade, setUpgrade ] = useState(false)
+    //MURAD! event data to attend
+	  const [eventData, setEventData] = useState([]);
+    
+    
+    // const [loading, setLoading]=useState(true)
+    
+    useEffect(() => { 
+        fetch("http://localhost:7000/user")
+        .then(response => response.json())
+        .then(result => {setUsers(result)})
+        .catch(error => console.log(error.message))
 
-	// General ALL posts fetches
-	const [users, setUsers] = useState([]);
-	const [allBeautyPost, setAllBeautyPost] = useState([]);
-	const [allArtsCraftPost, setArtsCraftPost] = useState([]);
-	const [allGardenPost, setGardenPost] = useState([]);
-	const [allRecipePost, setAllRecipePost] = useState([]);
-	const [allEventPost, setAllEventPost] = useState([]);
-	// dependency for fetches
-	const [upgrade, setUpgrade] = useState(false);
+        fetch("https://lokalseasons.herokuapp.com/produce")
+        .then(response=>response.json())
+        .then(result => setSeasonal(result))
+        .catch(error => console.log(error.message))
 
-	//MURAD! event data to attend
-	const [eventData, setEventData] = useState([]);
+        // const config = {
+        //     method: "GET",
+        //     credentials: 'include', // specify this if you need cookies
+        //     headers: { "Content-Type": "application/json" }
+        //   };
 
-	// const [loading, setLoading]=useState(true)
+        postCategories.map(cat => {
+            fetch(`http://localhost:7000/${cat}/`)
+            .then((response) => response.json())
+            .then((result) => {
+                if(!result.errors) { 
+                  switch (cat) {
+                    case 'beauty':
+                      setAllBeautyPost(result);
+                      break;
+                    case 'artsCraft':
+                      setAllArtsCraftPost(result);
+                      break;
+                    case 'garden':
+                      setAllGardenPost(result);
+                      break;
+                    case 'recipe':
+                      setAllRecipePost(result);
+                      break;
+                    case 'event':
+                      setAllEventPost(result);
+                      break;
+                  }
+                } else {
+                  console.log('fetch from PostContext :>> ', result.errors);
+                }
+              })
+            .catch((error) => console.log('fetch from PostContext :>> ', error));
+          })
 
-	useEffect(() => {
-		fetch("http://localhost:7000/user")
-			.then((response) => response.json())
-			.then((result) => {
-				setUsers(result);
-			})
-			.catch((error) => console.log(error.message));
+    }, [upgrade])
+    
+    // console.log(`seasonal`, seasonal)
 
-		fetch("https://lokalseasons.herokuapp.com/produce")
-			.then((response) => response.json())
-			.then((result) => setSeasonal(result))
-			.catch((error) => console.log(error.message));
 
-		// const config = {
-		//     method: "GET",
-		//     credentials: 'include', // specify this if you need cookies
-		//     headers: { "Content-Type": "application/json" }
-		//   };
+    function convertToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          }
+          fileReader.onerror = (error) => {
+            reject(error);
+          }
+        })
+    }
+    
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file)
+        setInputValues({...inputValues, image: base64})
+    }
 
-		postCategories.map((cat) => {
-			fetch(`http://localhost:7000/${cat}/`)
-				.then((response) => response.json())
-				.then((result) => {
-					if (!result.errors) {
-						switch (cat) {
-							case "beauty":
-								setAllBeautyPost(result);
-								break;
-							case "artsCraft":
-								setArtsCraftPost(result);
-								break;
-							case "garden":
-								setGardenPost(result);
-								break;
-							case "recipe":
-								setAllRecipePost(result);
-								break;
-							case "event":
-								setAllEventPost(result);
-								break;
-						}
-					} else {
-						console.log("fetch from PostContext :>> ", result.errors);
-					}
-				})
-				.catch((error) => console.log("fetch from PostContext :>> ", error));
-		});
-	}, [upgrade]);
+    function handleDelete() {
+        const config ={
+            method: "DELETE",
+            // headers: { Authorization: 'Bearer ' + "token"}, this is automated with cookies
+            body: JSON.stringify(inputValues)
+        }
+    
+        fetch(`http://localhost:7000/${category}`, config)
+            .then((response) => response.json())
+            .then((result) => console.log(category, "fetch result:", result))
+            .catch((error) => console.log(error));
+    }
 
-	// console.log(`seasonal`, seasonal)
+    const postsContextValue = {
+        postCategories,
+        inputValues, setInputValues,
+        address, setAddress,
+        convertToBase64, handleFileUpload,
+        data, setData, 
+        users, setUsers, 
+        allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost,
+        upgrade, setUpgrade,
+        searchResult, setSearchResult,
+        searchCat, setSearchCat,
+        searchOpt, setSearchOpt,
+        searchInput, setSearchInput,
+        seasonal, setSeasonal,
+        profileData, setProfileData,
+        eventData, setEventData,
+    }
 
-	function convertToBase64(file) {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader();
-			fileReader.readAsDataURL(file);
-			fileReader.onload = () => {
-				resolve(fileReader.result);
-			};
-			fileReader.onerror = (error) => {
-				reject(error);
-			};
-		});
-	}
+    return (
+        <PostsContext.Provider value={postsContextValue}>
+            {children}
+        </PostsContext.Provider>
+    )
 
-	const handleFileUpload = async (e) => {
-		const file = e.target.files[0];
-		const base64 = await convertToBase64(file);
-		setInputValues({ ...inputValues, image: base64 });
-	};
-
-	function handleDelete() {
-		const config = {
-			method: "DELETE",
-			// headers: { Authorization: 'Bearer ' + "token"}, this is automated with cookies
-			body: JSON.stringify(inputValues),
-		};
-
-		fetch(`http://localhost:7000/${category}`, config)
-			.then((response) => response.json())
-			.then((result) => console.log(category, "fetch result:", result))
-			.catch((error) => console.log(error));
-	}
-
-	const postsContextValue = {
-		postCategories,
-		inputValues,
-		setInputValues,
-		address,
-		setAddress,
-		convertToBase64,
-		handleFileUpload,
-		data,
-		setData,
-		users,
-		setUsers,
-		allBeautyPost,
-		allArtsCraftPost,
-		allGardenPost,
-		allRecipePost,
-		allEventPost,
-		upgrade,
-		setUpgrade,
-		searchResult,
-		setSearchResult,
-		searchCat,
-		setSearchCat,
-		searchOpt,
-		setSearchOpt,
-		searchInput,
-		setSearchInput,
-		seasonal,
-		setSeasonal,
-		eventData,
-		setEventData,
-	};
-
-	return (
-		<PostsContext.Provider value={postsContextValue}>
-			{children}
-		</PostsContext.Provider>
-	);
 }
 
 export default PostsContextProvider;
+

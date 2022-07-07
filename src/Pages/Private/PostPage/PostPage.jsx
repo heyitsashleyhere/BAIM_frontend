@@ -17,6 +17,7 @@ export const PostPage = ({ data }) => {
 
   const selected = data.find((item) => item.title === title);
 
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
@@ -74,7 +75,7 @@ export const PostPage = ({ data }) => {
             <p>Comments</p>
             {selected.comments
               ? selected.comments.map((item, index) => (
-                  <UserComment data={item} user={user._id} key={'userComment' + index}></UserComment>
+                  <UserComment data={item} user={currentUser._id} key={'userComment' + index}></UserComment>
                 ))
               : null}
 
