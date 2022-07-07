@@ -68,7 +68,6 @@ export default function App() {
 	// if (!initialized) {
 	//   return "Loading ;)"
 	// }
-	console.log('isNav', isNav)
 
 	return (
 		<ThemeProvider theme={theme}>

@@ -10,7 +10,7 @@ import displayAvatars from "../../../components/Private/Profile-components/displ
 import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
-import { Modal,	Typography, Paper} from "@mui/material";
+import { Modal,	Typography, Paper, Box} from "@mui/material";
 import "./profile.scss";
 
 
@@ -193,7 +193,9 @@ export const Profile = () => {
                            justifyContent: 'center',
                            alignItems: 'center'
                         }}>
-                <UserEdit />
+                <Box sx={{width: '80%', height: '90%'}}>
+                  <UserEdit />
+                </Box>
               </Modal>
              
 

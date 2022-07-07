@@ -483,7 +483,7 @@ export default function UserEdit() {
   }
 
   return (
-    <Paper elevation={3} className="ProfileEdit-form" sx={{ width: '80%', margin: '2rem'}}>
+   <Paper elevation={3} className="ProfileEdit-form" >
     <Grow in>
       <form onSubmit={handleUserRegistration} style={{ padding: '1rem 2rem'}}>
         <Grid container spacing={2}>
@@ -762,5 +762,6 @@ export default function UserEdit() {
     </Modal>
 
     </Paper>
+
   )
 }
