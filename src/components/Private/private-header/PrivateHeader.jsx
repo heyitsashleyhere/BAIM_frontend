@@ -167,6 +167,7 @@ const MobileMenu = ({ setBurgerMenu, logoutUser, links, burgerMenu }) => {
 		mobileMenuRef.current.style.display = "none";
 	};
 
+
 	useEffect(() => {
 		onLinkClick();
 	}, [mobileMenuRef]);
