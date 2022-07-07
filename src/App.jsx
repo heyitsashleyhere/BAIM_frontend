@@ -54,6 +54,8 @@ export default function App() {
 		setDisplayNav(localDisplayNav);
 	}, []);
 
+  if (!users.length){ return "loading" }
+
 	// ! try to do 'checkLogin' endpoint
 	// if (!initialized) {
 	//   return "Loading ;)"

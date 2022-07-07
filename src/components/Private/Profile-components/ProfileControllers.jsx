@@ -29,7 +29,7 @@ export default function ProfileControllers({ handleEdit, handleDelete}) {
   };
   // MUI popper END
   return (
-    <section className="Profile-Controllers">
+    <section className="Profile-editor">
       <IconButton
         aria-label="edit"
         aria-controls={openFeatures ? "basic-menu" : undefined}

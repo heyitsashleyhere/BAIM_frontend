@@ -1,6 +1,6 @@
-import { useContext } from 'react'
-import { PostsContext } from '../../../contexts/PostContext.js'
-import { SquareAvatar } from '../Avatars-Links/Avatars.jsx'
+import React, { useContext } from 'react'
+import { PostsContext } from '../../../contexts/PostContext'
+import { SquareAvatar } from '../Avatars-Links/Avatars'
 
 export const ProfileFeed = (props) => {
     const { data } = props; //data is the interest

@@ -13,11 +13,13 @@ export default function showPinCategoryButton(pins, display, setDisplay, showCat
         <div className="posts-btn-wrapper">
           <div onClick={handleClick}
                className={`${pins[0].postType} post-btn-container`} >
-            {pins[0].postType === "artsCraft"
-              ? "arts and crafts"
-              : pins[0].postType}
           </div>
+          
+          <p>{pins[0].postType === "artsCraft"
+              ? "arts"
+              : pins[0].postType}</p>
           <p>{pins.length} items</p>
+          
         </div>
       );
     }

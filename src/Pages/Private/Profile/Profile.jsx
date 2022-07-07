@@ -172,9 +172,9 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {currentUser.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete}/>
+                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} className="Profile-editor"/>
               )}
-
+              
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
                 <Paper elevation={3} className="ProfileEdit-form" 
                        sx={{ width: '80%', padding: '2rem',
@@ -195,6 +195,7 @@ export const Profile = () => {
                         }}>
                 <UserEdit />
               </Modal>
+             
 
               <div className="Profile-info">
                 <img src={profileData.avatar}></img>
@@ -211,15 +212,15 @@ export const Profile = () => {
               </div>
 
               <div className="Profile-followers">
-                <Follow />
+                <Follow className="Profile-follow-button"/>
                 <p>{followers.length} followers</p>
                 <p>{following.length} following</p>
               </div>
             </div>
 
             <div className="Profile-Collection-Nav">
-              <button onClick={ () => { setShowMyPosts(!showMyPosts) ; setShowMyPins(false) ; setShowCatPosts(false)} }>Posts</button> 
-              <button onClick={ () => { setShowMyPosts(false) ; setShowMyPins(!showMyPins)} }>Pins</button>
+              <button className="LokaB" onClick={ () => { setShowMyPosts(!showMyPosts) ; setShowMyPins(false) ; setShowCatPosts(false)} }>Posts</button> 
+              <button className="LokaB" onClick={ () => { setShowMyPosts(false) ; setShowMyPins(!showMyPins)} }>Pins</button>
             </div>
 
             <div className="Profile-Collection">
@@ -244,11 +245,11 @@ export const Profile = () => {
                 </div>}
             </div>
 
-            <div className="Profile-Own-Collection">
+            <div className="Profile-Lib-Collection">
               {display && showCatPosts && displayAvatars(display, beauties, artsCrafts, gardens, recipes, events)}
             </div>
 
-            <div className="Profile-Pin-Collection">
+            <div className="Profile-Lib-Collection">
               {display && showCatPins && displayPinAvatars(display, beautyPins, artsCraftPins, gardenPins, recipePins, eventPins)}
             </div>
 
@@ -278,3 +279,18 @@ export const Profile = () => {
 
     //       console.log('currentUserLibrary :>> ', currentUserLibrary);
     //       console.log('typeof test :>> ', typeof test);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
