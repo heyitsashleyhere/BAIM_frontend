@@ -7,6 +7,7 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { BsHeart } from "react-icons/bs";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import "./postPage.scss";
+import { Pin } from "../../../components/Private/Buttons/Pin/Pin";
 
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
@@ -46,7 +47,7 @@ export const PostPage = ({ data }) => {
               name={selected.authorProfileName}
               image={selected.authorAvatar}
             ></PostHeaderAvatar>
-            <button className="Like-button">Likes</button>
+             {/* <Pin/> */}
           </section>
 
           <section className="Post-title">

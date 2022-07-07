@@ -12,7 +12,7 @@ export const Collections = (props) => {
 	// animation
 	const [index, setIndex] = useState(0);
 	const delay = 5500;
-	const timeoutRef = useRef(null);
+	// const timeoutRef = useRef(null);
 
 	const images = {
 		recipe: [
@@ -105,15 +105,9 @@ export const Collections = (props) => {
 		],
 	};
 
-	function resetTimeout() {
-		if (timeoutRef.current) {
-			clearTimeout(timeoutRef.current);
-		}
-	}
 
 	useEffect(() => {
-		resetTimeout();
-		timeoutRef.current = setTimeout(
+		const id = setInterval(
 			() =>
 				setIndex((prevIndex) =>
 					prevIndex === images[type].length - 1 ? 0 : prevIndex + 1
@@ -122,9 +116,9 @@ export const Collections = (props) => {
 		);
 
 		return () => {
-			resetTimeout();
+			clearInterval(id)
 		};
-	}, [index]);
+	}, []);
 
 	return (
 		<>

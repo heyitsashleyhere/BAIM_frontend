@@ -1,3 +1,5 @@
+@import './../../../styles/breakpoints'; 
+
 .Create {
     padding: 6rem 2rem 0 2rem;
     h1 {
@@ -5,5 +7,23 @@
     }
     .pick-container {
         margin-top: 2rem;
+    }
+
+    @include media(">=tablet") {
+        display:grid;
+        grid-template-columns: repeat(8,1fr);
+        gap:2.5rem;
+
+        .Create-inner{
+            grid-column: 2/8;
+        }
+    }
+
+    @include media(">=desktop"){
+        grid-template-columns: repeat(12,1fr);
+
+        .Create-inner{
+            grid-column: 3/11;
+        }
     }
 }
