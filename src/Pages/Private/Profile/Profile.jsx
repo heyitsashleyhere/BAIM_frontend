@@ -10,7 +10,7 @@ import displayAvatars from "../../../components/Private/Profile-components/displ
 import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
-import { Modal,	Typography, Paper, Box} from "@mui/material";
+import { Modal,	Typography, Paper} from "@mui/material";
 import "./profile.scss";
 
 
@@ -117,7 +117,7 @@ export const Profile = () => {
           console.log(`profile ${cat} fetch errors :>> `, error)
         );
     });
-  }, [profileName]);
+  }, [profileName, upgrade]);
 
   useEffect(() => {
     pins.forEach(pin => {   
@@ -139,7 +139,7 @@ export const Profile = () => {
           break;
       }
     })
-  }, [pins])
+  }, [pins, upgrade])
 
   function handleEdit() {
     setUserEditOpen(true)
@@ -172,7 +172,7 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {currentUser.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} className="Profile-editor"/>
+                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
               
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
@@ -187,15 +187,15 @@ export const Profile = () => {
                 </Paper>
               </Modal>
 
-              <Modal open={isUserEditOpen} onClose={() => { setUserEditOpen(false); setUpgrade(!upgrade) }} 
+              <Modal open={isUserEditOpen} onClose={() => { setUserEditOpen(false); setUpgrade(!upgrade); }} 
                      sx={{ display: 'flex',
                            overflow:'scroll',
                            justifyContent: 'center',
                            alignItems: 'center'
                         }}>
-                <Box sx={{width: '80%', height: '90%'}}>
-                  <UserEdit />
-                </Box>
+                <Paper elevation={3} sx={{width: '80%', height: '90%', overflow: 'scroll'}}>
+                  <UserEdit setUserEditOpen={setUserEditOpen} />
+                </Paper>
               </Modal>
              
 

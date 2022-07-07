@@ -6,13 +6,14 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ImageInput from "../ImageInput.jsx";
 
-export default function UserEdit() {
+
+export default function UserEdit({ setUserEditOpen }) {
   const [userAddress, setUserAddress] = useState({});
   const [errors, setErrors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState(null)
-  const { inputValues, setInputValues, isShowPassword, showPasswordHandler } = useContext(UserContext);
-  const { profileData, upgrade, setUpgrade } = useContext(PostsContext)
+  const {inputValues, setInputValues, isShowPassword, showPasswordHandler} = useContext(UserContext);
+  const {profileData, upgrade, setUpgrade} = useContext(PostsContext)
   const [country, setCountry] = useState('')
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
@@ -456,7 +457,7 @@ export default function UserEdit() {
     }
   }
 
-  function handleUserRegistration(e) {
+  function handleUserUpdate(e) {
     e.preventDefault();
     setErrors([]);
 
@@ -483,22 +484,22 @@ export default function UserEdit() {
   }
 
   return (
-   <Paper elevation={3} className="ProfileEdit-form" >
-    <Grow in>
-      <form onSubmit={handleUserRegistration} style={{ padding: '1rem 2rem'}}>
+    <div className="ProfileEdit-form">
+      <Grow in>
+      <form onSubmit={handleUserUpdate} style={{ padding: '5% 7%'}} >
         <Grid container spacing={2}>
           <Grid item xs={12} sx={{ textAlign: 'center '}}>
-            <Typography variant="h1">Edit Profile</Typography>
+            <Typography variant="h3">Edit Profile</Typography>
           </Grid>
 
-          <Grid item xs={12} sx={{ textAlign: 'center '}}>
-            <Typography variant="h4">Profile Picture</Typography>
+          <Grid item xs={12} sx={{ textAlign: 'center', marginBottom: '2%'}}>
+            <Typography variant="h5">Profile Picture</Typography>
             <ImageInput imageUsage="avatar" oldUrl={profileData.avatar}/>
           </Grid>
 
           <Grid item xs={12} sm={6}>
             <Typography>First Name</Typography>
-            <Typography name="firstName" variant="h4"
+            <Typography name="firstName" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.firstName)}
               onInput={e => setInputValues({ ...inputValues, firstName: e.currentTarget.textContent}) } >
@@ -515,7 +516,7 @@ export default function UserEdit() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography>Last Name</Typography>
-            <Typography name="lastName" variant="h4"
+            <Typography name="lastName" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.lastName)}
               onInput={e => setInputValues({ ...inputValues, lastName: e.currentTarget.textContent}) } >
@@ -532,7 +533,7 @@ export default function UserEdit() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography>Profile Name</Typography>
-            <Typography name="profileName" variant="h4"
+            <Typography name="profileName" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.profileName)}
               onInput={e => setInputValues({ ...inputValues, profileName: e.currentTarget.textContent}) } >
@@ -566,7 +567,7 @@ export default function UserEdit() {
 
           <Grid item xs={12}>
             <Typography>Status</Typography>
-            <Typography name="status" variant="h4"
+            <Typography name="status" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.email)}
               onInput={e => setInputValues({ ...inputValues, status: e.currentTarget.textContent}) } >
@@ -585,7 +586,7 @@ export default function UserEdit() {
 
           <Grid item xs={12}>
             <Typography>Email</Typography>
-            <Typography name="email" variant="h4"
+            <Typography name="email" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error.email)}
               onInput={e => setInputValues({ ...inputValues, email: e.currentTarget.textContent}) } >
@@ -601,7 +602,7 @@ export default function UserEdit() {
             )}
           </Grid>
 
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <TextField name="password" label="Password"
               fullWidth
               margin="dense" type={isShowPassword ? "text" : "password"}
@@ -624,7 +625,7 @@ export default function UserEdit() {
                 )
             )}
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <TextField name="confirmPassword" label="Confirm Password"
               fullWidth
               margin="dense" type="password"
@@ -640,13 +641,13 @@ export default function UserEdit() {
             )}
           </Grid>
 
-          <Grid item xs={12}>      
+          <Grid item xs={12} sx={{margin: '6% 0 1% 0'}}>      
             <Divider>Address</Divider>
           </Grid>
 
           <Grid item xs={12} sm={8}>
             <Typography>Street</Typography>
-            <Typography name="street" variant="h4"
+            <Typography name="street" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.street"])}
               onInput={e => setUserAddress({ ...userAddress, street: e.currentTarget.textContent}) } >
@@ -663,7 +664,7 @@ export default function UserEdit() {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography>Street Number</Typography>
-            <Typography name="streetNumber" variant="h4"
+            <Typography name="streetNumber" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.streetNumber"])}
               onInput={e => setUserAddress({ ...userAddress, streetNumber: e.currentTarget.textContent}) } >
@@ -680,7 +681,7 @@ export default function UserEdit() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography>City</Typography>
-            <Typography name="city" variant="h4"
+            <Typography name="city" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.city"])}
               onInput={e => setUserAddress({ ...userAddress, city: e.currentTarget.textContent}) } >
@@ -697,7 +698,7 @@ export default function UserEdit() {
          </Grid>
          <Grid item xs={12} sm={6}>
             <Typography>Zip Code</Typography>
-            <Typography name="zip" variant="h4"
+            <Typography name="zip" variant="h5"
               contentEditable={true} suppressContentEditableWarning={true}
               error={errors.find((error) => error["userAddress.zip"])}
               onInput={e => setUserAddress({ ...userAddress, zip: e.currentTarget.textContent}) } >
@@ -749,7 +750,7 @@ export default function UserEdit() {
       </form>
     </Grow>
 
-    <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
+    <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade); setUserEditOpen(false) }} >
         <Paper elevation={3} className="ProfileEdit-form" 
                sx={{ width: '80%', padding: '2rem',
                      position: 'absolute', top: '50%', left: '50%',
@@ -761,7 +762,7 @@ export default function UserEdit() {
         </Paper>
     </Modal>
 
-    </Paper>
+    </div>
 
   )
 }

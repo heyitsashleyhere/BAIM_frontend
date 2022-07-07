@@ -64,7 +64,6 @@ export default function App() {
 	}, []);
 
   if (!users.length){ return "loading" }
-
 	// ! try to do 'checkLogin' endpoint
 	// if (!initialized) {
 	//   return "Loading ;)"
