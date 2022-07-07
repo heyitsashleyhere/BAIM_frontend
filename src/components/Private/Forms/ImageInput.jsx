@@ -51,7 +51,7 @@ export default function ImageInput({ imageUsage, oldUrl }){
         }
     }
 
-    console.log("checking image URL", inputValues[`${imageUsage}`])
+    // console.log("checking image URL", inputValues[`${imageUsage}`])
 
     // I have to find more about this according to some research in the 
     function updateFile(file){
