@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
-import EditPost from "../../../components/Private/Forms/EditPost/EditPost.jsx";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 
 import "./collections.scss";
@@ -155,8 +154,6 @@ export const Collections = (props) => {
           </section>
         </section>
       </section>
-
-	<EditPost />
     </>
   )
 }
