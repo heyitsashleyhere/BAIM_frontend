@@ -5,81 +5,91 @@
 .footer {
 	width: 100%;
 	height: 4.5rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	left: 0;
-	padding-inline: 1rem;
 
-	&-logo {
+	&-inner {
+		width: 100%;
+		height: 100%;
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-
-		p {
-			color: black;
-			font-size: 1.8rem;
-		}
-
-		.logo {
-			width: 1.8rem;
-		}
-	}
-	&-links {
-		ul {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 2rem;
-			list-style: none;
-
-			a {
-				text-decoration: none;
-				color: black;
-
-				p {
-					font-size: 1.2rem;
-				}
-			}
-		}
-	}
-
-	@include media(">=tablet") {
-		display: grid;
-		grid-template-columns: repeat(8, 1fr);
-		grid-column-gap: 2.5rem;
-		justify-content: center;
-		align-items: center;
+		justify-content: space-between;
+		padding-inline: 1rem;
 
 		&-logo {
-			grid-column: 2/4;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+
 			p {
-				font-size: 2.2rem;
+				color: black;
+				font-size: 1.8rem;
 			}
+
 			.logo {
 				width: 1.8rem;
 			}
 		}
 		&-links {
-			grid-column: 5/8;
-			justify-self: end;
+			ul {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 2rem;
+				list-style: none;
+
+				a {
+					text-decoration: none;
+					color: black;
+
+					p {
+						font-size: 1.2rem;
+					}
+				}
+			}
+		}
+	}
+	@include media(">=tablet") {
+		&-inner {
+			display: grid;
+			grid-template-columns: repeat(8, 1fr);
+			grid-column-gap: 2.5rem;
+			justify-content: center;
+			align-items: center;
+
+			&-logo {
+				grid-column: 2/4;
+				p {
+					font-size: 2.2rem;
+				}
+				.logo {
+					width: 1.8rem;
+				}
+			}
+			&-links {
+				grid-column: 5/8;
+				justify-self: end;
+			}
 		}
 	}
 	@include media(">=desktop") {
 		height: 7rem;
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		grid-column-gap: 2.5rem;
+		position: static;
 
-		&-logo {
-			grid-column: 3/5;
-			gap: 1rem;
-		}
+		&-inner {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			grid-column-gap: 2.5rem;
 
-		&-links {
-			grid-column: 6/11;
+			&-logo {
+				grid-column: 3/5;
+				gap: 1rem;
+			}
+
+			&-links {
+				grid-column: 6/11;
+			}
 		}
 	}
 }

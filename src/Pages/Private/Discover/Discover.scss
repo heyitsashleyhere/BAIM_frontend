@@ -49,9 +49,18 @@
 				color: #fff;
 				font-size: 5rem;
 				transition: 0.2s all ease-in-out;
+
+				.hovered {
+					font-size: 8rem;
+					position: relative;
+					border-radius: 1rem;
+					background-color: rgba(black, 0.4);
+					padding: 1rem 2rem;
+					transition: 0.2s all ease-in-out;
+				}
 			}
 			.active {
-				font-size: 6rem;
+				font-size: 8rem;
 				position: relative;
 				border-radius: 1rem;
 				background-color: rgba(black, 0.4);
@@ -80,12 +89,12 @@
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: 2.5rem;
-
-		position: relative;
-		height: calc(100vh - 26rem);
-		top: 14.5rem;
+		height: 100%;
 
 		&-wrapper {
+			position: relative;
+			height: calc(100vh - 26rem);
+			margin-top: 19rem;
 			overflow: hidden;
 			grid-column: 3/11;
 
@@ -95,10 +104,12 @@
 			}
 
 			.discover-collection {
+				height: 100%;
 				grid-column: 5/11;
 				display: flex;
 				align-items: flex-end;
-				padding-block: 2rem;
+				justify-content: space-between;
+				padding-block: 4rem;
 
 				.title {
 					margin-right: 6rem;

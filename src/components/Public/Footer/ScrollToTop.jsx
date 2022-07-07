@@ -1,15 +1,30 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
 import "./scrollToTop.scss";
 
 const ScrollToTop = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
+	const [iconColor, setIconColor] = useState(null);
+	const { pathname } = useLocation();
 	useEffect(() => {
 		window.addEventListener("scroll", () => {
-			window.scrollY > 200 ? setIsScrolled(true) : setIsScrolled(false);
+			setIsScrolled(window.scrollY > 200 ? true : false);
 		});
-	});
+	}, [isScrolled]);
+
+	useEffect(() => {
+		if (
+			pathname.includes("/main") ||
+			pathname.includes("/about") ||
+			pathname.includes("/team")
+		) {
+			setIconColor(true);
+		} else {
+			setIconColor(false);
+		}
+	}, [pathname, iconColor]);
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -22,8 +37,12 @@ const ScrollToTop = () => {
 		<div className="scroll-btn-container">
 			{isScrolled && (
 				<span className="scroll" onClick={scrollToTop}>
-					<BsIcons.BsArrowUpSquare className="scroll-btn" />
-					<BsIcons.BsFillArrowUpSquareFill className="scroll-btn-hover" />
+					<BsIcons.BsArrowUpSquare
+						className={`scroll-btn ${iconColor ? "public" : ""}`}
+					/>
+					<BsIcons.BsFillArrowUpSquareFill
+						className={`scroll-btn-hover ${iconColor ? "public" : null}`}
+					/>
 				</span>
 			)}
 		</div>

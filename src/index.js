@@ -7,7 +7,7 @@ import { UserContextProvider } from "./contexts/UserContext.js";
 import { AnimationContextProvider } from "./contexts/AnimationContext.js";
 // Components
 import App from "./App.jsx";
-// import PrivateHeader from "./components/Private/private-header/PrivateHeader.jsx";
+// import { Events } from "./Pages/Private/Events/Events.jsx";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
@@ -17,6 +17,7 @@ root.render(
 			<UserContextProvider>
 				<PostsContextProvider>
 					<AnimationContextProvider>
+						{/* <Events /> */}
 						<App />
 					</AnimationContextProvider>
 				</PostsContextProvider>

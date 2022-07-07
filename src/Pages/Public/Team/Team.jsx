@@ -78,7 +78,6 @@ const Team = () => {
 	};
 
 	const handleMemberComponent = (data) => {
-		// console.log(data);
 		setMemberData(data);
 		setIsClicked(true);
 	};
@@ -96,7 +95,7 @@ const Team = () => {
 										src={member.image}
 										alt={`${member.name.split(" ")[0]} image`}
 										onClick={() => handleMemberComponent(member)}
-										className="team_member-img"
+										className={`${member.name.split(" ")[0]}-img`}
 									/>
 									<h2 ref={addToNames}>
 										<span className="name">{member.name.split(" ")[0]}</span>
@@ -185,9 +184,6 @@ const Team = () => {
 export default Team;
 
 const Member = ({ memberData }) => {
-	console.log("memberData :>> ", memberData);
-	console.log(memberData.social.github);
-
 	return (
 		<>
 			<section className="team_logo member_details">

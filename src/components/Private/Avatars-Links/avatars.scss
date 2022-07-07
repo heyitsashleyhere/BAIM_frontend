@@ -6,17 +6,12 @@
     border:1px solid red;
     margin:1rem 0rem;
     
-
-
     .Avatar-Controllers{
         position:absolute;
         right:1vw;
         top:1vh;
-        z-index:1;
-
-
-        
-    };
+        z-index:1;       
+    }
     
     .InnerSquareAvatar{
         width:100%;
@@ -24,8 +19,6 @@
         margin:0.2rem 0.2rem;
         cursor: pointer;
        
-    
-    
         .imageAvatar{
             position:relative;
             width:100%;
@@ -45,8 +38,6 @@
                     transition: 0.35s all ease-in-out;
                 }
             }
-        
-        
     
             h2{
                 position:absolute;
@@ -56,52 +47,43 @@
                 font-size: 7.5vw;
                 font-weight: 700;
                 padding:1rem;
-                background-color: rgba(0, 0, 0, 0.26);
-              
+                background-color: rgba(0, 0, 0, 0.26);    
             }
-
-   
-    
         }
-
     }
     
     
-        @include media(">=tablet"){
-            max-width:30vw;
-            margin:1rem 1.2rem;
+    @include media(">=tablet"){
+         max-width:30vw;
+         margin:1rem 1.2rem;
 
 
-            .InnerSquareAvatar{
+         .InnerSquareAvatar{
                 display:flex;
                 width:100%;
                 text-decoration: none;
                 margin:0.2rem 0.2rem;
                 cursor: pointer;
     
-                    .imageAvatar{
-                        // width:200px;
-                        height:145px;
+                .imageAvatar{
+                      // width:200px;
+                      height:145px;
+                      margin:0.3rem 0.5rem;
+                      &:hover{
                         cursor:pointer;
-                        margin:0.3rem 0.5rem;
-                
+                      }
                 
                         h2{
-                            font-size: 1.5rem;
-                            
+                            font-size: 1.5rem;      
                         }
-                
-                
-                    }
-
-        }
+                }
+            }
     }
     
         @include media(">=desktop"){
             // width: 23%;
             margin:1rem 0.4rem;
 
-    
             .InnerSquareAvatar{
                 display:flex;
                 //width:20vw;
@@ -116,7 +98,6 @@
                         cursor:pointer;
                         margin:0.3rem 0.5rem;
 
-
                         img:hover{
                             transform: scale(2);
                             transition: 0.35s all ease-in-out;
@@ -127,10 +108,8 @@
                             font-size: 1.5rem;
                             
                         }
-                
 
                     }
-
         }
     
         }
@@ -262,84 +241,153 @@
 
     }
 
-   
 }
 
-.CommentAvatar{
-    text-decoration: none;
-    margin:1rem 1rem;
-    display:flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor:pointer;
+.RoundAvatar {
+	text-decoration: none;
+	margin: 1rem 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
 
-    .comAvatar{
-        width:30px;
-        height:30px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin:0.5rem;
-        border:1px solid black;
+	.imageAvatar {
+		width: 80px;
+		height: 80px;
+		overflow: hidden;
+		border-radius: 50%;
+		margin: 0.5rem;
+		border: 1px solid black;
 
-        img{
-            width:100%;
-            object-fit: cover;
-            object-position: top;
-        }
-    }
+		img {
+			width: 100%;
+			object-fit: cover;
+			object-position: top;
+			transition: 0.35s all ease-in-out;
+		}
+	}
+	.produceIcon {
+		&:hover {
+			background: #000;
+		}
+		img:hover {
+			transform: scale(2);
+			transition: 0.35s all ease-in-out;
+		}
+	}
 
-    h2{
-        color:black;
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 700;
-        padding:0.5rem;
-       
-    }
+	h2 {
+		color: black;
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 700;
+		padding: 0.5rem;
+	}
+
+	@include media(">=tablet") {
+		margin: 1rem 0.6rem;
+
+		.imageAvatar {
+			width: 100px;
+			height: 100px;
+		}
+
+		h2 {
+			margin: 1rem 0rem;
+			font-size: 1.2rem;
+		}
+	}
+
+	@include media(">=desktop") {
+		.imageAvatar {
+			max-width: 7rem;
+			max-height: 7rem;
+			min-width: 4rem;
+			min-height: 4rem;
+			height: 100%;
+			width: 100%;
+		}
+	}
 }
 
-.HeaderAvatar{
-    width: 50%;
-    text-decoration: none;
-    margin:1rem 0rem;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor:pointer;
+.CommentAvatar {
+	text-decoration: none;
+	margin: 1rem 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
 
-    .headAvatar{
-        width:50px;
-        height:50px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin:0.5rem;
-        border:1px solid black;
+	.comAvatar {
+		width: 30px;
+		height: 30px;
+		overflow: hidden;
+		border-radius: 50%;
+		margin: 0.5rem;
+		border: 1px solid black;
 
-        img{
-            width:100%;
-            object-fit: cover;
-            object-position: top;
-        }
-    }
+		img {
+			width: 100%;
+			object-fit: cover;
+			object-position: top;
+		}
+	}
 
-    h2{
-        color:black;
-        text-decoration: none;
-        font-size: 1.5rem;
-        font-weight: 700;
-        padding:0.7rem;
-       
-    }
+	h2 {
+		color: black;
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 700;
+		padding: 0.5rem;
+	}
+}
 
-    @include media(">=tablet"){
-        width:25%;
-        margin:0rem 1rem;
-    }
+.HeaderAvatar {
+	width: 50%;
+	text-decoration: none;
+	margin: 1rem 0rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
 
-    @include media(">=desktop"){
-        width:25%;
-        margin:1rem 1rem;
-    }
-    
+	.headAvatar {
+		width: 50px;
+		height: 50px;
+		overflow: hidden;
+		border-radius: 50%;
+		margin: 0.5rem;
+		border: 1px solid black;
+
+		img {
+			width: 100%;
+			object-fit: cover;
+			object-position: top;
+		}
+	}
+
+	h2 {
+		color: black;
+		text-decoration: none;
+		font-size: 1.5rem;
+		font-weight: 700;
+		padding: 0.7rem;
+	}
+
+	@include media(">=tablet") {
+		width: 25%;
+		margin: 0rem 1rem;
+	}
+
+	@include media(">=desktop") {
+		width: 25%;
+		margin: 1rem 1rem;
+	}
+}
+
+.AvatarR {
+	// width: 100%;
+	min-width: 4.2rem;
 }

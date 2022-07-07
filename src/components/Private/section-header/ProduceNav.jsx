@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { PostsContext } from "../../../contexts/PostContext.js";
 import { Link, useLocation } from "react-router-dom";
 import { SeasonalAvatar } from "../Avatars-Links/Avatars";
@@ -29,7 +29,6 @@ export const ProduceNav = () => {
 	});
 
 	const firstSix = inSeason.filter((_, idx) => idx < 10);
-
 	// let randomSeven = inSeason.sort(() => Math.random() - 0.5).slice(0, 7);
 
 	const discover = [
@@ -45,7 +44,7 @@ export const ProduceNav = () => {
 		{
 			id: 2,
 			name: "Seasonal",
-			src: require("../../../assets/images/seasonal.jpg"),
+			src: require("../../../assets/images/Seasonal.jpg"),
 			path: "/seasonal",
 			description:
 				"find your local Markets and sellers in your city and neighborhood",
@@ -82,17 +81,20 @@ export const ProduceNav = () => {
 			id: 6,
 			name: "events",
 			src: require("../../../assets/images/buy.jpg"),
-			path: "/event",
+			path: "/events",
 			description:
 				"find your local Markets and sellers in your city and neighborhood",
 			collection: "115 garderns",
 		},
 	];
 
+	const produceAvatarsRef = useRef(null);
 	useEffect(() => {
-		// console.log(location.pathname)
 		if (location.pathname === "/discover") {
 			setShow(false);
+		}
+		if (location.pathname === "/events") {
+			produceAvatarsRef.current.style.display = "none";
 		}
 	}, [location]);
 
@@ -116,7 +118,10 @@ export const ProduceNav = () => {
 	return (
 		<section className="section-nav">
 			<section className="section-nav-container">
-				<section className={`${visible ? "avatars" : "hidden"}`}>
+				<section
+					ref={produceAvatarsRef}
+					className={`${visible ? "avatars" : "hidden"}`}
+				>
 					{firstSix.map(({ id, name, image }, index) => (
 						<SeasonalAvatar id={id} name={name} image={image} key={index} />
 					))}

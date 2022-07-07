@@ -26,6 +26,7 @@ import ScrollToTop from "./components/Public/Footer/ScrollToTop.jsx";
 import { AnimationContext } from "./contexts/AnimationContext.js"; //TODO help to make it NONEED
 import { PostsContext } from "./contexts/PostContext.js";
 import { UserContext } from "./contexts/UserContext.js";
+import { Events } from "./Pages/Private/Events/Events.jsx";
 
 const theme = createTheme({
 	palette: {
@@ -43,11 +44,18 @@ const theme = createTheme({
 });
 
 export default function App() {
-  const { isLogin } = useContext(UserContext);
-  const { isNav } = useContext(AnimationContext);
-  const [cookies] = useCookies();
-  const [displayNav, setDisplayNav] = useState()
-  const { users, allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost, } = useContext(PostsContext)
+	const { isLogin } = useContext(UserContext);
+	const { isNav } = useContext(AnimationContext);
+	const [cookies] = useCookies();
+	const [displayNav, setDisplayNav] = useState();
+	const {
+		users,
+		allBeautyPost,
+		allArtsCraftPost,
+		allGardenPost,
+		allRecipePost,
+		allEventPost,
+	} = useContext(PostsContext);
 
 	useEffect(() => {
 		const localDisplayNav = localStorage.getItem("showNav");
@@ -62,68 +70,94 @@ export default function App() {
 	// }
 
 	return (
-    <ThemeProvider theme={theme}>
-      <section className="App">
-        {displayNav || isNav ? (
-          cookies.profileName || isLogin ? (
-            <>
-              <PrivateHeader />
-            </>
-          ) : (
-            <Header />
-          )
-        ) : null}
+		<ThemeProvider theme={theme}>
+			<section className="App">
+				{displayNav || isNav ? (
+					cookies.profileName || isLogin ? (
+						<>
+							<PrivateHeader />
+						</>
+					) : (
+						<Header />
+					)
+				) : null}
 
-        <ScrollToTop />
+				<ScrollToTop />
 
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<PromoVideo />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/auth" element={<LoginRegister />} />
+				<Routes>
+					{/* Public routes */}
+					<Route path="/" element={<PromoVideo />} />
+					<Route path="/main" element={<Main />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/team" element={<Team />} />
+					<Route path="/auth" element={<LoginRegister />} />
 
-          {/* Private routes */}
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/search" element={<Search />} />
+					{/* Private routes */}
+					<Route path="/discover" element={<Discover />} />
+					<Route path="/create" element={<Create />} />
+					<Route path="/search" element={<Search />} />
 
-          <Route path="/garden" element={<Collections data={allGardenPost} type="garden" />} />
-          <Route path="/garden/:title" element={<PostPage data={allGardenPost} />} />
+					<Route
+						path="/garden"
+						element={<Collections data={allGardenPost} type="garden" />}
+					/>
+					<Route
+						path="/garden/:title"
+						element={<PostPage data={allGardenPost} />}
+					/>
 
-          <Route path="/artsCraft" element={<Collections data={allArtsCraftPost} type="arts" />} />
-          <Route path="/artsCraft/:title" element={<PostPage data={allArtsCraftPost} />} />
+					<Route
+						path="/artsCraft"
+						element={<Collections data={allArtsCraftPost} type="arts" />}
+					/>
+					<Route
+						path="/artsCraft/:title"
+						element={<PostPage data={allArtsCraftPost} />}
+					/>
 
-          <Route path="/recipe" element={<Collections data={allRecipePost} type="recipe" />} />
-          <Route path="/recipe/:title" element={<PostPage data={allRecipePost} />} />
+					<Route
+						path="/recipe"
+						element={<Collections data={allRecipePost} type="recipe" />}
+					/>
+					<Route
+						path="/recipe/:title"
+						element={<PostPage data={allRecipePost} />}
+					/>
 
-          <Route path="/beauty" element={<Collections data={allBeautyPost} type="beauty" />} />
-          <Route path="/beauty/:title" element={<PostPage data={allBeautyPost} />} />
+					<Route
+						path="/beauty"
+						element={<Collections data={allBeautyPost} type="beauty" />}
+					/>
+					<Route
+						path="/beauty/:title"
+						element={<PostPage data={allBeautyPost} />}
+					/>
 
-          <Route path="/community" element={<Community />} />
-          <Route path="/community/:title" element={<PostPage />} />
+					<Route path="/community" element={<Community />} />
+					<Route path="/community/:title" element={<PostPage />} />
 
-          <Route path="/seasonal" element={<Seasonal />} />
-          <Route path="/seasonal/:name" element={<SingleProducePage />} />
+					<Route path="/seasonal" element={<Seasonal />} />
+					<Route path="/seasonal/:name" element={<SingleProducePage />} />
 
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/:profileName" element={<Profile />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile/:profileName" element={<Profile />} />
 
-          <Route path="/*" element={<Main />} />
-        </Routes>
-        {/* {isLogin ? <Footer /> : null} */}
+					<Route path="/events" element={<Events />} />
 
-        {displayNav ? (
-          cookies.profileName || isLogin ? (
-            <>
-              <Footer />
-            </>
-          ) : null
-        ) : null}
+					<Route path="/*" element={<Main />} />
+				</Routes>
+				{/* {isLogin ? <Footer /> : null} */}
 
-        {/* <Footer /> */}
-      </section>
-    </ThemeProvider>
-  )
+				{displayNav ? (
+					cookies.profileName || isLogin ? (
+						<>
+							<Footer />
+						</>
+					) : null
+				) : null}
+
+				{/* <Footer /> */}
+			</section>
+		</ThemeProvider>
+	);
 }

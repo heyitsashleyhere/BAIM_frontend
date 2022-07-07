@@ -3,7 +3,6 @@ import React, { useState, useEffect }  from 'react'
 export const PostsContext = React.createContext(null)
 
 function PostsContextProvider({ children }){
-
     const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"] 
     // creating a post
     const [data, setData] = useState({})
@@ -30,12 +29,13 @@ function PostsContextProvider({ children }){
     const [profileData, setProfileData] = useState(null)
     // dependency for fetches
     const [ upgrade, setUpgrade ] = useState(false)
+    //MURAD! event data to attend
+	  const [eventData, setEventData] = useState([]);
     
     
     // const [loading, setLoading]=useState(true)
     
-    useEffect(() => {
-        
+    useEffect(() => { 
         fetch("http://localhost:7000/user")
         .then(response => response.json())
         .then(result => {setUsers(result)})
@@ -132,7 +132,8 @@ function PostsContextProvider({ children }){
         searchOpt, setSearchOpt,
         searchInput, setSearchInput,
         seasonal, setSeasonal,
-        profileData, setProfileData
+        profileData, setProfileData,
+        eventData, setEventData,
     }
 
     return (

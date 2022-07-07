@@ -1,0 +1,143 @@
+@import "../../../styles/breakpoints";
+
+.events {
+	width: 100%;
+	padding-bottom: 2rem;
+	display: flex;
+	flex-direction: column;
+
+	&-cta {
+		width: 100%;
+		height: 17rem;
+		background-image: url(../../../assets/images/Seasonal.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+
+		&-title {
+			position: absolute;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.247);
+			font-weight: 800;
+			width: 100%;
+			padding: 0.5rem 1rem;
+
+			h1 {
+				color: white;
+				font-size: 4rem;
+				font-weight: 800;
+			}
+		}
+	}
+
+	&-month {
+		width: 100%;
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+		padding-inline: 2rem;
+		position: sticky;
+		top: 0rem;
+		z-index: 9;
+
+		&-container {
+			width: 4rem;
+			height: 4rem;
+			background: #10e9f6;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 2rem;
+
+			h2 {
+				font-size: 1.6rem;
+				font-weight: 800;
+			}
+		}
+	}
+
+	&-calendar {
+		padding-inline: 2rem;
+	}
+	@include media(">=tablet") {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		gap: 2.5rem;
+		padding-inline: none;
+
+		&-cta {
+			grid-column: 1/9;
+			height: 44rem;
+
+			&-title {
+				height: 17rem;
+				top: 0;
+				padding: 1rem;
+
+				h1 {
+					line-height: 2;
+					font-size: 8rem;
+				}
+			}
+		}
+
+		&-month {
+			grid-column: 2/8;
+			margin-block: 0;
+			padding-inline: 0;
+
+			background: #fff;
+			&-container {
+				// margin-top: 2rem;
+				height: 6rem;
+				width: 6rem;
+				h2 {
+					font-size: 2rem;
+					font-weight: 800;
+				}
+			}
+		}
+
+		&-calendar {
+			padding-inline: 0;
+			grid-column: 2/8;
+		}
+	}
+	@include media(">=desktop") {
+		margin-top: 10rem;
+		margin-bottom: 2rem;
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-column-gap: 2.5rem;
+		grid-row-gap: 5rem;
+
+		&-cta {
+			grid-column: 3/11;
+			height: 43vh;
+
+			&-title {
+				height: 20vh;
+
+				h1 {
+					font-size: 10vw;
+					font-weight: bold;
+					line-height: 1.2;
+				}
+			}
+		}
+		&-month {
+			// position: sticky;
+			top: 10rem;
+			grid-column: 3/4;
+			&-container {
+				margin-top: 0;
+			}
+		}
+
+		&-calendar {
+			grid-column: 4/11;
+		}
+	}
+}
