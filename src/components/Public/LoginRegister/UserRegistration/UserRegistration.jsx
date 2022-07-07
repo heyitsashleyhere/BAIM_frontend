@@ -1,11 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
-// mui
 import { TextField, InputAdornment, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Stack } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-// import ImageInput from "../../../ImageInput.jsx";
-// import "./userRegistration.scss";
+
 
 export default function UserRegistration() {
   const [userAddress, setUserAddress] = useState({});

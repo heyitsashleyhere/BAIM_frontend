@@ -476,6 +476,7 @@ export default function UserEdit() {
         } else {
           setMessage(result.message);
           setIsModalOpen(true)
+          setUpgrade(!upgrade)
         }
       })
       .catch((error) => console.log(error));

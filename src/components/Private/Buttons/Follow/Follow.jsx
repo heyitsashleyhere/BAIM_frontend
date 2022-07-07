@@ -53,9 +53,10 @@ export const Follow = ({name}) => {
       headers: { "Content-Type": "application/json" }
     }
        
-    fetch(`http://localhost:7000/user/${profileData._id}/following`, config)
+    fetch(`http://localhost:7000/user/following/${profileData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
+          console.log('result :>> ', result);
              if(result.errors){
                     setError(result.errors)
              } else {
