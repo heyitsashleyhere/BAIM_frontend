@@ -12,6 +12,7 @@ import { Pin } from "../../../components/Private/Buttons/Pin/Pin";
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({ data }) => {
+  
 	const { user } = useContext(UserContext);
   const { title } = useParams();
   let navigate = useNavigate();
@@ -35,7 +36,7 @@ export const PostPage = ({ data }) => {
     </section> */}
           <section className="Post-hero">
             <section className="Post-Page-header">
-              <BsHeart className="Post-Page-Header-icons" />
+             <Pin post={selected}/>
               <MdOutlineArrowBack onClick={() => navigate(-1)} className="Post-Page-Header-icons" />
             </section>
             <img src={selected.image}></img>
