@@ -7,7 +7,7 @@ import "./transitionPage.scss";
 import Logo from "./logo-black.png";
 // import Logo from '../../assets/logo/'
 
-const TransitionPage = () => {
+const TransitionPage = ({isFromRegister}) => {
 	const [cookies] = useCookies();
 	const [isOverlay, setIsOverlay] = useState(true);
 	const overlayPathIn = useRef(null);
@@ -116,7 +116,11 @@ const TransitionPage = () => {
 
 	const hideOverlay = () => {
 		setIsOverlay(false);
-		navigate(`/profile/${cookies.profileName}`, { replace: true });
+		if(isFromRegister) {
+			navigate(`/profile/${cookies.profileName}`, { replace: true });
+		} else {
+			navigate(`/discover`, { replace: true });
+		}
 	};
 
 	return (
