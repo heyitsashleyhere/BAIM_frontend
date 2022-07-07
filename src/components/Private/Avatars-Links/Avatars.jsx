@@ -3,44 +3,34 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
 
-import {
-	Modal,
-	IconButton,
-	Button,
-	Typography,
-	Menu,
-	MenuItem,
-	Popover,
-	Box,
-} from "@mui/material";
-
+import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box,} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
+
 import berry from "../../../assets/logo/raspberry.png";
-import { Follow } from "../Buttons/Follow/Follow";
-import { UnFollow } from "../Buttons/Unfollow/Unfollow";
+import { Follow } from "../Buttons/Follow/Follow.jsx";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import { DeletePost } from "../Buttons/Delete/DeletePost";
 
+
+
 // general avatars for the App
 export const SquareAvatar = ({ data }) => {
     const [cookies] = useCookies();
-    const {user}=useContext(UserContext)
+    const {upgrade, setUpgrade}=useContext(PostsContext)
     const [message, setMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-    // let navigate = useNavigate()
    
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
     const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
     const openFeatures = Boolean(anchorEl);
     const openPopper = Boolean(deleteAnchorEl);
-
   
     const handlePopper = (event) => {
       setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
@@ -63,10 +53,6 @@ export const SquareAvatar = ({ data }) => {
     }
 
     function handleDelete(type, id) {
-      // console.log('id :>> ', id);
-      // console.log('type :>> ', type);
-      // setMessage('your post is deleted');
-      // setIsModalOpen(true)
       const config = {
         method: "delete",
         credentials: 'include', 
@@ -82,7 +68,6 @@ export const SquareAvatar = ({ data }) => {
           }
         })
         .catch((error) => console.log(error));
-
     }
 
 
@@ -126,7 +111,7 @@ export const SquareAvatar = ({ data }) => {
               </section> 
         </NavLink>
     
-       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} >
+       <Modal open={isModalOpen} onClose={() => {setIsModalOpen(false); setUpgrade(!upgrade)}} >
           <p>{message}</p>
        </Modal>
         {/* experimental logic for add remove to user collections */}
@@ -138,25 +123,21 @@ export const SquareAvatar = ({ data }) => {
 // Avatars used specially in community page and general search engines.
 // this avatar uses nested components to fetch
 export const RoundAvatar = ({ name, id, image }) => {
-	const { user } = useContext(UserContext);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
-	const author = user._id === id;
-	console.log("auth", author);
+	const author = currentUser._id === id;
 
-	// needs to be done after collections api is done
-	// const found = user.collection.follow.find(item => item === user._id)
 
 	return (
-		<section className="AvatarR">
+		<section className="AvatarR AvatarProfile">
 			<Link to={`/profile/${name}`} key={id} className="RoundAvatar">
 				<section className="imageAvatar">
 					<img src={image}></img>
 				</section>
 				<h2>{name}</h2>
 			</Link>
-			{author ? <p>hey its me</p> : <p>follow</p>}
-			{/* disable bellow comment after collections from backend are operative */}
-			{/* { auth ?  <img src={berry}></img> : (found ? <Follow logUser={logUser} user={user._id}/> : <UnFollow logUser={logUser} user={user._id}/>)} */}
+			{author ? <Button disabled >hey its me</Button> : <Follow name={name} />}
+		
 		</section>
 	);
 };

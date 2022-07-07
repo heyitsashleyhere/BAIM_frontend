@@ -1,21 +1,22 @@
 import { useContext, useState } from "react";
-// MUI
-import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow } from "@mui/material";
+import { PostsContext } from "../../../../contexts/PostContext.js";
+import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ImageIcon from '@mui/icons-material/Image';
 import VideocamIcon from '@mui/icons-material/Videocam';
-// context
-import { PostsContext } from "../contexts/PostContext.js";
 
-export default function CreatePost({ category }) {
+
+
+export default function CreatePost({ category, setCategory }) {
   const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [tagsArray, setTagsArray] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const countryList = [
     "Afghanistan",
     "Albania",
@@ -315,8 +316,9 @@ export default function CreatePost({ category }) {
        if (result.errors) {
               setErrors(result.errors);
        }
-       console.log(category, "fetch result:", result)
-       })
+      //  console.log(category, "fetch result:", result)
+      setIsModalOpen(true)
+      })
       .catch((error) => console.log(error));
   }
 
@@ -509,20 +511,20 @@ export default function CreatePost({ category }) {
             )}
 
             <Grid item xs={6}>
-              <label htmlFor="video">
-                <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*"
+              <label htmlFor="create-post-video">
+                <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
                        onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
-                <Button variant="contained" endIcon={<VideocamIcon />} size="large">
+                <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
                   Upload Video
                 </Button>
               </label>
             </Grid>
 
             <Grid item xs={6}>
-              <label htmlFor="image">
-                <input type="file" name="image" accept=".jpeg, .png, .jpg"
+              <label htmlFor="create-post-image">
+                <input type="file" name="image" accept="image/*" id='create-post-image'
                       onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
-                <Button variant="contained" endIcon={<ImageIcon />} size="large">
+                <Button variant="contained" endIcon={<ImageIcon />} size="large" component="span">
                   Upload Image
                 </Button>
               </label>
@@ -543,15 +545,18 @@ export default function CreatePost({ category }) {
                      )
               )}
             </Grid>
-
-
-            
+        
             <Grid item xs={12} textAlign='center'>
               <Button variant="contained" type="submit" size="large">Post</Button>
             </Grid>
+
           </Grid>
         </form>
+
       </Grow>
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
+          <p>You have 'planted' a post in {category}</p>
+       </Modal>
     </section>
   )
 }
