@@ -28,26 +28,27 @@
     .login-page, .welcome-page{
         background-color: white;
         width:85%;
-        height:85%;
+        height:80%;
         display:flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 5rem;
+        padding: 3rem;
         border-radius:20px;
         box-shadow: 7px 10px 37px 3px rgba(0,0,0,0.61);
         -webkit-box-shadow: 7px 10px 37px 3px rgba(0,0,0,0.61);
         -moz-box-shadow: 7px 10px 37px 3px rgba(0,0,0,0.61);
-        // a {
-        //     cursor: pointer;
-        // }
+        @include media(">=tablet"){
+            padding: 5rem;
+            overflow-y: scroll;
+        }
         .LoginForm, .RegisterForm {
             h1 {
-                font-size: 4rem;
+                font-size: 3rem;
             }
         }
         .LoginForm {
             h1 {
-                margin-bottom: 2em;
+                margin-bottom: 1em;
             }
         }
         .RegisterForm {

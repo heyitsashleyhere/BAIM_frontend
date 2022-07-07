@@ -39,6 +39,7 @@ const theme = createTheme({
 		},
 	},
 	typography: {
+		htmlFontSize: 10,
 		fontFamily: ["Varela Round", "Arial", "Helvetica", "sans-serif"].join(","),
 	},
 });
@@ -68,6 +69,7 @@ export default function App() {
 	// if (!initialized) {
 	//   return "Loading ;)"
 	// }
+
 
 	return (
 		<ThemeProvider theme={theme}>
