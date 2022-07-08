@@ -44,6 +44,10 @@ const theme = createTheme({
 		fontFamily: ["Varela Round", "Arial", "Helvetica", "sans-serif"].join(","),
 		fontSize: 16,
 	},
+	snackbar:
+	{
+		textColor: '#123456'
+	}
 });
 
 export default function App() {

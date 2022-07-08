@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { PostsContext } from "../../../contexts/PostContext.js";
 import { AnimationContext } from "../../../contexts/AnimationContext";
+import { SnackbarContext } from "../../../contexts/SnackbarContext.js";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar";
 import EventModal from "./EventModal.jsx";
 
@@ -26,12 +27,11 @@ const styles2 = {
 };
 
 export const Events = () => {
-	const { allEventPost, setEventData, eventData } = useContext(PostsContext);
+	const { allEventPost, setEventData } = useContext(PostsContext);
+	const { setSnackbar } = useContext(SnackbarContext);
 	const { windowWidth } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [snackbarOpen, setSnackbarOpen] = useState(false);
-	const [error, setError] = useState();
 
 
 	const handleModalOpen = (idx) => {
@@ -45,13 +45,6 @@ export const Events = () => {
 		setShowMobile(windowWidth <= 500 ? true : false);
 	}, [showMobile, windowWidth]);
 
-	//alert mini popup
-	const handleSnackbarClose = (event, reason) => {
-		if (reason === "clickaway") {
-			return;
-		}
-		setSnackbarOpen(false);
-	};
 
 	//current month in letters
 	const date = new Date();
@@ -67,12 +60,11 @@ export const Events = () => {
 		}
 	});
 
-	// const handleCheckBoxClick = (event) => {
-	// };
+
 	const pinEvent = (event) => {
 		const config = {
 			method: "PATCH",
-			credentials: "include", // specify this if you need cookies
+			credentials: "include",
 		};
 
 		fetch(`http://localhost:7000/event/${event._id}/attend`, config)
@@ -82,7 +74,11 @@ export const Events = () => {
 				if (result.errors) {
 					setError(result.errors);
 				} else {
-					setSnackbarOpen(true);
+					setSnackbar({
+						message: "Event added to your Profile",
+						open: true,
+						severity: "error"
+					})
 					setEventData((prevState) => [...prevState, event]);
 				}
 			})
@@ -212,7 +208,7 @@ export const Events = () => {
 						))}
 					</MUI.List>
 				</section>
-				<MUI.Snackbar
+				{/* <MUI.Snackbar
 					open={snackbarOpen}
 					autoHideDuration={3000}
 					onClose={handleSnackbarClose}
@@ -220,7 +216,7 @@ export const Events = () => {
 					<MUI.Alert onClose={handleSnackbarClose} severity="success">
 						event was added to your calendar!
 					</MUI.Alert>
-				</MUI.Snackbar>
+				</MUI.Snackbar> */}
 			</section>
 		</>
 	);
