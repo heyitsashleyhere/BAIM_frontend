@@ -5,6 +5,7 @@ import "./Discover.scss";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,7 +65,7 @@ export const Discover = () => {
 		},
 		{
 			id: 6,
-			name: "events",
+			name: "Events",
 			src: require("../../../assets/images/buy.jpg"),
 			path: "/events",
 			description:
@@ -107,7 +108,8 @@ export const Discover = () => {
 
 	return (
 		<>
-			<ProduceNav />
+			{/* <ProduceNav /> */}
+			<ProduceNavbar />
 			<section className="discover">
 				<section className="discover-wrapper">
 					<section

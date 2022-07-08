@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
-import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx"
+import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
+import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
+import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
 
 import "./collections.scss";
 //(userLibrary[category]).find(post => post._id === id)
@@ -128,7 +130,8 @@ export const Collections = (props) => {
 
 	return (
 		<>
-			<ProduceNav />
+			<ProduceNavbar />
+			<DiscoverNavbar />
 			<section className="Collections">
 				<section className="Slideshow">
 					<section
@@ -136,7 +139,7 @@ export const Collections = (props) => {
 						style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
 					>
 						{images[type].map((item, index) => (
-							<section className="slide" key={'collectionHero-'+index}>
+							<section className="slide" key={"collectionHero-" + index}>
 								<img src={item.url}></img>
 								<section className="Hero-text">
 									<h1>{item.title}</h1>
@@ -154,7 +157,10 @@ export const Collections = (props) => {
 					</section>
 					<section className="Library-container">
 						{data.map((item) => (
-							<SquareAvatar data={item} key={'collectionSquareAvatar-'+ item._id}/>
+							<SquareAvatar
+								data={item}
+								key={"collectionSquareAvatar-" + item._id}
+							/>
 						))}
 					</section>
 				</section>

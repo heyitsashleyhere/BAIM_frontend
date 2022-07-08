@@ -1,5 +1,13 @@
 @import "../../../styles/breakpoints";
 
+.hidden {
+	height: 0;
+	width: 100%;
+	overflow: hidden;
+	transform: translateY(-150%);
+	// transition: cubic-bezier(1, 0, 0, 1) 0.4s;
+	// margin-bottom: 5rem;
+}
 .section-nav {
 	display: none;
 
@@ -8,8 +16,9 @@
 		grid-template-columns: repeat(12, 1fr);
 		grid-column-gap: 2.5rem;
 		width: 100%;
-		position: fixed;
-		top: 5.5rem;
+		// position: fixed;
+		// top: 5.5rem;
+		margin-top: 4.5rem;
 		z-index: 10;
 		background: #fff;
 
@@ -23,13 +32,6 @@
 				justify-content: space-between;
 				transform: translateY(0);
 				transition: cubic-bezier(1, 0, 0, 1) 0.6s;
-			}
-			.hidden {
-				height: 0;
-				width: 100%;
-				overflow: hidden;
-				transform: translateY(-150%);
-				transition: cubic-bezier(1, 0, 0, 1) 0.4s;
 			}
 
 			.categories {

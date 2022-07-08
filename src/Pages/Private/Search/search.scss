@@ -1,57 +1,62 @@
-@import '../../../styles/breakpoints';
+@import "../../../styles/breakpoints";
 
+.Search {
+	margin-top: 3rem;
+	padding-inline: 1rem;
+	// min-height: 100vh;
+	position: relative;
+	background: #fff;
 
+	.search-filter {
+		background: #fff;
+	}
+	.search-wrapper {
+		background: #fff;
+		border: 1px solid blue;
 
-.Search{
-    position:relative;
-    top:100px;
+		.search-info {
+			margin: 1rem;
+			h2 {
+				font-size: 2rem;
+			}
+			p {
+				margin: 1rem 0rem;
+			}
+		}
+	}
 
-    .search-wrapper{
-        border:1px solid blue;
+	@include media(">tablet") {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		gap: 2.5rem;
 
-        .search-info{
-            margin:1rem;
-            h2{
-                font-size: 2rem;
-            }
-            p{
-                margin:1rem 0rem;
-            }
-        }
+		.search-filter {
+			grid-column: 2/8;
+		}
 
-    }
+		.search-wrapper {
+			grid-column: 2/8;
+		}
 
-    @include media(">tablet"){
-        display:grid;
-        grid-template-columns: repeat(8,1fr);
-        gap:2.5rem;
+		.search-collection {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
 
-        .search-filter{
-            grid-column: 2/8;
-        }
+	@include media(">desktop") {
+		grid-template-columns: repeat(12, 1fr);
 
-        .search-wrapper{
-            grid-column: 1/9;
-        }
+		.search-filter {
+			// position: sticky;
+			// top: 24rem;
+			grid-column: 3/11;
+		}
 
-        .search-collection{
-            display:flex;
-            flex-wrap: wrap;
-        }
-    }
-
-    @include media(">desktop"){
-         grid-template-columns:repeat(12, 1fr);
-
-         .search-filter{
-            grid-column: 3/11;
-
-         }
-
-         .search-wrapper{
-            grid-column: 3/11;
-         }
-    }
-
+		.search-wrapper {
+			grid-column: 3/11;
+			height: 70vh;
+			overflow: scroll;
+		}
+	}
 }
-

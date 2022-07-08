@@ -1,188 +1,174 @@
-@import '../../../styles/breakpoints';
+@import "../../../styles/breakpoints";
 
+.Pages {
+	// position:relative;
+	// top:10rem;
+	width: 100%;
+	padding-bottom: 2rem;
+	display: flex;
+	flex-direction: column;
 
+	.community {
+		background: url(../../../assets/images/community.jpg);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
 
-.Pages{
-    position:relative;
-    top:10rem;
+	width: 100%;
 
-    .community{
-        background: url(../../../assets/images/community.jpg);
-        background-position: center;
-        background-repeat: repeat;
-        background-size: cover;
-    }
+	.Hero {
+		width: 100%;
+		position: relative;
 
-    width:100%;
-        
-    .Hero{
-        width:100%;
+		.hero-image {
+			width: 100%;
+			height: 25rem;
+		}
 
-        .hero-image{
-            position:relative;
-            width:100%;
-            height:50vh;
-        }
+		.Hero-text {
+			position: absolute;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.247);
+			font-weight: 800;
+			width: 100%;
+			padding: 0.5rem 0.5rem;
+			color: white;
 
-        .Hero-text{
-            height:50vh;
-            position:absolute;
-            top:0;
-            display:flex;
-            justify-content: flex-end;
-            flex-direction: column;
+			h1 {
+				font-size: 4rem;
+				color: white;
+			}
 
-            h1{
-                margin:0rem 1rem;
-                font-size: 2rem;
-                color:white;
-                
-            }
+			p {
+				font-size: 3.5rem;
+				color: white;
+			}
+		}
+	}
 
-            p{
-                margin:1rem 1rem;
-                font-size:2rem;
-                color:white;
-            }
+	.Library-wrapper {
+		width: 100%;
+		margin: 0.5rem 0rem;
 
-    
+		.lib-wrapper-header {
+			display: flex;
+			align-items: center;
+			margin-left: 1rem;
 
-        }
-    }
+			h2 {
+				font-size: 2rem;
+			}
 
-    .Library-wrapper{
-        width:100%;
-        margin: 0.5rem 0rem;
+			p {
+				font-size: 1.2rem;
+				margin-left: 1rem;
+				color: red;
+			}
+		}
 
-        .lib-wrapper-header{
-            display:flex;
-            align-items: center;
-            margin-left:1rem;
+		.Library-container {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			align-content: center;
+			justify-content: flex-start;
+			padding: 1rem;
+		}
 
-            h2{
-                font-size: 2rem;
-            }
+		.Library-container::-webkit-scrollbar {
+			height: 5px;
+		}
 
-            p{
-                font-size: 1.2rem;
-                margin-left:1rem;
-                color:red;
-            }
-            
-        }
+		.Library-container::-webkit-scrollbar-track {
+			box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
+			border-radius: 10px;
+		}
 
-        .Library-container{
-            width:100%;
-            display:flex;
-            flex-wrap:wrap;
-            align-content: center;
-            justify-content:flex-start;
-            padding:1rem;
-            
-        }
+		.Library-container::-webkit-scrollbar-thumb {
+			background: rgb(99, 99, 99);
+			border-radius: 20px;
+		}
+	}
 
-        .Library-container::-webkit-scrollbar {
-            height:5px;
-            
-          }
+	@include media(">=tablet") {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		gap: 2.5rem;
 
-        .Library-container::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
-            border-radius: 10px;
-        }
+		.Hero {
+			grid-column: 1/9;
+			.hero-image {
+				width: 100%;
+				height: 44rem;
+			}
 
-        .Library-container::-webkit-scrollbar-thumb {
-            background: rgb(99, 99, 99);
-            border-radius: 20px;
-          }
-    }
+			.Hero-text {
+				justify-content: flex-end;
+				height: 17rem;
+				top: 0;
 
+				h1 {
+					font-size: 8rem;
+				}
 
+				p {
+					font-size: 5.5rem;
+				}
+			}
+		}
 
-    @include media(">=tablet"){
-        display:grid;
-        grid-template-columns: repeat(8, 1fr);
-        gap:2.5rem;
+		.Library-wrapper {
+			grid-column: 2/8;
 
-        .Hero{
-            grid-column: 1/9;
-            
-    
-            .Hero-text{
-                justify-content: flex-end;
-               
-    
-                h1{
-                    margin:0rem 2rem;
-                    font-size: 10rem;
-                    
-                }
-    
-                p{
-                    margin:0rem 2rem;
-                    font-size:10rem;
-                }
-            }
-        }
+			.Library-container {
+				overflow: hidden;
+				overflow-x: scroll;
+			}
+		}
+	}
 
-        .Library-wrapper{
-          
-            grid-column: 1/9;
+	@include media(">=desktop") {
+		grid-template-columns: repeat(12, 1fr);
+		margin-top: 4.5rem;
+		grid-row-gap: 5rem;
 
-            .Library-container{
-               
-                overflow: hidden;
-                overflow-x: scroll;
-            }
+		.Hero {
+			grid-column: 3/11;
+			height: 43vh;
 
-        }
-    }
+			.hero-image {
+				position: relative;
+				width: 100%;
+			}
 
-    @include media(">=desktop"){
-        grid-template-columns: repeat(12,1fr);
+			.Hero-text {
+				top: 0;
+				height: 20vh;
+				// justify-content: flex-end;
 
-        .Hero{
-            grid-column: 2/12;
+				h1 {
+					// margin: 0rem 2rem;
+					// font-size: 10vw;
+					font-weight: bold;
+					// line-height: 1.2;
+				}
 
-            .hero-image{
-                position:relative;
-                width:100%;
-                
-               
-            }
+				p {
+					margin: 0rem 2rem;
+					font-size: 10rem;
+				}
+			}
+		}
 
-            .Hero-text{
-                top:0rem;
-                height:50vh;
-                justify-content: flex-end;
-               
+		// .Main-wrapper
 
-                h1{
-                    margin:0rem 2rem;
-                    font-size:15rem;
-                }
+		.Library-wrapper {
+			grid-column: 3/11;
+		}
+	}
 
-                p{
-                    margin:0rem 2rem;
-                    font-size: 10rem;
-                }
-            }
-        }
-
-        // .Main-wrapper
-
-        .Library-wrapper{
-            grid-column:2/12;
-        }
-    }
-
-
-
-.Pages::-webkit-scrollbar {
-    display: none;
+	.Pages::-webkit-scrollbar {
+		display: none;
+	}
 }
-
-}
-
-    
-

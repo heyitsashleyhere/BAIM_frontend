@@ -12,12 +12,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
+		// box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-		.Profile-editor{
+		.Profile-editor {
 			align-self: flex-end;
 		}
-
 
 		.Profile-info {
 			justify-content: space-evenly;
@@ -27,7 +27,7 @@
 			margin: 2rem 0rem;
 
 			img {
-        //! Murad's:
+				//! Murad's:
 				width: 7rem;
 				height: 7rem;
 				//! Ivos: width: 22%;
@@ -71,7 +71,6 @@
 			color: black;
 			margin: 1rem 0rem;
 		}
-
 	}
 
 	.Profile-Collection-Nav {
@@ -85,51 +84,45 @@
 			border: none;
 			background-color: white;
 		}
-
 	}
 
 	.Profile-Collection {
-		
-		display:flex;
+		display: flex;
 		justify-content: center;
-		margin:1rem 1rem;
+		margin: 1rem 1rem;
 
-		
 		.Profile-Library {
-		
 			margin: 2rem 0rem;
 			width: 100%;
 			display: flex;
 			align-items: flex-start;
-			
- // card of each collection
+
+			// card of each collection
 			.posts-btn-wrapper {
-			
 				width: 20%;
 				display: flex;
 				flex-direction: column;
 				justify-content: left;
 				align-items: center;
-				
 
-				p{
+				p {
 					margin-top: 1rem;
 					font-size: 1rem;
 				}
-				p:nth-child(2){
-					font-size:1.3rem;
+				p:nth-child(2) {
+					font-size: 1.3rem;
 				}
 
-				p:nth-child(3){
-					color:red;
-					font-size:0.9rem;
+				p:nth-child(3) {
+					color: red;
+					font-size: 0.9rem;
 				}
 
 				.post-btn-container {
 					width: 50px;
 					height: 50px;
 					border-radius: 50%;
-					border:1px solid rgba(128, 128, 128, 0.452);
+					border: 1px solid rgba(128, 128, 128, 0.452);
 					background-position: center;
 					background-repeat: no-repeat;
 					background-size: cover;
@@ -139,76 +132,62 @@
 				}
 
 				.recipe {
-					background-image: url('../../../assets/images/recipes.jpg');
-
+					background-image: url("../../../assets/images/recipes.jpg");
 				}
 
 				.beauty {
-					background-image: url('../../../assets/images/beauty.jpg');
-
+					background-image: url("../../../assets/images/beauty.jpg");
 				}
 
 				.garden {
-					background-image: url('../../../assets/images/gardens.jpg');
-
-
+					background-image: url("../../../assets/images/gardens.jpg");
 				}
 
 				.artsCraft {
-					background-image: url('../../../assets/images/pots.jpg');
-
+					background-image: url("../../../assets/images/pots.jpg");
 				}
 
-				.event{
-					background-image: url('../../../assets/images/calendar.jpg');
+				.event {
+					background-image: url("../../../assets/images/calendar.jpg");
 				}
-
 			}
 		}
-
 	}
 
-	.Profile-Lib-Collection{
-		
-		margin:1rem;
-		
+	.Profile-Lib-Collection {
+		margin: 1rem;
 	}
 
+	@include media(">=tablet") {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		gap: 2.5rem;
 
-	@include media(">=tablet"){
-		display:grid;
-		grid-template-columns: repeat(8,1fr);
-		gap:2.5rem;
-
-
-		.Profile-inner{
+		.Profile-inner {
 			grid-column: 2/8;
 
+			.Profile-header {
+				// box-shadow: 0px 10px 13px -7px #000000,
+				// 7px -30px 19px -30px rgba(0, 0, 0, 0.3);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.36);
 
-			.Profile-header{
-				box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
-
-				.Profile-info{
-					
-					
-					img{
-						width:18%;
+				.Profile-info {
+					img {
+						width: 18%;
 					}
 
-					.Profile-text{
-						font-size:2.5vw;
+					.Profile-text {
+						font-size: 2.5vw;
 					}
 				}
 
-				.Profile-followers{
+				.Profile-followers {
 					justify-content: space-evenly;
-					
 				}
-			
 			}
 
-			.Profile-Lib-Collection{
-				border:1px solid blue;
+			.Profile-Lib-Collection {
+				border: 1px solid blue;
 				display: flex;
 				flex-wrap: wrap;
 			}

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { PostsContext } from "../../../contexts/PostContext.js";
 import { AnimationContext } from "../../../contexts/AnimationContext";
-import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
+import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar";
 import EventModal from "./EventModal.jsx";
 
 //MUI
@@ -10,7 +10,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import "./events.scss";
-const cta = "../../../assets/images/Seasonal.jpg";
 
 //MUI styles
 const styles = {
@@ -32,10 +31,8 @@ export const Events = () => {
 	const [showMobile, setShowMobile] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
+	const [error, setError] = useState();
 
-	// const handleClick = () => {
-	// 	setOpen(true);
-	// };
 
 	const handleModalOpen = (idx) => {
 		console.log("idx :>> ", idx);
@@ -43,28 +40,22 @@ export const Events = () => {
 	};
 	const handleModalClose = () => setIsModalOpen(false);
 
+	//to toggle show/hide mui components between breakpoints
 	useEffect(() => {
 		setShowMobile(windowWidth <= 500 ? true : false);
 	}, [showMobile, windowWidth]);
-
-	const handleCheckBoxClick = (event) => {
-		setEventData((prevState) => [...prevState, event]);
-		setSnackbarOpen(true);
-	};
 
 	//alert mini popup
 	const handleSnackbarClose = (event, reason) => {
 		if (reason === "clickaway") {
 			return;
 		}
-
 		setSnackbarOpen(false);
 	};
 
 	//current month in letters
 	const date = new Date();
 	let currentMonth = date.toLocaleString("default", { month: "long" });
-	// let day = date.toLocaleString("default", { weekday: "short" });
 
 	//filtering events object based on current month
 	const eventDate = allEventPost.filter((event) => {
@@ -76,9 +67,34 @@ export const Events = () => {
 		}
 	});
 
+	// const handleCheckBoxClick = (event) => {
+	// };
+	const pinEvent = (event) => {
+		const config = {
+			method: "PATCH",
+			credentials: "include", // specify this if you need cookies
+		};
+
+		fetch(`http://localhost:7000/event/${event._id}/attend`, config)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log("result: >>", result);
+				if (result.errors) {
+					setError(result.errors);
+				} else {
+					setSnackbarOpen(true);
+					setEventData((prevState) => [...prevState, event]);
+				}
+			})
+			.catch((error) => {
+				console.log("error from Pin Event", error);
+			});
+	};
+
+
 	return (
 		<>
-			<ProduceNav />
+			<DiscoverNavbar />
 			<section className="events">
 				<div className="events-cta">
 					<div className="events-cta-title">
@@ -98,7 +114,7 @@ export const Events = () => {
 									<MUI.TableCell />
 									<MUI.TableCell>Date</MUI.TableCell>
 									{showMobile ? null : (
-										<MUI.TableCell align="right">Time</MUI.TableCell>
+										<MUI.TableCell align="center">Time</MUI.TableCell>
 									)}
 									<MUI.TableCell align="right">Location</MUI.TableCell>
 									{showMobile ? null : (
@@ -114,7 +130,7 @@ export const Events = () => {
 										event={event}
 										showMobile={showMobile}
 										setEventData={setEventData}
-										handleCheckBoxClick={handleCheckBoxClick}
+										pinEvent={pinEvent}
 									/>
 								))}
 							</MUI.TableBody>
@@ -130,59 +146,61 @@ export const Events = () => {
 				<section className="events-calendar">
 					<MUI.List component={MUI.Paper}>
 						{eventDate.map((event, idx) => (
-							<MUI.CardActionArea
-								key={idx}
-								onClick={() => handleModalOpen(idx)}
-							>
-								<MUI.ListItem alignItems="flex-start">
-									<MUI.ListItemAvatar sx={{ mb: 1 }}>
-										<MUI.Avatar
-											sx={
-												showMobile
-													? { width: 42, height: 42 }
-													: { width: 56, height: 56 }
+							<div key={event._id}>
+								<MUI.CardActionArea
+									key={idx}
+									onClick={() => handleModalOpen(idx)}
+								>
+									<MUI.ListItem alignItems="flex-start">
+										<MUI.ListItemAvatar sx={{ mb: 1 }}>
+											<MUI.Avatar
+												sx={
+													showMobile
+														? { width: 42, height: 42 }
+														: { width: 56, height: 56 }
+												}
+												alt="Remy Sharp"
+												src={event.image}
+											/>
+										</MUI.ListItemAvatar>
+										<MUI.ListItemText
+											sx={showMobile ? { pl: 1, pt: 0.5 } : { pl: 3, pt: 1 }}
+											primary={
+												<MUI.Typography
+													sx={{ display: "inline" }}
+													component="span"
+													variant={showMobile ? "h5" : "h4"}
+												>
+													{event.title}
+												</MUI.Typography>
 											}
-											alt="Remy Sharp"
-											src={event.image}
+											secondary={
+												<>
+													<MUI.Typography
+														sx={{ display: "inline" }}
+														component="span"
+														variant="h6"
+														color="text.secondary"
+													>
+														{new Date(event.start).getDate()}
+													</MUI.Typography>
+													<MUI.Typography
+														sx={{ display: "inline" }}
+														component="span"
+														variant="h6"
+														color="text.secondary"
+													>
+														{" — "}
+														{event.address.street}
+														{", "}
+														{event.address.city}
+													</MUI.Typography>
+												</>
+											}
 										/>
-									</MUI.ListItemAvatar>
-									<MUI.ListItemText
-										sx={showMobile ? { pl: 1, pt: 0.5 } : { pl: 3, pt: 1 }}
-										primary={
-											<MUI.Typography
-												sx={{ display: "inline" }}
-												component="span"
-												variant={showMobile ? "h5" : "h4"}
-											>
-												{event.title}
-											</MUI.Typography>
-										}
-										secondary={
-											<>
-												<MUI.Typography
-													sx={{ display: "inline" }}
-													component="span"
-													variant="h6"
-													color="text.secondary"
-												>
-													{new Date(event.start).getDate()}
-												</MUI.Typography>
-												<MUI.Typography
-													sx={{ display: "inline" }}
-													component="span"
-													variant="h6"
-													color="text.secondary"
-												>
-													{" — "}
-													{event.address.street}
-													{", "}
-													{event.address.city}
-												</MUI.Typography>
-											</>
-										}
-									/>
-								</MUI.ListItem>
-								<MUI.Divider component="li" />
+									</MUI.ListItem>
+									<MUI.Divider component="li" />
+								</MUI.CardActionArea>
 								<EventModal
 									setIsModalOpen={setIsModalOpen}
 									handleModalClose={handleModalClose}
@@ -190,7 +208,7 @@ export const Events = () => {
 									event={event}
 									key={event._id}
 								/>
-							</MUI.CardActionArea>
+							</div>
 						))}
 					</MUI.List>
 				</section>
@@ -199,11 +217,7 @@ export const Events = () => {
 					autoHideDuration={3000}
 					onClose={handleSnackbarClose}
 				>
-					<MUI.Alert
-						onClose={handleSnackbarClose}
-						severity="success"
-						sx={{ width: "100%" }}
-					>
+					<MUI.Alert onClose={handleSnackbarClose} severity="success">
 						event was added to your calendar!
 					</MUI.Alert>
 				</MUI.Snackbar>
@@ -213,7 +227,7 @@ export const Events = () => {
 };
 
 function EventRow(props) {
-	const { event, showMobile, handleCheckBoxClick } = props;
+	const { event, showMobile, pinEvent } = props;
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -225,11 +239,7 @@ function EventRow(props) {
 						size="small"
 						onClick={() => setOpen(!open)}
 					>
-						{open ? (
-							<KeyboardArrowUpIcon sx={{ fontSize: 22 }} />
-						) : (
-							<KeyboardArrowDownIcon sx={{ fontSize: 22 }} />
-						)}
+						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 					</MUI.IconButton>
 				</MUI.TableCell>
 				<MUI.TableCell component="th" scope="row">
@@ -240,8 +250,11 @@ function EventRow(props) {
 					})}
 				</MUI.TableCell>
 				{showMobile ? null : (
-					<MUI.TableCell align="right">
-						{new Date(event.start).getHours()}
+					<MUI.TableCell align="center">
+						{new Date(event.start).getHours() % 12 || 12}
+						{":00"} {" - "}
+						{new Date(event.end).getHours() % 12 || 12}
+						{":00"}
 					</MUI.TableCell>
 				)}
 				<MUI.TableCell align="right">{event.address.street}</MUI.TableCell>
@@ -250,8 +263,8 @@ function EventRow(props) {
 				)}
 				<MUI.TableCell align="right">
 					<MUI.Checkbox
-						sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-						onClick={() => handleCheckBoxClick(event)}
+						// sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+						onClick={() => pinEvent(event)}
 					/>
 				</MUI.TableCell>
 			</MUI.TableRow>
@@ -290,7 +303,7 @@ function EventRow(props) {
 										label={tag}
 										margin="normal"
 										variant="outlined"
-										sx={{ m: 0.5, fontSize: "12px" }}
+										sx={{ m: 0.5 }}
 									/>
 								))}
 							</MUI.Box>
