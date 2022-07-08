@@ -63,7 +63,9 @@ export default function App() {
 		setDisplayNav(localDisplayNav);
 	}, []);
 
-  if (!users.length){ return "loading" }
+  if (!users.length || !allBeautyPost.length
+	 || !allArtsCraftPost.length || !allGardenPost.length
+	 || !allRecipePost.length || !allEventPost.length){ return "loading" }
 	// ! try to do 'checkLogin' endpoint
 	// if (!initialized) {
 	//   return "Loading ;)"

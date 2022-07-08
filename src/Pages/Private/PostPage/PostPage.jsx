@@ -11,6 +11,7 @@ import "./postPage.scss";
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({ data }) => {
+  console.log('data', data)
 	const { user } = useContext(UserContext);
   const { title } = useParams();
   let navigate = useNavigate();

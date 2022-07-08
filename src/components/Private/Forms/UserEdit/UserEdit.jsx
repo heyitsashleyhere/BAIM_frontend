@@ -8,12 +8,12 @@ import ImageInput from "../ImageInput.jsx";
 
 
 export default function UserEdit({ setUserEditOpen }) {
-  const [userAddress, setUserAddress] = useState({});
   const [errors, setErrors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState(null)
   const {inputValues, setInputValues, isShowPassword, showPasswordHandler} = useContext(UserContext);
-  const {profileData, upgrade, setUpgrade} = useContext(PostsContext)
+  const {profileData, upgrade, setUpgrade, } = useContext(PostsContext)
+  const [userAddress, setUserAddress] = useState(profileData.userAddress);
   const [country, setCountry] = useState('')
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
@@ -442,6 +442,9 @@ export default function UserEdit({ setUserEditOpen }) {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+    if(!userAddress || !Object.keys(userAddress).length){
+      return
+    }
     setInputValues({ ...inputValues, userAddress });
   }, [userAddress]);
 
