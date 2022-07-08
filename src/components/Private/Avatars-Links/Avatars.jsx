@@ -26,7 +26,7 @@ export const SquareAvatar = ({ data }) => {
     const {upgrade, setUpgrade}=useContext(PostsContext)
     const [message, setMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [isEditOpen, setIsEditOpen] = useState(true)
+    const [isEditOpen, setIsEditOpen] = useState(false)
     const [postData, setPostData] = useState(data)
    
     // MUI popper START
@@ -52,7 +52,7 @@ export const SquareAvatar = ({ data }) => {
     // MUI popper END 
 
     function handleEdit() {
-
+      setIsEditOpen(true)
     }
 
     function handleDelete(type, id) {

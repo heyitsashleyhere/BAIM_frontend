@@ -55,8 +55,8 @@ export const PostPage = ({ data }) => {
           </section>
 
           <section className="Post-description">
-            {selected.description.split(/\r?\n/).map((item) => (
-              <p key={'PostPage-description' + item}>{item}</p>
+            {selected.description.split(/\r?\n/).map((item, i) => (
+              <p key={'PostPage-description' + i}>{item}</p>
             ))}
           </section>
           <section className="Post-tags">

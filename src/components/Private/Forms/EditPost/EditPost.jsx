@@ -12,7 +12,7 @@ import TagInput from "./TagInput.jsx";
 
 
 export default function EditPost({ postData }) {
-  const [ category, setCategory ] = useState('beauty')
+  const [ category, setCategory ] = useState(postData.type)
   const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
@@ -304,23 +304,23 @@ export default function EditPost({ postData }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    setInputValues({ ...inputValues, address });
+
     console.log('inputValues :>> ', inputValues);
     const config = {
-      method: "POST",
+      method: "PATCH",
       credentials: "include", // specify this if you need cookies
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputValues),
     }
 
-    fetch(`http://localhost:7000/${category}`, config)
+    fetch(`http://localhost:7000/${category}/${postData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
        if (result.errors) {
               setErrors(result.errors);
+       } else {
+        setIsModalOpen(true)
        }
-      //  console.log(category, "fetch result:", result)
-      setIsModalOpen(true)
       })
       .catch((error) => console.log(error));
   }
@@ -571,7 +571,7 @@ export default function EditPost({ postData }) {
 
       </Grow>
       <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
-          <p>You have 'planted' a post in {category}</p>
+          <p>You have updated your {category} post</p>
        </Modal>
     </section>
   )
