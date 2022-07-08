@@ -16,9 +16,7 @@ const isAuthor = currentUser[post.type].find(item => item === post._id)
 // find if the user as a pin of this post
 const isPin = currentUser.pin.find(item => item.postId === post._id )
 
-
 const [error, setError]=useState()
-
 
 
   function PinPost(){
@@ -43,7 +41,7 @@ const [error, setError]=useState()
 
   return (
     <section>
-    { isAuthor ? null : <>{ isPin ? <BsPinAngleFill onClick={PinPost} className="Pin-button"/> : <BsPinAngle onClick={PinPost} className="Pin-button"/>} </> }
+    { isAuthor ? null : <>{ isPin ? <BsPinAngleFill onClick={PinPost} className="Pin-icon"/> : <BsPinAngle onClick={PinPost} className="Pin-icon"/>} </> }
     </section>
     
   )

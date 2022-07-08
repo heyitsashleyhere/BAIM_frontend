@@ -9,7 +9,28 @@
         position:absolute;
         right:1vw;
         top:1vh;
-        z-index:1;       
+        z-index:1; 
+        
+        .Pin-icon{
+            position: relative;
+            color:white;
+            font-size: 5.5rem;
+            top:1.5vh;
+            right:2.5vw;
+            cursor:pointer;
+
+            @include media(">=tablet"){
+                font-size:3rem;
+                top:1vh;
+                right:1vw;
+            }
+
+            @include media(">=desktop"){
+                font-size: 2rem;
+                top:0.5vh;
+                right:0.5vw;
+            }
+        }
     }
     
     .InnerSquareAvatar{
