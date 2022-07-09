@@ -13,7 +13,6 @@ import { AddComment } from "../../../components/Private/Buttons/Comment/AddComme
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({ data }) => {
-  
 	const { user } = useContext(UserContext);
   const { title } = useParams();
   let navigate = useNavigate();
@@ -54,13 +53,13 @@ console.log(selected)
           </section>
 
           <section className="Post-description">
-            {selected.description.split(/\r?\n/).map((item) => (
-              <p>{item}</p>
+            {selected.description.split(/\r?\n/).map((item, i) => (
+              <p key={'PostPage-description' + i}>{item}</p>
             ))}
           </section>
           <section className="Post-tags">
             {selected.tags.map((item) => (
-              <p>{item}</p>
+              <p key={'PostPage-tags' + item}>{item}</p>
             ))}
           </section>
 

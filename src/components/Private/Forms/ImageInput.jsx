@@ -83,7 +83,8 @@ export default function ImageInput({ imageUsage, oldUrl }){
     return(
         <div className="image">
             <div className="image-container">
-                <img src={inputValues[`${imageUsage}`] || oldUrl} width="30%" style={{borderRadius: '50%'}}/> 
+                <img src={inputValues[`${imageUsage}`] || oldUrl} width="30%" 
+                     style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
             </div>
 
             <section className="input-image" style={{marginTop: '2rem'}}>

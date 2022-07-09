@@ -25,6 +25,8 @@ export default function Create() {
                           {...params}
                           name="category"
                           label="Category"
+                          // InputProps={{ style: { fontSize: 14 } }}
+                          // InputLabelProps={{ style: { fontSize: 14 } }}
                         /> )}
                   />
             </Grid>

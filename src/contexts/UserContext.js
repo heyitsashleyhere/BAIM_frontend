@@ -9,6 +9,7 @@ export const UserContextProvider = (props) => {
   const [inputValues, setInputValues] = useState({})
   const [message, setMessage] = useState("")
   const [isLogin, setIsLogin] = useState(false)
+  const [isFromRegister, setIsFromRegister] = useState(false)
   const [isShowPassword, setIsShowPassword] = useState(false)
 
   function showPasswordHandler(){
@@ -21,7 +22,8 @@ export const UserContextProvider = (props) => {
     message, setMessage,
     isLogin, setIsLogin,
     isShowPassword, setIsShowPassword,
-    showPasswordHandler
+    showPasswordHandler,
+    isFromRegister, setIsFromRegister
   }
 
   return (

@@ -25,8 +25,6 @@ const Team = () => {
 	nameRef.current = [];
 
 	useEffect(() => {
-		// ${name}/ h2 yposition for gsap name animation
-		// const yPosition = windowWidth >= 768 ? '-100%' : '-25%'
 
 		revealRef.current.forEach((mask, index) => {
 			const tl = gsap.timeline();

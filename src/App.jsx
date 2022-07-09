@@ -22,6 +22,7 @@ import About from "./Pages/Public/About/About.jsx";
 import LoginRegister from "./Pages/Public/Login/LoginRegister.jsx";
 import Team from "./Pages/Public/Team/Team.jsx";
 import ScrollToTop from "./components/Public/Footer/ScrollToTop.jsx";
+import LoadingSpinner from "./Pages/TransitionPage/LoadingSpinner.jsx";
 // context
 import { AnimationContext } from "./contexts/AnimationContext.js"; //TODO help to make it NONEED
 import { PostsContext } from "./contexts/PostContext.js";
@@ -39,6 +40,7 @@ const theme = createTheme({
 		},
 	},
 	typography: {
+		htmlFontSize: 10,
 		fontFamily: ["Varela Round", "Arial", "Helvetica", "sans-serif"].join(","),
 	},
 });
@@ -62,12 +64,16 @@ export default function App() {
 		setDisplayNav(localDisplayNav);
 	}, []);
 
-  if (!users.length){ return "loading" }
-
+  if (!users.length || !allBeautyPost.length
+	 || !allArtsCraftPost.length || !allGardenPost.length
+	 || !allRecipePost.length || !allEventPost.length){ 
+		return <LoadingSpinner />
+	}
 	// ! try to do 'checkLogin' endpoint
 	// if (!initialized) {
 	//   return "Loading ;)"
 	// }
+
 
 	return (
 		<ThemeProvider theme={theme}>

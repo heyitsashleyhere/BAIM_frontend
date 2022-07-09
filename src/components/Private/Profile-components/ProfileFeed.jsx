@@ -25,7 +25,7 @@ export const ProfileFeed = (props) => {
 
   return (
     <>
-        { myFeed.map((item, i) => <SquareAvatar data={item} key={i} />)}
+        { myFeed.map((item, i) => <SquareAvatar data={item} key={`myfeed`+i} />)}
     </>
    
   )

@@ -10,7 +10,8 @@ export default function UserRegistration() {
   const [errors, setErrors] = useState([]);
   const { inputValues, setInputValues, 
           setMessage, setUser, setIsLogin,
-          isShowPassword, showPasswordHandler } = useContext(UserContext);
+          isShowPassword, showPasswordHandler,
+          setIsFromRegister } = useContext(UserContext);
   const [country, setCountry] = useState('')
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
@@ -474,6 +475,7 @@ export default function UserRegistration() {
           setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
           setMessage(result.message)
           setIsLogin(true)
+          setIsFromRegister(true)
           localStorage.setItem('user', JSON.stringify(result.user))
         }
         
