@@ -36,7 +36,7 @@ const Header = () => {
 				>
 					<img src={Logo} alt="LOKA" />
 				</NavLink>
-				<NavLink className="LokaW" to="/main">
+				<NavLink className="NavLink-White" to="/main">
 					Loka
 				</NavLink>
 			</div>
@@ -44,17 +44,17 @@ const Header = () => {
 			<nav className="navbar">
 				<ul className="navbar-list">
 					<li className="navbar-list-item">
-						<NavLink className="LokaW" to="/team">
+						<NavLink className="NavLink-White" to="/team">
 							team
 						</NavLink>
 					</li>
 					<li className="navbar-list-item">
-						<NavLink className="LokaW" to="/about">
+						<NavLink className="NavLink-White" to="/about">
 							about
 						</NavLink>
 					</li>
 					<li className="navbar-list-item">
-						<NavLink className="LokaW" to="/auth">
+						<NavLink className="NavLink-White" to="/auth">
 							login
 						</NavLink>
 					</li>

@@ -254,9 +254,14 @@ export const Profile = () => {
             </div>
 
             <section className="Profile-Feed">
-              <h2>My Feed: {profileName}</h2>
+              <h2 className="Profile-Feed-Header">My Feed</h2>
+              <section className="Profile-Lib-Collection">
               <ProfileFeed data={profileData.interests}/>
+              </section>
+              
             </section>
+
+           
 
 
 

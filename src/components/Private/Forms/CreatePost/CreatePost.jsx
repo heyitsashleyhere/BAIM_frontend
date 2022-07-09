@@ -9,6 +9,8 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 
 
 
+
+
 export default function CreatePost({ category, setCategory }) {
   const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
@@ -323,7 +325,8 @@ export default function CreatePost({ category, setCategory }) {
   }
 
   return (
-    <section className="CreatePost-section">
+    <section>
+    
       <Grow in>
         <form className="create-form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -557,6 +560,7 @@ export default function CreatePost({ category, setCategory }) {
       <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
           <p>You have 'planted' a post in {category}</p>
        </Modal>
+       
     </section>
   )
 }
