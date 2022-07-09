@@ -121,7 +121,7 @@ export const SquareAvatar = ({ data }) => {
        <Modal open={isEditOpen} onClose={() => {setIsEditOpen(false); setUpgrade(!upgrade)}}
               sx={{ display: 'flex', overflow:'scroll', justifyContent: 'center', alignItems: 'center' }} >
           <Paper elevation={3} sx={{width: '80%', height: '90%', overflow: 'scroll'}}>
-              <EditPost postData={postData} />
+              <EditPost postData={postData} setPostData={setPostData} setIsEditOpen={setIsEditOpen} />
           </Paper>
        </Modal>
        

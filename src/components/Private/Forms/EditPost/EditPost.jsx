@@ -11,9 +11,9 @@ import TagInput from "./TagInput.jsx";
 
 
 
-export default function EditPost({ postData }) {
+export default function EditPost({ postData, setPostData, setIsEditOpen }) {
   const [ category, setCategory ] = useState(postData.type)
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -319,7 +319,9 @@ export default function EditPost({ postData }) {
        if (result.errors) {
               setErrors(result.errors);
        } else {
+        setPostData(result.updatedPost)
         setIsModalOpen(true)
+        setUpgrade(!upgrade)
        }
       })
       .catch((error) => console.log(error));
@@ -357,6 +359,7 @@ export default function EditPost({ postData }) {
                       getOptionLabel={(option) => option}
                       defaultValue={postData.category || []}
                       onChange={(event, value) => setInputValues({ ...inputValues, category: value })}
+                      onInputChange={(event, value) => setInputValues({ ...inputValues, category: value })}
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -570,7 +573,7 @@ export default function EditPost({ postData }) {
         </form>
 
       </Grow>
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null); setIsEditOpen(false) }} >
           <p>You have updated your {category} post</p>
        </Modal>
     </section>
