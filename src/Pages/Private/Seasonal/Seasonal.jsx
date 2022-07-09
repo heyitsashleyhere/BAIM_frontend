@@ -2,7 +2,6 @@ import React from "react";
 import { useContext } from "react";
 import { SeasonalAvatar } from "../../../components/Private/Avatars-Links/Avatars";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar";
-import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar";
 import { PostsContext } from "../../../contexts/PostContext";
 
 import "./seasonal.scss";
@@ -15,7 +14,6 @@ export const Seasonal = () => {
 		.toLocaleString("default", { month: "long" })
 		.split(" ")[0]
 		.toLowerCase();
-	console.log(currentMonth);
 
 	let shortMonth = date
 		.toLocaleString("default", { month: "short" })
@@ -34,21 +32,18 @@ export const Seasonal = () => {
 		// return produce.in_season.some(month => month === currentMonth)
 	});
 
-	console.log(seasonal);
 
 	const planting = library.filter(
 		(produce) =>
 			produce.planting_time.filter((month) => month === currentMonth).length
 	);
 
-	console.log(planting);
 
 	const seedingIndoor = library.filter(
 		(produce) =>
 			produce.seeding_indoor.filter((month) => month === currentMonth).length
 	);
 
-	console.log(seedingIndoor);
 
 	const seedingOutdoor = library.filter(
 		(produce) =>
@@ -57,7 +52,6 @@ export const Seasonal = () => {
 
 	return (
 		<>
-			<ProduceNavbar />
 			<DiscoverNavbar />
 			<section className="Seasonal">
 				<section className="Seasonal-inner">

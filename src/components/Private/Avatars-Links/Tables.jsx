@@ -138,9 +138,9 @@ function EventRow(props) {
 								</MUI.CardContent>
 							</MUI.Card>
 							<MUI.Box my={3}>
-								{data.tags.map((tag) => (
+								{data.tags.map((tag, i) => (
 									<MUI.Chip
-										key={tag}
+										key={'tag-of-'+i+tag}
 										label={tag}
 										margin="normal"
 										variant="outlined"

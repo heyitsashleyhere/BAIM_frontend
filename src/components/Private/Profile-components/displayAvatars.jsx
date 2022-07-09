@@ -9,7 +9,6 @@ export default function displayAvatars(
 	recipes,
 	events
 ) {
-	console.log("events : >>>", events);
 
 	switch (type) {
 		case "beauty":

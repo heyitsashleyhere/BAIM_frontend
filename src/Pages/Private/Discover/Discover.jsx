@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Discover.scss";
-import { ProduceNav } from "../../../components/Private/section-header/ProduceNav";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar";
@@ -107,7 +106,6 @@ export const Discover = () => {
 
 	return (
 		<>
-			{/* <ProduceNav /> */}
 			<ProduceNavbar />
 			<section className="discover">
 				<section className="discover-wrapper">

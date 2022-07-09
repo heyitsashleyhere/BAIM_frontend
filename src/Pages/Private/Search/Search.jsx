@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import SearchBar from "../../../components/Private/SearchBar/SearchBar.jsx";
 import { PostsContext } from "../../../contexts/PostContext.js";
-import { ProduceNav } from "../../../components/Private/section-header/ProduceNav";
 
 import "./search.scss";
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
@@ -16,7 +15,6 @@ export default function Search() {
 
 	return (
 		<>
-			{/* <ProduceNav /> */}
 			<ProduceNavbar />
 			<DiscoverNavbar />
 			<section className="Search">

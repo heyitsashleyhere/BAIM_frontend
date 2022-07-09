@@ -8,8 +8,6 @@ export const Follow = ({ name }) => {
 	const { profileName } = useParams();
 	const [error, setError] = useState(null);
 
-	console.log("upgrade: >>", upgrade);
-
 	// we can use the localStorage data to check author
 	const currentUser = JSON.parse(localStorage.getItem("user"));
 	const isAuthor = currentUser.profileName === profileName;
@@ -58,7 +56,6 @@ export const Follow = ({ name }) => {
 		fetch(`http://localhost:7000/user/following/${profileData._id}`, config)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log("result :>> ", result);
 				if (result.errors) {
 					setError(result.errors);
 				} else {

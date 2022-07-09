@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avatars";
 import { UserComment } from "../../../components/Private/Buttons/Comment/UserComment";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { BsHeart } from "react-icons/bs";
-import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
+import { Pin } from "../../../components/Private/Buttons/Pin/Pin.jsx";
+import { AddComment } from "../../../components/Private/Buttons/Comment/AddComment.jsx";
+import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
+import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar";
 import "./postPage.scss";
-import { Pin } from "../../../components/Private/Buttons/Pin/Pin";
-import { AddComment } from "../../../components/Private/Buttons/Comment/AddComment";
 
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
@@ -24,10 +24,10 @@ export const PostPage = ({ data }) => {
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
 
-console.log(selected)
   return (
     <>
-      <ProduceNav />
+      <ProduceNavbar />
+      <DiscoverNavbar />
       <section className="Post-Page" key={selected._id}>
         <section className="Post-Page-Inner">
           <section className="Post-hero">

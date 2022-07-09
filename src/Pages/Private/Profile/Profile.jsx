@@ -165,7 +165,6 @@ export const Profile = () => {
 
   return (
     <>
-    //! <ProduceNav /> delete?
       <ProduceNavbar />
       <DiscoverNavbar />
       <section className="Profile">

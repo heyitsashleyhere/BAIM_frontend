@@ -81,9 +81,11 @@
 		button {
 			font-size: 2rem;
 			margin: 0rem 3rem;
-			cursor: pointer;
 			border: none;
 			background-color: white;
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
 
@@ -190,7 +192,6 @@
 		grid-template-columns: repeat(8, 1fr);
 		gap: 2.5rem;
 
-
   //! check with Murad:
 		 // .Profile-inner {
 
@@ -200,15 +201,8 @@
 	//	gap:2.5rem;
 	//	top:5rem;
 
-
-		.Profile-inner{
-
+		.Profile-inner {
 			grid-column: 2/8;
-
-			.Profile-header {
-				// box-shadow: 0px 10px 13px -7px #000000,
-				// 7px -30px 19px -30px rgba(0, 0, 0, 0.3);
-				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.36);
 
         //! Murad's check:
 				//.Profile-info {
@@ -220,6 +214,7 @@
 					//	font-size: 2.5vw;
 
 			.Profile-header{
+				// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.36);
 				box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
 
 				.Profile-info{
@@ -261,20 +256,19 @@
 		}
 	}
 
+	@include media(">=desktop") {
+		position: relative;
+		top: 26rem;
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: 2.5rem;
 
-	@include media(">=desktop"){
-		position:relative;
-		top:26rem;
-		display:grid;
-		grid-template-columns: repeat(12,1fr);
-		gap:2.5rem;
 
-
-		.Profile-inner{
+		.Profile-inner {
 			grid-column: 3/11;
 
 
-			.Profile-text{
+			.Profile-text {
 				font-size: 1.5rem;
 			}
 		}

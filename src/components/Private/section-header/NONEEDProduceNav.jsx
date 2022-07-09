@@ -43,9 +43,9 @@ export const ProduceNav = () => {
 		},
 		{
 			id: 2,
-			name: "Seasonal",
+			name: "Arts & Craft",
 			src: require("../../../assets/images/Seasonal.jpg"),
-			path: "/seasonal",
+			path: "/artsCraft",
 			description:
 				"find your local Markets and sellers in your city and neighborhood",
 			collection: "115 garderns",

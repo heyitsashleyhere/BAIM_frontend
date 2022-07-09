@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 
 import { useParams, useNavigate } from 'react-router-dom'
-import { PostsContext } from '../../../contexts/PostContext'
+import { PostsContext } from '../../../contexts/PostContext.js'
 import {MdOutlineArrowBack} from 'react-icons/md'
-
 import './singleProducePage.scss';
 
 
@@ -19,10 +18,6 @@ export const SingleProducePage = () => {
     let currentMonth = date.toLocaleString('default', { month: 'short' }).split(" ")[0].toLowerCase();
 
     let navigate = useNavigate()
-    
-    console.log(data)
-
-
 
   return (
     <section className="Seasonal-page">
@@ -60,20 +55,20 @@ export const SingleProducePage = () => {
             <span>
               <h3>Planting</h3>
               <section className="Seasonal-Month">
-              {data.planting_time.map(item => <p>{item.substring(0,3).toUpperCase()}</p>)}
+              {data.planting_time.map((item, i) => <p key={`seasonalPlantingMonth-`+ i}>{item.substring(0,3).toUpperCase()}</p>)}
               </section>
               </span>
               <span>
               <h3>Seeding Indoor</h3>
                 <section className="Seasonal-Month">
-                {data.seeding_indoor.map(item => <p>{item.substring(0,3).toUpperCase()}</p>)}
+                {data.seeding_indoor.map((item, i) => <p key={`seasonalSeeding-indoor-Month-`+ i}>{item.substring(0,3).toUpperCase()}</p>)}
                 </section>
               </span>
 
               <span>
               <h3>Seeding Outdoor</h3>
               <section className="Seasonal-Month">
-              {data.seeding_outdoor.map(item => <p>{item.substring(0,3).toUpperCase()}</p>)}
+              {data.seeding_outdoor.map((item, i) => <p key={`seasonalSeeding-outdoor-Month-`+ i}>{item.substring(0,3).toUpperCase()}</p>)}
               </section>
               </span>
               <span className="Seasonal-days">
