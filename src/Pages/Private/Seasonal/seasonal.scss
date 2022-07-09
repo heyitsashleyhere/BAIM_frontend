@@ -1,51 +1,47 @@
 @import "../../../styles/breakpoints";
 
-.Seasonal{
-    position:relative;
-    top:100px;
-    width:100%;
+.Seasonal {
+	width: 100%;
 
-    .Seasonal-inner{
-        border:1px solid red;
-        display:flex;
-        flex-direction: column;
-        align-content: center;
-    }
+	.Seasonal-inner {
+		// border: 1px solid red;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+	}
 
-    .Seasonal-wrapper{
-        margin:0rem 0rem;
+	.Seasonal-wrapper {
+		margin: 0rem 0rem;
 
-        h1{
-            text-align: center;
-            font-size: 3.5rem;
-        }
+		h1 {
+			text-align: center;
+			font-size: 3.5rem;
+		}
 
-        .Seasonal-wrapper-collection{
-            margin:5rem 0.5rem;
-            display:flex;
-            flex-wrap: wrap;
-        }
-    }
+		.Seasonal-wrapper-collection {
+			margin: 5rem 0.5rem;
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
 
+	@include media(">=tablet") {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		gap: 2.5rem;
+		padding-top: 5rem;
 
-    @include media(">=tablet"){
-        display:grid;
-        grid-template-columns: repeat(8,1fr);
-        gap:2.5rem;
+		.Seasonal-inner {
+			grid-column: 1/9;
+		}
+	}
 
-        .Seasonal-inner{
-            grid-column: 1/9;
-        }
-    }
+	@include media(">=desktop") {
+		grid-template-columns: repeat(12, 1fr);
+		gap: 2.5rem;
 
-
-    @include media(">=desktop"){
-        grid-template-columns: repeat(12,1fr);
-        gap:2.5rem;
-
-        .Seasonal-inner{
-            grid-column: 3/11;
-        }
-    }
-
+		.Seasonal-inner {
+			grid-column: 3/11;
+		}
+	}
 }

@@ -6,42 +6,83 @@ const style = {
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	width: 400,
+	width: 600,
 	bgcolor: "background.paper",
 	boxShadow: 24,
 	p: 4,
+	borderRadius: '10px'
 };
 
 export default function EventModal(props) {
 	const { isModalOpen, event, handleModalClose } = props;
 
+
 	return (
-		<div>
-			{/* <MUI.Button onClick={handleOpen}>Open modal</MUI.Button> */}
-			<MUI.Modal
-				open={isModalOpen}
-				onClose={handleModalClose}
-				closeAfterTransition
-				BackdropComponent={MUI.Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}
-				aria-labelledby="keep-mounted-modal-title"
-				aria-describedby="keep-mounted-modal-description"
-			>
-				<MUI.Box sx={style}>
-					<MUI.Typography
-						id="keep-mounted-modal-title"
-						variant="h6"
-						component="h2"
-					>
-						Text in a modal
-					</MUI.Typography>
-					<MUI.Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-						Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-					</MUI.Typography>
+		<MUI.Modal
+			open={isModalOpen}
+			onClose={handleModalClose}
+			closeAfterTransition
+			BackdropComponent={MUI.Backdrop}
+			BackdropProps={{
+				timeout: 500,
+			}}
+		>
+			<MUI.Fade in={isModalOpen} >
+				<MUI.Box sx={style} >
+					<MUI.Card elevation={0} square>
+						<MUI.Typography
+							gutterBottom
+							variant="h3"
+							component="div"
+							sx={{
+								textTransform: "capitalize",
+								fontWeight: "bold",
+							}}
+						>
+							{event.title}
+						</MUI.Typography>
+						<MUI.Typography
+							sx={{ display: "inline" }}
+							component="span"
+							variant="h5"
+							color="text.secondary"
+						>
+							Date: {new Date(event.start).toLocaleDateString()}
+						</MUI.Typography>
+						<MUI.Typography
+							sx={{ display: "inline", textTransform: "capitalize", ml: 8 }}
+							component="span"
+							variant="h5"
+							color="text.secondary"
+						>
+							Location: {event.address.street}
+						</MUI.Typography>
+						<MUI.CardMedia
+							component="img"
+							height="400"
+							image={event.image}
+							alt={event.title}
+							sx={{ mt: 1, borderRadius: '5px' }}
+						/>
+						<MUI.CardContent>
+
+							<MUI.Typography variant="h5" component="span" color="text.secondary">
+								{event.description}
+							</MUI.Typography>
+						</MUI.CardContent>
+					</MUI.Card>
+					<MUI.Box>
+						{event.tags.map((tag) => (
+							<MUI.Chip
+								key={tag}
+								label={tag}
+								variant="outlined"
+								sx={{ m: 0.5 }}
+							/>
+						))}
+					</MUI.Box>
 				</MUI.Box>
-			</MUI.Modal>
-		</div>
+			</MUI.Fade>
+		</MUI.Modal>
 	);
 }

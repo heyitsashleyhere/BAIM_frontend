@@ -1,31 +1,31 @@
 @import '../../../styles/breakpoints';
 
-.SquareAvatar{
-    position:relative;
-    display:flex;
-    margin:1rem 0rem;
+.SquareAvatar {
+    position: relative;
+    display: flex;
+    margin: 1rem 0rem;
     
-    .Avatar-Controllers{
-        position:absolute;
-        right:1vw;
-        top:1vh;
-        z-index:1; 
+    .Avatar-Controllers {
+        position: absolute;
+        right: 1vw;
+        top: 1vh;
+        z-index: 1; 
         
-        .Pin-icon{
+        .Pin-icon {
             position: relative;
-            color:white;
+            color: white;
             font-size: 5.5rem;
-            top:1.5vh;
-            right:2.5vw;
-            cursor:pointer;
+            top: 1.5vh;
+            right: 2.5vw;
+            cursor: pointer;
 
-            @include media(">=tablet"){
+            @include media(">=tablet") {
                 font-size:3rem;
                 top:1vh;
                 right:1vw;
             }
 
-            @include media(">=desktop"){
+            @include media(">=desktop") {
                 font-size: 2rem;
                 top:0.5vh;
                 right:0.5vw;
@@ -33,96 +33,96 @@
         }
     }
     
-    .InnerSquareAvatar{
-        width:100%;
+    .InnerSquareAvatar {
+        width: 100%;
         text-decoration: none;
-        margin:0.2rem 0.2rem;
+        margin: 0.2rem 0.2rem;
         cursor: pointer;
        
-        .imageAvatar{
-            position:relative;
+        .imageAvatar {
+            position: relative;
             overflow: hidden;
             border-radius: 10px;
             display:flex;
             flex-direction: column;
             justify-content: flex-end;
     
-            img{
-                width:100%;
+            img {
+                width: 100%;
                 object-fit: cover;
 
-                &:hover{
+                &:hover {
                     transform: scale(2);
                     transition: 0.35s all ease-in-out;
                 }
             }
     
-            h2{
-                position:absolute;
-                width:100%;
-                color:white;
+            h2 {
+                position: absolute;
+                width: 100%;
+                color: white;
                 text-decoration: none;
                 font-size: 7.5vw;
                 font-weight: 700;
-                padding:1rem;
+                padding: 1rem;
                 background-color: rgba(0, 0, 0, 0.26);    
             }
         }
     }
     
     
-    @include media(">=tablet"){
+    @include media(">=tablet") {
         //  max-width:30vw;
-         width:30vw;
-         margin:1rem 1rem;
+         width: 30vw;
+         margin: 1rem 1rem;
 
 
-         .InnerSquareAvatar{
-                display:flex;
-                width:100%;
+         .InnerSquareAvatar {
+                display: flex;
+                width: 100%;
                 text-decoration: none;
-                margin:0.2rem 0.2rem;
+                margin: 0.2rem 0.2rem;
                 cursor: pointer;
     
-                .imageAvatar{
+                .imageAvatar {
                       // width:200px;
-                      height:auto;
+                      height: auto;
                     //   margin:0.3rem 0.5rem;
 
-                      &:hover{
-                        cursor:pointer;
+                      &:hover {
+                        cursor: pointer;
                       }
                 
-                        h2{
+                        h2 {
                             font-size: 1.5rem;      
                         }
                 }
             }
     }
     
-        @include media(">=desktop"){
+        @include media(">=desktop") {
             width: 15.7vw;
-            margin:1rem 0rem;
+            margin: 1rem 0rem;
 
-            .InnerSquareAvatar{
-                display:flex;
-                height:91%;
+            .InnerSquareAvatar {
+                display: flex;
+                height: 91%;
                 text-decoration: none;
-                margin:0.2rem 0.2rem;
+                margin: 0.2rem 0.2rem;
                 cursor: pointer;
     
-                    .imageAvatar{
-                        cursor:pointer;
-                        margin:0.3rem 0.5rem;
+                    .imageAvatar {
+                        cursor: pointer;
+                        margin: 0.3rem 0.5rem;
 
 
-                        img:hover{
+                        img:hover {
                             transform: scale(2);
                             transition: 0.35s all ease-in-out;
                         }
                 
                 
-                        h2{
+                        h2 {
                             font-size: 1.5rem;
                             
                         }
@@ -132,7 +132,7 @@
     
         }
 
-        // @include media(">widescreen"){
+        // @include media(">widescreen") {
             
         //     width:12vw;
 
@@ -166,10 +166,10 @@
     }
 
 
-.ProfileAvatar-CARD{
-    width:120px;
-    padding:1rem;
-    display:flex;
+.ProfileAvatar-CARD {
+    width: 120px;
+    padding: 1rem;
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin:1rem 1rem;
@@ -177,37 +177,37 @@
     border-radius: 10px;
     box-shadow: 0px 10px 13px -15px #000000, 7px -30px 19px -40px rgba(0,0,0,0.3);
 
-    @include media(">=tablet"){
-        padding:1rem;
-        margin:1rem 1rem;
-        width:145px;
+    @include media(">=tablet") {
+        padding: 1rem;
+        margin: 1rem 1rem;
+        width: 145px;
     }
 
-    @include media(">=desktop"){
-       width:145px;
+    @include media(">=desktop") {
+       width: 145px;
       
     }
 }
     
-.RoundAvatarProfile{
+.RoundAvatarProfile {
         text-decoration: none;
-        margin:1rem 1rem;
-        display:flex;
+        margin: 1rem 1rem;
+        display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: space-between;
-        cursor:pointer;
+        cursor: pointer;
         
-        .ImageAvatarProfile{
-            width:80px;
-            height:80px;
+        .ImageAvatarProfile {
+            width: 80px;
+            height: 80px;
             overflow: hidden;
             border-radius: 50%;
-            margin:0.5rem;
-            border:1px solid black;
+            margin: 0.5rem;
+            border: 1px solid black;
             
-            img{
-                width:100%;
+            img {
+                width: 100%;
                 object-fit: cover;
                 object-position: top;
                 transition: 0.35s all ease-in-out;
@@ -218,47 +218,131 @@
             &:hover {
                 background: #000;
             }
-            img:hover{
+            img:hover {
                 transform: scale(2);
                 transition: 0.35s all ease-in-out;
             }
         }
         
     h2{
-        color:black;
+        color: black;
         text-decoration: none;
         font-size: 1rem;
         font-weight: 700;
-        padding:0.5rem;
+        padding: 0.5rem;
        
     }
 
 
-    @include media(">=tablet"){
-        margin:1rem 0.6rem;
+    @include media(">=tablet") {
+        margin: 1rem 0.6rem;
 
       
 
-        .imageAvatar{
-            width:100%;
-            height:100%;
+        .imageAvatar {
+            width: 100%;
+            height: 100%;
         }
 
-        h2{
-            margin:1rem 0rem;
+        h2 {
+            margin: 1rem 0rem;
             font-size: 1.2rem;
         }
     }
 
-    @include media(">=desktop"){
+    @include media(">=desktop") {
 
-        .imageAvatar{
-            width:75%;
+        .imageAvatar {
+            width: 75%;
             height: 75%;
         }
 
     }
 
+.ProfileAvatar-CARD {
+	width: 120px;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 1rem 1rem;
+	background-color: whitesmoke;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+	@include media(">=tablet") {
+		padding: 1rem;
+		margin: 1rem 1rem;
+		width: 145px;
+	}
+
+	@include media(">=desktop") {
+		width: 145px;
+	}
+}
+
+.RoundAvatarProfile {
+	text-decoration: none;
+	margin: 1rem 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+
+	.ImageAvatarProfile {
+		width: 80px;
+		height: 80px;
+		overflow: hidden;
+		border-radius: 50%;
+		margin: 0.5rem;
+		border: 1px solid black;
+
+		img {
+			width: 100%;
+			object-fit: cover;
+			object-position: top;
+			transition: 0.35s all ease-in-out;
+		}
+	}
+	.produceIcon {
+		&:hover {
+			background: #000;
+		}
+		img:hover {
+			transform: scale(2);
+			transition: 0.35s all ease-in-out;
+		}
+	}
+
+	h2 {
+		color: black;
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 700;
+		padding: 0.5rem;
+	}
+
+	@include media(">=tablet") {
+		margin: 1rem 0.6rem;
+
+		.imageAvatar {
+			width: 100%;
+			height: 100%;
+		}
+
+		h2 {
+			margin: 1rem 0rem;
+			font-size: 1.2rem;
+		}
+	}
+
+	@include media(">=desktop") {
+		.imageAvatar {
+			width: 75%;
+			height: 75%;
+		}
+	}
 }
 
 .RoundAvatar {

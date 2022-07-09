@@ -28,6 +28,8 @@ import { AnimationContext } from "./contexts/AnimationContext.js"; //TODO help t
 import { PostsContext } from "./contexts/PostContext.js";
 import { UserContext } from "./contexts/UserContext.js";
 import { Events } from "./Pages/Private/Events/Events.jsx";
+// Material UI
+// import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 
 const theme = createTheme({
 	palette: {
@@ -42,7 +44,12 @@ const theme = createTheme({
 	typography: {
 		htmlFontSize: 10,
 		fontFamily: ["Varela Round", "Arial", "Helvetica", "sans-serif"].join(","),
+		fontSize: 16,
 	},
+	snackbar:
+	{
+		textColor: '#123456'
+	}
 });
 
 export default function App() {
@@ -63,6 +70,7 @@ export default function App() {
 		const localDisplayNav = localStorage.getItem("showNav");
 		setDisplayNav(localDisplayNav);
 	}, []);
+
 
   if (!users.length || !allBeautyPost.length
 	 || !allArtsCraftPost.length || !allGardenPost.length

@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
-import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
+import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
+import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
 import UserEdit from "../../../components/Private/Forms/UserEdit/UserEdit.jsx";
 import showPostCategoryButton from "../../../components/Private/Profile-components/showPostCategoryButton.jsx";
 import showPinCategoryButton from "../../../components/Private/Profile-components/showPinCategoryButton.jsx";
@@ -10,10 +11,8 @@ import displayAvatars from "../../../components/Private/Profile-components/displ
 import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
-import { Modal,	Typography, Paper} from "@mui/material";
+import { Modal, Typography, Paper } from "@mui/material";
 import "./profile.scss";
-
-
 
 export const Profile = () => {
   const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
@@ -166,7 +165,9 @@ export const Profile = () => {
 
   return (
     <>
-      <ProduceNav />
+    //! <ProduceNav /> delete?
+      <ProduceNavbar />
+      <DiscoverNavbar />
       <section className="Profile">
         {profileData && (
           <div className="Profile-inner">
@@ -261,18 +262,12 @@ export const Profile = () => {
               <ProfileFeed data={profileData.interests}/>
               </section>
               
-            </section>
-
-           
-
-
-
-           
+            </section>      
           </div>
         )}
       </section>
     </>
-  );
+  )
 }
 
     // const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
@@ -286,18 +281,3 @@ export const Profile = () => {
 
     //       console.log('currentUserLibrary :>> ', currentUserLibrary);
     //       console.log('typeof test :>> ', typeof test);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
