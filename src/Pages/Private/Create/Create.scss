@@ -1,9 +1,50 @@
+@import "../../../styles/breakpoints";
+
 .Create {
-    padding: 6rem 2rem 0 2rem;
-    h1 {
-        font-size: 4rem;
+    position: relative;
+    min-height: calc(100vh - 9rem);
+    padding: 4rem 2rem 4rem 2rem;
+
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .pick-container {
+            margin-top: 2rem;
+        }
     }
-    .pick-container {
-        margin-top: 2rem;
+
+    @include media(">tablet") {
+        display: grid;
+        grid-gap: 2.5rem;
+        padding: 6rem 0;
+
+        grid-template-columns: repeat(8, 1fr);
+
+        &-container {
+            grid-column: 2/8;
+        }
+    }
+
+    @include media(">desktop") {
+        display: grid;
+        grid-gap: 2.5rem;
+        padding-top: 15rem;
+        grid-template-columns: repeat(12, 1fr);
+
+        &-container {
+            grid-column: 3/11;
+
+            h1 {
+                font-size: 4rem;
+                margin-bottom: 2rem;
+            }
+        }
     }
 }

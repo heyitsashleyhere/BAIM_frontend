@@ -9,28 +9,30 @@ export default function Create() {
   const [category, setCategory] = useState('')
   return (
     <section className="Create">
+      <section className="Create-container">
         <h1>Create a Post</h1>
         <Grid container spacing={2} className='pick-container'>
-            <Grid item xs={12} sm={6}>
-                <h4>Pick a category</h4>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                <Autocomplete
-                      options={postCategories}
-                    //   value={category}
-                      onInputChange={(event, value) => setCategory(value)}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          name="category"
-                          label="Category"
-                        /> )}
-                  />
-            </Grid>
-        </Grid>           
-            {category && (
-                <CreatePost category={category} setCategory={setCategory}/>
-            )}
+          <Grid item xs={12} sm={4}>
+            <h4>Pick a category</h4>
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Autocomplete
+              options={postCategories}
+              //   value={category}
+              onInputChange={(event, value) => setCategory(value)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  name="category"
+                  label="Category"
+                />)}
+            />
+          </Grid>
+        </Grid>
+        {category && (
+          <CreatePost category={category} setCategory={setCategory} />
+        )}
+      </section>
 
     </section>
   )
