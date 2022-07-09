@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import { AnimationContext } from "../../../contexts/AnimationContext";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Discover.scss";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav";

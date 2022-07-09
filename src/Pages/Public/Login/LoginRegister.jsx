@@ -12,7 +12,7 @@ import "./loginRegister.scss";
 export default function LoginRegister() {
   const [isRegister, setIsRegister] = useState(false);
   const [cookies] = useCookies();
-  const { message, setMessage, user, setUser, isLogin, showPasswordHandler } =
+  const { message, setMessage, user, setUser, isLogin, showPasswordHandler, isFromRegister } =
     useContext(UserContext);
 
   function switchForm() {
@@ -29,7 +29,7 @@ export default function LoginRegister() {
                autoPlay playsInline muted loop />
       </section>
       {isLogin ? (
-        <TransitionPage />
+        <TransitionPage isFromRegister={isFromRegister}/>
       ) : (
         <section className="login-page">
           {isRegister ? <UserRegistration /> : <UserLogin />}

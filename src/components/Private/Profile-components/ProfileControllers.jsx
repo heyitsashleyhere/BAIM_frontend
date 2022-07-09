@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box, Paper} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -7,11 +7,19 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-export default function ProfileControllers({ handleEdit, handleDelete}) {
+export default function ProfileControllers({ handleEdit, handleDelete, isUserEditOpen }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [deleteAnchorEl, setDeleteAnchorEl] = useState(null);
   const openFeatures = Boolean(anchorEl);
   const openPopper = Boolean(deleteAnchorEl);
+
+  useEffect(() => {
+    if(isUserEditOpen === false ) {
+      setAnchorEl(null);
+      setDeleteAnchorEl(null);
+    }
+  }, [isUserEditOpen])
+  
 
   const handlePopper = (event) => {
     setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);

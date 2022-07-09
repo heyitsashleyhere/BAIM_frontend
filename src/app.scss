@@ -38,7 +38,7 @@ body {
 		}
 	}
 
-	.LokaW {
+	.NavLink-White {
 		position: relative;
 		background-color: transparent;
 		border: none;
@@ -48,7 +48,7 @@ body {
 		mix-blend-mode: difference;
 	}
 
-	.LokaB {
+	.NavLink-Black {
 		position: relative;
 		background-color: transparent;
 		border: none;
@@ -58,7 +58,7 @@ body {
 		// mix-blend-mode: difference;
 	}
 
-	.LokaW:after {
+	.NavLink-White:after {
 		content: "";
 		position: absolute;
 		display: inline;
@@ -73,7 +73,7 @@ body {
 		transition: transform 0.25s ease-out;
 	}
 
-	.LokaB:after {
+	.NavLink-Black:after {
 		content: "";
 		position: absolute;
 		display: inline;
@@ -88,16 +88,14 @@ body {
 		transition: transform 0.25s ease-out;
 	}
 
-	.LokaW:hover:after,
-	.LokaB:hover:after {
+	.NavLink-White:hover:after,
+	.NavLink-Black:hover:after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
 	}
 
 
-.Follow_Button{
-    width:20%;
-}
+
 }
 
 .App {

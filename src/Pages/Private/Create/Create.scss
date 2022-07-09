@@ -1,4 +1,4 @@
-@import "../../../styles/breakpoints";
+@import './../../../styles/breakpoints'; 
 
 .Create {
     position: relative;
@@ -45,6 +45,24 @@
                 font-size: 4rem;
                 margin-bottom: 2rem;
             }
+        }
+    }
+
+    @include media(">=tablet") {
+        display:grid;
+        grid-template-columns: repeat(8,1fr);
+        gap:2.5rem;
+
+        .Create-inner{
+            grid-column: 2/8;
+        }
+    }
+
+    @include media(">=desktop"){
+        grid-template-columns: repeat(12,1fr);
+
+        .Create-inner{
+            grid-column: 3/11;
         }
     }
 }

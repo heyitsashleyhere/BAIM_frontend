@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
 
-import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box,} from "@mui/material";
+import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover, Box, Paper} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -16,6 +16,8 @@ import { Follow } from "../Buttons/Follow/Follow.jsx";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import { DeletePost } from "../Buttons/Delete/DeletePost";
+import EditPost from "../Forms/EditPost/EditPost.jsx";
+import { Pin } from "../Buttons/Pin/Pin";
 
 
 
@@ -25,6 +27,8 @@ export const SquareAvatar = ({ data }) => {
     const {upgrade, setUpgrade}=useContext(PostsContext)
     const [message, setMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isEditOpen, setIsEditOpen] = useState(false)
+    const [postData, setPostData] = useState(data)
    
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
@@ -49,7 +53,7 @@ export const SquareAvatar = ({ data }) => {
     // MUI popper END 
 
     function handleEdit() {
-
+      setIsEditOpen(true)
     }
 
     function handleDelete(type, id) {
@@ -74,8 +78,10 @@ export const SquareAvatar = ({ data }) => {
     return (
       <section className="SquareAvatar">
     
-        {cookies.profileName === data.authorProfileName && 
+       
           <section className="Avatar-Controllers">
+          <Pin post={data}/>
+          { cookies.profileName === data.authorProfileName && <>
           <IconButton aria-label="edit"
                       aria-controls={openFeatures ? 'basic-menu' : undefined}
                       aria-haspopup="true"
@@ -101,10 +107,10 @@ export const SquareAvatar = ({ data }) => {
                               onClick={() => setDeleteAnchorEl(null)} >NO</Button>
                     </Box>     
             </Popover>
-          </Menu>
-        </section> }
+          </Menu></>}
+        </section> 
     
-        <NavLink to={`/${data.type}/${data.title}`} className="InnerSquareAvatar">
+        <NavLink  to={data.type === 'event' ? `/${data.type}/`:`/${data.type}/${data.title}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={data.image}></img>
                 <h2>{data.title}</h2>
@@ -114,7 +120,14 @@ export const SquareAvatar = ({ data }) => {
        <Modal open={isModalOpen} onClose={() => {setIsModalOpen(false); setUpgrade(!upgrade)}} >
           <p>{message}</p>
        </Modal>
-        {/* experimental logic for add remove to user collections */}
+      
+       <Modal open={isEditOpen} onClose={() => {setIsEditOpen(false); setUpgrade(!upgrade)}}
+              sx={{ display: 'flex', overflow:'scroll', justifyContent: 'center', alignItems: 'center' }} >
+          <Paper elevation={3} sx={{width: '80%', height: '90%', overflow: 'scroll'}}>
+              <EditPost postData={postData} setPostData={setPostData} setIsEditOpen={setIsEditOpen} />
+          </Paper>
+       </Modal>
+       
 
       </section>
     )

@@ -46,7 +46,7 @@ export const SingleProducePage = () => {
         <section className="Seasonal-text">
           <section className="Seasonal-description">
               <h3>Description</h3>
-              {data.description.split('.').map(item => <p>{item}.</p>)}
+              {data.description}
           </section>
 
           <section className="Seasonal-optimal">
@@ -101,15 +101,15 @@ export const SingleProducePage = () => {
           <section className="Seasonal-planting">
               <section className="Seasonal-plant-map">
                 <h3>Planting consideration</h3>
-                {data.planting_considerations.map(item=><p>{item}.</p>)}
+                {data.planting_considerations}
               </section>
               <section className="Seasonal-plant-map">
                 <h3>When to Plant</h3>
-                {data.when_to_plant.map(item=><p>{item}.</p>)}
+                {data.when_to_plant}
               </section>
               <section className="Seasonal-plant-map">
                 <h3>Growing from seed</h3>
-                {data.growing_from_seed.map(item=><p>{item}.</p>)}
+                {data.growing_from_seed}
               </section>
               <section className="Seasonal-plant">
                 <h3>Transplanting</h3>
@@ -129,7 +129,7 @@ export const SingleProducePage = () => {
               </section>
               <section className="Seasonal-plant-map">
                 <h3>Other Care:</h3>
-              {data.other_care.split('.').map(item=> <p>{item}.</p>)}
+              {data.other_care}
               </section>
               <section className="Seasonal-plant">
                 <h3>Diseases:</h3>
@@ -144,7 +144,7 @@ export const SingleProducePage = () => {
           <section className="Seasonal-harvest">
             <section className="Seasonal-plant-map">
                 <h3>Harvesting</h3>
-                {data.harvesting.map(item=><p>{item}.</p>)}
+                {data.harvesting}
               </section>
             <section className="Seasonal-plant">
                 <h3>Storage</h3>

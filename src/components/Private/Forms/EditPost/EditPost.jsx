@@ -1,18 +1,19 @@
 import { useContext, useState } from "react";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal } from "@mui/material";
+import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal, Typography } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ImageIcon from '@mui/icons-material/Image';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import ImageInput from "../ImageInput.jsx";
+import TagInput from "./TagInput.jsx";
 
 
 
-
-
-export default function CreatePost({ category, setCategory }) {
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
+export default function EditPost({ postData, setPostData, setIsEditOpen }) {
+  const [ category, setCategory ] = useState(postData.type)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -303,39 +304,46 @@ export default function CreatePost({ category, setCategory }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    setInputValues({ ...inputValues, address });
+
     console.log('inputValues :>> ', inputValues);
     const config = {
-      method: "POST",
+      method: "PATCH",
       credentials: "include", // specify this if you need cookies
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputValues),
     }
 
-    fetch(`http://localhost:7000/${category}`, config)
+    fetch(`http://localhost:7000/${category}/${postData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
        if (result.errors) {
               setErrors(result.errors);
+       } else {
+        setPostData(result.updatedPost)
+        setIsModalOpen(true)
+        setUpgrade(!upgrade)
        }
-      //  console.log(category, "fetch result:", result)
-      setIsModalOpen(true)
       })
       .catch((error) => console.log(error));
   }
+  // console.log('postData :>> ', postData);
 
   return (
-    <section>
-    
+    <section className="CreatePost-section">
       <Grow in>
-        <form className="create-form" onSubmit={handleSubmit}>
+        <form className="create-form" onSubmit={handleSubmit} style={{ padding: '5% 7%'}}>
           <Grid container spacing={2}>
+            <Grid sx={{ textAlign: 'center', marginBottom: '2%'}}>
+              <ImageInput imageUsage="image" oldUrl={postData.image} />
+            </Grid>
             <Grid item xs={12}>
               <TextField name="title" label="Title"
-                     type="text"
-                     fullWidth margin="dense"
-                     error={errors.find((error) => error.title)}
-                     onChange={handleInputChange} />
+                      type="text"
+                      fullWidth margin="dense"
+                      InputLabelProps={{ shrink: true }}
+                      defaultValue={postData.title}
+                      error={errors.find((error) => error.description)}
+                      onChange={handleInputChange} />
               {errors.map(
                      (error, i) =>
                      error.title && (
@@ -347,9 +355,11 @@ export default function CreatePost({ category, setCategory }) {
             </Grid>
             <Grid item xs={12}>
               <Autocomplete multiple
-                      options={categoriesForCategory[`${category}`]}
+                      options={categoriesForCategory[`${postData.type}`]}
                       getOptionLabel={(option) => option}
+                      defaultValue={postData.category || []}
                       onChange={(event, value) => setInputValues({ ...inputValues, category: value })}
+                      onInputChange={(event, value) => setInputValues({ ...inputValues, category: value })}
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -364,6 +374,8 @@ export default function CreatePost({ category, setCategory }) {
                      type="text"
                      fullWidth margin="dense"
                      multiline rows={6}
+                     InputLabelProps={{ shrink: true }}
+                     defaultValue={postData.description}
                      error={errors.find((error) => error.description)}
                      onChange={handleInputChange} />
               {errors.map(
@@ -379,6 +391,8 @@ export default function CreatePost({ category, setCategory }) {
             <Grid item xs={12}>
                 <TextField name="tags" label="Tags (separated by comma)"
                         type="text" fullWidth margin="dense"
+                        InputLabelProps={{ shrink: true }}
+                        defaultValue={postData.tags || []}
                         error={errors.find((error) => error.tags)}
                         onChange={handleTags} />
                   {errors.map( (error, i) =>
@@ -513,7 +527,7 @@ export default function CreatePost({ category, setCategory }) {
               </LocalizationProvider>
             )}
 
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               <label htmlFor="create-post-video">
                 <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
                        onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
@@ -523,7 +537,7 @@ export default function CreatePost({ category, setCategory }) {
               </label>
             </Grid>
 
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <label htmlFor="create-post-image">
                 <input type="file" name="image" accept="image/*" id='create-post-image'
                       onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
@@ -531,12 +545,14 @@ export default function CreatePost({ category, setCategory }) {
                   Upload Image
                 </Button>
               </label>
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={8}>
               <TextField name="link" label="Link"
                      type="text"
                      fullWidth margin="dense"
+                     InputLabelProps={{ shrink: true }}
+                     defaultValue={postData.link || ''}
                      error={errors.find((error) => error.link)}
                      onChange={handleInputChange} />
               {errors.map(
@@ -550,17 +566,16 @@ export default function CreatePost({ category, setCategory }) {
             </Grid>
         
             <Grid item xs={12} textAlign='center'>
-              <Button variant="contained" type="submit" size="large">Post</Button>
+              <Button variant="contained" type="submit" size="large">Update</Button>
             </Grid>
 
           </Grid>
         </form>
 
       </Grow>
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
-          <p>You have 'planted' a post in {category}</p>
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null); setIsEditOpen(false) }} >
+          <p>You have updated your {category} post</p>
        </Modal>
-       
     </section>
   )
 }

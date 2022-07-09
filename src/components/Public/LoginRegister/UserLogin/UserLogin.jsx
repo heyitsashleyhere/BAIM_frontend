@@ -49,7 +49,7 @@ export default function UserLogin() {
   return (
     <section className="LoginForm">
     <Grow in>
-      <Grid component="form" spacing={4} container onSubmit={handleUserLogin}>
+      <Grid component="form" spacing={2} container onSubmit={handleUserLogin}>
           <Grid item xs={12}>
             <h1>Login</h1>
           </Grid>

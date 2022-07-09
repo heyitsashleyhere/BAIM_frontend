@@ -123,7 +123,7 @@ export const ProduceNav = () => {
 					className={`${visible ? "avatars" : "hidden"}`}
 				>
 					{firstSix.map(({ id, name, image }, index) => (
-						<SeasonalAvatar id={id} name={name} image={image} key={index} />
+						<SeasonalAvatar id={id} name={name} image={image} key={`sectionNavFirstSix`+index} />
 					))}
 					<SeasonalAvatar id="plus" name="More" image={More} key="more" />
 				</section>

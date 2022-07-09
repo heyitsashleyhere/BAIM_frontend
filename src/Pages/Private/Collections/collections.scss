@@ -1,276 +1,296 @@
-@import "../../../styles/breakpoints";
+@import '../../../styles/breakpoints';
 
 .Collections {
-	// position: relative;
-	top: 50px;
+        // check positions after navBar, do we need relative? 
+        position:relative;
+        top:50px;
+        width:100%;
+        
+            .Slideshow {
+                margin:0 auto;
+                overflow:hidden;
+                width:100%;
+                
+                .slideShowSlider {
+                    white-space: nowrap;
+                    transition: ease 1000ms;
+                }
 
-	width: 100%;
+                .slide {
+                    position:relative;
+                    display:inline-block;
+                    max-width:100%;
+                    height:250px;
+                    overflow: hidden;
 
-	.Slideshow {
-		margin: 0 auto;
-		overflow: hidden;
-		width: 100%;
+                    img {
+                       width:100%;
+                       object-fit: cover; 
+                    }
 
-		.slideShowSlider {
-			white-space: nowrap;
-			transition: ease 1000ms;
-		}
+                    .Hero-text {
+                        position:absolute;
+                        bottom:0;
+                        background-color: rgba(0, 0, 0, 0.247);
+                        font-weight: 800;
+                        width:100%;
+                        padding:0.5rem 0rem;
+                        color: white;
 
-		.slide {
-			position: relative;
-			display: inline-block;
-			max-width: 100%;
-			height: 250px;
-			overflow: hidden;
+                        h1 {
+                            font-size: 4rem;      
+                        }
 
-			img {
-				width: 100%;
-				object-fit: cover;
-			}
+                       p {
+                           font-size: 3.5rem;
+                       }
+                    }
+                }    
+            }
+        
+            .Library-wrapper {
+                width:100%;
+                margin: 0.5rem 0rem;
+        
+                .lib-wrapper-header {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 1rem;
+        
+                    h2 {
+                        font-size: 2rem;
+                    }
+        
+                    p {
+                        font-size: 1.2rem;
+                        margin-left: 1rem;
+                        color: red;
+                    }
+                    
+                }
+        
+                .Library-container {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    
+                }
+        
+                .Library-container::-webkit-scrollbar {
+                    height: 5px;          
+                  }
+        
+                .Library-container::-webkit-scrollbar-track {
+                    box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
+                    border-radius: 10px;
+                }
+        
+                .Library-container::-webkit-scrollbar-thumb {
+                    background: rgb(99, 99, 99);
+                    border-radius: 20px;
+                  }
+            }
+        
+        
+        
+            @include media(">=tablet") {
+                display: grid;
+                grid-template-columns: repeat(8, 1fr);
+                gap: 2.5rem;
 
-			.Hero-text {
-				position: absolute;
-				bottom: 0;
-				background-color: rgba(0, 0, 0, 0.247);
-				font-weight: 800;
-				width: 100%;
-				padding: 0.5rem 0rem;
-				color: white;
+                .Slideshow {
+                    grid-column: 1/9;
+                    margin: 0 auto;
+                    overflow: hidden;
+                    width: 100%;
+                    
+                    .slideShowSlider {
+                        white-space: nowrap;
+                        transition: ease 1000ms;
+                    }
+    
+                    .slide {
+                        position: relative;
+                        display: inline-block;
+                        max-width: 100%;
+                        height: 440px;
+                        overflow: hidden;
+    
+                        img {
+                           width: 100%;
+                           object-fit: cover; 
+                           object-position: bottom;
+                        }
+    
+                        .Hero-text {
+                            height: 170px;
+                            position: absolute;
+                            top: 0;
+                            background-color: rgba(0, 0, 0, 0.247);
+                            font-weight: 800;
+                            width: 100%;
+                            padding: 1rem;
+                            color: white;
+    
+                            h1 {
+                                font-size: 8rem;
+                                
+                            }
+    
+                           p {
+                               font-size: 5.5rem;
+                               margin: 0rem 0.5rem;
+                           }
+                        }
+                    }
+            
+                }
+        
+              
+        
+                .Library-wrapper {     
+                    grid-column: 1/9;
+        
+                    .Library-container {
+                        display: flex;
+                        margin: 1rem 0rem;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        
+                    }
+        
+                }
+            }
+        
+            @include media(">=desktop") {
+                top: 35rem;  //! Check if we still needs top
+                grid-template-columns: repeat(12, 1fr);
+                gap: 2.5rem;
+        
+                .Slideshow{
+                    grid-column: 3/11;
+                    margin: 0 auto;
+                    overflow: hidden;
+                    width: 100%;
+                    
+                    .slideShowSlider{
+                        white-space: nowrap;
+                        transition: ease 1000ms;
+                    }
+    
+                    .slide{
+                        position: relative;
+                        display: inline-block;
+                        max-width: 100%;
+                        height: 43vh;
+                        overflow: hidden;
+    
+                        img{
+                           width: 100%;
+                           object-fit: cover; 
+                           object-position: bottom;
+                        }
+    
+                        .Hero-text{
+                            height: 20vh;
+                            position: absolute;
+                            top: 0;
+                            background-color: rgba(0, 0, 0, 0.247);
+                            font-weight: 800;
+                            width: 100%;
+                            padding: 1rem;
+                            color: white;
+    
+                            h1{
+                                font-size: 10vw;
+                                
+                            }
+    
+                           p{
+                               font-size: 6vw;
+                               margin: 0rem 0.5rem;
+                           }
+                        }
+                    }
+                }
+          
+        
+                .Library-wrapper {
+                    grid-column: 3/11;
 
-				h1 {
-					font-size: 4rem;
-				}
+                    .Library-container {       
+                        margin: 2rem 0rem;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        
+                    }
+                }
+            }
 
-				p {
-					font-size: 3.5rem;
-				}
-			}
-		}
-	}
+            @include media(">=widescreen") {
+                grid-template-columns: repeat(12,1fr);
+                gap:2.5rem;
+        
+                .Slideshow {
+                    grid-column: 3/11;
+                    margin: 0 auto;
+                    overflow: hidden;
+                    width: 100%;
+                    
+                    .slideShowSlider {
+                        white-space: nowrap;
+                        transition: ease 1000ms;
+                    }
+    
+                    .slide {
+                        position: relative;
+                        display: inline-block;
+                        max-width: 100%;
+                        height: 55vh;
+                        overflow: hidden;
+    
+                        img {
+                           width: 100%;
+                           object-fit: cover; 
+                           object-position: bottom;
+                        }
+    
+                        .Hero-text {
+                            height: 25vh;
+                            position: absolute;
+                            top: 0;
+                            background-color: rgba(0, 0, 0, 0.247);
+                            font-weight: 800;
+                            width: 100%;
+                            padding: 1rem;
+                            color: white;
+    
+                            h1 {
+                                font-size: 12rem;
+                                
+                            }
+    
+                           p {
+                               font-size:   8rem;
+                               margin: 0rem 0.5rem;
+                           }
+                        }
+                    }
+                }
+          
+        
+                .Library-wrapper {
+                    grid-column: 3/11;
+                }
 
-	.Library-wrapper {
-		width: 100%;
-		margin: 0.5rem 0rem;
 
-		.lib-wrapper-header {
-			display: flex;
-			align-items: center;
-			margin-left: 1rem;
+            }
+        
+        
+        
+        .Pages::-webkit-scrollbar {
+            display: none;
+        }
 
-			h2 {
-				font-size: 2rem;
-			}
-
-			p {
-				font-size: 1.2rem;
-				margin-left: 1rem;
-				color: red;
-			}
-		}
-
-		.Library-container {
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-		}
-
-		.Library-container::-webkit-scrollbar {
-			height: 5px;
-		}
-
-		.Library-container::-webkit-scrollbar-track {
-			box-shadow: inset 0 0 4px rgba(128, 128, 128, 0);
-			border-radius: 10px;
-		}
-
-		.Library-container::-webkit-scrollbar-thumb {
-			background: rgb(99, 99, 99);
-			border-radius: 20px;
-		}
-	}
-
-	@include media(">=tablet") {
-		display: grid;
-		grid-template-columns: repeat(8, 1fr);
-		gap: 2.5rem;
-
-		.Slideshow {
-			grid-column: 1/9;
-			margin: 0 auto;
-			overflow: hidden;
-			width: 100%;
-
-			.slideShowSlider {
-				white-space: nowrap;
-				transition: ease 1000ms;
-			}
-
-			.slide {
-				position: relative;
-				display: inline-block;
-				max-width: 100%;
-				height: 440px;
-				overflow: hidden;
-
-				img {
-					width: 100%;
-					object-fit: cover;
-					object-position: bottom;
-				}
-
-				.Hero-text {
-					height: 170px;
-					position: absolute;
-					top: 0;
-					background-color: rgba(0, 0, 0, 0.247);
-					font-weight: 800;
-					width: 100%;
-					padding: 1rem;
-					color: white;
-
-					h1 {
-						font-size: 8rem;
-					}
-
-					p {
-						font-size: 5.5rem;
-						margin: 0rem 0.5rem;
-					}
-				}
-			}
-		}
-
-		.Library-wrapper {
-			border: 1px solid blue;
-			grid-column: 1/9;
-
-			.Library-container {
-				display: flex;
-				margin: 1rem 0rem;
-				flex-direction: row;
-				flex-wrap: wrap;
-			}
-		}
-	}
-
-	@include media(">=desktop") {
-		// top:35rem;
-		grid-template-columns: repeat(12, 1fr);
-		gap: 2.5rem;
-
-		.Slideshow {
-			grid-column: 3/11;
-			margin: 0 auto;
-			overflow: hidden;
-			width: 100%;
-
-			.slideShowSlider {
-				white-space: nowrap;
-				transition: ease 1000ms;
-			}
-
-			.slide {
-				position: relative;
-				display: inline-block;
-				max-width: 100%;
-				height: 43vh;
-				overflow: hidden;
-
-				img {
-					width: 100%;
-					object-fit: cover;
-					object-position: bottom;
-				}
-
-				.Hero-text {
-					height: 20vh;
-					position: absolute;
-					top: 0;
-					background-color: rgba(0, 0, 0, 0.247);
-					font-weight: 800;
-					width: 100%;
-					padding: 1rem;
-					color: white;
-
-					h1 {
-						font-size: 10vw;
-					}
-
-					p {
-						font-size: 6vw;
-						margin: 0rem 0.5rem;
-					}
-				}
-			}
-		}
-
-		.Library-wrapper {
-			grid-column: 3/11;
-
-			.Library-container {
-				margin: 2rem 0rem;
-				flex-direction: row;
-				flex-wrap: wrap;
-			}
-		}
-	}
-
-	@include media(">=widescreen") {
-		grid-template-columns: repeat(12, 1fr);
-		gap: 2.5rem;
-
-		.Slideshow {
-			grid-column: 3/11;
-			margin: 0 auto;
-			overflow: hidden;
-			width: 100%;
-
-			.slideShowSlider {
-				white-space: nowrap;
-				transition: ease 1000ms;
-			}
-
-			.slide {
-				position: relative;
-				display: inline-block;
-				max-width: 100%;
-				height: 55vh;
-				overflow: hidden;
-
-				img {
-					width: 100%;
-					object-fit: cover;
-					object-position: bottom;
-				}
-
-				.Hero-text {
-					height: 25vh;
-					position: absolute;
-					top: 0;
-					background-color: rgba(0, 0, 0, 0.247);
-					font-weight: 800;
-					width: 100%;
-					padding: 1rem;
-					color: white;
-
-					h1 {
-						font-size: 12rem;
-					}
-
-					p {
-						font-size: 8rem;
-						margin: 0rem 0.5rem;
-					}
-				}
-			}
-		}
-
-		.Library-wrapper {
-			grid-column: 3/11;
-		}
-	}
-
-	.Pages::-webkit-scrollbar {
-		display: none;
-	}
-}
+    }
