@@ -149,7 +149,7 @@ export const RoundAvatar = ({ name, id, image }) => {
 				</section>
 				<h2>{name}</h2>
 			</Link>
-			{author ? <Button disabled >hey its me</Button> : <Follow name={name} />}
+			{author ? <Button disabled style={{ fontSize: "1rem", padding: '0.5em 1em' }} >hey its me</Button> : <Follow name={name} />}
 		
 		</section>
 	);

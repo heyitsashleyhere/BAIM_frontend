@@ -70,7 +70,7 @@ export const Follow = ({ name }) => {
 		<>
 			{profileData && !isAuthor && (
 				<Button
-					style={{ Width: "80px" }}
+					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
 						profileData.followers.find((objId) => objId == currentUser._id)
 							? "outlined"
