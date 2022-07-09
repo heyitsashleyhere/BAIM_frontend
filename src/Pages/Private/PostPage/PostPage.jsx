@@ -7,11 +7,12 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { BsHeart } from "react-icons/bs";
 import { ProduceNav } from "../../../components/Private/section-header/ProduceNav.jsx";
 import "./postPage.scss";
+import { Pin } from "../../../components/Private/Buttons/Pin/Pin";
+import { AddComment } from "../../../components/Private/Buttons/Comment/AddComment";
 
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({ data }) => {
-  console.log('data', data)
 	const { user } = useContext(UserContext);
   const { title } = useParams();
   let navigate = useNavigate();
@@ -23,19 +24,15 @@ export const PostPage = ({ data }) => {
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
 
-
+console.log(selected)
   return (
     <>
       <ProduceNav />
       <section className="Post-Page" key={selected._id}>
         <section className="Post-Page-Inner">
-          {/* <section className="Post-Page-header">
-    <BsHeart className="Post-Page-Header-icons"/>
-    <MdOutlineArrowBack onClick={() => backHandler(selected.type)} className="Post-Page-Header-icons"/>
-    </section> */}
           <section className="Post-hero">
             <section className="Post-Page-header">
-              <BsHeart className="Post-Page-Header-icons" />
+             <Pin post={selected}/>
               <MdOutlineArrowBack onClick={() => navigate(-1)} className="Post-Page-Header-icons" />
             </section>
             <img src={selected.image}></img>
@@ -47,7 +44,7 @@ export const PostPage = ({ data }) => {
               name={selected.authorProfileName}
               image={selected.authorAvatar}
             ></PostHeaderAvatar>
-            <button className="Like-button">Likes</button>
+             {/* <Pin/> */}
           </section>
 
           <section className="Post-title">
@@ -76,13 +73,12 @@ export const PostPage = ({ data }) => {
             <p>Comments</p>
             {selected.comments
               ? selected.comments.map((item, index) => (
-                  <UserComment data={item} user={currentUser._id} key={'userComment' + index}></UserComment>
+                  <UserComment post={item} user={currentUser._id} key={'userComment' + index}></UserComment>
                 ))
               : null}
 
             <section className="Leave-Comment">
-              <textarea placeholder="leave a comment"></textarea>
-              <button>leave a comment</button>
+            <AddComment post={selected}/>
             </section>
           </section>
         </section>

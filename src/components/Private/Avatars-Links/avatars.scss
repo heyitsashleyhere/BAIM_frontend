@@ -3,14 +3,34 @@
 .SquareAvatar{
     position:relative;
     display:flex;
-    border:1px solid red;
     margin:1rem 0rem;
     
     .Avatar-Controllers{
         position:absolute;
         right:1vw;
         top:1vh;
-        z-index:1;       
+        z-index:1; 
+        
+        .Pin-icon{
+            position: relative;
+            color:white;
+            font-size: 5.5rem;
+            top:1.5vh;
+            right:2.5vw;
+            cursor:pointer;
+
+            @include media(">=tablet"){
+                font-size:3rem;
+                top:1vh;
+                right:1vw;
+            }
+
+            @include media(">=desktop"){
+                font-size: 2rem;
+                top:0.5vh;
+                right:0.5vw;
+            }
+        }
     }
     
     .InnerSquareAvatar{
@@ -21,8 +41,6 @@
        
         .imageAvatar{
             position:relative;
-            width:100%;
-            height:200px;
             overflow: hidden;
             border-radius: 10px;
             display:flex;
@@ -54,8 +72,9 @@
     
     
     @include media(">=tablet"){
-         max-width:30vw;
-         margin:1rem 1.2rem;
+        //  max-width:30vw;
+         width:30vw;
+         margin:1rem 1rem;
 
 
          .InnerSquareAvatar{
@@ -67,8 +86,9 @@
     
                 .imageAvatar{
                       // width:200px;
-                      height:145px;
-                      margin:0.3rem 0.5rem;
+                      height:auto;
+                    //   margin:0.3rem 0.5rem;
+
                       &:hover{
                         cursor:pointer;
                       }
@@ -81,22 +101,20 @@
     }
     
         @include media(">=desktop"){
-            // width: 23%;
-            margin:1rem 0.4rem;
+            width: 15.7vw;
+            margin:1rem 0rem;
 
             .InnerSquareAvatar{
                 display:flex;
-                //width:20vw;
+                height:91%;
                 text-decoration: none;
                 margin:0.2rem 0.2rem;
                 cursor: pointer;
     
                     .imageAvatar{
-                        border:1px solid red;
-                        width:200px;
-                        height:125px;
                         cursor:pointer;
                         margin:0.3rem 0.5rem;
+
 
                         img:hover{
                             transform: scale(2);
@@ -157,7 +175,7 @@
     margin:1rem 1rem;
     background-color: whitesmoke;
     border-radius: 10px;
-    box-shadow: 0px 10px 13px -7px #000000, 7px -30px 19px -30px rgba(0,0,0,0.3);
+    box-shadow: 0px 10px 13px -15px #000000, 7px -30px 19px -40px rgba(0,0,0,0.3);
 
     @include media(">=tablet"){
         padding:1rem;
@@ -171,7 +189,7 @@
     }
 }
     
-    .RoundAvatarProfile{
+.RoundAvatarProfile{
         text-decoration: none;
         margin:1rem 1rem;
         display:flex;

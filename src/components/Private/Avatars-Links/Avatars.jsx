@@ -17,6 +17,7 @@ import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import { DeletePost } from "../Buttons/Delete/DeletePost";
 import EditPost from "../Forms/EditPost/EditPost.jsx";
+import { Pin } from "../Buttons/Pin/Pin";
 
 
 
@@ -77,8 +78,10 @@ export const SquareAvatar = ({ data }) => {
     return (
       <section className="SquareAvatar">
     
-        {cookies.profileName === data.authorProfileName && 
+       
           <section className="Avatar-Controllers">
+          <Pin post={data}/>
+          { cookies.profileName === data.authorProfileName && <>
           <IconButton aria-label="edit"
                       aria-controls={openFeatures ? 'basic-menu' : undefined}
                       aria-haspopup="true"
@@ -104,10 +107,10 @@ export const SquareAvatar = ({ data }) => {
                               onClick={() => setDeleteAnchorEl(null)} >NO</Button>
                     </Box>     
             </Popover>
-          </Menu>
-        </section> }
+          </Menu></>}
+        </section> 
     
-        <NavLink to={`/${data.type}/${data.title}`} className="InnerSquareAvatar">
+        <NavLink  to={data.type === 'event' ? `/${data.type}/`:`/${data.type}/${data.title}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={data.image}></img>
                 <h2>{data.title}</h2>

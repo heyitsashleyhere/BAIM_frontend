@@ -9,6 +9,7 @@ export default function Create() {
   const [category, setCategory] = useState('')
   return (
     <section className="Create">
+    <section className="Create-inner">
         <h1>Create a Post</h1>
         <Grid container spacing={2} className='pick-container'>
             <Grid item xs={12} sm={6}>
@@ -33,7 +34,7 @@ export default function Create() {
             {category && (
                 <CreatePost category={category} setCategory={setCategory}/>
             )}
-
+      </section>
     </section>
   )
 }

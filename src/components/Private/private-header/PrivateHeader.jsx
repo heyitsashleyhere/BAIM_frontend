@@ -73,7 +73,7 @@ export const PrivateHeader = () => {
 			<section className="private-header" ref={headerRef}>
 				<div className="logo">
 					<img src={Logo} alt="LOKA" />
-					<Link className="LokaB" to="/main">
+					<Link className="NavLink-Black" to="/main">
 						Loka
 					</Link>
 				</div>
@@ -91,14 +91,14 @@ export const PrivateHeader = () => {
 						{links.map((link, i) => {
 							return (
 								<li className="navbar-list-item" key={i}>
-									<Link className="LokaB" to={link.path} key={link.name}>
+									<Link className="NavLink-Black" to={link.path} key={link.name}>
 										{link.name}
 									</Link>
 								</li>
 							);
 						})}
 						<li className="navbar-list-item">
-							<p className="btn LokaB" onClick={logoutUser}>
+							<p className="btn NavLink-Black" onClick={logoutUser}>
 								Logout
 							</p>
 						</li>

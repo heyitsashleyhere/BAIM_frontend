@@ -118,10 +118,10 @@ export const Collections = (props) => {
       delay
     );
 
-    return () => {
-      resetTimeout();
-    };
-  }, [index]);
+	// animation
+	const [index, setIndex] = useState(0);
+	const delay = 5500;
+	// const timeoutRef = useRef(null);
 
   return (
     <>
@@ -142,18 +142,53 @@ export const Collections = (props) => {
           </section>
         </section>
 
-        <section className="Library-wrapper">
-          <section className="lib-wrapper-header">
-            <h2>Our {type} collections</h2>
-            <p>{data.length}items</p>
-          </section>
-          <section className="Library-container">
-            {data.map((item) => (
-              <SquareAvatar data={item} key={"collectionSquareAvatar-" + item._id} />
-            ))}
-          </section>
-        </section>
-      </section>
-    </>
-  )
+	useEffect(() => {
+		const id = setInterval(
+			() =>
+				setIndex((prevIndex) =>
+					prevIndex === images[type].length - 1 ? 0 : prevIndex + 1
+				),
+			delay
+		);
+
+		return () => {
+			clearInterval(id)
+		};
+	}, []);
+
+	return (
+		<>
+			<ProduceNav />
+			<section className="Collections">
+				<section className="Slideshow">
+					<section
+						className="Hero slideShowSlider"
+						style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+					>
+						{images[type].map((item, index) => (
+							<section className="slide" key={'collectionHero-'+index}>
+								<img src={item.url}></img>
+								<section className="Hero-text">
+									<h1>{item.title}</h1>
+									<p>{item.sub}</p>
+								</section>
+							</section>
+						))}
+					</section>
+				</section>
+
+				<section className="Library-wrapper">
+					<section className="lib-wrapper-header">
+						<h2>Our {type} collections</h2>
+						<p>{data.length}items</p>
+					</section>
+					<section className="Library-container">
+						{data.map((item) => (
+							<SquareAvatar data={item} key={'collectionSquareAvatar-'+ item._id}/>
+						))}
+					</section>
+				</section>
+			</section>
+		</>
+	);
 }

@@ -5,37 +5,37 @@ import { FiEdit2,FiSend } from 'react-icons/fi'
 import {AiOutlineDelete} from 'react-icons/ai'
 import {FcCancel} from 'react-icons/fc'
 
+import './userComment.scss'
 
-// Here write the logic and fetch for every button.
-// this component is used in all posts. 
+
 export const UserComment = (props) => {
 
 const{upgrade, setUpgrade}=useContext(PostsContext)
 
-// user is the userLogin ID
-const { data , user } = props
+
+const { post, user } = props
 const [ error, setError ]=useState()
 const [ edit, setEdit]=useState(true)
 const [ newComment, setNewComment]=useState('')
 
- 
+
 const date = item => new Date(item).toLocaleDateString("eu")
 
+// check user comment id with current user id
+const author = user  === post.author
 
 
-const author = user  === data.author
-console.log('comments', user)
 
   function editComment(){
 
-    const payload={ comment: newComment }
+    const payload={ message: newComment }
 
     const config = {
         credentials: 'include', // specify this if you need cookies
         method: "PATCH",
         body:JSON.stringify(payload)
       };
-      
+      // send id of the comment
       fetch(`http://localhost:7000/comment/${user}`, config)
         .then((response) => response.json())
         .then((result) => {
@@ -55,7 +55,7 @@ console.log('comments', user)
         body:JSON.stringify(payload)
         
       };
-      
+      // send id of the comment
       fetch(`http://localhost:7000/user/comment/${user}}`, config)
         .then((response) => response.json())
         .then((result) => {
@@ -69,9 +69,9 @@ console.log('comments', user)
 
 
   return (
-       <section className="Comments-inner" key={data.author}>
+       <section className="Comments-inner" key={post.author}>
        <section className="comments-header">
-            <p className="commentDate">{date(data.createdAt)}</p>
+            <p className="commentDate">{date(post.createdAt)}</p>
             { author ? 
                 <section className="comment-editors">  
                 { edit  ? <FiEdit2 onClick={e=>setEdit(!edit)}  className="editor-icon"/>  
@@ -85,10 +85,10 @@ console.log('comments', user)
         </section>
 
             <section className="comment">
-                <PostCommentsAvatar id={data._id} name={data.authorProfileName} image={data.authorAvatar}/>
-                { edit ? <p className="comment-text">{data.message}</p> 
+                <PostCommentsAvatar id={post._id} name={post.authorProfileName} image={post.authorAvatar}/>
+                { edit ? <p className="comment-text">{post.message}</p> 
                 : 
-                <input  placeholder={data.message} onChange={e=>setNewComment(e.target.value)}></input> }
+                <textarea  placeholder={post.message} onChange={e=>setNewComment(e.target.value)} className="comment-input"></textarea> }
             </section>
         </section>
 
