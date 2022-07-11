@@ -3,6 +3,7 @@
 @import "../../../styles/breakpoints";
 @import "../../../app.scss";
 
+
 .team {
 	padding-top: 5rem;
 	padding-bottom: 5rem;
@@ -28,12 +29,6 @@
 		gap: 1rem;
 		margin-top: 6rem;
 
-		.active {
-			img {
-				filter: grayscale(0%) !important;
-				transform: scale(1.4) !important;
-			}
-		}
 		.team_member {
 			width: 7.7rem;
 			height: 12rem;
@@ -41,12 +36,6 @@
 			border-radius: 1rem;
 			display: flex;
 			align-items: flex-end;
-			&:hover {
-				img {
-					// filter: grayscale(0%) !important;
-					transform: scale(1.4) !important;
-				}
-			}
 
 			.overlay {
 				width: 8rem;
@@ -62,6 +51,16 @@
 					filter: grayscale(100%);
 					transition: 0.8s all cubic-bezier(0.25, 0.77, 0.68, 0.99);
 					cursor: pointer;
+
+					&:hover {
+						filter: grayscale(0%) !important;
+						transform: scale(1.4) !important;
+					}
+				}
+
+				.active {
+					filter: grayscale(0%) !important;
+					transform: scale(1.4) !important;
 				}
 			}
 
@@ -101,6 +100,14 @@
 		}
 	}
 
+	.member_details-bio {
+		div {
+			p {
+				line-height: 2rem;
+			}
+		}
+	}
+
 	.team_section {
 		color: white;
 		padding: 1rem 2rem;
@@ -119,6 +126,7 @@
 			display: flex;
 			align-items: center;
 			gap: 1rem;
+
 			span {
 				display: flex;
 				align-items: center;
@@ -133,6 +141,7 @@
 			justify-content: flex-start;
 			align-items: center;
 			gap: 2rem;
+
 			a {
 				color: $white;
 				font-size: 3rem;
@@ -150,20 +159,22 @@
 			top: -2rem;
 			font-size: 1.6rem;
 		}
+
 		.team_images {
+			width: 100%;
 			grid-column: 2/8;
 
 			.team_member {
-				width: 13rem;
-				height: 25rem;
+				width: 25%;
+				height: 20rem;
 
 				.overlay {
-					width: 13rem;
-					height: 25rem;
+					width: 100%;
+					height: 100%;
 
 					img {
-						width: 13rem;
-						height: 25rem;
+						width: 100%;
+						height: 100%;
 						border-radius: 1rem;
 					}
 
@@ -180,6 +191,7 @@
 		.team_logo {
 			grid-column: 2/8;
 		}
+
 		.team_section {
 			grid-column: 2/8;
 			display: flex;
@@ -188,25 +200,10 @@
 			.inner_text {
 				width: 75%;
 				align-self: center;
+
 				p {
 					font-size: 2rem;
 					line-height: 1.3;
-				}
-			}
-		}
-	}
-
-	@include media(">=820px") {
-		.team_images {
-			.team_member {
-				width: 14rem;
-
-				.overlay {
-					width: 14rem;
-
-					img {
-						width: 14rem;
-					}
 				}
 			}
 		}
@@ -221,20 +218,18 @@
 		}
 
 		.team_images {
+			width: 100%;
 			grid-column: 3/11;
 
 			.team_member {
-				width: 18.4rem;
-				height: 25rem;
+				width: 25%;
 
 				.overlay {
-					width: 18.4rem;
-					height: 25rem;
+					width: 100%;
 
 					img {
-						width: 18.4rem;
-						height: 25rem;
-						border-radius: 1rem;
+						width: 100%;
+						height: 27rem;
 					}
 
 					h2 {
@@ -260,19 +255,15 @@
 
 	@include media(">=1190px") {
 		.team_images {
-			gap: 1.5rem;
+
 			.team_member {
-				width: 28.4rem;
-				height: 35rem;
+				height: 37rem;
 
 				.overlay {
-					width: 28.4rem;
-					height: 35rem;
+					height: 100%;
 
 					img {
-						width: 28.4rem;
-						height: 35rem;
-						border-radius: 1rem;
+						height: 100%;
 					}
 
 					h2 {

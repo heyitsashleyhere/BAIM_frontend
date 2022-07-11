@@ -1,197 +1,170 @@
 @import '../../../styles/breakpoints';
 
-.Post-Page{
-    position:relative;
-    top:100px;
-    
+.Post-Page {
+    margin-bottom: 2rem;
 
-    .Post-Page-Inner{
-        border:1px solid rgba(0, 0, 0, 0.13);
+    .Post-Page-Inner {
+        border: 1px solid rgba(0, 0, 0, 0.13);
         border-radius: 10px;
-        padding:1rem;
+        padding: 1rem;
     }
 
-    .Post-Page-header{
-        position:absolute;
-        top:10;
-        width:100%;
-        display:flex;
+    .Post-Page-header {
+        position: absolute;
+        top: 10;
+        width: 100%;
+        display: flex;
         justify-content: space-between;
         align-items: center;
-
     }
 
-    .Post-hero{
+    .Post-hero {
         position: relative;
         overflow: hidden;
 
-        .Post-Page-header{
-            position:absolute;
-            top:10;
-            width:100%;
-            display:flex;
+        .Post-Page-header {
+            position: absolute;
+            top: 10;
+            width: 100%;
+            display: flex;
             justify-content: space-between;
             background-color: rgba(0, 0, 0, 0.144);
-            padding:2rem;
-           
-    
-            .Pin-icon, .Post-Page-Header-icons{
-                color:white;
+            padding: 2rem;
+
+            .Pin-icon,
+            .Post-Page-Header-icons {
+                color: white;
                 font-size: 4rem;
 
                 &:hover {
                     cursor: pointer;
                 }
             }
-
-    
         }
 
-        img{
-            width:100%;
-            
-          
+        img {
+            width: 100%;
         }
 
-        h1{
-            bottom:0;
-            position:absolute;
-            margin:1rem 1.5rem;
+        h1 {
+            bottom: 0;
+            position: absolute;
+            margin: 1rem 1.5rem;
             font-size: 3rem;
-            color:white;
+            color: white;
             background-color: rgba(0, 0, 0, 0.295);
             border-radius: 3px;
         }
-
     }
 
-    .Post-header{
-        width:100%;
-        display:flex;
-       justify-content: space-between;
-        align-items: center;
-    
-
-    }
-
-    .Post-title{
-        display:flex;
+    .Post-header {
+        width: 100%;
+        display: flex;
         justify-content: space-between;
         align-items: center;
-        height:30px;
-        padding:0.5rem;
-        margin:1rem 0rem;
-      
-
-        p{
-            margin:0rem 1rem;
-        }
-
     }
 
-    .Post-video{
-        width:100%;
-       
-    }
+    .Post-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+        padding: 0.5rem;
+        margin: 1rem 0rem;
 
-    .Post-date{
-    
-        p{
-            margin:0.5rem 1.5rem;
+        p {
+            margin: 0rem 1rem;
         }
     }
-   
-    .Post-description{
-        padding:1.5rem;
 
-        p{
-            margin:1rem 0rem;
-        }
-
+    .Post-video {
+        width: 100%;
     }
-    
 
-    .Post-tags{
-        width:100%;
-        display:flex;
+    .Post-date {
+        p {
+            margin: 0.5rem 1.5rem;
+        }
+    }
+
+    .Post-description {
+        padding: 1.5rem;
+
+        p {
+            margin: 1rem 0rem;
+        }
+    }
+
+    .Post-tags {
+        width: 100%;
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        margin:2rem 0rem;
+        margin: 2rem 0rem;
 
-        p{
-            margin:0rem 1rem;
-            font-size:2rem;
+        p {
+            margin: 0rem 1rem;
+            font-size: 2rem;
             font-weight: 700;
-            color:rgb(34, 34, 34);
-
+            color: rgb(34, 34, 34);
         }
-
     }
 
-    .Post-comments{
+    .Post-comments {
         margin-top: 1rem;
-        width:100%;
-        padding:1rem;
-    
-
-
-
-   
-
+        width: 100%;
+        padding: 1rem;
     }
 
-   
-
-
-    @include media(">=tablet"){
-        top:35rem;
-        display:grid;
+    @include media(">=tablet") {
+        display: grid;
         grid-template-columns: repeat(8, 1fr);
         gap: 2.5rem;
+        margin-bottom: 4rem;
 
-        .Post-Page-Inner{
+        .Post-Page-Inner {
             grid-column: 2/8;
 
-            .Post-hero{ 
-                height:45vh;
-                
-                img{
-                    width:100%;
+            .Post-hero {
+                height: 45vh;
+
+                img {
+                    width: 100%;
                 }
 
-                h1{
+                h1 {
                     font-size: 5rem;
                 }
             }
 
-           
+
         }
     }
 
-    @include media(">=desktop"){
+    @include media(">=desktop") {
         grid-template-columns: repeat(12, 1fr);
 
-        .Post-Page-Inner{
+        .Post-Page-Inner {
             grid-column: 3/11;
 
-            .Post-hero{
-               width:100%; 
-               
-            
-                img{
-                    width:100%;
-                   
+            .Post-hero {
+                width: 100%;
+
+
+                img {
+                    width: 100%;
+
                 }
 
-                h1{
+                h1 {
                     font-size: 7rem;
                 }
-             
+
             }
 
-            .Post-header{
-                .Like-button{
-                    margin:0rem 2rem;
+            .Post-header {
+                .Like-button {
+                    margin: 0rem 2rem;
                 }
             }
         }
