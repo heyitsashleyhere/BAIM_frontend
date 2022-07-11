@@ -12,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 const promoVideos = [
 		{
 		class:"promo-welcome",
-		header: "Welcome to Loka",
+		header: "Search",
 		image:require('../../../assets/images/seasonalLoka.png'),
-		title: "When , What, How ?",
+		title: "we keep you informed ",
 		text: "At Loka we provide to our users a produce seasonal Api for all seasons. Either you want to plant or to know when is the rigth time to eat the veggies and fruits planted in your country."
 	},
 	{
@@ -22,12 +22,14 @@ const promoVideos = [
 		header: "CREATE * SHARE * COLLECT * INSPIRE",
 		image:require('../../../assets/images/collectionsNoback.png'),
 		title:"Always with you to inspire and remember",
-		text:"In Loka you can create your recipes, your home-made beauty creams and "
+		text:"Create your collection of recipes, your home-made beauty solutions, save posts of D.I.Y. or how to plant in your balcony... whatever suits you Loka got it !!"
 	},
 	{
 		class:"promo-connect",
-		header: "CONNECT Create your community",
+		header: "CONNECT",
 		image:require('../../../assets/avatars_2-removebg-preview.png'),
+		title: "Create your community",
+		text:"At Loka you can follow other users, comment on your favorite posts and save all you dont want to forget"
 	},
 
 ];
@@ -104,9 +106,9 @@ const Main = () => {
 								key={`text${index}`}
 							>
 								<h1 className="text">{video.header}</h1>
+								<h2>{video.title}</h2>
 								<img src={video.image}></img>
-								<section>
-									<h2>{video.title}</h2>
+								<section className="hero-text">
 									<p>{video.text}</p>
 								</section>
 							</section>

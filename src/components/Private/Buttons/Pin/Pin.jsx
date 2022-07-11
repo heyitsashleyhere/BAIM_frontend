@@ -12,7 +12,7 @@ const { setSnackbar } = useContext(SnackbarContext)
 const [ isPinned, setIsPinned ] = useState(false)
 
 useEffect(() => {
-  setUpgrade(!upgrade)
+  
   if(post.likes.find(item => item === cookies.id)){
     setIsPinned(true)
   }

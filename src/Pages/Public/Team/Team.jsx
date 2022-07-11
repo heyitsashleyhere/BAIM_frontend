@@ -7,6 +7,16 @@ import {
 	MdPhoneIphone,
 	MdOutlineArrowBackIosNew,
 } from "react-icons/md";
+
+	<p>
+						<a
+							href={memberData.social.github}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FaTwitter />
+						</a>
+					</p>
 // Components
 import team from "./teamData.js";
 // Styles and images
@@ -212,6 +222,15 @@ const Member = ({ memberData }) => {
 			<section className="team_section member_details-social">
 				<h2>Connect </h2>
 				<span className="social_links">
+					<p>
+						<a
+							href={memberData.social.github}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FaTwitter />
+						</a>
+					</p>
 					<p>
 						<a
 							href={memberData.social.github}
