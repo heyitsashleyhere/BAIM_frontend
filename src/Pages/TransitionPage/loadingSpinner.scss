@@ -1,7 +1,35 @@
 .LoadingSpinner-wrapper {
     width: 100vw;
-    height: 70vh;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    p {
+        font-size: 3rem;
+        font-weight: 800;
+        transform: translateY(210px)
+    }
+
+    img {
+        width: 10rem;
+        animation: bounce 0.75s;
+        animation-direction: alternate;
+        animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
+        animation-iteration-count: infinite;
+    }
+}
+
+
+
+
+@keyframes bounce {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, 200px, 0);
+    }
 }
