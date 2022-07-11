@@ -5,35 +5,35 @@ import { PostsContext } from '../../../../contexts/PostContext.js'
 import { SnackbarContext } from '../../../../contexts/SnackbarContext.js';
 
 export const Pin = (props) => {
-  const { post } = props
-  const [cookies] = useCookies(); //loggedIn User info
-  const { upgrade, setUpgrade, users } = useContext(PostsContext)
-  const [isPinned, setIsPinned] = useState(false)
+const { post }= props
+const [cookies] = useCookies(); //loggedIn User info
+const { upgrade, setUpgrade, users }=useContext(PostsContext)
+const { setSnackbar } = useContext(SnackbarContext)
+const [ isPinned, setIsPinned ] = useState(false)
 
-  useEffect(() => {
-    setUpgrade(!upgrade)
-    if (post.likes.find(item => item === cookies.id)) {
-      setIsPinned(true)
-    }
-  }, [post])
+useEffect(() => {
+  if(post.likes.find(item => item === cookies.id)){
+    setIsPinned(true)
+  }
+}, [post])
 
-  function PinPost() {
-    const config = {
-      method: "PATCH",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
-    };
-
-    fetch(`http://localhost:7000/${post.type}/pin/${post._id}`, config)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('result from fetch', result)
-        setSnackbar({
-          message: `You have ${isPinned ? 'unpinned' : 'pinned'} the post`,
-          open: true,
-          severity: 'error'
-        })
-        setUpgrade(!upgrade)
+  function PinPost(){
+		  const config = {
+			  method: "PATCH",
+			  credentials: "include", // specify this if you need cookies
+			  headers: { "Content-Type": "application/json" },
+		  };
+      
+      fetch(`http://localhost:7000/${post.type}/pin/${post._id}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log('result from fetch', result)
+          setSnackbar({
+            message: `You have ${isPinned ? 'unpinned' : 'pinned'} the post`,
+            open: true,
+            severity: 'error'
+          })
+          setUpgrade(!upgrade)
       })
       .catch((error) => console.log('error from Pin component ', error));
 
