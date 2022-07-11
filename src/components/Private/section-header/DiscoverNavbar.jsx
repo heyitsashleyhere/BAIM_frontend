@@ -68,7 +68,7 @@ export const DiscoverNavbar = () => {
 					{discover.map((category, index) => (
 						<li key={category.id} className="category">
 							<Link to={category.path}>
-								<p className="LokaB">{category.name}</p>
+								<p className="NavLink-Black">{category.name}</p>
 							</Link>
 						</li>
 					))}
