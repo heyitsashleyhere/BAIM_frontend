@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/src/all";
 import "./main.scss";
 import "../../../../src/app.scss";
 // Logo
-import Logo from "../../../assets/pngLogo.png";
+import Logo from "../../../assets/logo/loka-logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 

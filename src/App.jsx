@@ -28,8 +28,10 @@ import { AnimationContext } from "./contexts/AnimationContext.js"; //TODO help t
 import { PostsContext } from "./contexts/PostContext.js";
 import { UserContext } from "./contexts/UserContext.js";
 import { Events } from "./Pages/Private/Events/Events.jsx";
-// Material UI
-// import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+
+const { REACT_APP_TEST } = process.env
+console.log("process.env:", process.env);
+console.log("REACT_APP_TEST:", REACT_APP_TEST);
 
 const theme = createTheme({
 	palette: {
