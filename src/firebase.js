@@ -1,7 +1,7 @@
 import {initializeApp } from 'firebase/app'
 import { getStorage} from 'firebase/storage'
 
-console.log('processenv',process.env.REACT_APP_STORAGE_BUCKET)
+// console.log('processenv',process.env.REACT_APP_STORAGE_BUCKET)
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,

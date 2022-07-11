@@ -29,6 +29,9 @@ export default function About() {
 		imagesRef.current.push(e);
 	};
 
+
+	const promoVideo = `${process.env.PUBLIC_URL}/landingVideos/lokapromoVideo.webm`
+
 	return (
 		<section className="About">
 			<section className="about_images">
@@ -50,7 +53,8 @@ export default function About() {
 
 			<section className="about_text">
 				<section className="inner_text">
-					<p>loka is an idea or a thought about Globalization.</p>
+					<p>"There is no power for change greater than a community discovering what it cares about." Margaret J. Wheatley</p>
+
 					<p>
 						Loka is about locality as a reply to our concerns about the negative
 						side effects of globalization in the last decade.{" "}
@@ -60,13 +64,13 @@ export default function About() {
 						Our idea comes as an inspiration from Fridays for Future,
 						politically Green with motives to make life in the cities more
 						sustainable wile bringing communities together and to bring
-						individual or local producers closer to the city consumers.
+						individuals or local producers closer to the city consumers.
 					</p>
 
 					<p>
-						Loka is an app dedicated as a platform to connect people, either
-						your a curious consumers or a seller. Loka is passionate about
-						gardening, local markets, regional produce and mostly about to share
+						Loka is an Application that wants to produce a community library, where users can search, create , share and connect with other users,
+						on topics of sustainability, planting, food, DIY and crafts. 
+						Loka is passionate aboutgardening, local markets, regional produce and mostly about to share
 						knowledge and resources on topics of lifestyle and DIY. Loka is
 						aimed for anyone , either a gardner, a food lover, a blogger , a
 						professional, event organizers or beauty gurus.{" "}
@@ -77,13 +81,17 @@ export default function About() {
 						in the area of Brandenburg, Berlin. Our aim was to give to the
 						consumer a informative platform to know when to plant or eat what is
 						in season. Our App later evolved to a create a platform like a
-						collaborative magazine or a community library that could offer many
+						collaborative a community library that could offer many
 						topics around planting eating and learning. In Loka is where the
 						consumer shares and asks for help on is own journey either planting
 						in the balkony, or posting your recipes, or DIY products related to
 						beauty, gardening, arts and crafts, events, etc...{" "}
 					</p>
 				</section>
+			</section>
+
+			<section className="about_video">
+				<video src={promoVideo} controls loop></video>
 			</section>
 
 			<Footer className="footer" />

@@ -164,7 +164,7 @@ export default function App() {
 					<Route path="/*" element={<Main />} />
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
-				<Footer />
+				{/* <Footer /> */}
 
 				{/* {isLogin ? (
 					<>

@@ -66,6 +66,18 @@
       }
     }
 
+    .about_video{
+      width: 100%;
+     
+      padding:1rem;
+      margin:1rem 0rem;
+
+      video{
+        border:1px solid rgba(255, 255, 255, 0.404);
+        width:100%;
+      }
+    }
+
 
 
     @include media(">=tablet"){
@@ -137,6 +149,10 @@
         }
       }
 
+      .about_video{
+        grid-column: 2/8;
+      }
+
       .footer{
         grid-column: 1/9;
       }
@@ -176,6 +192,11 @@
             font-size:2rem;
           }
           width:100%;
+          grid-column: 3/11;
+        }
+
+
+        .about_video{
           grid-column: 3/11;
         }
 

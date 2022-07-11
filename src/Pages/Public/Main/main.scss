@@ -64,8 +64,8 @@
 					margin: 3rem 0;
 				}
 
-				img {
-					// width:100%;
+				img{
+					width:100%;
 					align-self: center;
 					border-radius: 10px;
 				}
@@ -73,12 +73,21 @@
 				h2 {
 					color: #fff;
 					font-size: 2rem;
+					margin:2rem 0rem;
 				}
 
-				p {
-					font-size: 1.5rem;
-					color: #fff;
+
+				.hero-text{
+					margin:1rem 0rem;
+					padding:1rem;					
+					
+					p{
+						font-size: 1.3rem;
+						color:#fff;
+					}
 				}
+
+				
 			}
 
 			.promo-welcome {
@@ -134,7 +143,6 @@
 				top: 65%;
 				left: 0;
 
-
 				.logo {
 					margin-bottom: 2rem;
 					width: 40rem;
@@ -151,6 +159,50 @@
 
 		.promo-section {
 			grid-column: 1/9;
+			
+
+			.promo-create, .promo-connect, .promo-welcome{
+		
+				width:100%;
+				padding:1rem;
+				margin:10rem 0rem;
+			
+				
+				
+				h1{
+					font-size: 4rem;
+					padding:1rem;
+					margin: 3rem 0;
+				}
+
+				img{
+					width:80%;
+					
+
+				}
+
+				h2{
+					color:#fff;
+					font-size: 2rem;
+					margin:1rem 0rem;
+				}
+
+				.hero-text{
+					width:70%;
+					margin:3rem 0rem;
+					padding:1rem;					
+					
+					p{
+						font-size: 1.3rem;
+						color:#fff;
+					}
+
+				}
+
+				
+			}
+
+			
 		}
 	}
 
@@ -179,6 +231,49 @@
 
 		.promo-section {
 			grid-column: 1/13;
+			height:100vh;
+
+			.promo-create, .promo-connect, .promo-welcome{
+				border:1px solid red;
+				height:100vh;
+				width:100%;
+				padding:1rem;
+				margin:10rem 0rem;
+			
+				
+				
+				h1{
+					font-size: 4rem;
+					padding:1rem;
+					margin: 3rem 0;
+				}
+
+				img{
+					width:80%;
+					
+
+				}
+
+				h2{
+					color:#fff;
+					font-size: 2rem;
+					margin:1rem 0rem;
+				}
+
+				.hero-text{
+					width:70%;
+					margin:3rem 0rem;
+					padding:1rem;					
+					
+					p{
+						font-size: 1.3rem;
+						color:#fff;
+					}
+
+				}
+
+				
+			}
 		}
 	}
 }
