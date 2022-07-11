@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 // Icons
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { SiSitepoint } from "react-icons/si"
+import { GrInstagram } from "react-icons/gr"
 import {
 	MdAlternateEmail,
-	MdPhoneIphone,
 	MdOutlineArrowBackIosNew,
 } from "react-icons/md";
 // Components
@@ -190,7 +191,7 @@ const Member = ({ memberData }) => {
 			</section>
 			<section className="team_section member_details-bio">
 				<h2>About {memberData.name.split(" ")[0]}</h2>
-				<p>{memberData.bio}</p>
+				{memberData.bio}
 			</section>
 			<section className="team_section member_details-role">
 				<h2>Project Role</h2>
@@ -202,10 +203,6 @@ const Member = ({ memberData }) => {
 					<span className="contact_email icon">
 						<MdAlternateEmail className="icon" />
 						<p>{memberData.contact.email}</p>
-					</span>
-					<span className="contact_phone icon">
-						<MdPhoneIphone className="icon" />
-						<p>{memberData.contact.phone}</p>
 					</span>
 				</span>
 			</section>
@@ -230,15 +227,46 @@ const Member = ({ memberData }) => {
 							<FaLinkedin />
 						</a>
 					</p>
-					<p>
-						<a
-							href={memberData.social.github}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<FaTwitter />
-						</a>
-					</p>
+					{memberData.social.facebook && (
+						<p>
+							<a href={memberData.social.facebook}
+							   target="_blank"
+							   rel="noopener noreferrer"
+							 >
+								<FaFacebook />
+							</a>
+						</p>
+					)}
+					{memberData.social.instagram && (
+						<p>
+							<a href={memberData.social.instagram}
+							   target="_blank"
+							   rel="noopener noreferrer"
+							 >
+								<GrInstagram />
+							</a>
+						</p>
+					)}
+					{memberData.social.twitter && (
+						<p>
+							<a href={memberData.social.twitter}
+							   target="_blank"
+							   rel="noopener noreferrer"
+							 >
+								<FaTwitter />
+							</a>
+						</p>
+					)}
+					{memberData.social.portfolio && (
+						<p>
+							<a href={memberData.social.portfolio}
+							   target="_blank"
+							   rel="noopener noreferrer"
+							 >
+								<SiSitepoint />
+							</a>
+						</p>
+					)}
 				</span>
 			</section>
 		</>

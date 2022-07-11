@@ -57,7 +57,7 @@ export const PostPage = ({ data }) => {
             ))}
           </section>
           <section className="Post-tags">
-            {selected.tags.map((item) => (
+            {selected.tags && selected.tags.map((item) => (
               <p key={'PostPage-tags' + item}>{item}</p>
             ))}
           </section>
