@@ -8,7 +8,6 @@ import { AnimationContextProvider } from "./contexts/AnimationContext.js";
 import SnackbarContextProvider from "./contexts/SnackbarContext.js"
 // Components
 import App from "./App.jsx";
-import LoadingSpinner from "./Pages/TransitionPage/LoadingSpinner.jsx";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
@@ -19,8 +18,7 @@ root.render(
 				<UserContextProvider>
 					<PostsContextProvider>
 						<AnimationContextProvider>
-							{/* <App /> */}
-							<LoadingSpinner />
+							<App />
 						</AnimationContextProvider>
 					</PostsContextProvider>
 				</UserContextProvider>

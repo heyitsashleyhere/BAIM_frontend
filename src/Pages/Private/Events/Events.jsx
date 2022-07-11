@@ -41,7 +41,6 @@ export const Events = () => {
 	console.log(currentUser.event);
 
 	const handleModalOpen = (idx) => {
-		console.log("idx :>> ", idx);
 		setIsModalOpen(true);
 	};
 	const handleModalClose = () => setIsModalOpen(false);
@@ -68,12 +67,14 @@ export const Events = () => {
 
 
 	const pinEvent = (event) => {
+		console.log('event', event)
 		const config = {
 			method: "PATCH",
 			credentials: "include",
+			headers: { "Content-Type": "application/json" },
 		};
 
-		fetch(`http://localhost:7000/event/${event._id}/attend`, config)
+		fetch(`http://localhost:7000/event/pin/${event._id}`, config)
 			.then((response) => response.json())
 			.then((result) => {
 				console.log("result: >>", result);

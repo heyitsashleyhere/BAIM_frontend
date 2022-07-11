@@ -10,6 +10,7 @@ import showPinCategoryButton from "../../../components/Private/Profile-component
 import displayAvatars from "../../../components/Private/Profile-components/displayAvatars.jsx";
 import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
+import { EventsTable } from "../../../components/Private/Avatars-Links/Tables"
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
 import { Modal, Typography, Paper } from "@mui/material";
 import "./profile.scss";
@@ -60,7 +61,7 @@ export const Profile = () => {
     fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.pin);
+        console.log(result);
         if (result.errors) {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
@@ -84,6 +85,7 @@ export const Profile = () => {
       })
       .catch((error) => console.log(`error from profileName request in Profile`, error));
 
+    console.log('pins', pins)
     postCategories.map((cat) => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
@@ -247,6 +249,9 @@ export const Profile = () => {
                   {showPinCategoryButton(gardenPins, display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(recipePins, display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(eventPins, display, setDisplay, showCatPins, setShowCatPins)}
+                  {/* <EventsTable events={eventPins} />; */}
+
+
                 </div>}
             </div>
 

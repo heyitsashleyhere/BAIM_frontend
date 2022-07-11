@@ -14,14 +14,12 @@
 
     img {
         width: 10rem;
-        animation: bounce 0.75s;
+        animation: bounce 0.5s;
         animation-direction: alternate;
         animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
         animation-iteration-count: infinite;
     }
 }
-
-
 
 
 @keyframes bounce {
