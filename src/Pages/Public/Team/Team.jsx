@@ -9,15 +9,6 @@ import {
 	MdOutlineArrowBackIosNew,
 } from "react-icons/md";
 
-	<p>
-						<a
-							href={memberData.social.github}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<FaTwitter />
-						</a>
-					</p>
 // Components
 import team from "./teamData.js";
 // Styles and images

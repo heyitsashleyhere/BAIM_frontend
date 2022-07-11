@@ -1,14 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useCookies } from "react-cookie";
 import { BsPinAngleFill, BsPinAngle } from 'react-icons/bs'
+import { AnimationContext } from '../../../../contexts/AnimationContext.js';
 import { PostsContext } from '../../../../contexts/PostContext.js'
-import { SnackbarContext } from '../../../../contexts/SnackbarContext.js';
+import { Snackbar } from '../../Snackbar.jsx';
 
 export const Pin = (props) => {
 const { post }= props
 const [cookies] = useCookies(); //loggedIn User info
-const { upgrade, setUpgrade, users }=useContext(PostsContext)
-const { setSnackbar } = useContext(SnackbarContext)
+const { upgrade, setUpgrade, users } = useContext(PostsContext)
+const { setSnackbar } = useContext(AnimationContext)
 const [ isPinned, setIsPinned ] = useState(false)
 
 useEffect(() => {
@@ -50,6 +51,7 @@ useEffect(() => {
             <BsPinAngle onClick={PinPost} className="Pin-icon" />} </>
         )
       }
+      <Snackbar />
     </section>
 
   )

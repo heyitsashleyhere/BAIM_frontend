@@ -23,9 +23,9 @@ const styles2 = {
 };
 
 export const EventsTable = ({ events }) => {
+	console.log('events from EventsTable :>> ', events);
 	const { windowWidth } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
-
 	const [cookies] = useCookies();
 
 	//to toggle show/hide mui components between breakpoints
@@ -35,8 +35,6 @@ export const EventsTable = ({ events }) => {
 
 	return (
 		<section className="tableAvatar" style={{ width: "100%" }}>
-
-
 			<MUI.TableContainer component={MUI.Paper}>
 				<MUI.Table aria-label="collapsible table">
 					<MUI.TableHead>
@@ -55,13 +53,11 @@ export const EventsTable = ({ events }) => {
 					<MUI.TableBody>
 						{events.map((event, i) => (
 							<>
-								{cookies.profileName === event.authorProfileName && (
-									<EventRow
-										key={"profilePage-avatar" + i}
-										data={event}
-										showMobile={showMobile}
-									/>
-								)}
+								<EventRow
+									key={"profilePage-avatar-eventRow" + i}
+									data={event}
+									showMobile={showMobile}
+								/>
 							</>
 						))}
 					</MUI.TableBody>
@@ -138,7 +134,7 @@ function EventRow(props) {
 							<MUI.Box my={3}>
 								{data.tags.map((tag, i) => (
 									<MUI.Chip
-										key={'tag-of-' + i + tag}
+										key={'eventRow-tag-of-' + i + tag}
 										label={tag}
 										margin="normal"
 										variant="outlined"

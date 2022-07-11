@@ -164,13 +164,12 @@ export default function App() {
 					<Route path="/*" element={<Main />} />
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
-				{/* <Footer /> */}
 
-				{/* {isLogin ? (
+				{cookies.profileName || isLogin  ? (
 					<>
 						<Footer />
 					</>
-				) : null} */}
+				) : null}
 
 			</section>
 		</ThemeProvider>

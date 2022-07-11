@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import "./events.scss";
-import { Snackbar } from "../../../components/Private/Snackbar";
+import { Snackbar } from "../../../components/Private/Snackbar.jsx";
 
 //MUI styles
 const styles = {
@@ -31,7 +31,6 @@ export const Events = ({ data }) => {
 	const { windowWidth, setSnackbar } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-
 
 	// find if the user is the author
 	const isAuthor = data.find(item => item._id === cookies.id)
@@ -79,7 +78,7 @@ export const Events = ({ data }) => {
 					setError(result.errors);
 				} else {
 					setSnackbar({
-						message: "Event added to your Profile",
+						message: `Event ${event.likes.find(item => item === cookies.id) ? `removed from` : `added to`} your Profile`,
 						open: true,
 						severity: "error"
 					})
@@ -126,6 +125,7 @@ export const Events = ({ data }) => {
 								{eventDate.map((event) => (
 									<EventRow
 										key={event._id}
+										currentUserId={cookies.id}
 										event={event}
 										showMobile={showMobile}
 										pinEvent={pinEvent}
@@ -218,7 +218,7 @@ export const Events = ({ data }) => {
 };
 
 function EventRow(props) {
-	const { event, showMobile, pinEvent, isAuthor } = props;
+	const { event, showMobile, pinEvent, isAuthor, currentUserId } = props;
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -256,6 +256,8 @@ function EventRow(props) {
 					{isAuthor ? null :
 						<MUI.Checkbox
 							onClick={() => pinEvent(event)}
+							defaultChecked={event.likes.find(item => item === currentUserId) ? true : false}
+							inputProps={{ 'aria-label': 'controlled' }}
 						/>
 					}
 				</MUI.TableCell>
