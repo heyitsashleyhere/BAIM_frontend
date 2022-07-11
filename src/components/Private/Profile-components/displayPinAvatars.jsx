@@ -33,9 +33,8 @@ export default function displayPinAvatars(type, beautyPins, artsCraftPins, garde
         <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
       ));
     case "event":
-      return filter(allEventPost, eventPins).map((data, i) => (
-        <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
-      ));
+      return <EventsTable events={filter(allEventPost, eventPins)} />
+      ;
     // return <EventsTable events={events} />;
   }
 }

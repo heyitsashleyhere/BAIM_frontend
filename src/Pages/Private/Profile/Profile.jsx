@@ -61,7 +61,6 @@ export const Profile = () => {
     fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result.errors) {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
@@ -85,7 +84,6 @@ export const Profile = () => {
       })
       .catch((error) => console.log(`error from profileName request in Profile`, error));
 
-    console.log('pins', pins)
     postCategories.map((cat) => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())

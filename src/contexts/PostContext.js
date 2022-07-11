@@ -29,8 +29,6 @@ function PostsContextProvider({ children }) {
   const [profileData, setProfileData] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
-  //MURAD! event data to attend
-  const [eventData, setEventData] = useState([]);
 
 
   // const [loading, setLoading]=useState(true)
@@ -56,7 +54,6 @@ function PostsContextProvider({ children }) {
       fetch(`http://localhost:7000/${cat}/`)
         .then((response) => response.json())
         .then((result) => {
-          console.log('result', result)
           if (!result.errors) {
             switch (cat) {
               case 'beauty':
@@ -133,8 +130,7 @@ function PostsContextProvider({ children }) {
     searchOpt, setSearchOpt,
     searchInput, setSearchInput,
     seasonal, setSeasonal,
-    profileData, setProfileData,
-    eventData, setEventData,
+    profileData, setProfileData
   }
 
   return (

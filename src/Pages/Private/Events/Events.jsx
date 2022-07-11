@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { PostsContext } from "../../../contexts/PostContext.js";
+import { useCookies } from "react-cookie";
 import { AnimationContext } from "../../../contexts/AnimationContext";
 import { SnackbarContext } from "../../../contexts/SnackbarContext.js";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar";
@@ -26,19 +26,15 @@ const styles2 = {
 	},
 };
 
-export const Events = () => {
-	const currentUser = JSON.parse(localStorage.getItem("user"));
-	const { allEventPost, setEventData } = useContext(PostsContext);
+export const Events = ({ data }) => {
+	const [cookies] = useCookies(); 
 	const { setSnackbar } = useContext(SnackbarContext);
 	const { windowWidth } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	// find if the user is the author
-	const isAuthor = currentUser.event.find(item => item._id === event._id)
-
-	// const isPin = currentUser.pin.find(item => item.postId === post._id)
-	console.log(currentUser.event);
+	const isAuthor = data.find(item => item._id === cookies.id)
 
 	const handleModalOpen = (idx) => {
 		setIsModalOpen(true);
@@ -56,7 +52,7 @@ export const Events = () => {
 	let currentMonth = date.toLocaleString("default", { month: "long" });
 
 	//filtering events object based on current month
-	const eventDate = allEventPost.filter((event) => {
+	const eventDate = data.filter((event) => {
 		const eventMonth = new Date(event.start).toLocaleString("default", {
 			month: "long",
 		});
@@ -86,7 +82,6 @@ export const Events = () => {
 						open: true,
 						severity: "error"
 					})
-					setEventData((prevState) => [...prevState, event]);
 				}
 			})
 			.catch((error) => {
@@ -132,7 +127,6 @@ export const Events = () => {
 										key={event._id}
 										event={event}
 										showMobile={showMobile}
-										setEventData={setEventData}
 										pinEvent={pinEvent}
 										isAuthor={isAuthor}
 									/>
@@ -222,6 +216,7 @@ export const Events = () => {
 };
 
 function EventRow(props) {
+	const [cookies] = useCookies(); 
 	const { event, showMobile, pinEvent, isAuthor } = props;
 	const [open, setOpen] = useState(false);
 
@@ -259,6 +254,7 @@ function EventRow(props) {
 				<MUI.TableCell align="right">
 					{isAuthor ? null :
 						<MUI.Checkbox
+							defaultChecked={ event.likes.find(item => item === cookies.id) ? true : false}
 							// sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
 							onClick={() => pinEvent(event)}
 						/>

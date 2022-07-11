@@ -85,7 +85,6 @@ export default function App() {
 	//   return "Loading ;)"
 	// }
 
-	console.log('cookies.profileName', cookies.profileName)
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -160,7 +159,7 @@ export default function App() {
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/profile/:profileName" element={<Profile />} />
 
-					<Route path="/events" element={<Events />} />
+					<Route path="/events" element={<Events data={allEventPost} type="event" />} />
 
 					<Route path="/*" element={<Main />} />
 				</Routes>

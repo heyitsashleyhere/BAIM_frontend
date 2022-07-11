@@ -15,7 +15,6 @@ function SnackbarContextProvider({ children }) {
 		if (reason === 'clickaway') {
 			return;
 		}
-		setUpgrade(!upgrade)
 		setSnackbar({ open: false });
 
 	};

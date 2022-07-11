@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import gsap, { Quint } from "gsap";
 // styles
 import "./transitionPage.scss";
-import Logo from "./logo-black.png";
+import Logo from "./loka-logo-black.png";
 // import Logo from '../../assets/logo/'
 
 const TransitionPage = ({isFromRegister}) => {
