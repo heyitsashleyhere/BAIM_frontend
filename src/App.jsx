@@ -72,9 +72,9 @@ export default function App() {
 	}, []);
 
 
-  if (!users.length || !allBeautyPost.length
-	 || !allArtsCraftPost.length || !allGardenPost.length
-	 || !allRecipePost.length || !allEventPost.length){ 
+	if (!users.length || !allBeautyPost.length
+		|| !allArtsCraftPost.length || !allGardenPost.length
+		|| !allRecipePost.length || !allEventPost.length) {
 		return <LoadingSpinner />
 	}
 	// ! try to do 'checkLogin' endpoint
@@ -82,6 +82,7 @@ export default function App() {
 	//   return "Loading ;)"
 	// }
 
+	console.log('cookies.profileName', cookies.profileName)
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -161,16 +162,14 @@ export default function App() {
 					<Route path="/*" element={<Main />} />
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
+				<Footer />
 
-				{displayNav ? (
-					cookies.profileName || isLogin ? (
-						<>
-							<Footer />
-						</>
-					) : null
-				) : null}
+				{/* {isLogin ? (
+					<>
+						<Footer />
+					</>
+				) : null} */}
 
-				{/* <Footer /> */}
 			</section>
 		</ThemeProvider>
 	);

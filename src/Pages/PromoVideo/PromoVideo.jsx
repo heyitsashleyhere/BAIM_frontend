@@ -17,10 +17,10 @@ const PromoVideo = () => {
   //to change the CTA section video based on the window width
   const desktopVideo = `${process.env.PUBLIC_URL}/landingVideos/commercialTitles.webm`
   const tabletVideo = `${process.env.PUBLIC_URL}/landingVideos/raspberrie.mp4`
-  
+
   const videoUrl = windowWidth >= 992 ? desktopVideo : tabletVideo;
-  
-  
+
+
   useEffect(() => {
     const skip = setTimeout(() => {
       setShow(true)
@@ -39,31 +39,32 @@ const PromoVideo = () => {
       duration: 1,
       ease: "power3.out"
     })
-  }, [ show ])
-    
+  }, [show])
+
 
 
   return (
     <section className="promo-container">
       <div className="promo-video-wrapper">
         <video src={videoUrl} autoPlay playsInline onEnded={() => {
-              setIsNav(true)
-              localStorage.setItem('showNav', 'showNav')
-              navigate('/main') }}/>
+          setIsNav(true)
+          localStorage.setItem('showNav', 'showNav')
+          navigate('/main')
+        }} />
       </div>
 
       <>
         {show && (
           <button ref={skipBtn} onClick={() => {
             setIsNav(true)
-            localStorage.setItem('showNav', 'showNav') 
+            localStorage.setItem('showNav', 'showNav')
             navigate('/main')
-            }} className='skip-btn'>Skip <Icons.MdSkipNext className='skip-icon' /></button>
+          }} className='skip-btn'>Skip <Icons.MdSkipNext className='skip-icon' /></button>
         )}
-        
+
       </>
     </section>
-    
+
   )
 }
 

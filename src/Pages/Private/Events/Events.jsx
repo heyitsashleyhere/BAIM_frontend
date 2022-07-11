@@ -27,15 +27,20 @@ const styles2 = {
 };
 
 export const Events = () => {
+	const currentUser = JSON.parse(localStorage.getItem("user"));
 	const { allEventPost, setEventData } = useContext(PostsContext);
 	const { setSnackbar } = useContext(SnackbarContext);
 	const { windowWidth } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	// find if the user is the author
+	const isAuthor = currentUser.event.find(item => item._id === event._id)
+
+	// const isPin = currentUser.pin.find(item => item.postId === post._id)
+	console.log(currentUser.event);
 
 	const handleModalOpen = (idx) => {
-		console.log("idx :>> ", idx);
 		setIsModalOpen(true);
 	};
 	const handleModalClose = () => setIsModalOpen(false);
@@ -62,12 +67,14 @@ export const Events = () => {
 
 
 	const pinEvent = (event) => {
+		console.log('event', event)
 		const config = {
 			method: "PATCH",
 			credentials: "include",
+			headers: { "Content-Type": "application/json" },
 		};
 
-		fetch(`http://localhost:7000/event/${event._id}/attend`, config)
+		fetch(`http://localhost:7000/event/pin/${event._id}`, config)
 			.then((response) => response.json())
 			.then((result) => {
 				console.log("result: >>", result);
@@ -127,6 +134,7 @@ export const Events = () => {
 										showMobile={showMobile}
 										setEventData={setEventData}
 										pinEvent={pinEvent}
+										isAuthor={isAuthor}
 									/>
 								))}
 							</MUI.TableBody>
@@ -208,22 +216,13 @@ export const Events = () => {
 						))}
 					</MUI.List>
 				</section>
-				{/* <MUI.Snackbar
-					open={snackbarOpen}
-					autoHideDuration={3000}
-					onClose={handleSnackbarClose}
-				>
-					<MUI.Alert onClose={handleSnackbarClose} severity="success">
-						event was added to your calendar!
-					</MUI.Alert>
-				</MUI.Snackbar> */}
 			</section>
 		</>
 	);
 };
 
 function EventRow(props) {
-	const { event, showMobile, pinEvent } = props;
+	const { event, showMobile, pinEvent, isAuthor } = props;
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -258,10 +257,12 @@ function EventRow(props) {
 					<MUI.TableCell align="right">{event.address.city}</MUI.TableCell>
 				)}
 				<MUI.TableCell align="right">
-					<MUI.Checkbox
-						// sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-						onClick={() => pinEvent(event)}
-					/>
+					{isAuthor ? null :
+						<MUI.Checkbox
+							// sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+							onClick={() => pinEvent(event)}
+						/>
+					}
 				</MUI.TableCell>
 			</MUI.TableRow>
 			<MUI.TableRow>
