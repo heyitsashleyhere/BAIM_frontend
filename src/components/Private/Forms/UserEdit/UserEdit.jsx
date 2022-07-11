@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useCookies } from "react-cookie";
 import { UserContext } from "../../../../contexts/UserContext.js";
 import { PostsContext } from "../../../../contexts/PostContext.js";
 import { Typography, TextField, Autocomplete, Paper, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Divider, Modal, InputAdornment, Stack } from "@mui/material";
@@ -8,6 +9,7 @@ import ImageInput from "../ImageInput.jsx";
 
 
 export default function UserEdit({ setUserEditOpen }) {
+  const [cookies] = useCookies();
   const [errors, setErrors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState(null)
@@ -439,7 +441,6 @@ export default function UserEdit({ setUserEditOpen }) {
     { code: 'ZM', label: 'Zambia', phone: '260' },
     { code: 'ZW', label: 'Zimbabwe', phone: '263' },
   ]
-  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if(!userAddress || !Object.keys(userAddress).length){
@@ -463,6 +464,7 @@ export default function UserEdit({ setUserEditOpen }) {
   function handleUserUpdate(e) {
     e.preventDefault();
     setErrors([]);
+    console.log('inputValues :>> ', inputValues);
 
     const config = {
       method: "PATCH",
@@ -471,7 +473,7 @@ export default function UserEdit({ setUserEditOpen }) {
       body: JSON.stringify(inputValues),
     };
 
-    fetch(`http://localhost:7000/user/${currentUser._id}`, config)
+    fetch(`http://localhost:7000/user/${cookies.id}`, config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)

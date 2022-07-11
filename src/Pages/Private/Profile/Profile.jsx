@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
@@ -18,8 +19,7 @@ import "./profile.scss";
 export const Profile = () => {
   const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
   const { profileName } = useParams();
-
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const [cookies] = useCookies();
 
   // user library
   const [beauties, setBeauties] = useState([]);
@@ -66,15 +66,15 @@ export const Profile = () => {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
-            currentUser.profileName === profileName
-              ? setPostMessage("You have not posted anything yet")
-              : setPostMessage("This person has not posted anything yet");
+            cookies.profileName === profileName
+            ? setPostMessage("You have not posted anything yet")
+            : setPostMessage("This person has not posted anything yet");
           }
 
           if (result.pin.length == 0) {
-            currentUser.profileName === profileName
-              ? setPinMessage("You have not pinned anything yet")
-              : setPinMessage("This person has not pinned anything yet");
+            cookies.profileName === profileName
+            ? setPinMessage("You have not pinned anything yet")
+            : setPinMessage("This person has not pinned anything yet");
           }
 
           setProfileData(result)
@@ -174,8 +174,8 @@ export const Profile = () => {
         {profileData && (
           <div className="Profile-inner">
             <div className="Profile-header">
-              {currentUser.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
+              {cookies.profileName === profileName && (
+                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >

@@ -1,26 +1,24 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { useCookies } from "react-cookie";
 import {BsPinAngleFill, BsPinAngle} from 'react-icons/bs'
-import { PostsContext } from '../../../../contexts/PostContext'
+import { PostsContext } from '../../../../contexts/PostContext.js'
+import { SnackbarContext } from '../../../../contexts/SnackbarContext.js';
 
 export const Pin = (props) => {
+const { post }= props
+const [cookies] = useCookies(); //loggedIn User info
+const { upgrade, setUpgrade, users }=useContext(PostsContext)
+const { setSnackbar } = useContext(SnackbarContext)
+const [ isPinned, setIsPinned ] = useState(false)
 
-const{upgrade, setUpgrade}=useContext(PostsContext)
-
-const currentUser = JSON.parse(localStorage.getItem("user"));
-const {post}= props
-
-
-// find if the user is the author
-const isAuthor = currentUser[post.type].find(item => item === post._id)
-
-// find if the user as a pin of this post
-const isPin = currentUser.pin.find(item => item.postId === post._id )
-
-const [error, setError]=useState()
-
+useEffect(() => {
+  setUpgrade(!upgrade)
+  if(post.likes.find(item => item === cookies.id)){
+    setIsPinned(true)
+  }
+}, [post])
 
   function PinPost(){
-    console.log('clicking Pin')
 		  const config = {
 			  method: "PATCH",
 			  credentials: "include", // specify this if you need cookies
@@ -30,7 +28,12 @@ const [error, setError]=useState()
       fetch(`http://localhost:7000/${post.type}/pin/${post._id}`, config)
         .then((response) => response.json())
         .then((result) => {
-          console.log('result', result)
+          console.log('result from fetch', result)
+          setSnackbar({
+            message: `You have ${isPinned ? 'unpinned' : 'pinned'} the post`,
+            open: true,
+            severity: 'error'
+          })
           setUpgrade(!upgrade)
         })
         .catch((error) => console.log('error from Pin component ',error));
@@ -38,10 +41,16 @@ const [error, setError]=useState()
   }
 
 
-
   return (
     <section>
-    { isAuthor ? null : <>{ isPin ? <BsPinAngleFill onClick={PinPost} className="Pin-icon"/> : <BsPinAngle onClick={PinPost} className="Pin-icon"/>} </> }
+      {post.author === cookies.id ? null : 
+      post.likes && (
+        <>{ isPinned ? 
+          <BsPinAngleFill onClick={PinPost} className="Pin-icon"/> 
+          : 
+          <BsPinAngle onClick={PinPost} className="Pin-icon"/>} </>
+        )
+      }
     </section>
     
   )

@@ -77,8 +77,6 @@ export const SquareAvatar = ({ data }) => {
 
     return (
       <section className="SquareAvatar">
-    
-       
           <section className="Avatar-Controllers">
           <Pin post={data}/>
           { cookies.profileName === data.authorProfileName && <>
@@ -110,7 +108,7 @@ export const SquareAvatar = ({ data }) => {
           </Menu></>}
         </section> 
     
-        <NavLink  to={data.type === 'event' ? `/${data.type}/`:`/${data.type}/${data.title}`} className="InnerSquareAvatar">
+        <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data.title}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={data.image}></img>
                 <h2>{data.title}</h2>
@@ -136,9 +134,10 @@ export const SquareAvatar = ({ data }) => {
 // Avatars used specially in community page and general search engines.
 // this avatar uses nested components to fetch
 export const RoundAvatar = ({ name, id, image }) => {
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const { user } = useContext(UserContext)
+  const [cookies] = useCookies();
 
-	const author = currentUser._id === id;
+	const author = cookies.profileName === name;
 
 
 	return (
@@ -149,7 +148,7 @@ export const RoundAvatar = ({ name, id, image }) => {
 				</section>
 				<h2>{name}</h2>
 			</Link>
-			{author ? <Button disabled >hey its me</Button> : <Follow name={name} />}
+			{author ? <Button disabled style={{ fontSize: "1rem", padding: '0.5em 1em' }} >hey its me</Button> : <Follow name={name} />}
 		
 		</section>
 	);

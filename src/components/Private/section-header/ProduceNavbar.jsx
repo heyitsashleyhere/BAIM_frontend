@@ -15,7 +15,6 @@ export const ProduceNavbar = () => {
 		.toLowerCase();
 
 	const inSeason = seasonal.filter((produce) => {
-		// return produce.in_season.filter(month => month === currentMonth).length
 		return produce.in_season.some((month) => month === currentMonth);
 	});
 

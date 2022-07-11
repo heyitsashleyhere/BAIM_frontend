@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useCookies } from "react-cookie";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avatars";
@@ -13,13 +14,11 @@ import "./postPage.scss";
 // ? IVO : Im still working on the usercomments component the one its here its not to stay.
 
 export const PostPage = ({ data }) => {
-	const { user } = useContext(UserContext);
+  const [cookies] = useCookies();
   const { title } = useParams();
   let navigate = useNavigate();
 
   const selected = data.find((item) => item.title === title);
-
-  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
@@ -73,7 +72,7 @@ export const PostPage = ({ data }) => {
             <p>Comments</p>
             {selected.comments
               ? selected.comments.map((item, index) => (
-                  <UserComment post={item} user={currentUser._id} key={'userComment' + index}></UserComment>
+                  <UserComment post={item} user={cookies.id} key={'userComment' + index}></UserComment>
                 ))
               : null}
 

@@ -472,11 +472,11 @@ export default function UserRegistration() {
         if (result.errors) {
           setErrors(result.errors);
         } else {
-          setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
+          // setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
           setMessage(result.message)
           setIsLogin(true)
           setIsFromRegister(true)
-          localStorage.setItem('user', JSON.stringify(result.user))
+          // localStorage.setItem('user', JSON.stringify(result.user))
         }
         
       })

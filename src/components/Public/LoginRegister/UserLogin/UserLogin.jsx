@@ -34,10 +34,10 @@ export default function UserLogin() {
         .then((result) => {
             // console.log("UserLogin:", result);
             if(!result.errors) { 
-              setUser({ id: result.user._id, profileName: result.user.profileName, avatar: result.user.avatar })
+              // setUser(result.user)
               setMessage(result.message)
               setIsLogin(true)
-              localStorage.setItem('user', JSON.stringify(result.user))
+              // localStorage.setItem('user', JSON.stringify(result.user))
             } else {
               setErrors(result.errors)
               console.log('errors :>> ', errors);
