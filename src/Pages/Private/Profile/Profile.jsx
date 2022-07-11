@@ -43,8 +43,8 @@ export const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
   // toggle
-  const [showMyPosts, setShowMyPosts]= useState(false)
-  const [showMyPins, setShowMyPins]= useState(false)
+  const [showMyPosts, setShowMyPosts] = useState(false)
+  const [showMyPins, setShowMyPins] = useState(false)
   const [showCatPosts, setShowCatPosts] = useState(false)
   const [showCatPins, setShowCatPins] = useState(false)
 
@@ -60,21 +60,22 @@ export const Profile = () => {
     fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result.pin);
         if (result.errors) {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
             currentUser.profileName === profileName
-            ? setPostMessage("You have not posted anything yet")
-            : setPostMessage("This person has not posted anything yet");
+              ? setPostMessage("You have not posted anything yet")
+              : setPostMessage("This person has not posted anything yet");
           }
-          
+
           if (result.pin.length == 0) {
             currentUser.profileName === profileName
-            ? setPinMessage("You have not pinned anything yet")
-            : setPinMessage("This person has not pinned anything yet");
+              ? setPinMessage("You have not pinned anything yet")
+              : setPinMessage("This person has not pinned anything yet");
           }
-          
+
           setProfileData(result)
           setPins(result.pin)
           setFollowers(result.followers);
@@ -88,24 +89,24 @@ export const Profile = () => {
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
-              switch (cat) {
-                case "beauty":
-                  setBeauties(result);
-                  break;
-                case "artsCraft":
-                  setArtsCrafts(result);
-                  break;
-                case "garden":
-                  setGardens(result);
-                  break;
-                case "recipe":
-                  setRecipes(result);
-                  break;
-                case "event":
-                  setEvents(result);
-                  break;
-              }
-            } else {
+            switch (cat) {
+              case "beauty":
+                setBeauties(result);
+                break;
+              case "artsCraft":
+                setArtsCrafts(result);
+                break;
+              case "garden":
+                setGardens(result);
+                break;
+              case "recipe":
+                setRecipes(result);
+                break;
+              case "event":
+                setEvents(result);
+                break;
+            }
+          } else {
             console.log(
               `profile ${cat} fetch errors :>> `,
               result.errors
@@ -119,7 +120,7 @@ export const Profile = () => {
   }, [profileName, upgrade]);
 
   useEffect(() => {
-    pins.forEach(pin => {   
+    pins.forEach(pin => {
       switch (pin.postType) {
         case "beauty":
           setBeautyPins([...beautyPins, pin]);
@@ -147,7 +148,7 @@ export const Profile = () => {
   function handleDelete(id) {
     const config = {
       method: "delete",
-      credentials: 'include', 
+      credentials: 'include',
       headers: { "Content-Type": "application/json" },
     };
 
@@ -172,61 +173,63 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {currentUser.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
+                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
               )}
-              
+
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
-                <Paper elevation={3} className="ProfileEdit-form" 
-                       sx={{ width: '80%', padding: '2rem',
-                             position: 'absolute', top: '50%', left: '50%',
-                             transform: 'translate(-50%, -50%)'
-                             }}>
-                    <Typography variant="h3" textAlign='center'>
-                      {message}
-                    </Typography> 
+                <Paper elevation={3} className="ProfileEdit-form"
+                  sx={{
+                    width: '80%', padding: '2rem',
+                    position: 'absolute', top: '50%', left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                  }}>
+                  <Typography variant="h3" textAlign='center'>
+                    {message}
+                  </Typography>
                 </Paper>
               </Modal>
 
-              <Modal open={isUserEditOpen} onClose={() => { setUserEditOpen(false); setUpgrade(!upgrade); }} 
-                     sx={{ display: 'flex',
-                           overflow:'scroll',
-                           justifyContent: 'center',
-                           alignItems: 'center'
-                        }}>
-                <Paper elevation={3} sx={{width: '80%', height: '90%', overflow: 'scroll'}}>
+              <Modal open={isUserEditOpen} onClose={() => { setUserEditOpen(false); setUpgrade(!upgrade); }}
+                sx={{
+                  display: 'flex',
+                  overflow: 'scroll',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                <Paper elevation={3} sx={{ width: '80%', height: '90%', overflow: 'scroll' }}>
                   <UserEdit setUserEditOpen={setUserEditOpen} />
                 </Paper>
               </Modal>
-             
+
 
               <div className="Profile-info">
                 <img src={profileData.avatar}></img>
                 <section className="Profile-text">
                   <h1>{profileData.profileName}</h1>
                   <p>"{profileData.status}"</p>
-                  { profileData.userAddress && (
-                  <h2>
-                    {profileData.userAddress.city} ,{" "}
-                    {profileData.userAddress.country}
-                  </h2>
+                  {profileData.userAddress && (
+                    <h2>
+                      {profileData.userAddress.city} ,{" "}
+                      {profileData.userAddress.country}
+                    </h2>
                   )}
                 </section>
               </div>
 
               <div className="Profile-followers">
-                <Follow className="Profile-follow-button"/>
+                <Follow className="Profile-follow-button" />
                 <p>{followers.length} followers</p>
                 <p>{following.length} following</p>
               </div>
             </div>
 
             <div className="Profile-Collection-Nav">
-              <button className="LokaB" onClick={ () => { setShowMyPosts(!showMyPosts) ; setShowMyPins(false) ; setShowCatPosts(false)} }>Posts</button> 
-              <button className="LokaB" onClick={ () => { setShowMyPosts(false) ; setShowMyPins(!showMyPins)} }>Pins</button>
+              <button className="LokaB" onClick={() => { setShowMyPosts(!showMyPosts); setShowMyPins(false); setShowCatPosts(false) }}>Posts</button>
+              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins) }}>Pins</button>
             </div>
 
             <div className="Profile-Collection">
-              { showMyPosts &&       
+              {showMyPosts &&
                 <div className="Profile-Library">
                   {postMessage && <p>{postMessage}</p>}
                   {showPostCategoryButton(beauties, display, setDisplay, showCatPosts, setShowCatPosts)}
@@ -236,7 +239,7 @@ export const Profile = () => {
                   {showPostCategoryButton(events, display, setDisplay, showCatPosts, setShowCatPosts)}
                 </div>}
 
-              { showMyPins &&       
+              {showMyPins &&
                 <div className="Profile-Library">
                   {pinMessage && <p>{pinMessage}</p>}
                   {showPinCategoryButton(beautyPins, display, setDisplay, showCatPins, setShowCatPins)}
@@ -258,10 +261,10 @@ export const Profile = () => {
             <section className="Profile-Feed">
               <h2 className="Profile-Feed-Header">My Feed</h2>
               <section className="Profile-Lib-Collection">
-              <ProfileFeed data={profileData.interests}/>
+                <ProfileFeed data={profileData.interests} />
               </section>
-              
-            </section>      
+
+            </section>
           </div>
         )}
       </section>

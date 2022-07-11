@@ -20,24 +20,6 @@ export const ProduceNavbar = () => {
 	});
 
 	const firstSix = inSeason.filter((_, idx) => idx < 10);
-	// let randomSeven = inSeason.sort(() => Math.random() - 0.5).slice(0, 7);
-
-	// const [position, setPosition] = useState(window.screenY);
-	// const [visible, setVisible] = useState(true);
-
-	// useEffect(() => {
-	// 	const handleScroll = () => {
-	// 		let scrolling = window.scrollY;
-
-	// 		setVisible(position > scrolling);
-	// 		setPosition(scrolling);
-	// 	};
-	// 	window.addEventListener("scroll", handleScroll);
-
-	// 	return () => {
-	// 		window.removeEventListener("scroll", handleScroll);
-	// 	};
-	// });
 
 	return (
 		<section className="produce-nav">
