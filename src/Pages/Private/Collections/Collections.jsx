@@ -9,6 +9,7 @@ import "./collections.scss";
 
 export const Collections = (props) => {
   const { data, type } = props
+
   // animation
 	const [index, setIndex] = useState(0);
 	const delay = 5500;

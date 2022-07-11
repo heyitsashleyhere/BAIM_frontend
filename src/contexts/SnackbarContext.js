@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as MUI from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -15,7 +15,7 @@ function SnackbarContextProvider({ children }) {
 		if (reason === 'clickaway') {
 			return;
 		}
-
+		setUpgrade(!upgrade)
 		setSnackbar({ open: false });
 
 	};
