@@ -26,9 +26,7 @@ export const EventsTable = ({ events }) => {
 	const { windowWidth } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
 
-
 	const [cookies] = useCookies();
-	const [message, setMessage] = useState("");
 
 	//to toggle show/hide mui components between breakpoints
 	useEffect(() => {
@@ -140,7 +138,7 @@ function EventRow(props) {
 							<MUI.Box my={3}>
 								{data.tags.map((tag, i) => (
 									<MUI.Chip
-										key={'tag-of-'+i+tag}
+										key={'tag-of-' + i + tag}
 										label={tag}
 										margin="normal"
 										variant="outlined"

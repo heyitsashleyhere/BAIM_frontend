@@ -1,24 +1,24 @@
 @import "../../../styles/breakpoints";
 
 .Search {
-	margin-top: 3rem;
+	padding-top: 3rem;
 	padding-inline: 1rem;
-	// min-height: 100vh;
-	position: relative;
+	min-height: calc(100vh - 9rem);
 	background: #fff;
 
-	.search-filter {
-		background: #fff;
-	}
 	.search-wrapper {
 		background: #fff;
 		border: 1px solid blue;
+		margin-top: 2rem;
+		overflow: scroll;
 
 		.search-info {
 			margin: 1rem;
+
 			h2 {
 				font-size: 2rem;
 			}
+
 			p {
 				margin: 1rem 0rem;
 			}
@@ -28,7 +28,7 @@
 	@include media(">tablet") {
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
-		gap: 2.5rem;
+		grid-gap: 2.5rem;
 
 		.search-filter {
 			grid-column: 2/8;
@@ -36,6 +36,8 @@
 
 		.search-wrapper {
 			grid-column: 2/8;
+			height: 75vh;
+			margin-top: 0;
 		}
 
 		.search-collection {
@@ -48,15 +50,12 @@
 		grid-template-columns: repeat(12, 1fr);
 
 		.search-filter {
-			// position: sticky;
-			// top: 24rem;
 			grid-column: 3/11;
 		}
 
 		.search-wrapper {
 			grid-column: 3/11;
-			height: 70vh;
-			overflow: scroll;
+			height: 60vh;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-@import './../../../styles/breakpoints'; 
+@import './../../../styles/breakpoints';
 
 .Create {
     position: relative;
@@ -36,6 +36,7 @@
         display: grid;
         grid-gap: 2.5rem;
         padding-top: 15rem;
+        min-height: calc(100vh - 7rem);
         grid-template-columns: repeat(12, 1fr);
 
         &-container {
@@ -49,19 +50,19 @@
     }
 
     @include media(">=tablet") {
-        display:grid;
-        grid-template-columns: repeat(8,1fr);
-        gap:2.5rem;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 2.5rem;
 
-        .Create-inner{
+        .Create-inner {
             grid-column: 2/8;
         }
     }
 
-    @include media(">=desktop"){
-        grid-template-columns: repeat(12,1fr);
+    @include media(">=desktop") {
+        grid-template-columns: repeat(12, 1fr);
 
-        .Create-inner{
+        .Create-inner {
             grid-column: 3/11;
         }
     }
