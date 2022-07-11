@@ -3,6 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 export const AnimationContext = React.createContext();
 
 export const AnimationContextProvider = ({ children }) => {
+	const [snackbar, setSnackbar] = useState({
+		message: '',
+		open: false,
+		severity: null,
+	})
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [isNav, setIsNav] = useState(false);
 
@@ -57,7 +62,7 @@ export const AnimationContextProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<AnimationContext.Provider value={{ windowWidth, isNav, setIsNav, discover }}>
+		<AnimationContext.Provider value={{ windowWidth, isNav, setIsNav, discover, snackbar, setSnackbar }}>
 			{children}
 		</AnimationContext.Provider>
 	);

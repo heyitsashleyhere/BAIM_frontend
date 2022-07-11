@@ -17,6 +17,7 @@ import Logo from "../../../assets/logo/raspberry.png";
 const Team = () => {
 	const [isClicked, setIsClicked] = useState(false);
 	const [memberData, setMemberData] = useState(null);
+	const [selectedImg, setSelectedImg] = useState(null);
 
 	const imagesRef = useRef([]);
 	imagesRef.current = [];
@@ -76,9 +77,10 @@ const Team = () => {
 		nameRef.current.push(el);
 	};
 
-	const handleMemberComponent = (data) => {
+	const handleMemberComponent = (data, index) => {
 		setMemberData(data);
 		setIsClicked(true);
+		setSelectedImg(index)
 	};
 
 	return (
@@ -91,11 +93,13 @@ const Team = () => {
 								<div ref={addToReveal} className="overlay">
 									<img
 										ref={addToRefs}
+										onClick={() => handleMemberComponent(member, index)}
+										key={index}
 										src={member.image}
 										alt={`${member.name.split(" ")[0]} image`}
-										onClick={() => handleMemberComponent(member)}
-										className={`${member.name.split(" ")[0]}-img`}
+										className={`member-img  ${isClicked && selectedImg === index ? 'active' : ''}`}
 									/>
+
 									<h2 ref={addToNames}>
 										<span className="name">{member.name.split(" ")[0]}</span>
 									</h2>

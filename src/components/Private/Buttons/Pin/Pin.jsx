@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useCookies } from "react-cookie";
-import {BsPinAngleFill, BsPinAngle} from 'react-icons/bs'
+import { BsPinAngleFill, BsPinAngle } from 'react-icons/bs'
 import { PostsContext } from '../../../../contexts/PostContext.js'
 import { SnackbarContext } from '../../../../contexts/SnackbarContext.js';
 
@@ -34,23 +34,23 @@ useEffect(() => {
             severity: 'error'
           })
           setUpgrade(!upgrade)
-        })
-        .catch((error) => console.log('error from Pin component ',error));
-        
+      })
+      .catch((error) => console.log('error from Pin component ', error));
+
   }
 
 
   return (
     <section>
-      {post.author === cookies.id ? null : 
-      post.likes && (
-        <>{ isPinned ? 
-          <BsPinAngleFill onClick={PinPost} className="Pin-icon"/> 
-          : 
-          <BsPinAngle onClick={PinPost} className="Pin-icon"/>} </>
+      {post.author === cookies.id ? null :
+        post.likes && (
+          <>{isPinned ?
+            <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
+            :
+            <BsPinAngle onClick={PinPost} className="Pin-icon" />} </>
         )
       }
     </section>
-    
+
   )
 }
