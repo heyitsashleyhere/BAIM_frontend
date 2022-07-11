@@ -5,19 +5,31 @@ import { ScrollTrigger } from "gsap/src/all";
 import "./main.scss";
 import "../../../../src/app.scss";
 // Logo
-import Logo from "../../../assets/logo/loka-logo.png";
+import Logo from "../../../assets/pngLogo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const promoVideos = [
-	{
-		text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat est necessitatibus soluta ipsam sunt nesciunt repudiandae velit architecto, a sapiente.",
-		src: process.env.PUBLIC_URL + "/landingVideos/strawberries.webm",
+		{
+		class:"promo-welcome",
+		header: "Welcome to Loka",
+		image:require('../../../assets/images/seasonalLoka.png'),
+		title: "When , What, How ?",
+		text: "At Loka we provide to our users a produce seasonal Api for all seasons. Either you want to plant or to know when is the rigth time to eat the veggies and fruits planted in your country."
 	},
 	{
-		text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat est necessitatibus soluta ipsam sunt nesciunt repudiandae velit architecto, a sapiente.",
-		src: process.env.PUBLIC_URL + "/landingVideos/lemons.webm",
+		class:"promo-create",
+		header: "CREATE * SHARE * COLLECT * INSPIRE",
+		image:require('../../../assets/images/collectionsNoback.png'),
+		title:"Always with you to inspire and remember",
+		text:"In Loka you can create your recipes, your home-made beauty creams and "
 	},
+	{
+		class:"promo-connect",
+		header: "CONNECT Create your community",
+		image:require('../../../assets/avatars_2-removebg-preview.png'),
+	},
+
 ];
 
 const Main = () => {
@@ -88,16 +100,21 @@ const Main = () => {
 					return (
 						<section key={`promo${index}`} className="promo-section-content">
 							<section
-								className="promo-section-content-text"
+								className={`promo-section-content-text ${video.class}`}
 								key={`text${index}`}
 							>
-								<h1 className="text">{video.text}</h1>
+								<h1 className="text">{video.header}</h1>
+								<img src={video.image}></img>
+								<section>
+									<h2>{video.title}</h2>
+									<p>{video.text}</p>
+								</section>
 							</section>
 							<section
 								className="promo-section-content-media"
 								key={`video${index}`}
 							>
-								<video
+								{/* <video
 									ref={addToRefs}
 									className="promo-vid"
 									src={video.src}
@@ -106,7 +123,7 @@ const Main = () => {
 									loop
 									muted
 									playsInline
-								/>
+								/> */}
 							</section>
 						</section>
 					);
