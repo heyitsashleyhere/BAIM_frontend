@@ -304,7 +304,6 @@ export default function CreatePost({ category, setCategory }) {
   function handleSubmit(e) {
     e.preventDefault()
     setInputValues({ ...inputValues, address });
-    console.log('inputValues :>> ', inputValues);
     const config = {
       method: "POST",
       credentials: "include", // specify this if you need cookies

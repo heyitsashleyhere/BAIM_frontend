@@ -66,7 +66,6 @@ export const Profile = () => {
         if (result.errors) {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
-          console.log('result :>> ', result);
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
             cookies.profileName === profileName
             ? setPostMessage("You have not posted anything yet")
@@ -93,7 +92,6 @@ export const Profile = () => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
         .then((result) => {
-          console.log('result from map :>> ', result);
           if (!result.errors) {
             switch (cat) {
               case "beauty":

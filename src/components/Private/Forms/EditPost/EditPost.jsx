@@ -304,8 +304,6 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-
-    console.log('inputValues :>> ', inputValues);
     const config = {
       method: "PATCH",
       credentials: "include", // specify this if you need cookies
