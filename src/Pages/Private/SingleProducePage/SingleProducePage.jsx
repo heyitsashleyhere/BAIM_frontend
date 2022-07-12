@@ -119,19 +119,19 @@ export const SingleProducePage = () => {
               <p>{data.watering}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Feeding:</h3>
+                <h3>Feeding</h3>
               <p>{data.feeding}</p>
               </section>
               <section className="Seasonal-plant-map">
-                <h3>Other Care:</h3>
+                <h3>Other Care</h3>
               {data.other_care}
               </section>
               <section className="Seasonal-plant">
-                <h3>Diseases:</h3>
+                <h3>Diseases</h3>
               <p>{data.diseases}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Pests:</h3>
+                <h3>Pests</h3>
               <p>{data.pests}</p>
               </section>
           </section>

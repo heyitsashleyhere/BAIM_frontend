@@ -258,11 +258,11 @@ export const Profile = () => {
                 <Follow className="Profile-follow-button" />
 
                 {/* // ! MURAD : check this logic with the Modal thing  */}
-                {/* <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
+                <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
 
-               { isFollowers && <FollowPage follow={following} type={followers}/>  }
-               { isFollowing && <FollowPage follow={following} type={following}/> } */}
+               { isFollowers && <FollowPage follow={following} type={"followers"}/>  }
+               { isFollowing && <FollowPage follow={following} type={"following"}/> }
               </div>
             </div>
 

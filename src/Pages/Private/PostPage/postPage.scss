@@ -2,6 +2,9 @@
 
 .Post-Page {
     margin-bottom: 2rem;
+    position:relative;
+    top:2rem;
+    
 
     .Post-Page-Inner {
         border: 1px solid rgba(0, 0, 0, 0.13);
@@ -117,6 +120,7 @@
     }
 
     @include media(">=tablet") {
+        top:5rem;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         gap: 2.5rem;
@@ -143,9 +147,10 @@
 
     @include media(">=desktop") {
         grid-template-columns: repeat(12, 1fr);
+        top:5rem;
 
         .Post-Page-Inner {
-            grid-column: 3/11;
+            grid-column: 4/10;
 
             .Post-hero {
                 width: 100%;
@@ -162,11 +167,6 @@
 
             }
 
-            .Post-header {
-                .Like-button {
-                    margin: 0rem 2rem;
-                }
-            }
         }
     }
 }
