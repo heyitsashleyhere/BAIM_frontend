@@ -12,9 +12,11 @@ export const Snackbar = () => {
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
+    } else {
+      setSnackbar({ open: false });
+      setUpgrade(!upgrade)
     }
-    setSnackbar({ open: false });
-    setUpgrade(!upgrade)
+
   };
   const action = (
     <MUI.IconButton

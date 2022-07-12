@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import { SquareAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
+import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 
 
 import "./collections.scss";
@@ -121,6 +121,9 @@ export const Collections = (props) => {
 	}, []);
 
 
+  if (!data.length) {
+		return <LoadingSpinner />
+	}
 
   return (
     <>
