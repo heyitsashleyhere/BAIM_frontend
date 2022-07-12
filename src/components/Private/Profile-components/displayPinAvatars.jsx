@@ -3,7 +3,7 @@ import { PostsContext } from "../../../contexts/PostContext.js";
 import { SquareAvatar } from "../Avatars-Links/Avatars.jsx";
 import { EventsTable } from "../Avatars-Links/Tables.jsx"
 
-export default function displayPinAvatars(type, beautyPins, artsCraftPins, gardenPins, recipePins, eventPins) {
+export default function displayPinAvatars(type, pins) {
   const { allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost, } = useContext(PostsContext)
 
   function filter(arr1, arr2) {
@@ -17,24 +17,23 @@ export default function displayPinAvatars(type, beautyPins, artsCraftPins, garde
 
   switch (type) {
     case "beauty":
-      return filter(allBeautyPost, beautyPins).map((data, i) => (
+      return filter(allBeautyPost, pins.filter(pin => pin.postType === "beauty")).map((data, i) => (
         <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
       ));
     case "artsCraft":
-      return filter(allArtsCraftPost, artsCraftPins).map((data, i) => (
+      return filter(allArtsCraftPost, pins.filter(pin => pin.postType === "artsCraft")).map((data, i) => (
         <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
       ));
     case "garden":
-      return filter(allGardenPost, gardenPins).map((data, i) => (
+      return filter(allGardenPost, pins.filter(pin => pin.postType === "garden")).map((data, i) => (
         <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
       ));
     case "recipe":
-      return filter(allRecipePost, recipePins).map((data, i) => (
+      return filter(allRecipePost, pins.filter(pin => pin.postType === "recipe")).map((data, i) => (
         <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
       ));
     case "event":
-      return <EventsTable events={filter(allEventPost, eventPins)} />
+      return <EventsTable events={filter(allEventPost, pins.filter(pin => pin.postType === "event"))} />
       ;
-    // return <EventsTable events={events} />;
   }
 }

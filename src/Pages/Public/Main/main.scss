@@ -3,12 +3,14 @@
 .main {
 	width: 100%;
 	height: 100%;
-	position: relative;
+	// position: relative;
 	background: #000;
+	padding-bottom: 2rem;
 
 	.cta-section {
 		width: 100%;
 		height: 100vh;
+		min-height: 74rem;
 		position: relative;
 
 		&-content {
@@ -36,13 +38,15 @@
 		}
 	}
 
-	.promo-section {
+	.promo {
 		width: 100%;
-		height: 100vh;
+		// height: 100vh;
+		height: 100%;
+		position: relative;
 
 		&-content {
 			width: 100%;
-			height: 70%;
+			min-height: 74rem;
 			position: relative;
 			background-color: #000;
 
@@ -51,83 +55,41 @@
 			.promo-welcome {
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
-				align-items: center;
 				width: 100%;
 				padding: 1rem;
-
+				line-height: 1.2;
+				color: #fff;
 
 				h1 {
-					align-self: center;
+					text-align: center;
 					font-size: 4rem;
+					font-weight: 800;
 					padding: 1rem;
 					margin: 3rem 0;
 				}
 
-				img{
-					width:100%;
-					align-self: center;
-					border-radius: 10px;
-				}
-
 				h2 {
-					color: #fff;
-					font-size: 2rem;
-					margin:2rem 0rem;
+					text-align: center;
+					font-size: 2.4rem;
+					margin: 2rem 0rem;
 				}
 
-
-				.hero-text{
-					margin:1rem 0rem;
-					padding:1rem;					
-					
-					p{
-						font-size: 1.3rem;
-						color:#fff;
-					}
-				}
-
-				
-			}
-
-			.promo-welcome {
 				img {
-					width: 80%;
+					width: 100%;
+					border-radius: 1rem;
+				}
+
+				.hero-text {
+					margin: 1rem 0rem;
+					padding: 1rem;
 				}
 			}
-
 
 			&-text {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				z-index: 10;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 
-				.text {
-					font-size: 3rem;
-					color: #fff;
-
-					@include media(">=tablet") {
-						font-size: 5rem;
-					}
-				}
-			}
-
-			&-media {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-
-				video {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					object-position: center;
-				}
 			}
 		}
 	}
@@ -157,52 +119,41 @@
 			}
 		}
 
-		.promo-section {
-			grid-column: 1/9;
-			
+		.promo {
+			// grid-column: 1/9;
+			grid-column: 2/8;
 
-			.promo-create, .promo-connect, .promo-welcome{
-		
-				width:100%;
-				padding:1rem;
-				margin:10rem 0rem;
-			
-				
-				
-				h1{
+			.promo-create,
+			.promo-connect,
+			.promo-welcome {
+
+				min-height: 80rem;
+				width: 100%;
+				padding: 0;
+				// margin: 10rem 0rem;
+
+				h1 {
 					font-size: 4rem;
-					padding:1rem;
+					padding: 1rem;
 					margin: 3rem 0;
 				}
 
-				img{
-					width:80%;
-					
-
+				h2 {
+					font-size: 2.4rem;
+					margin: 1rem 0rem 2rem;
 				}
 
-				h2{
-					color:#fff;
-					font-size: 2rem;
-					margin:1rem 0rem;
-				}
+				.hero-text {
+					width: 70%;
+					margin: 3rem 0rem;
+					padding: 1rem;
 
-				.hero-text{
-					width:70%;
-					margin:3rem 0rem;
-					padding:1rem;					
-					
-					p{
-						font-size: 1.3rem;
-						color:#fff;
+					p {
+						font-size: 1.8rem;
+						color: #fff;
 					}
-
 				}
-
-				
 			}
-
-			
 		}
 	}
 
@@ -229,50 +180,33 @@
 			}
 		}
 
-		.promo-section {
-			grid-column: 1/13;
-			height:100vh;
+		.promo {
+			grid-column: 3/11;
 
-			.promo-create, .promo-connect, .promo-welcome{
-				border:1px solid red;
-				height:100vh;
-				width:100%;
-				padding:1rem;
-				margin:10rem 0rem;
-			
-				
-				
-				h1{
-					font-size: 4rem;
-					padding:1rem;
-					margin: 3rem 0;
+			.promo-create,
+			.promo-connect,
+			.promo-welcome {
+				// border: 1px solid red;
+				height: 100vh;
+				margin-block: 10rem;
+
+				h1 {
+					font-weight: 800;
 				}
 
-				img{
-					width:80%;
-					
-
+				h2 {
+					font-size: 3rem;
 				}
 
-				h2{
-					color:#fff;
-					font-size: 2rem;
-					margin:1rem 0rem;
-				}
+				.hero-text {
+					margin-top: 5rem;
+					width: 100%;
 
-				.hero-text{
-					width:70%;
-					margin:3rem 0rem;
-					padding:1rem;					
-					
-					p{
-						font-size: 1.3rem;
-						color:#fff;
+					p {
+						padding-inline: 1rem;
+						font-size: 2.2rem;
 					}
-
 				}
-
-				
 			}
 		}
 	}

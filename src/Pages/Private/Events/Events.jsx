@@ -63,7 +63,6 @@ export const Events = ({ data }) => {
 
 
 	const pinEvent = (event) => {
-		console.log('event', event)
 		const config = {
 			method: "PATCH",
 			credentials: "include",
@@ -73,7 +72,6 @@ export const Events = ({ data }) => {
 		fetch(`http://localhost:7000/event/pin/${event._id}`, config)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log("result: >>", result);
 				if (result.errors) {
 					setError(result.errors);
 				} else {

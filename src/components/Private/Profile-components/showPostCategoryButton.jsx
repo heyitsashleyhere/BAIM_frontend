@@ -1,5 +1,5 @@
 export default function showPostCategoryButton(Category, display, setDisplay, showCatPosts, setShowCatPosts) {
-    if (Category.length > 0) {
+  if (Category.length > 0) {
       function handleClick() {
         setDisplay(Category[0].type) 
         if(display === Category[0].type){

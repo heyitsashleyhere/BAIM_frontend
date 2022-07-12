@@ -464,7 +464,6 @@ export default function UserEdit({ setUserEditOpen }) {
   function handleUserUpdate(e) {
     e.preventDefault();
     setErrors([]);
-    console.log('inputValues :>> ', inputValues);
 
     const config = {
       method: "PATCH",
