@@ -27,6 +27,8 @@ function PostsContextProvider({ children }) {
   const [allEventPost, setAllEventPost] = useState([])
   // Profile Page
   const [profileData, setProfileData] = useState(null)
+  // for Pin and Profile
+  const [ postData, setPostData ] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
 
@@ -130,7 +132,8 @@ function PostsContextProvider({ children }) {
     searchOpt, setSearchOpt,
     searchInput, setSearchInput,
     seasonal, setSeasonal,
-    profileData, setProfileData
+    profileData, setProfileData,
+    postData, setPostData
   }
 
   return (

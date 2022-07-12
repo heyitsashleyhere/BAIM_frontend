@@ -19,7 +19,7 @@ import "./profile.scss";
 import { FollowPage } from "../../../components/Private/Profile-components/FollowPage.jsx";
 
 export const Profile = () => {
-  const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
+  const { postCategories, upgrade, setUpgrade, profileData, setProfileData, postData } = useContext(PostsContext);
   const { profileName } = useParams();
   const [cookies] = useCookies();
 
@@ -37,11 +37,6 @@ export const Profile = () => {
   const [postMessage, setPostMessage] = useState(null)
   const [pinMessage, setPinMessage] = useState(null)
   const [pins, setPins] = useState([])
-  const [beautyPins, setBeautyPins] = useState([])
-  const [artsCraftPins, setArtsCraftsPins] = useState([])
-  const [gardenPins, setGardenPins] = useState([])
-  const [recipePins, setRecipePins] = useState([])
-  const [eventPins, setEventPins] = useState([])
   // pop up Modals
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
@@ -92,7 +87,7 @@ export const Profile = () => {
       })
       .catch((error) => console.log(`error from profileName request in Profile`, error));
 
-  }, [profileName]);
+  }, [profileName, upgrade, postData]);
 
   useEffect(() => {
     postCategories.map((cat) => {
@@ -129,30 +124,7 @@ export const Profile = () => {
         );
     });
   }, [profileName, showMyPosts, showCatPosts])
-  
 
-  // useEffect(() => {
-  //   console.log('pins :>> ', pins);
-  //   pins.forEach(pin => {
-  //     switch (pin.postType) {
-  //       case "beauty":
-  //         setBeautyPins([...beautyPins, pin]);
-  //         break;
-  //       case "artsCraft":
-  //         setArtsCraftsPins([...artsCraftPins, pin]);
-  //         break;
-  //       case "garden":
-  //         setGardenPins([...gardenPins, pin]);
-  //         break;
-  //       case "recipe":
-  //         setRecipePins([...recipePins, pin]);
-  //         break;
-  //       case "event":
-  //         setEventPins([...eventPins, pin]);
-  //         break;
-  //     }
-  //   })
-  // }, [showMyPins, pins])
 
   function handleEdit() {
     setUserEditOpen(true)
@@ -291,8 +263,6 @@ export const Profile = () => {
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "recipe"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "event"), display, setDisplay, showCatPins, setShowCatPins)}
                   {/* <EventsTable events={eventPins} />; */}
-
-
                 </div>}
             </div>
 

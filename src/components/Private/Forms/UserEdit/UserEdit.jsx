@@ -1,10 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { UserContext } from "../../../../contexts/UserContext.js";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Typography, TextField, Autocomplete, Paper, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Divider, Modal, InputAdornment, Stack } from "@mui/material";
+import { Typography, TextField, Autocomplete, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Divider, Modal, InputAdornment, Stack, Snackbar } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import CloseIcon from '@mui/icons-material/Close';
 import ImageInput from "../ImageInput.jsx";
 
 
@@ -487,6 +488,14 @@ export default function UserEdit({ setUserEditOpen }) {
       .catch((error) => console.log(error));
   }
 
+  function handleClose(event, reason) {
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
+      setUserEditOpen(false)
+	}
+
   return (
     <div className="ProfileEdit-form">
       <Grow in>
@@ -749,21 +758,29 @@ export default function UserEdit({ setUserEditOpen }) {
 
           <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
             <Button variant="contained" type="submit" size="large">Confirm</Button>
+
+            <Button variant="outlined" size="large" onClick={() => setUserEditOpen(false)}>Cancel</Button>
           </Grid>
         </Grid>
       </form>
     </Grow>
 
     <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade); setUserEditOpen(false) }} >
-        <Paper elevation={3} className="ProfileEdit-form" 
-               sx={{ width: '80%', padding: '2rem',
-                     position: 'absolute', top: '50%', left: '50%',
-                     transform: 'translate(-50%, -50%)'
-                   }}>
-              <Typography variant="h3" textAlign='center'>
-                  {message}
-              </Typography> 
-        </Paper>
+      <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleClose}
+              message={message}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
     </Modal>
 
     </div>

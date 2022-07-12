@@ -1,17 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useCookies } from "react-cookie";
 import { BsPinAngleFill, BsPinAngle } from 'react-icons/bs'
-import { AnimationContext } from '../../../../contexts/AnimationContext.js';
 import { PostsContext } from '../../../../contexts/PostContext.js'
-import { Modal, Button, Snackbar, IconButton } from "@mui/material";
+import { Modal, Snackbar, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 export const Pin = (props) => {
 const { post }= props
 const [ cookies ] = useCookies(); //loggedIn User info
-const { upgrade, setUpgrade, users } = useContext(PostsContext)
-const { setSnackbar } = useContext(AnimationContext)
-const [ postData, setPostData ] = useState(null)
+const { postData, setPostData } = useContext(PostsContext)
 const [ isModalOpen, setIsModalOpen ] = useState(false);
 
 useEffect(() => {
