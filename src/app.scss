@@ -6,7 +6,13 @@
 html {
 	font-size: 62.5%;
 	scroll-behavior: smooth;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
 }
+
+
 
 *,
 *::after,
@@ -21,6 +27,7 @@ body {
 	font-family: $font-family-Varela;
 	height: 100%;
 	width: 100%;
+	
 	// min-height: 100vh;
 
 	input {

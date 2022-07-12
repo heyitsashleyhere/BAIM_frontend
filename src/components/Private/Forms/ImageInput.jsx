@@ -34,6 +34,8 @@ export default function ImageInput({ imageUsage, oldUrl }){
         })
     }
 
+
+    // we need to fetch from the profile user to delete in real time 
     function deleteFile(file){
         if(inputValues[`${imageUsage}`]){
             const storage = getStorage()
@@ -50,18 +52,12 @@ export default function ImageInput({ imageUsage, oldUrl }){
         }
     }
 
+
+
     // console.log("checking image URL", inputValues[`${imageUsage}`])
 
     // I have to find more about this according to some research in the 
-    function updateFile(file){
 
-        if(inputValues.image){
-            const storage = getStorage()
-            const imageRef = ref(storage,`${inputValues[`${imageUsage}`]}`)
-
-        }
-
-    }
 
     function LinearProgressWithLabel(props) {
         return (
