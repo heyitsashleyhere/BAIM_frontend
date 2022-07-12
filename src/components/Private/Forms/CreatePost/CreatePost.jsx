@@ -317,9 +317,10 @@ export default function CreatePost({ category, setCategory }) {
       .then((result) => {
        if (result.errors) {
               setErrors(result.errors);
+       } else {
+            //  console.log(category, "fetch result:", result)
+            setIsModalOpen(true)
        }
-      //  console.log(category, "fetch result:", result)
-      setIsModalOpen(true)
       })
       .catch((error) => console.log(error));
   }
