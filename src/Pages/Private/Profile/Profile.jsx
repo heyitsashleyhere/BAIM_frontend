@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
+import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
@@ -22,11 +23,11 @@ export const Profile = () => {
   const [cookies] = useCookies();
 
   // user library
-  const [beauties, setBeauties] = useState([]);
-  const [artsCrafts, setArtsCrafts] = useState([]);
-  const [gardens, setGardens] = useState([]);
-  const [recipes, setRecipes] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [beauties, setBeauties] = useState(null);
+  const [artsCrafts, setArtsCrafts] = useState(null);
+  const [gardens, setGardens] = useState(null);
+  const [recipes, setRecipes] = useState(null);
+  const [events, setEvents] = useState(null);
   // user data
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([])
@@ -49,14 +50,15 @@ export const Profile = () => {
   const [showCatPosts, setShowCatPosts] = useState(false)
   const [showCatPins, setShowCatPins] = useState(false)
 
+  const config = {
+    method: "GET",
+    credentials: "include", // specify this if you need cookies
+    headers: { "Content-Type": "application/json" },
+  }
+
   useEffect(() => {
     setPostMessage(null)
     setPinMessage(null)
-    const config = {
-      method: "GET",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
-    }
 
     fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
@@ -84,11 +86,14 @@ export const Profile = () => {
       })
       .catch((error) => console.log(`error from profileName request in Profile`, error));
 
+  }, [profileName]);
+
+  useEffect(() => {
     postCategories.map((cat) => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
         .then((result) => {
-          console.log('result :>> ', result);
+          console.log('result from map :>> ', result);
           if (!result.errors) {
             switch (cat) {
               case "beauty":
@@ -118,29 +123,31 @@ export const Profile = () => {
           console.log(`profile ${cat} fetch errors :>> `, error)
         );
     });
-  }, [profileName, upgrade]);
+  }, [profileName, showMyPosts, showCatPosts])
+  
 
-  useEffect(() => {
-    pins.forEach(pin => {
-      switch (pin.postType) {
-        case "beauty":
-          setBeautyPins([...beautyPins, pin]);
-          break;
-        case "artsCraft":
-          setArtsCraftsPins([...artsCraftPins, pin]);
-          break;
-        case "garden":
-          setGardenPins([...gardenPins, pin]);
-          break;
-        case "recipe":
-          setRecipePins([...recipePins, pin]);
-          break;
-        case "event":
-          setEventPins([...eventPins, pin]);
-          break;
-      }
-    })
-  }, [pins, profileData, upgrade])
+  // useEffect(() => {
+  //   console.log('pins :>> ', pins);
+  //   pins.forEach(pin => {
+  //     switch (pin.postType) {
+  //       case "beauty":
+  //         setBeautyPins([...beautyPins, pin]);
+  //         break;
+  //       case "artsCraft":
+  //         setArtsCraftsPins([...artsCraftPins, pin]);
+  //         break;
+  //       case "garden":
+  //         setGardenPins([...gardenPins, pin]);
+  //         break;
+  //       case "recipe":
+  //         setRecipePins([...recipePins, pin]);
+  //         break;
+  //       case "event":
+  //         setEventPins([...eventPins, pin]);
+  //         break;
+  //     }
+  //   })
+  // }, [showMyPins, pins])
 
   function handleEdit() {
     setUserEditOpen(true)
@@ -163,6 +170,13 @@ export const Profile = () => {
       })
       .catch((error) => console.log(error));
   }
+  
+
+  if (!profileData || !beauties
+		|| !artsCrafts || !gardens
+		|| !recipes || !events) {
+		return <LoadingSpinner />
+	}
 
 
   return (
@@ -225,8 +239,8 @@ export const Profile = () => {
             </div>
 
             <div className="Profile-Collection-Nav">
-              <button className="LokaB" onClick={() => { setShowMyPosts(!showMyPosts); setShowMyPins(false); setShowCatPosts(false) }}>Posts</button>
-              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins) }}>Pins</button>
+              <button className="LokaB" onClick={() => { setShowMyPosts(!showMyPosts); setShowMyPins(false); setShowCatPosts(false); setShowCatPins(false) }}>Posts</button>
+              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins); setShowCatPosts(false) }}>Pins</button>
             </div>
 
             <div className="Profile-Collection">
@@ -243,11 +257,11 @@ export const Profile = () => {
               {showMyPins &&
                 <div className="Profile-Library">
                   {pinMessage && <p>{pinMessage}</p>}
-                  {showPinCategoryButton(beautyPins, display, setDisplay, showCatPins, setShowCatPins)}
-                  {showPinCategoryButton(artsCraftPins, display, setDisplay, showCatPins, setShowCatPins)}
-                  {showPinCategoryButton(gardenPins, display, setDisplay, showCatPins, setShowCatPins)}
-                  {showPinCategoryButton(recipePins, display, setDisplay, showCatPins, setShowCatPins)}
-                  {showPinCategoryButton(eventPins, display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(pins.filter(pin => pin.postType === "beauty"), display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(pins.filter(pin => pin.postType === "artsCraft"), display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(pins.filter(pin => pin.postType === "garden"), display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(pins.filter(pin => pin.postType === "recipe"), display, setDisplay, showCatPins, setShowCatPins)}
+                  {showPinCategoryButton(pins.filter(pin => pin.postType === "event"), display, setDisplay, showCatPins, setShowCatPins)}
                   {/* <EventsTable events={eventPins} />; */}
 
 
@@ -259,7 +273,7 @@ export const Profile = () => {
             </div>
 
             <div className="Profile-Lib-Collection">
-              {display && showCatPins && displayPinAvatars(display, beautyPins, artsCraftPins, gardenPins, recipePins, eventPins)}
+              {display && showCatPins && displayPinAvatars(display, pins)}
             </div>
 
             <section className="Profile-Feed">
