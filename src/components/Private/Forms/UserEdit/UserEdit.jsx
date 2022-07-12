@@ -490,7 +490,7 @@ export default function UserEdit({ setUserEditOpen }) {
   return (
     <div className="ProfileEdit-form">
       <Grow in>
-      <form onSubmit={handleUserUpdate} style={{ padding: '5% 7%'}} >
+      <form onSubmit={handleUserUpdate} style={{ padding: '5% 7%', overflow:'hidden'}} >
         <Grid container spacing={2}>
           <Grid item xs={12} sx={{ textAlign: 'center '}}>
             <Typography variant="h3">Edit Profile</Typography>

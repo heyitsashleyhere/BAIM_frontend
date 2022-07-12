@@ -16,6 +16,7 @@ import { EventsTable } from "../../../components/Private/Avatars-Links/Tables"
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
 import { Modal, Typography, Paper } from "@mui/material";
 import "./profile.scss";
+import { FollowPage } from "../../../components/Private/Profile-components/FollowPage.jsx";
 
 export const Profile = () => {
   const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
@@ -50,11 +51,17 @@ export const Profile = () => {
   const [showCatPosts, setShowCatPosts] = useState(false)
   const [showCatPins, setShowCatPins] = useState(false)
 
+
+  //toggle followpage
+  const [ isFollowers, setIsFollowers]=useState(false)
+  const [ isFollowing, setIsFollowing]=useState(false)
+
   const config = {
     method: "GET",
     credentials: "include", // specify this if you need cookies
     headers: { "Content-Type": "application/json" },
   }
+
 
   useEffect(() => {
     setPostMessage(null)
@@ -176,6 +183,24 @@ export const Profile = () => {
 		return <LoadingSpinner />
 	}
 
+  function openFollowers(){
+
+    if(isFollowing){
+      setIsFollowing(false)
+      setFollowers(!isFollowers)
+    }
+      setFollowers(!isFollowers)
+    
+  }
+
+  function openFollowing(){
+    if(isFollowers){
+      setIsFollowers(false)
+      setIsFollowing(!isFollowing)
+    }
+    setIsFollowing(!isFollowing)
+  }
+
 
   return (
     <>
@@ -231,8 +256,13 @@ export const Profile = () => {
 
               <div className="Profile-followers">
                 <Follow className="Profile-follow-button" />
-                <p>{followers.length} followers</p>
-                <p>{following.length} following</p>
+
+                // ! MURAD : check this logic with the Modal thing 
+                {/* <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
+                <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
+
+               { isFollowers && <FollowPage follow={following} type={followers}/>  }
+               { isFollowing && <FollowPage follow={following} type={following}/> } */}
               </div>
             </div>
 
@@ -275,7 +305,7 @@ export const Profile = () => {
             </div>
 
             <section className="Profile-Feed">
-              <h2 className="Profile-Feed-Header">My Feed</h2>
+              <h2 className="Profile-Feed-Header">{profileData.profileName} feed</h2>
               <section className="Profile-Lib-Collection">
                 <ProfileFeed data={profileData.interests} />
               </section>
