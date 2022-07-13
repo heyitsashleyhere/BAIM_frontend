@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
-import { TextField, InputAdornment, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Stack } from "@mui/material";
+import { TextField, InputAdornment, IconButton, Button, FormHelperText, Grow, Autocomplete, Grid, Box } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
@@ -9,10 +9,9 @@ export default function UserRegistration() {
   const [userAddress, setUserAddress] = useState({});
   const [errors, setErrors] = useState([]);
   const { inputValues, setInputValues, 
-          setMessage, setUser, setIsLogin,
+          setMessage, setIsLogin,
           isShowPassword, showPasswordHandler,
           setIsFromRegister } = useContext(UserContext);
-  const [country, setCountry] = useState('')
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     {
@@ -437,6 +436,7 @@ export default function UserRegistration() {
     { code: 'ZM', label: 'Zambia', phone: '260' },
     { code: 'ZW', label: 'Zimbabwe', phone: '263' },
   ]
+  const [country, setCountry] = useState('')
 
   useEffect(() => {
     setInputValues({ ...inputValues, userAddress });
@@ -449,9 +449,9 @@ export default function UserRegistration() {
   // this function handles all the address input changes:
   function handleAddressChange(e) {
     setUserAddress({ ...userAddress, [e.target.name]: e.target.value.trim() });
-    if(e.target.name === 'country') {
-      setCountry(e.target.value)
-    }
+    // if(e.target.name === 'country') {
+    //   setCountry(e.target.value)
+    // }
   }
 
   function handleUserRegistration(e) {
@@ -654,35 +654,48 @@ export default function UserRegistration() {
                 )
             )}
           </Grid>
+
           <Grid item xs={12} sm={12}>
-            <TextField name="country" label="Country"
-              fullWidth required
-              margin="dense" select
-              value={country}
-              error={errors.find((error) => error["userAddress.country"])}
-              onChange={handleAddressChange}>
-              {countries.map(option => (
-                        <MenuItem key={option.label} value={option.label}>
-                          <Stack direction="row" spacing={1} alignItems='center'>
-                            <img loading="lazy" width="20"
-                                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                                  alt={option.label} 
-                              />
-                            <p>{option.label}</p>
-                          </Stack>
-                        </MenuItem>
-              ))}
-            </TextField>
-            {errors.map(
+            <Autocomplete
+                options={countries}
+                value={country}
+                autoHighlight
+                isOptionEqualToValue={(option, value) => option.label === value}
+                onInputChange={(event, newInputValue) => { setUserAddress({ ...userAddress, country: newInputValue }); setCountry(newInputValue) }}
+                renderOption={(props, option) => (
+                  <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                    <img
+                      loading="lazy"
+                      width="20"
+                      src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                      srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                      alt={`${option.code.toLowerCase()}`}
+                    />
+                    {option.label}
+                  </Box>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    name="country" label="Country"
+                    error={errors.find((error) => error["userAddress.country"])}
+                    inputProps={{
+                      ...params.inputProps,
+                      autoFill: false // disable autocomplete and autofill
+                    }}
+                  />
+                )}
+              />
+              {errors.map(
               (error, i) =>
                 error["userAddress.country"] && (
                   <FormHelperText error key={"countryError" + i}>
                     {error["userAddress.country"]}
                   </FormHelperText>
                 )
-            )}
+              )}
           </Grid>
+
 
           <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
             <Button variant="contained" type="submit" size="large">Register</Button>
@@ -693,3 +706,34 @@ export default function UserRegistration() {
     </section>
   )
 }
+
+// Old country input
+{/* <Grid item xs={12} sm={12}>
+<TextField name="country" label="Country"
+  fullWidth required
+  margin="dense" select
+  value={country}
+  error={errors.find((error) => error["userAddress.country"])}
+  onChange={handleAddressChange}>
+  {countries.map(option => (
+            <MenuItem key={option.label} value={option.label}>
+              <Stack direction="row" spacing={1} alignItems='center'>
+                <img loading="lazy" width="20"
+                      src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                      srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                      alt={option.label} 
+                  />
+                <p>{option.label}</p>
+              </Stack>
+            </MenuItem>
+  ))}
+</TextField>
+{errors.map(
+  (error, i) =>
+    error["userAddress.country"] && (
+      <FormHelperText error key={"countryError" + i}>
+        {error["userAddress.country"]}
+      </FormHelperText>
+    )
+)}
+</Grid> */}

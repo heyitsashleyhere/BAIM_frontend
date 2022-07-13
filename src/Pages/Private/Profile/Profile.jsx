@@ -21,7 +21,7 @@ import { FollowPage } from "../../../components/Private/Profile-components/Follo
 
 export const Profile = () => {
   const { postCategories, upgrade, setUpgrade, profileData, setProfileData, postData } = useContext(PostsContext);
-  const { setIsLogin, setIsUserDelete } = useContext(UserContext)
+  const { setIsLogin } = useContext(UserContext)
   const { profileName } = useParams();
   const [cookies] = useCookies();
   let navigate = useNavigate()
@@ -182,7 +182,7 @@ export const Profile = () => {
                 <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
-              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false); setIsUserDelete(true) }} >
+              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false) }} >
                 <Paper elevation={3} className="ProfileEdit-form"
                   sx={{
                     width: '80%', padding: '2rem',
