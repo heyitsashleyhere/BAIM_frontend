@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
 
-import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover, Box, Paper} from "@mui/material";
+import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover, Box, Paper, Snackbar} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -74,6 +74,16 @@ export const SquareAvatar = ({ data }) => {
         .catch((error) => console.log(error));
     }
 
+    function handleSnackBarClose(event, reason) {
+      if (reason === 'clickaway') {
+        return;
+        }
+        setIsModalOpen(false);
+        setAnchorEl(null);
+        setDeleteAnchorEl(null)
+        setIsEditOpen(false)
+    }
+
 
     return (
       <section className="SquareAvatar">
@@ -116,10 +126,24 @@ export const SquareAvatar = ({ data }) => {
         </NavLink>
     
        <Modal open={isModalOpen} onClose={() => {setIsModalOpen(false); setUpgrade(!upgrade)}} >
-          <p>{message}</p>
+          <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleSnackBarClose}
+              message={message}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleSnackBarClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
        </Modal>
       
-       <Modal open={isEditOpen} onClose={() => {setIsEditOpen(false); setUpgrade(!upgrade)}}
+       <Modal open={isEditOpen} onClose={() => {setIsEditOpen(false)}}
               sx={{ display: 'flex', overflow:'scroll', justifyContent: 'center', alignItems: 'center' }} >
           <Paper elevation={3} sx={{width: '80%', height: '90%', overflow: 'scroll'}}>
               <EditPost postData={postData} setPostData={setPostData} setIsEditOpen={setIsEditOpen} />

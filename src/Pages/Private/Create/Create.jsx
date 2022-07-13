@@ -6,7 +6,7 @@ import './Create.scss'
 
 export default function Create() {
   const { postCategories } = useContext(PostsContext)
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState(null)
   return (
     <section className="Create">
       <section className="Create-inner">
@@ -18,22 +18,27 @@ export default function Create() {
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                       options={postCategories}
-                    //   value={category}
+                      onChange={(event, value) => setCategory(value)}
                       onInputChange={(event, value) => setCategory(value)}
                       renderInput={(params) => (
                         <TextField
                           {...params}
                           name="category"
                           label="Category"
-                          // InputProps={{ style: { fontSize: 14 } }}
+                          inputProps={{
+                            ...params.inputProps,
+                            autoFill: false // disable autocomplete and autofill
+                          }}
                           // InputLabelProps={{ style: { fontSize: 14 } }}
                         /> )}
                   />
             </Grid>
-        </Grid>           
-            {category && (
-                <CreatePost category={category} setCategory={setCategory}/>
-            )}
+        </Grid>
+                   
+        {category && (
+            <CreatePost category={category} setCategory={setCategory}/>
+        )}
+            
       </section>
     </section>
   )
