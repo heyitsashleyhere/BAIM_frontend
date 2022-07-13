@@ -53,19 +53,24 @@ The users can edit their posts, pin them to their profile, read and write commen
 ## Technologies
 
     "dependencies": {
-        "bcrypt": "^5.0.1",
-        "chance": "^1.1.8",
-        "cookie-parser": "^1.4.6",
-        "cors": "^2.8.5",
+        "@emotion/react": "^11.9.3",
+        "@emotion/styled": "^11.9.3",
+        "@mui/icons-material": "^5.8.4",
+        "@mui/material": "^5.8.7",
+        "@mui/x-date-pickers": "^5.0.0-alpha.6",
+        "date-fns": "^2.28.0",
         "dotenv": "^16.0.1",
-        "express": "^4.18.1",
-        "express-validator": "^6.14.1",
-        "http-errors": "^2.0.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^6.3.4",
-        "nodemon": "^2.0.16"
-    }
-
+        "firebase": "^9.8.2",
+        "gsap": "^3.10.4",
+        "react": "^18.1.0",
+        "react-cookie": "^4.1.1",
+        "react-dom": "^18.1.0",
+        "react-icons": "^4.4.0",
+        "react-router-dom": "^6.3.0",
+        "react-scripts": "^5.0.1",
+        "sass": "^1.52.2"
+  }
+  
 <!-- TEAM -->
 
 ## Team
