@@ -7,6 +7,7 @@
 - [About](#about)  
 - [Features](#features)
 - [Technologies](#technologies)
+- [Designe](#designe)
 - [Team](#team)
 - [link](#link)
 
@@ -70,6 +71,15 @@ The users can edit their posts, pin them to their profile, read and write commen
         "react-scripts": "^5.0.1",
         "sass": "^1.52.2"
   }
+  
+  
+  
+  <!-- DESIGNE -->
+  
+  ## Designe
+  
+  <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FATMhtCX7NRp9otxh0y1EMy%2FUntitled-(Copy)%3Fnode-id%3D0%253A1" allowfullscreen></iframe>
+  
   
 <!-- TEAM -->
 
