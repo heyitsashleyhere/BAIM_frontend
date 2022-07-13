@@ -94,17 +94,17 @@ export const SingleProducePage = () => {
           </section>
 
           <section className="Seasonal-planting">
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>Planting consideration</h3>
-                {data.planting_considerations}
+                <p>{data.planting_considerations}</p>
               </section>
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>When to Plant</h3>
-                {data.when_to_plant}
+                <p>{data.when_to_plant}</p>
               </section>
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>Growing from seed</h3>
-                {data.growing_from_seed}
+                <p>{data.growing_from_seed}</p>
               </section>
               <section className="Seasonal-plant">
                 <h3>Transplanting</h3>
@@ -122,9 +122,9 @@ export const SingleProducePage = () => {
                 <h3>Feeding</h3>
               <p>{data.feeding}</p>
               </section>
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>Other Care</h3>
-              {data.other_care}
+              <p>{data.other_care}</p>
               </section>
               <section className="Seasonal-plant">
                 <h3>Diseases</h3>
@@ -137,23 +137,15 @@ export const SingleProducePage = () => {
           </section>
 
           <section className="Seasonal-harvest">
-            <section className="Seasonal-plant-map">
+            <section className="Seasonal-plant">
                 <h3>Harvesting</h3>
-                {data.harvesting}
+                <p>{data.harvesting}</p>
               </section>
             <section className="Seasonal-plant">
                 <h3>Storage</h3>
                 <p>{data.storage}</p>
                 </section>
-            
-            {/* <section className="Seasonal-harvest">
-                <h3>good neighbors:</h3>
-              <p>{data.good_neighbors.map(item=> <p>{item}</p>)}</p>
-              </section>
-              <section className="Seasonal-harvest">
-                <h3>bad neighbors:</h3>
-                <p>{data.bad_neighbors.map(item=><p>{item}</p>)}</p>
-              </section> */}
+      
             </section>
 
         </section>
