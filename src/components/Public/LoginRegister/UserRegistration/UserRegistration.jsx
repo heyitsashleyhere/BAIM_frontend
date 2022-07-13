@@ -681,7 +681,8 @@ export default function UserRegistration() {
                     error={errors.find((error) => error["userAddress.country"])}
                     inputProps={{
                       ...params.inputProps,
-                      autoFill: false // disable autocomplete and autofill
+                      autoFill: false, // disable autocomplete and autofill
+                      autoComplete: "new-password"
                     }}
                   />
                 )}

@@ -18,6 +18,7 @@ export default function Create() {
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                       options={postCategories}
+                      value={category}
                       onChange={(event, value) => setCategory(value)}
                       onInputChange={(event, value) => setCategory(value)}
                       renderInput={(params) => (
@@ -25,9 +26,10 @@ export default function Create() {
                           {...params}
                           name="category"
                           label="Category"
+                          autoComplete='off'
                           inputProps={{
                             ...params.inputProps,
-                            autoFill: false // disable autocomplete and autofill
+                            autoComplete: "new-password", // disable autocomplete and autofill
                           }}
                           // InputLabelProps={{ style: { fontSize: 14 } }}
                         /> )}
@@ -36,7 +38,7 @@ export default function Create() {
         </Grid>
                    
         {category && (
-            <CreatePost category={category} setCategory={setCategory}/>
+          category.length > 4 && <CreatePost category={category} setCategory={setCategory}/>
         )}
             
       </section>

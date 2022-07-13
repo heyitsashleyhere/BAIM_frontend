@@ -753,6 +753,7 @@ export default function UserEdit({ setUserEditOpen }) {
                     error={errors.find((error) => error["userAddress.country"])}
                     inputProps={{
                       ...params.inputProps,
+                      autoComplete: "new-password",
                       autoFill: false // disable autocomplete and autofill
                     }}
                   />

@@ -49,8 +49,7 @@ export const Profile = () => {
   const [showCatPosts, setShowCatPosts] = useState(false)
   const [showCatPins, setShowCatPins] = useState(false)
 
-
-  //toggle followpage
+  //toggle followPage
   const [ isFollowers, setIsFollowers]=useState(false)
   const [ isFollowing, setIsFollowing]=useState(false)
 

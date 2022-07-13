@@ -11,11 +11,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-import berry from "../../../assets/logo/raspberry.png";
 import { Follow } from "../Buttons/Follow/Follow.jsx";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
-import { DeletePost } from "../Buttons/Delete/DeletePost";
 import EditPost from "../Forms/EditPost/EditPost.jsx";
 import { Pin } from "../Buttons/Pin/Pin";
 
@@ -118,7 +116,7 @@ export const SquareAvatar = ({ data }) => {
           </Menu></>}
         </section> 
     
-        <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data.title}`} className="InnerSquareAvatar">
+        <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data._id}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
                 <img src={data.image}></img>
                 <h2>{data.title}</h2>

@@ -21,6 +21,7 @@ export default function CreatePost({ category, setCategory }) {
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [tagsArray, setTagsArray] = useState([])
+  const [postId, setPostId] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   let navigate = useNavigate()
   const countryList = [
@@ -322,6 +323,7 @@ export default function CreatePost({ category, setCategory }) {
        if (result.errors) {
               setErrors(result.errors);
        } else {
+            setPostId(result._id)
             setIsModalOpen(true)
             setUpgrade(!upgrade)
        }
@@ -334,7 +336,7 @@ export default function CreatePost({ category, setCategory }) {
 			return;
 		  }
 		  setIsModalOpen(false);
-      navigate(`/${category}/${inputValues.title}`)
+      navigate(`/${category}/${postId}`)
 	}
 
   return (
@@ -367,6 +369,7 @@ export default function CreatePost({ category, setCategory }) {
                           {...params}
                           name="category"
                           label="Category"
+                          autoComplete="new-password"
                         />
                       )}
                     />

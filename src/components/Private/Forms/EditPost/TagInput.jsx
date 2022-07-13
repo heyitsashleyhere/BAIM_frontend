@@ -61,7 +61,7 @@ export default function TagInput({ tags }) {
       sx={{ width: 300 }}
       freeSolo
       renderInput={(params) => (
-        <TextField {...params} label="separated by comma" />
+        <TextField {...params} label="separated by comma" autoComplete="new-password" />
       )}
     />
   );

@@ -116,11 +116,12 @@ const TransitionPage = ({isFromRegister}) => {
 
 	const hideOverlay = () => {
 		setIsOverlay(false);
-		if(isFromRegister) {
-			navigate(`/profile/${cookies.profileName}`, { replace: true });
-		} else {
-			navigate(`/discover`, { replace: true });
-		}
+		navigate(`/discover`, { replace: true });
+		// if(isFromRegister) {
+		// 	navigate(`/profile/${cookies.profileName}`, { replace: true });
+		// } else {
+		// 	navigate(`/discover`, { replace: true });
+		// }
 	};
 
 	return (

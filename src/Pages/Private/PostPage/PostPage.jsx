@@ -1,27 +1,69 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useCookies } from "react-cookie";
-import { useParams, useNavigate } from "react-router-dom";
-import { UserContext } from "../../../contexts/UserContext";
-import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avatars";
+import { useParams } from "react-router-dom";
+import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import { UserComment } from "../../../components/Private/Buttons/Comment/UserComment";
 import { MdOutlineArrowBack } from "react-icons/md";
 import { Pin } from "../../../components/Private/Buttons/Pin/Pin.jsx";
 import { AddComment } from "../../../components/Private/Buttons/Comment/AddComment.jsx";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
-import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar";
+import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
+import EditPost from "../../../components/Private/Forms/EditPost/EditPost.jsx";
 import "./postPage.scss";
-
-// ? IVO : Im still working on the usercomments component the one its here its not to stay.
+import { Button, Modal, Paper, IconButton, Popover, Typography, Box, Snackbar } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 export const PostPage = ({ data }) => {
+  const [deleteAnchorEl, setDeleteAnchorEl] = useState(null);
   const [cookies] = useCookies();
-  const { title } = useParams();
-  let navigate = useNavigate();
-
-  const selected = data.find((item) => item.title === title);
+  const { id } = useParams();
+  const [isPostEditOpen, setIsPostEditOpen] = useState(false)
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
+  const [selected, setSelected] = useState(data.find((item) => item._id === id))
 
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
+
+  const handleDeleteClick = (event) => {
+    setDeleteAnchorEl(event.currentTarget);
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteAnchorEl(null);
+  };
+
+  const deleteIsOpen = Boolean(deleteAnchorEl);
+  const deleteId = deleteIsOpen ? 'postPage-delete-popover' : undefined;
+
+  function handlePostDelete(id) {
+    const config = {
+      method: "delete",
+      credentials: 'include',
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
+      .then((response) => response.json())
+      .then((result) => {
+        if (!result.errors) {
+          setIsSnackbarOpen(true)
+        } else {
+          console.log('delete Post error :>> ', result);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function handleSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+			return;
+		  }
+    setIsSnackbarOpen(false)
+    setShowCatPosts(null)
+  }
 
   return (
     <>
@@ -42,9 +84,84 @@ export const PostPage = ({ data }) => {
             <PostHeaderAvatar
               name={selected.authorProfileName}
               image={selected.authorAvatar}
-            ></PostHeaderAvatar>
-             {/* <Pin/> */}
+            />
+            {cookies.profileName === selected.authorProfileName && (
+              <div>
+                <IconButton aria-label="delete" color="primary" sx={{ mr: 2 }}
+                            onClick={handleDeleteClick}>
+                    <DeleteIcon />
+                </IconButton>
+                <Popover
+                  id={deleteId}
+                  open={deleteIsOpen}
+                  anchorEl={deleteAnchorEl}
+                  onClose={handleDeleteClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                >
+                  <Typography sx={{ p: 2 }}>
+                    Want to delete this post forever ever?
+                  </Typography>
+                  <Box sx={{ textAlign: "center" }}>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      startIcon={<CheckCircleIcon />}
+                      sx={{ mb: 1 }}
+                      onClick={() => handlePostDelete(selected._id)}
+                    >
+                      YES
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      startIcon={<CloseIcon />}
+                      sx={{ mb: 1 }}
+                      onClick={() => setDeleteAnchorEl(null)}
+                    >
+                      NO
+                    </Button>
+                  </Box>
+                </Popover>
+                <Button variant="outlined" onClick={() => setIsPostEditOpen(true)}>
+                  <EditIcon fontSize="small" sx={{ mr: 2 }} color="primary"/>Edit
+                </Button>
+              </div>
+            )}
           </section>
+
+          <Modal open={isPostEditOpen} onClose={() => { setIsPostEditOpen(false) }}
+                sx={{
+                  display: 'flex',
+                  overflow: 'scroll',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                <Paper elevation={3} sx={{ width: '80%', height: '90%', overflow: 'scroll' }}>
+                  <EditPost postData={selected} setPostData={setSelected} setIsEditOpen={setIsPostEditOpen} />
+                </Paper>
+
+          </Modal>
+
+          <Modal open={isSnackbarOpen} onClose={() => { setIsSnackbarOpen(false); setUpgrade(!upgrade) }} >
+            <Snackbar open={isSnackbarOpen} autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    message={"Your post is deleted"}
+                    action={
+                        <React.Fragment>
+                          <IconButton
+                          aria-label="close"
+                          color="inherit"
+                          sx={{ p: 0.5 }}
+                          onClick={handleSnackbarClose}
+                          >
+                          <CloseIcon />
+                          </IconButton>
+                        </React.Fragment>
+                        } />
+          </Modal>
 
           <section className="Post-title">
             <p>{selected.category.map((item) => item.toUpperCase())}</p>
