@@ -189,7 +189,7 @@ export const PostPage = ({ data }) => {
             <p>Comments</p>
             {selected.comments
               ? selected.comments.map((item, index) => (
-                  <UserComment post={item} user={cookies.id} key={'userComment' + index}></UserComment>
+                  <UserComment post={item} key={'userComment' + index} />
                 ))
               : null}
 
