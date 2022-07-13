@@ -9,6 +9,7 @@ export const UserContextProvider = (props) => {
   const [inputValues, setInputValues] = useState({})
   const [message, setMessage] = useState("")
   const [isLogin, setIsLogin] = useState(false)
+  const [isUserDelete, setIsUserDelete] = useState(false)
   const [isFromRegister, setIsFromRegister] = useState(false)
   const [isShowPassword, setIsShowPassword] = useState(false)
 
@@ -23,7 +24,8 @@ export const UserContextProvider = (props) => {
     isLogin, setIsLogin,
     isShowPassword, setIsShowPassword,
     showPasswordHandler,
-    isFromRegister, setIsFromRegister
+    isFromRegister, setIsFromRegister,
+    isUserDelete, setIsUserDelete
   }
 
   return (

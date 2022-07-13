@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
+import { UserContext } from "../../../contexts/UserContext.js";
 import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
@@ -20,8 +21,10 @@ import { FollowPage } from "../../../components/Private/Profile-components/Follo
 
 export const Profile = () => {
   const { postCategories, upgrade, setUpgrade, profileData, setProfileData, postData } = useContext(PostsContext);
+  const { setIsLogin, setIsUserDelete } = useContext(UserContext)
   const { profileName } = useParams();
   const [cookies] = useCookies();
+  let navigate = useNavigate()
 
   // user library
   const [beauties, setBeauties] = useState(null);
@@ -130,7 +133,7 @@ export const Profile = () => {
     setUserEditOpen(true)
   }
 
-  function handleDelete(id) {
+  function handleUserDelete(id) {
     const config = {
       method: "delete",
       credentials: 'include',
@@ -156,20 +159,13 @@ export const Profile = () => {
 	}
 
   function openFollowers(){
-
-    if(isFollowing){
       setIsFollowing(false)
-      setFollowers(!isFollowers)
-    }
-      setFollowers(!isFollowers)
+      setIsFollowers(!isFollowers)
     
   }
 
   function openFollowing(){
-    if(isFollowers){
-      setIsFollowers(false)
-      setIsFollowing(!isFollowing)
-    }
+    setIsFollowers(false)
     setIsFollowing(!isFollowing)
   }
 
@@ -183,10 +179,10 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {cookies.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
+                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
-              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
+              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false); setIsUserDelete(true) }} >
                 <Paper elevation={3} className="ProfileEdit-form"
                   sx={{
                     width: '80%', padding: '2rem',
@@ -230,11 +226,11 @@ export const Profile = () => {
                 <Follow className="Profile-follow-button" />
 
                 {/* // ! MURAD : check this logic with the Modal thing  */}
-                {/* <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
+                <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
 
-               { isFollowers && <FollowPage follow={following} type={followers}/>  }
-               { isFollowing && <FollowPage follow={following} type={following}/> } */}
+               { isFollowers && <FollowPage follow={followers} type='followers'/>  }
+               { isFollowing && <FollowPage follow={following} type='following'/> }
               </div>
             </div>
 

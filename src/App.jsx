@@ -56,7 +56,7 @@ const theme = createTheme({
 
 
 export default function App() {
-	const { isLogin } = useContext(UserContext);
+	const { isLogin, isUserDelete } = useContext(UserContext);
 	const { isNav } = useContext(AnimationContext);
 	const [cookies] = useCookies();
 	const [displayNav, setDisplayNav] = useState();
@@ -95,6 +95,11 @@ export default function App() {
 							<PrivateHeader />
 						</>
 					) : (
+						<Header />
+					)
+				) : null}
+				{displayNav || isNav ? (
+					!cookies.profileName && !isLogin && isUserDelete && (
 						<Header />
 					)
 				) : null}

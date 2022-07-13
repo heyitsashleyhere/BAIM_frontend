@@ -10,7 +10,7 @@ export const FollowPage = (props) => {
 
   const { follow, type } = props
 
-
+  console.log('follow', follow)
 
   function filter(arr1, arr2) {
     return arr1.filter(el => {
@@ -30,8 +30,8 @@ export const FollowPage = (props) => {
        <h2>{type}</h2>
        </section>
        <section className="Follow-body">
-        {filter(users, follow).map(item => <RoundAvatar name={item.profileName} id={item._id} image={item.avatar}/>)}
-      </section>
+          {filter(users, follow).map(item => <RoundAvatar name={item.profileName} id={item._id} image={item.avatar}/>)}
+       </section>
     </div>
   )
 }
