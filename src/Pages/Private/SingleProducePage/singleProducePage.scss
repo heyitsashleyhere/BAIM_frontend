@@ -115,6 +115,7 @@
                             background-color: black;
                             color: white;
                             border-radius: 10%;
+                            
                         }
 
 
@@ -146,6 +147,7 @@
 
                 p {
                     margin: 1rem 0rem;
+                    font-size: 2rem;
 
                     &:last-child {
                         display: none;
@@ -261,6 +263,7 @@
 
             .Seasonal-text {
                 grid-column: 2/8;
+                line-height: 1.4;
 
                 .Seasonal-dual {
                     display: flex;
@@ -280,6 +283,13 @@
                     }
 
 
+                }
+
+                .Seasonal-plant{
+                    p{
+                        
+                        line-height: 1.4;
+                    }
                 }
 
 

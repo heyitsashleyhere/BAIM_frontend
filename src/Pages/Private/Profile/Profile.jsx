@@ -261,6 +261,7 @@ export const Profile = () => {
               <div className="Profile-followers">
                 <Follow className="Profile-follow-button" />
 
+
                 <button className="NavLink-Black" onClick={() => setIsFollowersOpen(true)}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={() => setIsFollowingOpen(true)}>{following.length} following</button>
 
@@ -277,6 +278,7 @@ export const Profile = () => {
                     <FollowPage follow={followers} type='followers' />
                   </Paper>
                 </Modal>
+
               </div>
             </div>
 
