@@ -30,8 +30,8 @@ import { UserContext } from "./contexts/UserContext.js";
 import { Events } from "./Pages/Private/Events/Events.jsx";
 
 const { REACT_APP_TEST } = process.env
-console.log("process.env:", process.env);
-console.log("REACT_APP_TEST:", REACT_APP_TEST);
+// console.log("process.env:", process.env);
+// console.log("REACT_APP_TEST:", REACT_APP_TEST);
 
 const theme = createTheme({
 	palette: {

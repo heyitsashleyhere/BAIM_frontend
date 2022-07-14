@@ -229,11 +229,11 @@ export const Profile = () => {
                 <Follow className="Profile-follow-button" />
 
                 {/* // ! MURAD : check this logic with the Modal thing  */}
-               // <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
-               // <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
+                {/* <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
+                <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
 
-              // { isFollowers && <FollowPage follow={followers} type='followers'/>  }
-              // { isFollowing && <FollowPage follow={following} type='following'/> }
+                 { isFollowers && <FollowPage follow={followers} type='followers'/>  }
+                 { isFollowing && <FollowPage follow={following} type='following'/> } */}
 
                 <button className="NavLink-Black" onClick={() => setIsFollowersOpen(true)}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={() => setIsFollowingOpen(true)}>{following.length} following</button>
@@ -277,10 +277,6 @@ export const Profile = () => {
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "garden"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "recipe"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "event"), display, setDisplay, showCatPins, setShowCatPins)}
-
-                  <EventsTable data={eventPins} />
-
-
                 </div>}
             </div>
 
