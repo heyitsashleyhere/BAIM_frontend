@@ -22,13 +22,18 @@ export const UserComment = ({ post } ) => {
   const author = cookies.id === post.author;
 
   function editComment() {
-    const payload = { message: newComment }
+    const payload = {
+      type: post.type,
+      [post.type]: post[`${post.type}`],
+      message: newComment === "" ? post.message : newComment 
+    }
     const config = {
       method: "PATCH",
       credentials: "include", // specify this if you need cookies
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }
+
     // send id of the comment
     fetch(`http://localhost:7000/comments/${post._id}`, config)
       .then((response) => response.json())
@@ -44,10 +49,15 @@ export const UserComment = ({ post } ) => {
   }
 
   function deleteComment() {
+    const payload = {
+      type: post.type,
+      [post.type]: post[`${post.type}`],
+    }
     const config = {
       method: "DELETE",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     }
     // send id of the comment
     fetch(`http://localhost:7000/comments/${post._id}`, config)
@@ -100,9 +110,10 @@ export const UserComment = ({ post } ) => {
         ) : (
           <textarea
             placeholder={post.message}
+            defaultValue={post.message}
             onChange={(e) => setNewComment(e.target.value)}
             className="comment-input"
-          ></textarea>
+          />
         )}
       </section>
     </section>

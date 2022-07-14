@@ -73,7 +73,7 @@ export default function App() {
 		const localDisplayNav = localStorage.getItem("showNav");
 		setDisplayNav(localDisplayNav);
 	}, []);
-
+	
 
 	if (!users.length || !allBeautyPost.length
 		|| !allArtsCraftPost.length || !allGardenPost.length

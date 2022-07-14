@@ -307,25 +307,30 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const config = {
-      method: "PATCH",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(inputValues),
-    }
 
-    fetch(`http://localhost:7000/${category}/${postData._id}`, config)
-      .then((response) => response.json())
-      .then((result) => {
-       if (result.errors) {
-              setErrors(result.errors);
-       } else {
-        setPostData(result.updatedPost)
-        setIsModalOpen(true)
-        setUpgrade(!upgrade)
-       }
-      })
-      .catch((error) => console.log(error));
+    if(Object.values(inputValues).every(x => (x === null || x === ''))){
+      setIsEditOpen(false)
+    } else {
+      const config = {
+        method: "PATCH",
+        credentials: "include", // specify this if you need cookies
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(inputValues),
+      }
+  
+      fetch(`http://localhost:7000/${category}/${postData._id}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+         if (result.errors) {
+                setErrors(result.errors);
+         } else {
+          setPostData(result.updatedPost)
+          setIsModalOpen(true)
+          setUpgrade(!upgrade)
+         }
+        })
+        .catch((error) => console.log(error));
+    }
   }
   
   function handleClose(event, reason) {

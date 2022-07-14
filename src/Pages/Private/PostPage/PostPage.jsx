@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
@@ -10,7 +10,7 @@ import { DiscoverNavbar } from "../../../components/Private/section-header/Disco
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
 import EditPost from "../../../components/Private/Forms/EditPost/EditPost.jsx";
 import "./postPage.scss";
-import { Button, Modal, Paper, IconButton, Popover, Typography, Box, Snackbar } from "@mui/material";
+import { Button, Modal, Paper, IconButton, Popover, Typography, Box, Snackbar, Chip } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
@@ -22,10 +22,32 @@ export const PostPage = ({ data }) => {
   const { id } = useParams();
   const [isPostEditOpen, setIsPostEditOpen] = useState(false)
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
+  const [isAddCommentModalOpen, setIsAddCommentModalOpen] = useState(false);
+  const [isUserCommentModalOpen, setIsUserCommentModalOpen] = useState(false)
   const [selected, setSelected] = useState(data.find((item) => item._id === id))
-
+  
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
+
+  useEffect(() => {
+    const config = {
+      method: "GET",
+      credentials: "include", // specify this if you need cookies
+      headers: { "Content-Type": "application/json" },
+    };
+    
+    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.errors) {
+          console.log("errors from PostPage GET :>> ", result.errors);
+        } else {
+          setSelected(result);
+        }
+    })
+    .catch((error) => console.log('error from Pin component ', error));
+  }, [selected, isAddCommentModalOpen])
+  
 
   const handleDeleteClick = (event) => {
     setDeleteAnchorEl(event.currentTarget);
@@ -164,7 +186,13 @@ export const PostPage = ({ data }) => {
           </Modal>
 
           <section className="Post-title">
-            <p>{selected.category.map((item) => item.toUpperCase())}</p>
+            <div>
+              {selected.category.map((item, i) => 
+                <Chip label={item.toUpperCase()} sx={{marginRight: 1}} variant="outlined" key={'category-'+ item + i}/>
+              )}
+            </div>
+
+            {/* <p>{selected.category.map((item) => item.toUpperCase())}</p> */}
             <p className="Post-date">{date(selected.createdAt)}</p>
           </section>
 
@@ -193,9 +221,9 @@ export const PostPage = ({ data }) => {
                 ))
               : null}
 
-            <section className="Leave-Comment">
-            <AddComment post={selected}/>
-            </section>
+            <div className="Leave-Comment">  
+              <AddComment post={selected} isModalOpen={isAddCommentModalOpen} setIsModalOpen={setIsAddCommentModalOpen}/>
+            </div>
           </section>
         </section>
       </section>
