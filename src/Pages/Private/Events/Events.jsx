@@ -3,43 +3,31 @@ import { useCookies } from "react-cookie";
 import { AnimationContext } from "../../../contexts/AnimationContext";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar";
 import EventModal from "./EventModal.jsx";
+import { EventsTable } from "./EventsTable.jsx";
+
 
 //MUI
 import * as MUI from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
 import "./events.scss";
 import { Snackbar } from "../../../components/Private/Snackbar.jsx";
 
-//MUI styles
-const styles = {
-	"& th": {
-		fontWeight: "bold",
-		fontSize: "15px",
-	},
-};
-const styles2 = {
-	"& th, td": {
-		fontWeight: "bold",
-		fontSize: "14px",
-	},
-};
+
 
 export const Events = ({ data }) => {
 	const [cookies] = useCookies();
-	const { windowWidth, setSnackbar } = useContext(AnimationContext);
+	const { windowWidth } = useContext(AnimationContext);
 	const [showMobile, setShowMobile] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	// find if the user is the author
-	const isAuthor = data.find(item => item._id === cookies.id)
+	const [selected, setSelected] = useState({});
 
 
-	const handleModalOpen = (idx) => {
+
+	const handleModalOpen = (event) => {
+		setSelected(event);
 		setIsModalOpen(true);
 	};
 	const handleModalClose = () => setIsModalOpen(false);
+
 
 	//to toggle show/hide mui components between breakpoints
 	useEffect(() => {
@@ -51,6 +39,7 @@ export const Events = ({ data }) => {
 	const date = new Date();
 	let currentMonth = date.toLocaleString("default", { month: "long" });
 
+
 	//filtering events object based on current month
 	const eventDate = data.filter((event) => {
 		const eventMonth = new Date(event.start).toLocaleString("default", {
@@ -61,32 +50,12 @@ export const Events = ({ data }) => {
 		}
 	});
 
-
-	const pinEvent = (event) => {
-		const config = {
-			method: "PATCH",
-			credentials: "include",
-			headers: { "Content-Type": "application/json" },
-		};
-
-		fetch(`http://localhost:7000/event/pin/${event._id}`, config)
-			.then((response) => response.json())
-			.then((result) => {
-				if (result.errors) {
-					setError(result.errors);
-				} else {
-					setSnackbar({
-						message: `Event ${event.likes.find(item => item === cookies.id) ? `removed from` : `added to`} your Profile`,
-						open: true,
-						severity: "error"
-					})
-				}
-			})
-			.catch((error) => {
-				console.log("error from Pin Event", error);
-			});
-	};
-
+	const augustEvents = data.filter((event) => {
+		const upcomingMonth = new Date(event.start).toLocaleString("default", { month: "long" })
+		if (upcomingMonth === 'August') {
+			return upcomingMonth
+		}
+	})
 
 	return (
 		<>
@@ -103,36 +72,7 @@ export const Events = ({ data }) => {
 					</div>
 				</section>
 				<section className="events-calendar">
-					<MUI.TableContainer component={MUI.Paper}>
-						<MUI.Table aria-label="collapsible table">
-							<MUI.TableHead>
-								<MUI.TableRow sx={styles}>
-									<MUI.TableCell />
-									<MUI.TableCell>Date</MUI.TableCell>
-									{showMobile ? null : (
-										<MUI.TableCell align="center">Time</MUI.TableCell>
-									)}
-									<MUI.TableCell align="right">Location</MUI.TableCell>
-									{showMobile ? null : (
-										<MUI.TableCell align="right">City</MUI.TableCell>
-									)}
-									<MUI.TableCell align="right">Attending</MUI.TableCell>
-								</MUI.TableRow>
-							</MUI.TableHead>
-							<MUI.TableBody>
-								{eventDate.map((event) => (
-									<EventRow
-										key={event._id}
-										currentUserId={cookies.id}
-										event={event}
-										showMobile={showMobile}
-										pinEvent={pinEvent}
-										isAuthor={isAuthor}
-									/>
-								))}
-							</MUI.TableBody>
-						</MUI.Table>
-					</MUI.TableContainer>
+					<EventsTable data={eventDate} />
 				</section>
 
 				<section className="events-month">
@@ -142,11 +82,11 @@ export const Events = ({ data }) => {
 				</section>
 				<section className="events-calendar">
 					<MUI.List component={MUI.Paper}>
-						{eventDate.map((event, idx) => (
+						{augustEvents.map((event, idx) => (
 							<div key={event._id}>
 								<MUI.CardActionArea
 									key={idx}
-									onClick={() => handleModalOpen(idx)}
+									onClick={() => handleModalOpen(event)}
 								>
 									<MUI.ListItem alignItems="flex-start">
 										<MUI.ListItemAvatar sx={{ mb: 1 }}>
@@ -201,7 +141,7 @@ export const Events = ({ data }) => {
 								<EventModal
 									setIsModalOpen={setIsModalOpen}
 									handleModalClose={handleModalClose}
-									isModalOpen={isModalOpen}
+									isModalOpen={selected._id === event._id && isModalOpen}
 									event={event}
 									key={event._id}
 								/>
@@ -214,95 +154,3 @@ export const Events = ({ data }) => {
 		</>
 	);
 };
-
-function EventRow(props) {
-	const { event, showMobile, pinEvent, isAuthor, currentUserId } = props;
-	const [open, setOpen] = useState(false);
-
-	return (
-		<>
-			<MUI.TableRow sx={styles2}>
-				<MUI.TableCell>
-					<MUI.IconButton
-						aria-label="expand row"
-						size="small"
-						onClick={() => setOpen(!open)}
-					>
-						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-					</MUI.IconButton>
-				</MUI.TableCell>
-				<MUI.TableCell component="th" scope="row">
-					{new Date(event.start).getDate()}
-					{" - "}
-					{new Date(event.start).toLocaleString("default", {
-						weekday: "short",
-					})}
-				</MUI.TableCell>
-				{showMobile ? null : (
-					<MUI.TableCell align="center">
-						{new Date(event.start).getHours() % 12 || 12}
-						{":00"} {" - "}
-						{new Date(event.end).getHours() % 12 || 12}
-						{":00"}
-					</MUI.TableCell>
-				)}
-				<MUI.TableCell align="right">{event.address.street}</MUI.TableCell>
-				{showMobile ? null : (
-					<MUI.TableCell align="right">{event.address.city}</MUI.TableCell>
-				)}
-				<MUI.TableCell align="right">
-					{isAuthor ? null :
-						<MUI.Checkbox
-							onClick={() => pinEvent(event)}
-							defaultChecked={event.likes.find(item => item === currentUserId) ? true : false}
-							inputProps={{ 'aria-label': 'controlled' }}
-						/>
-					}
-				</MUI.TableCell>
-			</MUI.TableRow>
-			<MUI.TableRow>
-				<MUI.TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-					<MUI.Collapse in={open} timeout="auto" unmountOnExit>
-						<MUI.Box sx={{ margin: 1 }}>
-							<MUI.Card elevation={0} square sx={{ marginTop: 2 }}>
-								<MUI.CardMedia
-									component="img"
-									height="400"
-									image={event.image}
-									alt={event.title}
-								/>
-								<MUI.CardContent>
-									<MUI.Typography
-										gutterBottom
-										variant="h3"
-										component="div"
-										sx={{
-											textTransform: "capitalize",
-											fontWeight: "bold",
-										}}
-									>
-										{event.title}
-									</MUI.Typography>
-									<MUI.Typography variant="h5" color="text.secondary">
-										{event.description}
-									</MUI.Typography>
-								</MUI.CardContent>
-							</MUI.Card>
-							<MUI.Box my={3}>
-								{event.tags.map((tag) => (
-									<MUI.Chip
-										key={tag}
-										label={tag}
-										margin="normal"
-										variant="outlined"
-										sx={{ m: 0.5 }}
-									/>
-								))}
-							</MUI.Box>
-						</MUI.Box>
-					</MUI.Collapse>
-				</MUI.TableCell>
-			</MUI.TableRow>
-		</>
-	);
-}

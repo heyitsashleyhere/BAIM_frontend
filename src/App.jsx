@@ -47,11 +47,31 @@ const theme = createTheme({
 		htmlFontSize: 10,
 		fontFamily: ["Varela Round", "Arial", "Helvetica", "sans-serif"].join(","),
 		fontSize: 16,
+		h3: {
+			fontSize: '3rem',
+			'@media (min-width:600px)': {
+				fontSize: '3.6rem',
+			},
+			'@media (min-width:992px)': {
+				fontSize: '4rem',
+			}
+		},
+		h5: {
+			fontSize: '1.8rem',
+			'@media (min-width:600px)': {
+				fontSize: '2.2rem',
+			},
+			'@media (min-width:992px)': {
+				fontSize: '2.8rem',
+			}
+		},
+		h6: {
+			fontSize: '1.6rem',
+			'@media (min-width:992px)': {
+				fontSize: '1.8rem',
+			}
+		},
 	},
-	snackbar:
-	{
-		textColor: '#123456'
-	}
 });
 
 
@@ -165,7 +185,7 @@ export default function App() {
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
 
-				{cookies.profileName || isLogin  ? (
+				{cookies.profileName || isLogin ? (
 					<>
 						<Footer />
 					</>

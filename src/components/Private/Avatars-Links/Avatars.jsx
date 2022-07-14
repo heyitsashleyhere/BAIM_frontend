@@ -156,6 +156,7 @@ export const SquareAvatar = ({ data }) => {
       </section>
     )
   }
+  
 
 // Avatars used specially in community page and general search engines.
 // this avatar uses nested components to fetch
@@ -163,56 +164,56 @@ export const RoundAvatar = ({ name, id, image }) => {
   const { user } = useContext(UserContext)
   const [cookies] = useCookies();
 
-	const author = cookies.profileName === name;
+  const author = cookies.profileName === name;
 
 
-	return (
-		<section className="ProfileAvatar-CARD">
-			<Link to={`/profile/${name}`} key={id} className="RoundAvatarProfile">
-				<section className="ImageAvatarProfile">
-					<img src={image}></img>
-				</section>
-				<h2>{name}</h2>
-			</Link>
-			{author ? <Button disabled style={{ fontSize: "1rem", padding: '0.5em 1em' }} >hey its me</Button> : <Follow name={name} />}
-		
-		</section>
-	);
+  return (
+    <section className="ProfileAvatar-CARD">
+      <Link to={`/profile/${name}`} key={id} className="RoundAvatarProfile">
+        <section className="ImageAvatarProfile">
+          <img src={image}></img>
+        </section>
+        <h2>{name}</h2>
+      </Link>
+      {author ? <Button disabled style={{ fontSize: "1rem", padding: '0.5em 1em' }} >hey its me</Button> : <Follow name={name} />}
+
+    </section>
+  );
 };
 
 // Seasonal avatar
 export const SeasonalAvatar = ({ name, id, image }) => {
-	return (
-		<section className="AvatarR">
-			<NavLink to={name === 'More' ? `/seasonal`: `/seasonal/${name}`} key={id} className="RoundAvatar">
-				<section className="imageAvatar produceIcon">
-					<img src={image}></img>
-				</section>
-				<h2>{name}</h2>
-			</NavLink>
-		</section>
-	);
+  return (
+    <section className="AvatarR">
+      <NavLink to={name === 'More' ? `/seasonal` : `/seasonal/${name}`} key={id} className="RoundAvatar">
+        <section className="imageAvatar produceIcon">
+          <img src={image}></img>
+        </section>
+        <h2>{name}</h2>
+      </NavLink>
+    </section>
+  );
 };
 
 // AVATARS for POSTS
 export const PostHeaderAvatar = ({ id, name, image }) => {
-	return (
-		<Link to={`/profile/${name}`} key={id} className="HeaderAvatar">
-			<section className="headAvatar">
-				<img src={image}></img>
-			</section>
-			<h2>{name}</h2>
-		</Link>
-	);
+  return (
+    <Link to={`/profile/${name}`} key={id} className="HeaderAvatar">
+      <section className="headAvatar">
+        <img src={image}></img>
+      </section>
+      <h2>{name}</h2>
+    </Link>
+  );
 };
 
 export const PostCommentsAvatar = ({ id, name, image }) => {
-	return (
-		<Link to={`/profile/${name}`} key={id} className="CommentAvatar">
-			<section className="comAvatar">
-				<img src={image}></img>
-			</section>
-			<h2>{name}</h2>
-		</Link>
-	);
+  return (
+    <Link to={`/profile/${name}`} className="CommentAvatar">
+      <section className="comAvatar">
+        <img src={image}></img>
+      </section>
+      <h2>{name}</h2>
+    </Link>
+  );
 };
