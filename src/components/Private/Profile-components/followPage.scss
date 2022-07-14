@@ -1,0 +1,27 @@
+@import '../../../styles/breakpoints';
+
+.Follow {
+  padding: 1rem;
+
+  &-header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-block: 2rem;
+    text-transform: capitalize;
+  }
+
+  &-body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @include media(">tablet") {
+    padding: 2rem;
+
+    &-header {
+      font-size: 2.4rem;
+      margin-block: 3rem;
+    }
+  }
+}

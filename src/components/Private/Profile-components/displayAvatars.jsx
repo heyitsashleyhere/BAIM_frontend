@@ -1,5 +1,7 @@
 import { SquareAvatar } from "../Avatars-Links/Avatars.jsx";
-import { EventsTable } from "../Avatars-Links/Tables.jsx";
+// import { EventsTable } from "../Avatars-Links/Tables.jsx";
+import { EventsTable } from '../../../Pages/Private/Events/EventsTable'
+
 
 export default function displayAvatars(
 	type,
@@ -28,6 +30,6 @@ export default function displayAvatars(
 				<SquareAvatar key={"profilePage-avatar" + i} data={data} />
 			));
 		case "event":
-			return <EventsTable events={events} />;
+			return <EventsTable data={events} />;
 	}
 }

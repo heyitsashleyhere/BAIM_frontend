@@ -1,16 +1,18 @@
 import * as React from "react";
 import * as MUI from "@mui/material";
+import { height } from "@mui/system";
 
 const style = {
 	position: "absolute",
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	width: 600,
 	bgcolor: "background.paper",
 	boxShadow: 24,
 	p: 4,
-	borderRadius: '10px'
+	borderRadius: '10px',
+	overflowY: "scroll",
+	height: "80%"
 };
 
 export default function EventModal(props) {

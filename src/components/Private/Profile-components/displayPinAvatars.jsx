@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { PostsContext } from "../../../contexts/PostContext.js";
 import { SquareAvatar } from "../Avatars-Links/Avatars.jsx";
-import { EventsTable } from "../Avatars-Links/Tables.jsx"
+// import { EventsTable } from "../Avatars-Links/Tables.jsx"
+import { EventsTable } from '../../../Pages/Private/Events/EventsTable'
 
 export default function displayPinAvatars(type, pins) {
   const { allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost, } = useContext(PostsContext)
@@ -33,7 +34,7 @@ export default function displayPinAvatars(type, pins) {
         <SquareAvatar key={"profilePage-pinAvatar" + i} data={data} />
       ));
     case "event":
-      return <EventsTable events={filter(allEventPost, pins.filter(pin => pin.postType === "event"))} />
-      ;
+      return <EventsTable data={filter(allEventPost, pins.filter(pin => pin.postType === "event"))} />
+        ;
   }
 }

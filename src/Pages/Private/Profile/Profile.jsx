@@ -12,9 +12,10 @@ import showPinCategoryButton from "../../../components/Private/Profile-component
 import displayAvatars from "../../../components/Private/Profile-components/displayAvatars.jsx";
 import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
-import { EventsTable } from "../../../components/Private/Avatars-Links/Tables"
+// import { EventsTable } from "../../../components/Private/Avatars-Links/NONEEDTablesTables"
+import { EventsTable } from "../Events/EventsTable.jsx";
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
-import { Modal, Typography, Paper } from "@mui/material";
+import { Modal, Typography, Paper, Popper, Box } from "@mui/material";
 import "./profile.scss";
 import { FollowPage } from "../../../components/Private/Profile-components/FollowPage.jsx";
 
@@ -53,8 +54,11 @@ export const Profile = () => {
 
 
   //toggle followpage
-  const [ isFollowers, setIsFollowers]=useState(false)
-  const [ isFollowing, setIsFollowing]=useState(false)
+  // const [isFollowers, setIsFollowers] = useState(false)
+  // const [isFollowing, setIsFollowing] = useState(false)
+  const [isFollowingOpen, setIsFollowingOpen] = useState(false)
+  const [isFollowersOpen, setIsFollowersOpen] = useState(false)
+
 
   const config = {
     method: "GET",
@@ -75,14 +79,14 @@ export const Profile = () => {
         } else {
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
             cookies.profileName === profileName
-            ? setPostMessage("You have not posted anything yet")
-            : setPostMessage("This person has not posted anything yet");
+              ? setPostMessage("You have not posted anything yet")
+              : setPostMessage("This person has not posted anything yet");
           }
 
           if (result.pin.length == 0) {
             cookies.profileName === profileName
-            ? setPinMessage("You have not pinned anything yet")
-            : setPinMessage("This person has not pinned anything yet");
+              ? setPinMessage("You have not pinned anything yet")
+              : setPinMessage("This person has not pinned anything yet");
           }
           setProfileData(result)
           setPins(result.pin)
@@ -129,7 +133,7 @@ export const Profile = () => {
         );
     });
   }, [profileName, showMyPosts, showCatPosts])
-  
+
 
   // useEffect(() => {
   //   console.log('pins :>> ', pins);
@@ -175,31 +179,31 @@ export const Profile = () => {
       })
       .catch((error) => console.log(error));
   }
-  
+
 
   if (!profileData || !beauties
-		|| !artsCrafts || !gardens
-		|| !recipes || !events) {
-		return <LoadingSpinner />
-	}
-
-  function openFollowers(){
-
-    if(isFollowing){
-      setIsFollowing(false)
-      setFollowers(!isFollowers)
-    }
-      setFollowers(!isFollowers)
-    
+    || !artsCrafts || !gardens
+    || !recipes || !events) {
+    return <LoadingSpinner />
   }
 
-  function openFollowing(){
-    if(isFollowers){
-      setIsFollowers(false)
-      setIsFollowing(!isFollowing)
-    }
-    setIsFollowing(!isFollowing)
-  }
+  // function openFollowers() {
+
+  //   if (isFollowing) {
+  //     setIsFollowing(false)
+  //     setFollowers(!isFollowers)
+  //   }
+  //   setFollowers(!isFollowers)
+
+  // }
+
+  // function openFollowing() {
+  //   if (isFollowers) {
+  //     setIsFollowers(false)
+  //     setIsFollowing(!isFollowing)
+  //   }
+  //   setIsFollowing(!isFollowing)
+  // }
 
 
   return (
@@ -211,7 +215,7 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {cookies.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
+                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
               )}
 
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
@@ -257,12 +261,24 @@ export const Profile = () => {
               <div className="Profile-followers">
                 <Follow className="Profile-follow-button" />
 
-                {/* // ! MURAD : check this logic with the Modal thing  */}
-                <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
-                <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
 
-               { isFollowers && <FollowPage follow={following} type={"followers"}/>  }
-               { isFollowing && <FollowPage follow={following} type={"following"}/> }
+                <button className="NavLink-Black" onClick={() => setIsFollowersOpen(true)}>{followers.length} followers</button>
+                <button className="NavLink-Black" onClick={() => setIsFollowingOpen(true)}>{following.length} following</button>
+
+
+
+                <Modal open={isFollowingOpen} onClose={() => setIsFollowingOpen(false)}>
+                  <Paper elevation={1} sx={{ width: '80%', height: '90%', overflow: 'scroll', position: "fixed", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                    <FollowPage follow={following} type='following' />
+                  </Paper>
+                </Modal>
+
+                <Modal open={isFollowersOpen} onClose={() => setIsFollowersOpen(false)}>
+                  <Paper elevation={1} sx={{ width: '80%', height: '90%', overflow: 'scroll', position: "fixed", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                    <FollowPage follow={followers} type='followers' />
+                  </Paper>
+                </Modal>
+
               </div>
             </div>
 
@@ -290,7 +306,7 @@ export const Profile = () => {
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "garden"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "recipe"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "event"), display, setDisplay, showCatPins, setShowCatPins)}
-                  {/* <EventsTable events={eventPins} />; */}
+                  <EventsTable data={eventPins} />
 
 
                 </div>}
