@@ -1,12 +1,14 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal, Typography } from "@mui/material";
+import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal, Snackbar, IconButton } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import ImageIcon from '@mui/icons-material/Image';
+import CloseIcon from '@mui/icons-material/Close';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import ImageInput from "../ImageInput.jsx";
+// import ImageIcon from '@mui/icons-material/Image';
 import TagInput from "./TagInput.jsx";
 
 
@@ -271,6 +273,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
     "Zimbabwe",
     "Åland Islands"
   ]
+  let navigate = useNavigate()
 
   const categoriesForCategory = {
      artsCraft: ["upcycling", "refashion", "decor", "ceramic", "textile", "drawings", "zero-waste", "other"],
@@ -304,27 +307,41 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const config = {
-      method: "PATCH",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(inputValues),
-    }
 
-    fetch(`http://localhost:7000/${category}/${postData._id}`, config)
-      .then((response) => response.json())
-      .then((result) => {
-       if (result.errors) {
-              setErrors(result.errors);
-       } else {
-        setPostData(result.updatedPost)
-        setIsModalOpen(true)
-        setUpgrade(!upgrade)
-       }
-      })
-      .catch((error) => console.log(error));
+    if(Object.values(inputValues).every(x => (x === null || x === ''))){
+      setIsEditOpen(false)
+    } else {
+      const config = {
+        method: "PATCH",
+        credentials: "include", // specify this if you need cookies
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(inputValues),
+      }
+  
+      fetch(`http://localhost:7000/${category}/${postData._id}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+         if (result.errors) {
+                setErrors(result.errors);
+         } else {
+          setPostData(result.updatedPost)
+          setIsModalOpen(true)
+          setUpgrade(!upgrade)
+         }
+        })
+        .catch((error) => console.log(error));
+    }
   }
-  // console.log('postData :>> ', postData);
+  
+  function handleClose(event, reason) {
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
+      setIsEditOpen(false);
+      
+	}
+  
 
   return (
     <section className="CreatePost-section">
@@ -363,6 +380,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
                           {...params}
                           name="category"
                           label="Category"
+                          autoComplete="new-password"
                         />
                       )}
                     />
@@ -565,6 +583,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
         
             <Grid item xs={12} textAlign='center'>
               <Button variant="contained" type="submit" size="large">Update</Button>
+              <Button variant="outlined" size="large" onClick={() => setIsEditOpen(false)}>Cancel</Button>
             </Grid>
 
           </Grid>
@@ -572,7 +591,21 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
       </Grow>
       <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null); setIsEditOpen(false) }} >
-          <p>You have updated your {category} post</p>
+          <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleClose}
+              message={`You have updated your ${category} post`}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
        </Modal>
     </section>
   )

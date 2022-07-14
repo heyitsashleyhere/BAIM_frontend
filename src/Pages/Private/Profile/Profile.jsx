@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
+import { UserContext } from "../../../contexts/UserContext.js";
 import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
@@ -20,9 +21,11 @@ import "./profile.scss";
 import { FollowPage } from "../../../components/Private/Profile-components/FollowPage.jsx";
 
 export const Profile = () => {
-  const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
+  const { postCategories, upgrade, setUpgrade, profileData, setProfileData, postData } = useContext(PostsContext);
+  const { setIsLogin } = useContext(UserContext)
   const { profileName } = useParams();
   const [cookies] = useCookies();
+  let navigate = useNavigate()
 
   // user library
   const [beauties, setBeauties] = useState(null);
@@ -38,11 +41,6 @@ export const Profile = () => {
   const [postMessage, setPostMessage] = useState(null)
   const [pinMessage, setPinMessage] = useState(null)
   const [pins, setPins] = useState([])
-  const [beautyPins, setBeautyPins] = useState([])
-  const [artsCraftPins, setArtsCraftsPins] = useState([])
-  const [gardenPins, setGardenPins] = useState([])
-  const [recipePins, setRecipePins] = useState([])
-  const [eventPins, setEventPins] = useState([])
   // pop up Modals
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
@@ -52,8 +50,7 @@ export const Profile = () => {
   const [showCatPosts, setShowCatPosts] = useState(false)
   const [showCatPins, setShowCatPins] = useState(false)
 
-
-  //toggle followpage
+  //toggle followPage
   // const [isFollowers, setIsFollowers] = useState(false)
   // const [isFollowing, setIsFollowing] = useState(false)
   const [isFollowingOpen, setIsFollowingOpen] = useState(false)
@@ -96,7 +93,7 @@ export const Profile = () => {
       })
       .catch((error) => console.log(`error from profileName request in Profile`, error));
 
-  }, [profileName]);
+  }, [profileName, upgrade, postData]);
 
   useEffect(() => {
     postCategories.map((cat) => {
@@ -135,34 +132,11 @@ export const Profile = () => {
   }, [profileName, showMyPosts, showCatPosts])
 
 
-  // useEffect(() => {
-  //   console.log('pins :>> ', pins);
-  //   pins.forEach(pin => {
-  //     switch (pin.postType) {
-  //       case "beauty":
-  //         setBeautyPins([...beautyPins, pin]);
-  //         break;
-  //       case "artsCraft":
-  //         setArtsCraftsPins([...artsCraftPins, pin]);
-  //         break;
-  //       case "garden":
-  //         setGardenPins([...gardenPins, pin]);
-  //         break;
-  //       case "recipe":
-  //         setRecipePins([...recipePins, pin]);
-  //         break;
-  //       case "event":
-  //         setEventPins([...eventPins, pin]);
-  //         break;
-  //     }
-  //   })
-  // }, [showMyPins, pins])
-
   function handleEdit() {
     setUserEditOpen(true)
   }
 
-  function handleDelete(id) {
+  function handleUserDelete(id) {
     const config = {
       method: "delete",
       credentials: 'include',
@@ -182,28 +156,21 @@ export const Profile = () => {
 
 
   if (!profileData || !beauties
-    || !artsCrafts || !gardens
-    || !recipes || !events) {
-    return <LoadingSpinner />
+		|| !artsCrafts || !gardens
+		|| !recipes || !events) {
+		return <LoadingSpinner />
+	}
+
+  function openFollowers(){
+      setIsFollowing(false)
+      setIsFollowers(!isFollowers)
+    
   }
 
-  // function openFollowers() {
-
-  //   if (isFollowing) {
-  //     setIsFollowing(false)
-  //     setFollowers(!isFollowers)
-  //   }
-  //   setFollowers(!isFollowers)
-
-  // }
-
-  // function openFollowing() {
-  //   if (isFollowers) {
-  //     setIsFollowers(false)
-  //     setIsFollowing(!isFollowing)
-  //   }
-  //   setIsFollowing(!isFollowing)
-  // }
+  function openFollowing(){
+    setIsFollowers(false)
+    setIsFollowing(!isFollowing)
+  }
 
 
   return (
@@ -215,10 +182,10 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {cookies.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
+                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
-              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
+              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false) }} >
                 <Paper elevation={3} className="ProfileEdit-form"
                   sx={{
                     width: '80%', padding: '2rem',
@@ -261,11 +228,15 @@ export const Profile = () => {
               <div className="Profile-followers">
                 <Follow className="Profile-follow-button" />
 
+                {/* // ! MURAD : check this logic with the Modal thing  */}
+               // <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
+               // <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
+
+              // { isFollowers && <FollowPage follow={followers} type='followers'/>  }
+              // { isFollowing && <FollowPage follow={following} type='following'/> }
 
                 <button className="NavLink-Black" onClick={() => setIsFollowersOpen(true)}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={() => setIsFollowingOpen(true)}>{following.length} following</button>
-
-
 
                 <Modal open={isFollowingOpen} onClose={() => setIsFollowingOpen(false)}>
                   <Paper elevation={1} sx={{ width: '80%', height: '90%', overflow: 'scroll', position: "fixed", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -306,6 +277,7 @@ export const Profile = () => {
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "garden"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "recipe"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "event"), display, setDisplay, showCatPins, setShowCatPins)}
+
                   <EventsTable data={eventPins} />
 
 

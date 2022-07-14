@@ -12,7 +12,7 @@ export const FollowPage = (props) => {
 
   const { follow, type } = props
 
-
+  console.log('follow', follow)
 
   function filter(arr1, arr2) {
     return arr1.filter(el => {

@@ -1,22 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
-import { PostsContext } from "../../../../contexts/PostContext.js";
-import { AnimationContext } from "../../../../contexts/AnimationContext.js"
-import { Modal, Button } from "@mui/material";
-import { Snackbar } from "../../Snackbar.jsx";
+import { Modal, Button, Snackbar, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 export const Follow = ({ name }) => {
-	const { upgrade, setUpgrade } = useContext(PostsContext);
-	const { setSnackbar } = useContext(AnimationContext)
 	const { profileName } = useParams();
 	const [cookies] = useCookies();
 	const [error, setError] = useState(null);
-
 	const isAuthor = cookies.profileName === profileName;
-
 	const [profileData, setProfileData] = useState(null);
-	// pop up if follow/unfollow
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
@@ -62,20 +55,17 @@ export const Follow = ({ name }) => {
 				if (result.errors) {
 					setError(result.errors);
 				} else {
-					// setSnackbar({
-					// 	message: `You are now ${
-					// 		profileData.followers.find((objId) => objId == cookies.id)
-					// 			? `unfollowing`
-					// 			: `following`
-					// 	} ${profileData.profileName}`,
-					// 	open: true,
-					// 	severity: 'error'
-					//   })
 					setIsModalOpen(true);
-					setUpgrade(!upgrade);
 				}
 			})
 			.catch((error) => console.log(`error from Follow request`, error));
+	}
+
+	function handleClose(event, reason) {
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
 	}
 
 	return (
@@ -97,13 +87,22 @@ export const Follow = ({ name }) => {
 			)}
 			<p>{error}</p>
 			{profileData && (
-				// <Snackbar />
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-					<p>{`You are now ${
-						profileData.followers.find((objId) => objId == cookies.id)
-							? `following`
-							: `unfollowing`
-					} ${profileData.profileName}`}</p>
+					<Snackbar open={isModalOpen} autoHideDuration={6000}
+						onClose={handleClose}
+						message={`You are now ${profileData.followers.find((objId) => objId == cookies.id) ? `following` : `unfollowing`} ${profileData.profileName}`}
+						action={
+								<React.Fragment>
+									<IconButton
+									aria-label="close"
+									color="inherit"
+									sx={{ p: 0.5 }}
+									onClick={handleClose}
+									>
+									<CloseIcon />
+									</IconButton>
+								</React.Fragment>
+								} />
 				</Modal>
 			)}
 		</>

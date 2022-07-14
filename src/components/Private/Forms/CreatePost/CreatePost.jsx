@@ -1,24 +1,29 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal } from "@mui/material";
+import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal, Snackbar, IconButton } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ImageIcon from '@mui/icons-material/Image';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import CloseIcon from '@mui/icons-material/Close';
+import ImageInput from "../ImageInput.jsx";
 
 
 
 
 
 export default function CreatePost({ category, setCategory }) {
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [tagsArray, setTagsArray] = useState([])
+  const [postId, setPostId] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  let navigate = useNavigate()
   const countryList = [
     "Afghanistan",
     "Albania",
@@ -304,6 +309,7 @@ export default function CreatePost({ category, setCategory }) {
   function handleSubmit(e) {
     e.preventDefault()
     setInputValues({ ...inputValues, address });
+
     const config = {
       method: "POST",
       credentials: "include", // specify this if you need cookies
@@ -317,16 +323,24 @@ export default function CreatePost({ category, setCategory }) {
        if (result.errors) {
               setErrors(result.errors);
        } else {
-            //  console.log(category, "fetch result:", result)
+            setPostId(result._id)
             setIsModalOpen(true)
+            setUpgrade(!upgrade)
        }
       })
       .catch((error) => console.log(error));
   }
 
+  function handleClose(event, reason) {
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
+      navigate(`/${category}/${postId}`)
+	}
+
   return (
     <section>
-    
       <Grow in>
         <form className="create-form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -355,6 +369,7 @@ export default function CreatePost({ category, setCategory }) {
                           {...params}
                           name="category"
                           label="Category"
+                          autoComplete="new-password"
                         />
                       )}
                     />
@@ -531,7 +546,20 @@ export default function CreatePost({ category, setCategory }) {
                   Upload Image
                 </Button>
               </label>
+
+              {errors.map(
+              (error, i) =>
+                error.image && (
+                  <FormHelperText error key={category + "-imageFile" + i}>
+                    {error.image}
+                  </FormHelperText>
+                )
+            )}
             </Grid>
+
+            {/* <Grid item xs={12}>
+              <ImageInput imageUsage="image" />
+            </Grid> */}
 
             <Grid item xs={12}>
               <TextField name="link" label="Link"
@@ -557,9 +585,24 @@ export default function CreatePost({ category, setCategory }) {
         </form>
 
       </Grow>
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
-          <p>You have 'planted' a post in {category}</p>
-       </Modal>
+
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null)}} >
+          <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleClose}
+              message={`post planted in ${category}`}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
+      </Modal>
        
     </section>
   )

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box, Paper} from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { PostsContext } from "../../../contexts/PostContext.js";
+import { IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover,	Box} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -7,9 +8,10 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-export default function ProfileControllers({ handleEdit, handleDelete, isUserEditOpen }) {
+export default function ProfileControllers({ handleEdit, handleUserDelete, isUserEditOpen }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [deleteAnchorEl, setDeleteAnchorEl] = useState(null);
+  const { profileData } = useContext(PostsContext)
   const openFeatures = Boolean(anchorEl);
   const openPopper = Boolean(deleteAnchorEl);
 
@@ -72,7 +74,7 @@ export default function ProfileControllers({ handleEdit, handleDelete, isUserEdi
               color="success"
               startIcon={<CheckCircleIcon />}
               sx={{ mb: 1 }}
-              onClick={() => handleDelete(profileData._id)}
+              onClick={() => handleUserDelete(profileData._id)}
             >
               YES
             </Button>
