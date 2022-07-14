@@ -120,7 +120,7 @@ const Team = () => {
 				) : (
 					<>
 						<section className="team_logo">
-							<p>BIAM TEAM</p>
+							<p>BAIM TEAM</p>
 							<img className="logo" src={Logo}></img>
 						</section>
 						<section className="team_text team_section">
@@ -244,9 +244,9 @@ const Member = ({ memberData }) => {
 					{memberData.social.facebook && (
 						<p>
 							<a href={memberData.social.facebook}
-							   target="_blank"
-							   rel="noopener noreferrer"
-							 >
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<FaFacebook />
 							</a>
 						</p>
@@ -254,9 +254,9 @@ const Member = ({ memberData }) => {
 					{memberData.social.instagram && (
 						<p>
 							<a href={memberData.social.instagram}
-							   target="_blank"
-							   rel="noopener noreferrer"
-							 >
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<GrInstagram />
 							</a>
 						</p>
@@ -264,9 +264,9 @@ const Member = ({ memberData }) => {
 					{memberData.social.twitter && (
 						<p>
 							<a href={memberData.social.twitter}
-							   target="_blank"
-							   rel="noopener noreferrer"
-							 >
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<FaTwitter />
 							</a>
 						</p>
@@ -274,9 +274,9 @@ const Member = ({ memberData }) => {
 					{memberData.social.portfolio && (
 						<p>
 							<a href={memberData.social.portfolio}
-							   target="_blank"
-							   rel="noopener noreferrer"
-							 >
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<SiSitepoint />
 							</a>
 						</p>
