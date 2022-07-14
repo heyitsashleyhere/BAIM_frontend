@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
 
@@ -27,6 +27,7 @@ export const SquareAvatar = ({ data }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [postData, setPostData] = useState(data)
+    let location = useLocation()
    
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
@@ -80,6 +81,9 @@ export const SquareAvatar = ({ data }) => {
         setAnchorEl(null);
         setDeleteAnchorEl(null)
         setIsEditOpen(false)
+      if(location.pathname === `/profile/${cookies.profileName}`){
+        window.location.reload();
+      }
     }
 
 

@@ -1,32 +1,55 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { PostsContext } from "../../../../contexts/PostContext";
 import { PostCommentsAvatar } from "../../Avatars-Links/Avatars";
 import { FiEdit2, FiSend } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FcCancel } from "react-icons/fc";
-
+import { Modal, Snackbar, IconButton, Alert } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import "./userComment.scss";
 
 // post={item} user={cookies.id}
 export const UserComment = ({ post } ) => {
-  const { upgrade, setUpgrade } = useContext(PostsContext);
   const [cookies] = useCookies();
   const [error, setError] = useState();
   const [edit, setEdit] = useState(true);
   const [newComment, setNewComment] = useState("");
+  const [snackBarMsg, setSnackBarMsg] = useState(null);
+  const [isUserCommentModalOpen, setIsUserCommentModalOpen] = useState(false)
+  const [commentData, setCommentData] = useState(post)
 
   const date = (item) => new Date(item).toLocaleDateString("eu");
 
   // check user comment id with current user id
   const author = cookies.id === post.author;
 
+  useEffect(() => {
+    const config = {
+      method: "GET",
+      credentials: "include", // specify this if you need cookies
+      headers: { "Content-Type": "application/json" },
+    };
+    
+    fetch(`http://localhost:7000/comments/${post._id}`, config)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.errors) {
+          console.log("errors from UserComment GET :>> ", result.errors);
+        } else {
+          setCommentData(result);
+        }
+    })
+    .catch((error) => console.log('errors from UserComment GET ', error));
+  }, [isUserCommentModalOpen])
+
   function editComment() {
     const payload = {
-      type: post.type,
-      [post.type]: post[`${post.type}`],
-      message: newComment === "" ? post.message : newComment 
+      type: commentData.type,
+      [commentData.type]: commentData[`${commentData.type}`],
+      message: newComment === "" ? commentData.message : newComment 
     }
+
+    console.log('payload :>> ', payload);
     const config = {
       method: "PATCH",
       credentials: "include", // specify this if you need cookies
@@ -35,14 +58,15 @@ export const UserComment = ({ post } ) => {
     }
 
     // send id of the comment
-    fetch(`http://localhost:7000/comments/${post._id}`, config)
+    fetch(`http://localhost:7000/comments/${commentData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('edit result', result)
         if (result.errors) {
           setError(result.errors);
         } else {
-          setUpgrade(!upgrade);
+          setSnackBarMsg(result.message)
+          setIsUserCommentModalOpen(true)
         }
       })
       .catch((error) => console.log(error));
@@ -50,8 +74,8 @@ export const UserComment = ({ post } ) => {
 
   function deleteComment() {
     const payload = {
-      type: post.type,
-      [post.type]: post[`${post.type}`],
+      type: commentData.type,
+      [commentData.type]: commentData[`${commentData.type}`],
     }
     const config = {
       method: "DELETE",
@@ -60,23 +84,33 @@ export const UserComment = ({ post } ) => {
       body: JSON.stringify(payload),
     }
     // send id of the comment
-    fetch(`http://localhost:7000/comments/${post._id}`, config)
+    fetch(`http://localhost:7000/comments/${commentData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('delete result', result)
         if (result.errors) {
           setError(result.errors);
         } else {
-          setUpgrade(!upgrade);
+          setSnackBarMsg(result.message);
+          setIsUserCommentModalOpen(true)
+          window.location.reload();
         }
       })
       .catch((error) => console.log(error));
   }
 
+  function handleSnackBarClose(event, reason) {
+    if (reason === 'clickaway') {
+			return;
+		  }
+    setIsUserCommentModalOpen(false)
+    setEdit(true)
+  }
+
   return (
-    <section className="Comments-inner" key={post.author}>
+    <section className="Comments-inner" key={commentData.author}>
       <section className="comments-header">
-        <p className="commentDate">{date(post.createdAt)}</p>
+        <p className="commentDate">{date(commentData.createdAt)}</p>
         {author ? (
           <section className="comment-editors">
             {edit ? (
@@ -101,21 +135,43 @@ export const UserComment = ({ post } ) => {
 
       <section className="comment">
         <PostCommentsAvatar
-          id={post._id}
-          name={post.authorProfileName}
-          image={post.authorAvatar}
+          id={commentData._id}
+          name={commentData.authorProfileName}
+          image={commentData.authorAvatar}
         />
         {edit ? (
-          <p className="comment-text">{post.message}</p>
+          <p className="comment-text">{commentData.message}</p>
         ) : (
           <textarea
-            placeholder={post.message}
-            defaultValue={post.message}
+            placeholder={commentData.message}
+            defaultValue={commentData.message}
             onChange={(e) => setNewComment(e.target.value)}
             className="comment-input"
           />
         )}
+        
+        {error && (
+        <Alert severity="error" sx={{ marginBottom: 2}}>{error.errors}</Alert>
+        )}
       </section>
+
+      <Modal open={isUserCommentModalOpen} onClose={() => setIsUserCommentModalOpen(false)}>
+					<Snackbar open={isUserCommentModalOpen} autoHideDuration={6000}
+						onClose={handleSnackBarClose}
+						message={snackBarMsg}
+						action={
+								<React.Fragment>
+									<IconButton
+									aria-label="close"
+									color="inherit"
+									sx={{ p: 0.5 }}
+									onClick={handleSnackBarClose}
+									>
+									<CloseIcon />
+									</IconButton>
+								</React.Fragment>
+								} />
+			</Modal>
     </section>
   );
 };

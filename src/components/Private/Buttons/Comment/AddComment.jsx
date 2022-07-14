@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { PostsContext } from "../../../../contexts/PostContext";
+import React, { useState } from "react";
 import { Alert, Modal, Snackbar, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PostHeaderAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import { UserComment } from "../../../components/Private/Buttons/Comment/UserComment";
 import { MdOutlineArrowBack } from "react-icons/md";
@@ -23,8 +23,9 @@ export const PostPage = ({ data }) => {
   const [isPostEditOpen, setIsPostEditOpen] = useState(false)
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const [isAddCommentModalOpen, setIsAddCommentModalOpen] = useState(false);
-  const [isUserCommentModalOpen, setIsUserCommentModalOpen] = useState(false)
+  // const [isUserCommentModalOpen, setIsUserCommentModalOpen] = useState(false)
   const [selected, setSelected] = useState(data.find((item) => item._id === id))
+  let navigate = useNavigate()
   
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
@@ -46,7 +47,7 @@ export const PostPage = ({ data }) => {
         }
     })
     .catch((error) => console.log('error from Pin component ', error));
-  }, [selected, isAddCommentModalOpen])
+  }, [isAddCommentModalOpen])
   
 
   const handleDeleteClick = (event) => {
@@ -83,8 +84,13 @@ export const PostPage = ({ data }) => {
     if (reason === 'clickaway') {
 			return;
 		  }
-    setIsSnackbarOpen(false)
-    setShowCatPosts(null)
+      setIsSnackbarOpen(false)
+      // window.location.reload();
+      navigate(`/profile/${cookies.profileName}`, { replace: true });
+  }
+
+  if(!selected) {
+    return 'loading'
   }
 
   return (
