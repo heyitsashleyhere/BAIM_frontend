@@ -465,7 +465,7 @@ export default function UserRegistration() {
       body: JSON.stringify(inputValues),
     };
 
-    fetch("https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/user/register", config)
+    fetch("http://localhost:7000/user/register", config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)

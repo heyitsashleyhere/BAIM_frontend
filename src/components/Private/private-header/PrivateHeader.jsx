@@ -36,7 +36,7 @@ export const PrivateHeader = () => {
 			credentials: "include", // specify this if you need cookies
 			headers: { "Content-Type": "application/json" },
 		};
-		fetch("https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/user/logout", config)
+		fetch("http://localhost:7000/user/logout", config)
 			.then((response) => response.json())
 			.then((result) => {
 				// console.log("UserLogin:", result);

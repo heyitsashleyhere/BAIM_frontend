@@ -20,7 +20,7 @@ const [ preDelete, setPreDelete ]=useState(false)
         method: "DELETE",
       };
       
-      fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${category}/${id}`, config)
+      fetch(`http://localhost:7000/${category}/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if(result.errors){

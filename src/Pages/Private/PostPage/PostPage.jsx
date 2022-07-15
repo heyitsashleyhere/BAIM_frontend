@@ -37,7 +37,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json" },
     };
     
-    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${data[0].type}/${id}`, config)
+    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -68,7 +68,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${data[0].type}/${id}`, config)
+    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {

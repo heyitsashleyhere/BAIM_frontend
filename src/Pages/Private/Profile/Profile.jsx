@@ -68,7 +68,7 @@ export const Profile = () => {
     setPostMessage(null)
     setPinMessage(null)
 
-    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/user/${profileName}`, config)
+    fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -97,7 +97,7 @@ export const Profile = () => {
 
   useEffect(() => {
     postCategories.map((cat) => {
-      fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${cat}/author/${profileName}/`, config)
+      fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -143,7 +143,7 @@ export const Profile = () => {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/user/${id}`, config)
+    fetch(`http://localhost:7000/user/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {
@@ -302,7 +302,7 @@ export const Profile = () => {
   )
 }
 
-    // const promises = postCategories.map(cat => fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${cat}/author/${profileName}/`, config))
+    // const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
     // Promise.all(promises)
     //        .then(responses => Promise.all( responses.map(r => r.json())) )
     //        .then(result =>  {
