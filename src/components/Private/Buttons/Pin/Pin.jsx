@@ -18,7 +18,7 @@ useEffect(() => {
     headers: { "Content-Type": "application/json" },
   };
   
-  fetch(`http://localhost:7000/${post.type}/${post._id}`, config)
+  fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${post.type}/${post._id}`, config)
     .then((response) => response.json())
     .then((result) => {
       if (result.errors) {
@@ -37,7 +37,7 @@ useEffect(() => {
 			  headers: { "Content-Type": "application/json" },
 		  };
       
-      fetch(`http://localhost:7000/${post.type}/pin/${post._id}`, config)
+      fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/${post.type}/pin/${post._id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (result.errors) {

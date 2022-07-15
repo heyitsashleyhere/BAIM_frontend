@@ -24,7 +24,7 @@ export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
       body: JSON.stringify(payload),
     };
 
-    fetch(`http://localhost:7000/comments`, config)
+    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/comments`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('result :>> ', result);

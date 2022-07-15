@@ -473,7 +473,7 @@ export default function UserEdit({ setUserEditOpen }) {
       body: JSON.stringify(inputValues),
     };
 
-    fetch(`http://localhost:7000/user/${cookies.id}`, config)
+    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/user/${cookies.id}`, config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)

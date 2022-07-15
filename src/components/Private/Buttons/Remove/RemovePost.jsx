@@ -14,7 +14,7 @@ const [error, setError]=useState()
         method: "DELETE",
       };
       
-      fetch(`http://localhost:7000/user/collection/${id}`, config)
+      fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/user/collection/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if(result.errors){

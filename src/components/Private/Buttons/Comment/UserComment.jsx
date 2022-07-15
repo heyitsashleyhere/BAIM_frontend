@@ -30,7 +30,7 @@ export const UserComment = ({ post } ) => {
       headers: { "Content-Type": "application/json" },
     };
     
-    fetch(`http://localhost:7000/comments/${post._id}`, config)
+    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/comments/${post._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -58,7 +58,7 @@ export const UserComment = ({ post } ) => {
     }
 
     // send id of the comment
-    fetch(`http://localhost:7000/comments/${commentData._id}`, config)
+    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/comments/${commentData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('edit result', result)
@@ -84,7 +84,7 @@ export const UserComment = ({ post } ) => {
       body: JSON.stringify(payload),
     }
     // send id of the comment
-    fetch(`http://localhost:7000/comments/${commentData._id}`, config)
+    fetch(`https://cors-anywhere.herokuapp.com/https://git.heroku.com/loka-database.git/comments/${commentData._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('delete result', result)
