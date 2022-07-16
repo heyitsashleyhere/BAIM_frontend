@@ -181,7 +181,7 @@ const Team = () => {
 										<SiReact/>
 										<p>React</p>
 									</section>
-
+								
 									<section className="s_icon">
 										<SiFigma/>
 										<p>Figma</p>
