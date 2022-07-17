@@ -68,22 +68,22 @@ export default function About() {
 					</p>
 
 					<p>
-						Loka is an Digital platform that wants to produce a library that is created from the users generating its own communities on topics of sustainability, where users can search, create , share and connect with other users.
-						Loka is passionate about gardening, local markets, regional produce food, DIY, events  and mostly important Loka is about to share
-						knowledge and inspiration... Loka wants to provide the users this resources:  what how and who is available to you in your region or surroundings, either there are your neighbors, bloggers, professionals, or your virtual friends. Loka moto is Gesunde Globalisierung? dann lokalisiere dich!
+						Loka is an Digital platform that wants to produce a library that is created by the users, generating its own communities on topics of sustainability. Users can search, create , share and connect with others.
+						Loka is passionate about gardening, local markets, regional produce, food, DIY, workshops, events and mostly important Loka is about to share
+						knowledge and inspiration... Loka wants to provide the users this resources:  WHAT HOW and WHO is available to you in your region or surroundings, your neighbors, bloggers, professionals, or your virtual friends. Loka moto is Gesunde Globalisierung? dann lokalisiere dich!
 						{" "}
 					</p>
 
 					<p>
 						Loka as a team project started as an idea for creating a library of regional seasonal produce
-						in the area of germany. Our aim was to give to the
-						consumer a informative platform to know when to plant or eat what is
-						in season. Our App later evolved to a create a platform like a
+						in the area of Germany. Our aim was to give to the
+						consumer a informative platform to know when to plant or eat or what is
+						in season. Our App later evolved to create a platform like a
 						collaborative a community library that could offer many
-						topics around planting eating and learning. In Loka is where the
+						topics on learning around planting, eating and DIY. In Loka is where the
 						consumer shares and asks for help on is own journey either planting
-						in the balkony, or posting your recipes, or DIY products related to
-						beauty, gardening, arts and crafts, events, etc...{" "}
+						in the balkony, or posting recipes, or DIY technics related to
+						beauty, gardening, arts and crafts, events, etc...{" "}. Our video inspired with marketing strategy wants to demonstrate the type of clients this app aims for. Get inspired !
 					</p>
 				</section>
 			</section>

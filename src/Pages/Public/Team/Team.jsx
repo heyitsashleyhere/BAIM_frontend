@@ -1,19 +1,24 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 // Icons
-import { FaGithub, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
-import { SiSitepoint } from "react-icons/si"
+import { FaGithub, FaTwitter, FaLinkedin, FaFacebook , FaCookieBite, FaSass } from "react-icons/fa";
+import { SiSitepoint, SiGreensock, SiFirebase, SiReact, SiExpress, SiMongodb, SiNodemon, SiFigma, SiGithub, SiMaterialui, SiNodedotjs } from "react-icons/si"
 import { GrInstagram } from "react-icons/gr"
 import {
 	MdAlternateEmail,
 	MdOutlineArrowBackIosNew,
 } from "react-icons/md";
 
+
+
 // Components
 import team from "./teamData.js";
 // Styles and images
 import "./team.scss";
 import Logo from "../../../assets/logo/raspberry.png";
+import { Link } from "@mui/material";
+
+
 
 const Team = () => {
 	const [isClicked, setIsClicked] = useState(false);
@@ -126,14 +131,11 @@ const Team = () => {
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<p>
-									We are a group of students doing our final project. We all
-									meet in DCI-digital career institute and started this journey
-									together as developers. We come from very different
-									backgrounds. All of us are full stack developers, still with
-									specific roles in this project. We are super happy we came
-									together and were able to finalize our one year program with
-									this project. if your interest click in our fotos tosee our
-									backgrounds.
+									We are a group of colleges, friends and finalists of the one year program of web-development in DCI. We all
+									meet in DCI-digital career institute wile studying together in the same class. We come from different professional
+									backgrounds and nationalities and together we created Loka as our final project of the program. 
+									All of us study to become full stack developers. In this project we explored different aspects of programing with
+									specific roles. If your interest click in our photos to see our Bios.
 								</p>
 							</span>
 						</section>
@@ -141,40 +143,117 @@ const Team = () => {
 							<span className="inner_text">
 								<h2>Project Stack</h2>
 								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Cupiditate inventore dolorem voluptatum recusandae eligendi
-									sed.
+									This is our general overview of our stack for both Backend and Frontend.
+									For more information please scroll down. 
 								</p>
+								<section className="stack-icons">
+
+									<section className="s_icon">
+										<FaSass/>
+										<p>Sass</p>
+									</section>
+
+									<section className="s_icon">
+										<SiGreensock/>
+										<p>Greensock</p>
+									</section>
+									<section className="s_icon">
+										<SiMaterialui/>
+										<p>Node</p>
+									</section>
+									<section className="s_icon">
+										<SiMongodb/>
+										<p>MongoDb</p>
+									</section>
+									<section className="s_icon">
+										<SiExpress/>
+										<p>Express</p>
+									</section>
+									<section className="s_icon">
+										<SiFirebase/>
+										<p>Firebase</p>
+									</section>
+									<section className="s_icon">
+										<SiNodemon/>
+										<p>Nodemon</p>
+									</section>
+									<section className="s_icon">
+										<SiReact/>
+										<p>React</p>
+									</section>
+								
+									<section className="s_icon">
+										<SiFigma/>
+										<p>Figma</p>
+									</section>
+									<section className="s_icon">
+										<SiMaterialui/>
+										<p>material UI</p>
+									</section>
+
+									<section className="s_icon">
+										<SiGithub/>
+										<p>Github</p>
+									</section>
+									<section className="s_icon">
+										<FaCookieBite/>
+										<p>Cookies</p>
+									</section>
+
+								</section>
+							</span>
+						</section>
+						<section className="team_text team_section">
+							<span className="inner_text">
+								<h2>Excalidraw Project</h2>
+								<p>
+									We started this project using Excalidraw. This was a perfect collaborative tool that helped us to sketch an initial understanding of our product. Here we created strategies and relations from the backend and frontend. Are you curious to see more ? please click on the image bellow. 
+								</p>
+								<a href="https://excalidraw.com/#room=abb0e7e174f679add6d4,LTObiIulrnaU9LxThYW01w" target="_blank"><img src={require('./../../../assets/team-projects/excalidraw.png')}/></a>
 							</span>
 						</section>
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<h2>Figma Project</h2>
 								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Cupiditate inventore dolorem voluptatum recusandae eligendi
-									sed.
+									We used Figma to design the frontend project for all sort of media queries. The design was build at the same time as the backend. This strategy helped us to have a further understanding of the system we needed to implement in the backend and frontend. Are you curious to see more ? please click on the image bellow. 
 								</p>
+								
+								<a href="https://www.figma.com/file/ATMhtCX7NRp9otxh0y1EMy/Untitled-(Copy)?node-id=0%3A1" target="_blank"><img src={require('./../../../assets/team-projects/figma.png')}/></a>
+							</span>
+						</section>
+						<section className="team_text team_section">
+							<span className="inner_text">
+								<h2>Git-hub projects</h2>
+								<p>
+								  .Are you curious to see more ? please click on the image bellow. 
+								</p>
+								<a href="https://github.com/users/heyitsashleyhere/projects/2" target="_blank"><img src={require('./../../../assets/team-projects/githubprojects.png')}/></a>
 							</span>
 						</section>
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<h2>Backend Repository</h2>
 								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Cupiditate inventore dolorem voluptatum recusandae eligendi
-									sed.
+									Our Backend stack was made with: bcrypt, change, cookie-parser,cors, dotenv, express,express-validator, http-errors, jsonwebtoken, mongoose, nodemon, faker-js.
 								</p>
+								<p>
+									Please click on the icon to see our repository.
+								</p>
+								<section className="repo"><a href=""><SiGithub/></a></section>
+							
 							</span>
 						</section>
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<h2>Frontend Repository</h2>
 								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Cupiditate inventore dolorem voluptatum recusandae eligendi
-									sed.
+									Our Frontend stack was made with: Sass, Materia-Ui, Gsap-Greensock, firebase, date-fns, React, React-Cookie, React-Dom, React-icons, React-scripts and React-geocode.  
 								</p>
+								<p>
+									Please click on the icon to see our repository.
+								</p>
+								<section className="repo"><a href=""><SiGithub/></a></section>
 							</span>
 						</section>
 					</>
