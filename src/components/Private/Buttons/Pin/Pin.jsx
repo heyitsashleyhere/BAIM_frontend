@@ -56,12 +56,11 @@ useEffect(() => {
 		  setIsModalOpen(false);
 	}
 
-  console.log('postData.likes :>> ', post);
   return (
     <section>
       { postData && (
           postData.author !== cookies.id && (
-          postData.likes.find(item => item === cookies.id) ? <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
+            post.likes.find(item => item === cookies.id) ? <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
                 :
                 <BsPinAngle onClick={PinPost} className="Pin-icon" /> 
           )

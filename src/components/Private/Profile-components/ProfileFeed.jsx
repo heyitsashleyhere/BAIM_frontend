@@ -1,15 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { PostsContext } from '../../../contexts/PostContext'
 import { SquareAvatar } from '../Avatars-Links/Avatars'
 
 export const ProfileFeed = (props) => {
     const { data } = props; //data is the interest
-
-    const { allArtsCraftPost, allBeautyPost,allGardenPost,allRecipePost}=useContext(PostsContext)
-
-    const allCollections = [allArtsCraftPost,allBeautyPost,allRecipePost,allGardenPost] 
-
+    const [ allCollections, setAllCollections ] = useState([])
+    const { allArtsCraftPost, allBeautyPost,allGardenPost,allRecipePost, postCategories}=useContext(PostsContext)
     let myFeed = []
+    // const allCollections = [allArtsCraftPost,allBeautyPost,allRecipePost,allGardenPost] 
+    useEffect(() => {
+      postCategories.map(cat => {
+        fetch(`http://localhost:7000/${cat}/`)
+          .then((response) => response.json())
+          .then((result) => {
+            if (!result.errors) {
+              setAllCollections([...allCollections, result])
+            } else {
+              console.log('fetch from PostContext :>> ', result.errors);
+            }
+          })
+          .catch((error) => console.log('fetch from PostContext :>> ', error));
+        })
+    }, [])
 
     data.forEach(item => {
       let match = []
