@@ -13,13 +13,6 @@ export default function ImageInput({ imageUsage, oldUrl }){
     const [ imageUrl, setImageUrl ] = useState()
     const img = useRef()
 
-    function fileHandler(e) {
-        e.preventDefault()
-        setImageUrl(URL.createObjectURL(img.current.files[0]))
-        const url = uploadFile(img.current.files[0])
-    }
-
-
     function uploadFile(file){
         if(!file){return}
         const storageRef= ref(storage,`/files/image/${file.name}`);
@@ -32,6 +25,12 @@ export default function ImageInput({ imageUsage, oldUrl }){
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> setInputValues({...inputValues, [`${imageUsage}`]: imgURL}))
         })
+    }
+
+    function fileHandler(e) {
+        e.preventDefault()
+        setImageUrl(URL.createObjectURL(img.current.files[0]))
+        const url = uploadFile(img.current.files[0])
     }
 
 

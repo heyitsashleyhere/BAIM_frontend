@@ -15,7 +15,7 @@ import ImageInput from "../ImageInput.jsx";
 
 
 export default function CreatePost({ category, setCategory }) {
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -528,7 +528,19 @@ export default function CreatePost({ category, setCategory }) {
               </LocalizationProvider>
             )}
 
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
+              <ImageInput imageUsage="image" />
+              {errors.map(
+              (error, i) =>
+                error.image && (
+                  <FormHelperText error key={category + "-imageFile" + i}>
+                    {error.image}
+                  </FormHelperText>
+                )
+              )}
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
               <label htmlFor="create-post-video">
                 <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
                        onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
@@ -538,31 +550,8 @@ export default function CreatePost({ category, setCategory }) {
               </label>
             </Grid>
 
-            <Grid item xs={6}>
-              <label htmlFor="create-post-image">
-                <input type="file" name="image" accept="image/*" id='create-post-image'
-                      onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
-                <Button variant="contained" endIcon={<ImageIcon />} size="large" component="span">
-                  Upload Image
-                </Button>
-              </label>
-
-              {errors.map(
-              (error, i) =>
-                error.image && (
-                  <FormHelperText error key={category + "-imageFile" + i}>
-                    {error.image}
-                  </FormHelperText>
-                )
-            )}
-            </Grid>
-
-            {/* <Grid item xs={12}>
-              <ImageInput imageUsage="image" />
-            </Grid> */}
-
             <Grid item xs={12}>
-              <TextField name="link" label="Link"
+              <TextField name="link" label="Map Link"
                      type="text"
                      fullWidth margin="dense"
                      error={errors.find((error) => error.link)}
@@ -607,3 +596,22 @@ export default function CreatePost({ category, setCategory }) {
     </section>
   )
 }
+            // old imageInput
+            {/* <Grid item xs={6}>
+              <label htmlFor="create-post-image">
+                <input type="file" name="image" accept="image/*" id='create-post-image'
+                      onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
+                <Button variant="contained" endIcon={<ImageIcon />} size="large" component="span">
+                  Upload Image
+                </Button>
+              </label>
+
+              {errors.map(
+              (error, i) =>
+                error.image && (
+                  <FormHelperText error key={category + "-imageFile" + i}>
+                    {error.image}
+                  </FormHelperText>
+                )
+              )}
+            </Grid> */}
