@@ -12,14 +12,16 @@ export const ProfileFeed = (props) => {
     let myFeed = []
 
     data.forEach(item => {
-
-      let match = allCollections.map(coll => coll.filter(one => one.type === item))
+      let match = []
+      if (item === 'arts-and-craft') {
+        match = allCollections.map(coll => coll.filter(one => one.type === 'artsCraft'))
+      } else {
+        match = allCollections.map(coll => coll.filter(one => one.type === item))
+      }
       match = match.filter(item => item.length)
       if (match[0]) {
         myFeed = myFeed.concat(match[0]).sort((objA, objB)=> new Date(objB.updatedAt) - new Date(objA.updatedAt))
       }
-
-      
   })
  
 

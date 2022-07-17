@@ -25,7 +25,7 @@ export const SingleProducePage = () => {
       <section className="Seasonal-page-inner">
 
         <section className="Seasonal-back-button">
-        <MdOutlineArrowBack onClick={()=>navigate('/seasonal')} className="Seasonal-button"/>
+        <MdOutlineArrowBack onClick={()=>navigate(-1)} className="Seasonal-button"/>
         </section>
       
         <section className="Seasonal-page-hero">
