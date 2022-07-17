@@ -246,6 +246,16 @@
 				p {
 					font-size: 2rem;
 					line-height: 1.3;
+
+					a {
+						text-decoration: underline;
+						color: white;
+						&:visited,
+						&:hover,
+						&:active {
+							color: white;
+						}
+					}
 				}
 
 				.stack-icons{

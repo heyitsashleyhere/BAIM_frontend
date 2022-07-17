@@ -131,11 +131,10 @@ const Team = () => {
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<p>
-									We are a group of colleges, friends and finalists of the one year program of web-development in DCI. We all
-									meet in DCI-digital career institute wile studying together in the same class. We come from different professional
-									backgrounds and nationalities and together we created Loka as our final project of the program. 
-									All of us study to become full stack developers. In this project we explored different aspects of programing with
-									specific roles. If your interest click in our photos to see our Bios.
+									We are a group of colleagues and friends in the one-year program of web development at <a href="https://digitalcareerinstitute.org/" target="_blank">DCI - Digital Career Institute gGmbH</a>. 
+									We come from different professional backgrounds and nationalities and together we created Loka as our final project of the program. 
+                                    This project showcases all of our studies to become full-stack developers. In this project, we explored different aspects of programming with
+                                    specific roles. If you are interested please click on our photos to see our bios.
 								</p>
 							</span>
 						</section>
@@ -143,7 +142,7 @@ const Team = () => {
 							<span className="inner_text">
 								<h2>Project Stack</h2>
 								<p>
-									This is our general overview of our stack for both Backend and Frontend.
+									This is an general overview of our stack for both frontend and backend.
 									For more information please scroll down. 
 								</p>
 								<section className="stack-icons">
@@ -155,11 +154,11 @@ const Team = () => {
 
 									<section className="s_icon">
 										<SiGreensock/>
-										<p>Greensock</p>
+										<p>Greensock Gsap</p>
 									</section>
 									<section className="s_icon">
 										<SiMaterialui/>
-										<p>Node</p>
+										<p>Node JS</p>
 									</section>
 									<section className="s_icon">
 										<SiMongodb/>
@@ -188,7 +187,7 @@ const Team = () => {
 									</section>
 									<section className="s_icon">
 										<SiMaterialui/>
-										<p>material UI</p>
+										<p>Material UI</p>
 									</section>
 
 									<section className="s_icon">
@@ -206,27 +205,23 @@ const Team = () => {
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<h2>Excalidraw Project</h2>
-								<p>
-									We started this project using Excalidraw. This was a perfect collaborative tool that helped us to sketch an initial understanding of our product. Here we created strategies and relations from the backend and frontend. Are you curious to see more ? please click on the image bellow. 
-								</p>
+								<p>We started this project using Excalidraw. This was a perfect collaborative tool that helped us sketch an initial understanding of our product. Here we created strategies and relations from the frontend and backend. Are you curious to see more? Please click on the image below.</p>
 								<a href="https://excalidraw.com/#room=abb0e7e174f679add6d4,LTObiIulrnaU9LxThYW01w" target="_blank"><img src={require('./../../../assets/team-projects/excalidraw.png')}/></a>
 							</span>
 						</section>
 						<section className="team_text team_section">
 							<span className="inner_text">
 								<h2>Figma Project</h2>
-								<p>
-									We used Figma to design the frontend project for all sort of media queries. The design was build at the same time as the backend. This strategy helped us to have a further understanding of the system we needed to implement in the backend and frontend. Are you curious to see more ? please click on the image bellow. 
-								</p>
+								<p>We used Figma to design the frontend for all sorts of media queries. The design was built at the same time as the backend. This strategy helped us to have a further understanding of the system we needed to implement in the backend and frontend. Are you curious to see more? Please click on the image below.</p>
 								
 								<a href="https://www.figma.com/file/ATMhtCX7NRp9otxh0y1EMy/Untitled-(Copy)?node-id=0%3A1" target="_blank"><img src={require('./../../../assets/team-projects/figma.png')}/></a>
 							</span>
 						</section>
 						<section className="team_text team_section">
 							<span className="inner_text">
-								<h2>Git-hub projects</h2>
+								<h2>Github Project Management</h2>
 								<p>
-								  .Are you curious to see more ? please click on the image bellow. 
+								  Are you curious to see more? Please click on the image bellow. 
 								</p>
 								<a href="https://github.com/users/heyitsashleyhere/projects/2" target="_blank"><img src={require('./../../../assets/team-projects/githubprojects.png')}/></a>
 							</span>
@@ -235,7 +230,7 @@ const Team = () => {
 							<span className="inner_text">
 								<h2>Backend Repository</h2>
 								<p>
-									Our Backend stack was made with: bcrypt, change, cookie-parser,cors, dotenv, express,express-validator, http-errors, jsonwebtoken, mongoose, nodemon, faker-js.
+									Our backend stack was made with: bcrypt, change, cookie-parser, cors, dotenv, express, express-validator, http-errors, jsonwebtoken, mongoose, nodemon, faker-js.
 								</p>
 								<p>
 									Please click on the icon to see our repository.
@@ -248,7 +243,7 @@ const Team = () => {
 							<span className="inner_text">
 								<h2>Frontend Repository</h2>
 								<p>
-									Our Frontend stack was made with: Sass, Materia-Ui, Gsap-Greensock, firebase, date-fns, React, React-Cookie, React-Dom, React-icons, React-scripts and React-geocode.  
+									Our frontend stack was made with: Sass, Material-Ui, Gsap-Greensock, Firebase, date-fns, React, React-Cookie, React-Dom, React-icons, React-scripts and React-geocode.  
 								</p>
 								<p>
 									Please click on the icon to see our repository.

@@ -126,6 +126,7 @@ function PostsContextProvider({ children }) {
     data, setData,
     users, setUsers,
     allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost,
+    setAllArtsCraftPost, setAllBeautyPost, setAllGardenPost, setAllRecipePost, setAllEventPost,
     upgrade, setUpgrade,
     searchResult, setSearchResult,
     searchCat, setSearchCat,

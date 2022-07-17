@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 export const Pin = (props) => {
 const { post }= props
 const [ cookies ] = useCookies(); //loggedIn User info
-const { postData, setPostData } = useContext(PostsContext)
+const { postData, setPostData, upgrade } = useContext(PostsContext)
 const [ isModalOpen, setIsModalOpen ] = useState(false);
 
 useEffect(() => {
@@ -28,7 +28,7 @@ useEffect(() => {
       }
   })
   .catch((error) => console.log('error from Pin component ', error));
-}, [post, isModalOpen])
+}, [post, isModalOpen, upgrade])
 
   function PinPost(){
 		  const config = {
