@@ -32,7 +32,6 @@ export const EventsTable = (props) => {
   const date = new Date();
   let currentMonth = date.toLocaleString("default", { month: "long" });
 
-  console.log(isAuthor);
   useEffect(() => {
     setIsAuthor(data.find(item => item.author === cookies.id))
   }, [isAuthor]);
@@ -61,7 +60,7 @@ export const EventsTable = (props) => {
         console.log("error from Pin Event", error);
       });
   };
-  console.log(data.length)
+
   return (
     <>
       {data.length === 0 ? null : (

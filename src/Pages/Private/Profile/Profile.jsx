@@ -255,7 +255,7 @@ export const Profile = () => {
 
             <div className="Profile-Collection-Nav">
               <button className="LokaB" onClick={() => { setShowMyPosts(!showMyPosts); setShowMyPins(false); setShowCatPosts(false); setShowCatPins(false) }}>Posts</button>
-              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins); setShowCatPosts(false) }}>Pins</button>
+              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins); setShowCatPosts(false); setShowCatPins(false) }}>Pins</button>
             </div>
 
             <div className="Profile-Collection">
@@ -289,7 +289,7 @@ export const Profile = () => {
             </div>
 
             <section className="Profile-Feed">
-              <h2 className="Profile-Feed-Header">{profileData.profileName} feed</h2>
+              <h2 className="Profile-Feed-Header">{profileData.profileName === cookies.profileName ? 'Your' : `${profileData.profileName}'s`} feed</h2>
               <section className="Profile-Lib-Collection">
                 <ProfileFeed data={profileData.interests} />
               </section>
