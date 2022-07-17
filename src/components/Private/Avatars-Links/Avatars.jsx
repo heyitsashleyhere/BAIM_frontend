@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
@@ -27,7 +27,28 @@ export const SquareAvatar = ({ data }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [postData, setPostData] = useState(data)
+    const [pinPostData, setPinPostData] = useState(data)
     let location = useLocation()
+
+    useEffect(() => {
+      const config = {
+        method: "GET",
+        credentials: "include", // specify this if you need cookies
+        headers: { "Content-Type": "application/json" },
+      };
+      
+      fetch(`http://localhost:7000/${data.type}/${data._id}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.errors) {
+            console.log("errors from Pin GET post :>> ", result.errors);
+          } else {
+            setPinPostData(result);
+          }
+      })
+      .catch((error) => console.log('error from squareAvatar pinData fetch ', error));
+    }, [])
+    
    
     // MUI popper START
     const [anchorEl, setAnchorEl] = useState(null);
@@ -90,7 +111,7 @@ export const SquareAvatar = ({ data }) => {
     return (
       <section className="SquareAvatar">
           <section className="Avatar-Controllers">
-          <Pin post={data}/>
+          <Pin post={pinPostData}/>
           { cookies.profileName === data.authorProfileName && <>
           <IconButton aria-label="edit"
                       aria-controls={openFeatures ? 'basic-menu' : undefined}

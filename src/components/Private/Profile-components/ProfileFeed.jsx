@@ -6,52 +6,52 @@ export const ProfileFeed = (props) => {
     const { data } = props; //data is the interest
     // const [ allCollections, setAllCollections ] = useState([])
     const { allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost, postCategories,
-      setAllArtsCraftPost, setAllBeautyPost, setAllGardenPost, setAllRecipePost, setAllEventPost,}=useContext(PostsContext)
+      setAllArtsCraftPost, setAllBeautyPost, setAllGardenPost, setAllRecipePost, setAllEventPost}=useContext(PostsContext)
     let myFeed = []
     const allCollections = [allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost] 
-    useEffect(() => {
-      postCategories.map(cat => {
-        fetch(`http://localhost:7000/${cat === "arts-and-craft" ? 'artsCraft' : cat}/`)
-          .then((response) => response.json())
-          .then((result) => {
-            if (!result.errors) {
-              setAllCollections([...allCollections, result])
-            } else {
-              console.log('fetch from PostContext :>> ', result.errors);
-            }
-          })
-          .catch((error) => console.log('fetch from PostContext :>> ', error));
-        })
-
-    // postCategories.map(cat => {
-    //   fetch(`http://localhost:7000/${cat}/`)
-    //     .then((response) => response.json())
-    //     .then((result) => {
-    //       if (!result.errors) {
-    //         switch (cat) {
-    //           case 'beauty':
-    //             setAllBeautyPost(result);
-    //             break;
-    //           case 'artsCraft':
-    //             setAllArtsCraftPost(result);
-    //             break;
-    //           case 'garden':
-    //             setAllGardenPost(result);
-    //             break;
-    //           case 'recipe':
-    //             setAllRecipePost(result);
-    //             break;
-    //           case 'event':
-    //             setAllEventPost(result);
-    //             break;
+    // useEffect(() => {
+    //   postCategories.map(cat => {
+    //     fetch(`http://localhost:7000/${cat === "arts-and-craft" ? 'artsCraft' : cat}/`)
+    //       .then((response) => response.json())
+    //       .then((result) => {
+    //         if (!result.errors) {
+    //           setAllCollections([...allCollections, result])
+    //         } else {
+    //           console.log('fetch from PostContext :>> ', result.errors);
     //         }
-    //       } else {
-    //         console.log('fetch from PostContext :>> ', result.errors);
-    //       }
+    //       })
+    //       .catch((error) => console.log('fetch from PostContext :>> ', error));
     //     })
-    //     .catch((error) => console.log('fetch from PostContext :>> ', error));
-    // })
-    }, [])
+
+    // // postCategories.map(cat => {
+    // //   fetch(`http://localhost:7000/${cat}/`)
+    // //     .then((response) => response.json())
+    // //     .then((result) => {
+    // //       if (!result.errors) {
+    // //         switch (cat) {
+    // //           case 'beauty':
+    // //             setAllBeautyPost(result);
+    // //             break;
+    // //           case 'artsCraft':
+    // //             setAllArtsCraftPost(result);
+    // //             break;
+    // //           case 'garden':
+    // //             setAllGardenPost(result);
+    // //             break;
+    // //           case 'recipe':
+    // //             setAllRecipePost(result);
+    // //             break;
+    // //           case 'event':
+    // //             setAllEventPost(result);
+    // //             break;
+    // //         }
+    // //       } else {
+    // //         console.log('fetch from PostContext :>> ', result.errors);
+    // //       }
+    // //     })
+    // //     .catch((error) => console.log('fetch from PostContext :>> ', error));
+    // // })
+    // }, [])
 
     data.forEach(item => {
       let match = []
@@ -65,7 +65,6 @@ export const ProfileFeed = (props) => {
         myFeed = myFeed.concat(match[0]).sort((objA, objB)=> new Date(objB.updatedAt) - new Date(objA.updatedAt))
       }
   })
-  console.log('allCollections', allCollections)
 
   return (
     <>
