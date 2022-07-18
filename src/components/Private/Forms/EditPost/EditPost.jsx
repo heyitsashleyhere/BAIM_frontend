@@ -7,7 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import CloseIcon from '@mui/icons-material/Close';
 import VideocamIcon from '@mui/icons-material/Videocam';
-import ImageInput from "../ImageInput.jsx";
+import PostImageInput from "../PostImageInput.jsx";
 // import ImageIcon from '@mui/icons-material/Image';
 import TagInput from "./TagInput.jsx";
 
@@ -15,7 +15,7 @@ import TagInput from "./TagInput.jsx";
 
 export default function EditPost({ postData, setPostData, setIsEditOpen }) {
   const [ category, setCategory ] = useState(postData.type)
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade, image, setImage } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -307,15 +307,18 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    
+    //? my solution to set the image in the post. kisses ivo
+    const payload = {...inputValues, ...image}
 
-    if(Object.values(inputValues).every(x => (x === null || x === ''))){
+    if(Object.values(payload).every(x => (x === null || x === ''))){
       setIsEditOpen(false)
     } else {
       const config = {
         method: "PATCH",
         credentials: "include", // specify this if you need cookies
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(inputValues),
+        body: JSON.stringify(payload),
       }
   
       fetch(`http://localhost:7000/${category}/${postData._id}`, config)
@@ -327,6 +330,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
           setPostData(result.updatedPost)
           setIsModalOpen(true)
           setUpgrade(!upgrade)
+          setImage('')
          }
         })
         .catch((error) => console.log(error));
@@ -349,7 +353,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
         <form className="create-form" onSubmit={handleSubmit} style={{ padding: '5% 7%'}}>
           <Grid container spacing={2}>
             <Grid sx={{ textAlign: 'center', marginBottom: '2%'}}>
-              <ImageInput imageUsage="image" oldUrl={postData.image} />
+              <PostImageInput oldUrl={postData.image} category={category} postData={postData}/>
             </Grid>
             <Grid item xs={12}>
               <TextField name="title" label="Title"

@@ -112,7 +112,7 @@
 
 		.InnerSquareAvatar {
 			display: flex;
-			height: 91%;
+			height: 75%;
 			text-decoration: none;
 			margin: 0.2rem 0.2rem;
 
@@ -122,13 +122,17 @@
 
 			.imageAvatar {
 				margin: 0.3rem 0.5rem;
+				
+				
+				
 
 				&:hover {
 					cursor: pointer;
 				}
 
 				img {
-					transition: 0.35s all ease-in-out; //! added this to add smoothness to image animation on mouse leave --  murad!
+					object-fit: cover;
+					transition: 0.35s all ease-in-out; 
 
 					&:hover {
 						transform: scale(2);
