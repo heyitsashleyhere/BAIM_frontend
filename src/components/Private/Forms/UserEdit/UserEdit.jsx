@@ -469,7 +469,7 @@ export default function UserEdit({ setUserEditOpen }) {
     const config = {
       method: "PATCH",
       credentials: 'include', 
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     };
 

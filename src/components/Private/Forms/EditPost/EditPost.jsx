@@ -314,7 +314,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
       const config = {
         method: "PATCH",
         credentials: "include", // specify this if you need cookies
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
         body: JSON.stringify(inputValues),
       }
   

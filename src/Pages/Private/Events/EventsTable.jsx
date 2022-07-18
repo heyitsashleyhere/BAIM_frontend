@@ -40,7 +40,7 @@ export const EventsTable = (props) => {
     const config = {
       method: "PATCH",
       credentials: "include",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
     fetch(`https://loka-database.herokuapp.com/event/pin/${event._id}`, config)

@@ -27,7 +27,7 @@ export const UserComment = ({ post } ) => {
     const config = {
       method: "GET",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     
     fetch(`https://loka-database.herokuapp.com/comments/${post._id}`, config)
@@ -53,7 +53,7 @@ export const UserComment = ({ post } ) => {
     const config = {
       method: "PATCH",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(payload),
     }
 
@@ -80,7 +80,7 @@ export const UserComment = ({ post } ) => {
     const config = {
       method: "DELETE",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(payload),
     }
     // send id of the comment

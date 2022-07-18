@@ -46,7 +46,7 @@ export const Follow = ({ name }) => {
 		const config = {
 			method: "PATCH",
 			credentials: "include", // specify this if you need cookies
-			headers: { "Content-Type": "application/json" },
+			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
 
 		fetch(`https://loka-database.herokuapp.com/user/following/${profileData._id}`, config)

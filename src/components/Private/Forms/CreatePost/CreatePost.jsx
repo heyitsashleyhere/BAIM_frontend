@@ -313,7 +313,7 @@ export default function CreatePost({ category, setCategory }) {
     const config = {
       method: "POST",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     }
 

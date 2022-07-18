@@ -63,7 +63,7 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
     fetch(`https://loka-database.herokuapp.com/user/${profileName}`, config)
@@ -97,7 +97,7 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
     postCategories.map((cat) => {
@@ -144,7 +144,7 @@ export const Profile = () => {
     const config = {
       method: "delete",
       credentials: 'include',
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
     fetch(`https://loka-database.herokuapp.com/user/${id}`, config)

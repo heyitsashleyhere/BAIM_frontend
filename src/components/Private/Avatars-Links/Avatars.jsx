@@ -34,7 +34,7 @@ export const SquareAvatar = ({ data }) => {
       const config = {
         method: "GET",
         credentials: "include", // specify this if you need cookies
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
       
       fetch(`https://loka-database.herokuapp.com/${data.type}/${data._id}`, config)
@@ -80,7 +80,7 @@ export const SquareAvatar = ({ data }) => {
       const config = {
         method: "delete",
         credentials: 'include', 
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
   
       fetch(`https://loka-database.herokuapp.com/${type}/${id}`, config)
