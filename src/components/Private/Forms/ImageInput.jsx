@@ -15,9 +15,10 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     const img = useRef()
 
     function uploadFile(file){
+        
         if(!file){return}
 
-        if(!oldUrl){
+        if(!oldUrl || !oldUrl.includes('firebase')){
             const storageRef= ref(storage,`/files/image/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file)
     
@@ -34,7 +35,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
                     }
                 })
             })
-        }else{
+        }else {
             const storage = getStorage()
             const videoRef=ref(storage, `${oldUrl}`)
 
@@ -94,7 +95,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     return(
         <div className="image">
             <div className="image-container">
-            { image ? 
+            { image.image ? 
                 <img src={ image.image } width="50%" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
                 : 
                 <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
