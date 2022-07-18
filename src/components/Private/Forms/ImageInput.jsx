@@ -17,7 +17,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     function uploadFile(file){
         if(!file){return}
 
-        if(oldUrl){
+        if(oldUrl.includes('firebase')){
             const storage = getStorage()
             const videoRef=ref(storage, `${oldUrl}`)
 
@@ -94,7 +94,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
         <div className="image">
             <div className="image-container">
             { image ?  
-            <img src={ image.image } width="50" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
+            <img src={ image.image } width="50%" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
             : 
             <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "30%" : '50%' } 
                      style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
