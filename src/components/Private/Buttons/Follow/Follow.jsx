@@ -14,7 +14,7 @@ export const Follow = ({ name }) => {
 
 	useEffect(() => {
 		if (profileName) {
-			fetch(`https://loka-database.herokuapp.com/user/${profileName}`)
+			fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user/${profileName}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (result.errors) {
@@ -27,7 +27,7 @@ export const Follow = ({ name }) => {
 					console.log(`error from profileName request in Profile`, error)
 				);
 		} else {
-			fetch(`https://loka-database.herokuapp.com/user/${name}`)
+			fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user/${name}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (result.errors) {
@@ -49,7 +49,7 @@ export const Follow = ({ name }) => {
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
 
-		fetch(`https://loka-database.herokuapp.com/user/following/${profileData._id}`, config)
+		fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user/following/${profileData._id}`, config)
 			.then((response) => response.json())
 			.then((result) => {
 				if (result.errors) {

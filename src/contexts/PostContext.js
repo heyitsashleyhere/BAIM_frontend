@@ -36,7 +36,7 @@ function PostsContextProvider({ children }) {
   // const [loading, setLoading]=useState(true)
 
   useEffect(() => {
-    fetch("https://loka-database.herokuapp.com/user")
+    fetch("https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user")
       .then(response => response.json())
       .then(result => { setUsers(result) })
       .catch(error => console.log(error.message))
@@ -53,7 +53,7 @@ function PostsContextProvider({ children }) {
     //   };
 
     postCategories.map(cat => {
-      fetch(`https://loka-database.herokuapp.com/${cat}/`)
+      fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${cat}/`)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -112,7 +112,7 @@ function PostsContextProvider({ children }) {
       body: JSON.stringify(inputValues)
     }
 
-    fetch(`https://loka-database.herokuapp.com/${category}`, config)
+    fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${category}`, config)
       .then((response) => response.json())
       .then((result) => console.log(category, "fetch result:", result))
       .catch((error) => console.log(error));

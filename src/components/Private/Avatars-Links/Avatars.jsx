@@ -37,7 +37,7 @@ export const SquareAvatar = ({ data }) => {
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
       
-      fetch(`https://loka-database.herokuapp.com/${data.type}/${data._id}`, config)
+      fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${data.type}/${data._id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (result.errors) {
@@ -83,7 +83,7 @@ export const SquareAvatar = ({ data }) => {
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
   
-      fetch(`https://loka-database.herokuapp.com/${type}/${id}`, config)
+      fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${type}/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {

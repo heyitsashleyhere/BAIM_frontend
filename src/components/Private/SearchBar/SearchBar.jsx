@@ -45,7 +45,7 @@ export default function SearchBar({ display }) {
 
 	function handleSearch() {
 		if (searchCat === "user") {
-			fetch(`https://loka-database.herokuapp.com/user/search/${searchInput}`)
+			fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user/search/${searchInput}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (!result.errors) {
@@ -82,7 +82,7 @@ export default function SearchBar({ display }) {
 				.catch((error) => console.log(error.message));
 			}
 		} else {
-			fetch(`https://loka-database.herokuapp.com/${searchCat}/${searchOpt}/${searchInput}`)
+			fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${searchCat}/${searchOpt}/${searchInput}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (!result.errors) {

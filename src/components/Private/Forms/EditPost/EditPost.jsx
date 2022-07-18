@@ -318,7 +318,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
         body: JSON.stringify(inputValues),
       }
   
-      fetch(`https://loka-database.herokuapp.com/${category}/${postData._id}`, config)
+      fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${category}/${postData._id}`, config)
         .then((response) => response.json())
         .then((result) => {
          if (result.errors) {
