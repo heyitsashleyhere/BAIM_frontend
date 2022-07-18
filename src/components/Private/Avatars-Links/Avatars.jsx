@@ -33,8 +33,7 @@ export const SquareAvatar = ({ data }) => {
     useEffect(() => {
       const config = {
         method: "GET",
-        credentials: "include", 
-        withCredentials: true,
+        credentials: "include", // specify this if you need cookies
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
       

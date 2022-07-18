@@ -34,7 +34,6 @@ export const PostPage = ({ data }) => {
     const config = {
       method: "GET",
       credentials: "include", 
-      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     

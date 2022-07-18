@@ -313,8 +313,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
     } else {
       const config = {
         method: "PATCH",
-        credentials: "include", 
-        withCredentials: true,
+        credentials: "include",
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
         body: JSON.stringify(inputValues),
       }
