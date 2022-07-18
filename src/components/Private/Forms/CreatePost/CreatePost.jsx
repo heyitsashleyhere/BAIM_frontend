@@ -317,7 +317,7 @@ export default function CreatePost({ category, setCategory }) {
       body: JSON.stringify(inputValues),
     }
 
-    fetch(`http://localhost:7000/${category}`, config)
+    fetch(`https://loka-database.herokuapp.com/${category}`, config)
       .then((response) => response.json())
       .then((result) => {
        if (result.errors) {

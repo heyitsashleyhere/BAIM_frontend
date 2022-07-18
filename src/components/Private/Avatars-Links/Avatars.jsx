@@ -37,7 +37,7 @@ export const SquareAvatar = ({ data }) => {
         headers: { "Content-Type": "application/json" },
       };
       
-      fetch(`http://localhost:7000/${data.type}/${data._id}`, config)
+      fetch(`https://loka-database.herokuapp.com/${data.type}/${data._id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (result.errors) {
@@ -83,7 +83,7 @@ export const SquareAvatar = ({ data }) => {
         headers: { "Content-Type": "application/json" },
       };
   
-      fetch(`http://localhost:7000/${type}/${id}`, config)
+      fetch(`https://loka-database.herokuapp.com/${type}/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {

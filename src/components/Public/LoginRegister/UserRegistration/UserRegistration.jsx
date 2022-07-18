@@ -465,7 +465,7 @@ export default function UserRegistration() {
       body: JSON.stringify(inputValues),
     };
 
-    fetch("http://localhost:7000/user/register", config)
+    fetch("https://loka-database.herokuapp.com/user/register", config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)

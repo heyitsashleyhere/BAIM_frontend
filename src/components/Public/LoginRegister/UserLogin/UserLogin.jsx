@@ -29,7 +29,7 @@ export default function UserLogin() {
       };
       // https://stackoverflow.com/questions/36824106/express-doesnt-set-a-cookie
   
-      fetch("http://localhost:7000/user/login", config)
+      fetch("https://loka-database.herokuapp.com/user/login", config)
         .then((response) => response.json())
         .then((result) => {
             // console.log("UserLogin:", result);
