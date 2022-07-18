@@ -221,7 +221,8 @@ const Team = () => {
 							<span className="inner_text">
 								<h2>Github Project Management</h2>
 								<p>
-								  Are you curious to see more? Please click on the image bellow. 
+								  Some other project management tools we considered were Trello, Jira and Notion. We finally chose Github as it is very convenient for our team to link issues and push requests.
+								  If you would like to see more please click on the image below. 
 								</p>
 								<a href="https://github.com/users/heyitsashleyhere/projects/2" target="_blank"><img src={require('./../../../assets/team-projects/githubprojects.png')}/></a>
 							</span>

@@ -56,17 +56,15 @@ export const Profile = () => {
   const [isFollowingOpen, setIsFollowingOpen] = useState(false)
   const [isFollowersOpen, setIsFollowersOpen] = useState(false)
 
-
-  const config = {
-    method: "GET",
-    credentials: "include", // specify this if you need cookies
-    headers: { "Content-Type": "application/json" },
-  }
-
-
   useEffect(() => {
     setPostMessage(null)
     setPinMessage(null)
+
+    const config = {
+      method: "GET",
+      credentials: "include", // specify this if you need cookies
+      headers: { "Content-Type": "application/json" },
+    }
 
     fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
@@ -96,6 +94,12 @@ export const Profile = () => {
   }, [profileName, upgrade, postData]);
 
   useEffect(() => {
+    const config = {
+      method: "GET",
+      credentials: "include", // specify this if you need cookies
+      headers: { "Content-Type": "application/json" },
+    }
+
     postCategories.map((cat) => {
       fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
@@ -161,18 +165,6 @@ export const Profile = () => {
 		return <LoadingSpinner />
 	}
 
-  function openFollowers(){
-      setIsFollowing(false)
-      setIsFollowers(!isFollowers)
-    
-  }
-
-  function openFollowing(){
-    setIsFollowers(false)
-    setIsFollowing(!isFollowing)
-  }
-
-
   return (
     <>
       <ProduceNavbar />
@@ -227,14 +219,6 @@ export const Profile = () => {
 
               <div className="Profile-followers">
                 <Follow className="Profile-follow-button" />
-
-                {/* // ! MURAD : check this logic with the Modal thing  */}
-                {/* <button className="NavLink-Black" onClick={openFollowers}>{followers.length} followers</button>
-                <button className="NavLink-Black" onClick={openFollowing}>{following.length} following</button>
-
-                 { isFollowers && <FollowPage follow={followers} type='followers'/>  }
-                 { isFollowing && <FollowPage follow={following} type='following'/> } */}
-
                 <button className="NavLink-Black" onClick={() => setIsFollowersOpen(true)}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={() => setIsFollowingOpen(true)}>{following.length} following</button>
 
@@ -301,15 +285,3 @@ export const Profile = () => {
     </>
   )
 }
-
-    // const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
-    // Promise.all(promises)
-    //        .then(responses => Promise.all( responses.map(r => r.json())) )
-    //        .then(result =>  {
-    //         result.forEach(cat => currentUserLibrary[cat[0].type] = cat)
-    //         setTest(result)
-    //       }) // result.forEach(catArr =>  setCurrentUserLibrary({...currentUserLibrary, [catArr[0].type]: catArr}))
-    //        .catch(err => console.error(`from Promise all`, err))
-
-    //       console.log('currentUserLibrary :>> ', currentUserLibrary);
-    //       console.log('typeof test :>> ', typeof test);

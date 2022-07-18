@@ -6,13 +6,8 @@ import { RoundAvatar } from '../Avatars-Links/Avatars'
 
 import './followPage.scss'
 
-export const FollowPage = (props) => {
-
+export const FollowPage = ({ follow, type }) => {
   const { users } = useContext(PostsContext)
-
-  const { follow, type } = props
-
-  console.log('follow', follow)
 
   function filter(arr1, arr2) {
     return arr1.filter(el => {
@@ -22,9 +17,6 @@ export const FollowPage = (props) => {
     })
 
   }
-  console.log('following')
-
-
 
   return (
     <div className="Follow">
