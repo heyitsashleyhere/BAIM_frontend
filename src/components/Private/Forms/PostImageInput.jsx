@@ -88,6 +88,8 @@ export default function PostImageInput({ imageUsage, oldUrl, category, postData 
             fetch(url, config)
             .then(response=> response.json())
             .then(result => {
+                setImage('')
+                setImageUrl('')
                setUpgrade(!Upgrade)
                 
             })
