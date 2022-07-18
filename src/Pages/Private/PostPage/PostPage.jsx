@@ -37,7 +37,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     
-    fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
+    fetch(`https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -68,7 +68,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
+    fetch(`https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {

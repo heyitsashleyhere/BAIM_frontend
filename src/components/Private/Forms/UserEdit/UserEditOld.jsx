@@ -28,7 +28,7 @@ export default function UserRegistration() {
               body: JSON.stringify(inputValues),
               }
                
-       fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user/${user.id}`, config)
+       fetch(`https://loka-database.herokuapp.com/user/${user.id}`, config)
               .then((response) => response.json())
               .then((result) => {
                      console.log("UserEdit:", result)

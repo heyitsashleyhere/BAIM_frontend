@@ -11,7 +11,7 @@ export const ProfileFeed = (props) => {
     const allCollections = [allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost] 
     // useEffect(() => {
     //   postCategories.map(cat => {
-    //     fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${cat === "arts-and-craft" ? 'artsCraft' : cat}/`)
+    //     fetch(`https://loka-database.herokuapp.com/${cat === "arts-and-craft" ? 'artsCraft' : cat}/`)
     //       .then((response) => response.json())
     //       .then((result) => {
     //         if (!result.errors) {
@@ -24,7 +24,7 @@ export const ProfileFeed = (props) => {
     //     })
 
     // // postCategories.map(cat => {
-    // //   fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${cat}/`)
+    // //   fetch(`https://loka-database.herokuapp.com/${cat}/`)
     // //     .then((response) => response.json())
     // //     .then((result) => {
     // //       if (!result.errors) {

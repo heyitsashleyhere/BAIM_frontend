@@ -317,7 +317,7 @@ export default function CreatePost({ category, setCategory }) {
       body: JSON.stringify(inputValues),
     }
 
-    fetch(`https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/${category}`, config)
+    fetch(`https://loka-database.herokuapp.com/${category}`, config)
       .then((response) => response.json())
       .then((result) => {
        if (result.errors) {
