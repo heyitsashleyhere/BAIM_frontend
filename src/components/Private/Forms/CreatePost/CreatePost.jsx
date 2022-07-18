@@ -536,7 +536,7 @@ export default function CreatePost({ category, setCategory }) {
             )}
 
             <Grid item xs={12} sm={6}>
-              <ImageInput imageUsage="image" oldUrl={postData.image} category={category} />
+              <ImageInput imageUsage="image" category={category} />
               {errors.map(
               (error, i) =>
                 error.image && (

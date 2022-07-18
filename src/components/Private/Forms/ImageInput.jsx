@@ -17,7 +17,24 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     function uploadFile(file){
         if(!file){return}
 
-        if(oldUrl.includes('firebase')){
+        if(!oldUrl){
+            const storageRef= ref(storage,`/files/image/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file)
+    
+            uploadTask.on("state_changed", (snapshot)=>{
+                const prog= Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(prog)
+            }, (err) => console.log("uploadFile error", err), 
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> {
+                    if(imageUsage === "avatar"){
+                    setInputValues({...inputValues, [`${imageUsage}`]: imgURL})
+                    }else{
+                        setImage({ image: imgURL })
+                    }
+                })
+            })
+        }else{
             const storage = getStorage()
             const videoRef=ref(storage, `${oldUrl}`)
 
@@ -47,23 +64,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
                 })
             })
         }
-
-        const storageRef= ref(storage,`/files/image/${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, file)
-
-        uploadTask.on("state_changed", (snapshot)=>{
-            const prog= Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            setProgress(prog)
-        }, (err) => console.log("uploadFile error", err), 
-        () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> {
-                if(imageUsage === "avatar"){
-                setInputValues({...inputValues, [`${imageUsage}`]: imgURL})
-                }else{
-                    setImage({ image: imgURL })
-                }
-            })
-        })
+        
     }
 
     function fileHandler(e) {
@@ -93,13 +94,15 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     return(
         <div className="image">
             <div className="image-container">
-            { image ?  
-            <img src={ image.image } width="50%" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
-            : 
-            <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "30%" : '50%' } 
-                     style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
-                     
+            { image ? 
+                <img src={ image.image } width="50%" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
+                : 
+                <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
+                
             }
+
+            {/* { (inputValues[`${imageUsage}`]) && <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> } */}
+            {/* { oldUrl && <img src={oldUrl} width={ imageUsage === 'avatar' ? "30%" : '50%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> }  */}
             </div>
 
             <section className="input-image" style={{marginTop: '2rem'}}>
