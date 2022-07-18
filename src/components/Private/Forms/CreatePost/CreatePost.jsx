@@ -8,7 +8,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ImageIcon from '@mui/icons-material/Image';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import CloseIcon from '@mui/icons-material/Close';
-import PostImageInput from "../PostImageInput.jsx";
+import ImageInput from "../ImageInput.jsx";
 
 
 
@@ -536,7 +536,7 @@ export default function CreatePost({ category, setCategory }) {
             )}
 
             <Grid item xs={12} sm={6}>
-              <PostImageInput imageUsage="image" />
+              <ImageInput imageUsage="image" oldUrl={postData.image} category={category} />
               {errors.map(
               (error, i) =>
                 error.image && (

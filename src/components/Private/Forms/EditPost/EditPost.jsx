@@ -7,7 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import CloseIcon from '@mui/icons-material/Close';
 import VideocamIcon from '@mui/icons-material/Videocam';
-import PostImageInput from "../PostImageInput.jsx";
+import ImageInput from "../ImageInput.jsx";
 // import ImageIcon from '@mui/icons-material/Image';
 import TagInput from "./TagInput.jsx";
 
@@ -353,7 +353,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
         <form className="create-form" onSubmit={handleSubmit} style={{ padding: '5% 7%'}}>
           <Grid container spacing={2}>
             <Grid sx={{ textAlign: 'center', marginBottom: '2%'}}>
-              <PostImageInput oldUrl={postData.image} category={category} postData={postData}/>
+              <ImageInput oldUrl={postData.image} category={category} imageUsage="image"/>
             </Grid>
             <Grid item xs={12}>
               <TextField name="title" label="Title"
