@@ -33,7 +33,8 @@ export const PostPage = ({ data }) => {
   useEffect(() => {
     const config = {
       method: "GET",
-      credentials: "include", 
+      credentials: "include",
+withCredentials: true, 
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     

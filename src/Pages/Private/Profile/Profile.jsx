@@ -62,7 +62,8 @@ export const Profile = () => {
 
     const config = {
       method: "GET",
-      credentials: "include", 
+      credentials: "include",
+withCredentials: true, 
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
@@ -96,7 +97,8 @@ export const Profile = () => {
   useEffect(() => {
     const config = {
       method: "GET",
-      credentials: "include", 
+      credentials: "include",
+withCredentials: true, 
       headers: { "Content-Type": "application/json", 
       "Access-Control-Allow-Credentials": true, },
     }

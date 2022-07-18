@@ -15,7 +15,8 @@ const [ isModalOpen, setIsModalOpen ] = useState(false);
 useEffect(() => {
   const config = {
     method: "GET",
-    credentials: "include", // specify this if you need cookies
+    credentials: "include",
+withCredentials: true, // specify this if you need cookies
     headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
   };
   
@@ -35,7 +36,8 @@ useEffect(() => {
   function PinPost(){
 		  const config = {
 			  method: "PATCH",
-			  credentials: "include", // specify this if you need cookies
+			  credentials: "include",
+withCredentials: true, // specify this if you need cookies
 			  headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		  };
       

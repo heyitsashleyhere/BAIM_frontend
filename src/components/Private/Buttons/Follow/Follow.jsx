@@ -45,7 +45,8 @@ export const Follow = ({ name }) => {
 	function FollowUser() {
 		const config = {
 			method: "PATCH",
-			credentials: "include", // specify this if you need cookies
+			credentials: "include",
+withCredentials: true, // specify this if you need cookies
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
 
