@@ -19,7 +19,8 @@ export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
     console.log('payload', payload)
     const config = {
       method: "POST",
-      credentials: "include", // specify this if you need cookies
+      credentials: "include", 
+      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(payload),
     };

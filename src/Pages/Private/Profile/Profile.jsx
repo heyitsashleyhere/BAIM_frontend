@@ -62,7 +62,8 @@ export const Profile = () => {
 
     const config = {
       method: "GET",
-      credentials: "include", // specify this if you need cookies
+      credentials: "include", 
+      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
@@ -96,8 +97,10 @@ export const Profile = () => {
   useEffect(() => {
     const config = {
       method: "GET",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
+      credentials: "include", 
+      withCredentials: true,
+      headers: { "Content-Type": "application/json", 
+      "Access-Control-Allow-Credentials": true, },
     }
 
     postCategories.map((cat) => {

@@ -33,7 +33,8 @@ export const PrivateHeader = () => {
 	function logoutUser() {
 		const config = {
 			method: "POST",
-			credentials: "include", // specify this if you need cookies
+			credentials: "include", 
+			withCredentials: true,
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
 		fetch("https://loka-database.herokuapp.com/user/logout", config)
