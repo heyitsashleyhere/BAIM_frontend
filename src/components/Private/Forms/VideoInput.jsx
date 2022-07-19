@@ -3,9 +3,8 @@ import { useState, useRef, useContext } from 'react'
 import { storage } from "../../../firebase.js"
 import { PostsContext } from '../../../contexts/PostContext.js'
 
-import { Grid, TextField, Box, Typography, LinearProgress, Grow, Modal, ButtonBase } from "@mui/material";
-import ImageIcon from '@mui/icons-material/Image';
-// import VideocamIcon from '@mui/icons-material/Videocam';
+import { Box, Typography, Button, LinearProgress } from "@mui/material";
+import VideocamIcon from '@mui/icons-material/Videocam';
 
 
 export default function VideoInput({ oldUrl }){
@@ -85,27 +84,34 @@ export default function VideoInput({ oldUrl }){
     }
 
 
-
-
     return(
-        <div className="image">
+    <div className="image">
         <div className="image-container">
             { video.video ?
-
                 <video src={video.video} width="50%" style={{ borderRadius: '5%' }} controls>
                     <source src={video.video} type="video/mp4"/>
                     <source src={video.video } type="video/webm"/>
                 </video>
                 :
-                <video src={oldUrl} width="50%" style={{ borderRadius: '5%'}} />
+                oldUrl && <video src={oldUrl} width="50%" style={{ borderRadius: '5%'}} />
             }
         </div>
 
-        <section className="input-image" style={{marginTop: '2rem'}}>
+        {/* <section className="input-image" style={{marginTop: '2rem'}}>
         
             <input ref={media} type="file" accept="video/*" className="input" />
             <button type="submit" onClick={fileHandler} variant="outlined" size="large">Upload</button>
            
+        </section> */}
+
+        <section className="input-image" style={{marginTop: '2rem'}}>
+                <label htmlFor="videoInput-input">
+                    <input ref={media} type="file" accept="video/*" style={{display: 'none'}} id='videoInput-input' />
+                    <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
+                        Choose file
+                    </Button>
+                </label>
+                <Button type="submit" onClick={fileHandler} variant="outlined" size="large">Upload</Button>      
         </section>
 
         <Box sx={{ width: '100%' }}>

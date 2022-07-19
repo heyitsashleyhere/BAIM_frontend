@@ -5,8 +5,6 @@ import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import ImageIcon from '@mui/icons-material/Image';
-import VideocamIcon from '@mui/icons-material/Videocam';
 import CloseIcon from '@mui/icons-material/Close';
 import ImageInput from "../ImageInput.jsx";
 import VideoInput from "../VideoInput.jsx";
@@ -309,11 +307,8 @@ export default function CreatePost({ category, setCategory }) {
  
   function handleSubmit(e) {
     e.preventDefault()
-    console.log('address :>> ', address);
     setInputValues({ ...inputValues, address});
-    
 
-    
     const payload = { ...inputValues, ...image, ...video }
     const config = {
       method: "POST",
@@ -555,15 +550,15 @@ export default function CreatePost({ category, setCategory }) {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-            <VideoInput/>
-              <label htmlFor="create-post-video">
-              
-                {/* <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
-                       onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
-                <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
-                  Upload Video
-                </Button> */}
-              </label>
+              <VideoInput/>
+              {errors.map(
+              (error, i) =>
+                error.video && (
+                  <FormHelperText error key={category + "-videoFile" + i}>
+                    {error.video}
+                  </FormHelperText>
+                )
+              )}
             </Grid>
 
             <Grid item xs={12}>

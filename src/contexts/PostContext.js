@@ -33,7 +33,7 @@ function PostsContextProvider({ children }) {
   const [upgrade, setUpgrade] = useState(false)
   // imageInput
   const [image, setImage]=useState({image:""})
-  // for Video Component
+  // videoInput
   const[video, setVideo]=useState({video:""})
 
 

@@ -3,7 +3,7 @@ import { useState, useRef, useContext } from 'react'
 import { storage } from "../../../firebase.js"
 import { PostsContext } from '../../../contexts/PostContext.js'
 import { UserContext } from '../../../contexts/UserContext.js'
-import { Grid, TextField, Box, Typography, Button, LinearProgress, Grow, Modal, ButtonBase } from "@mui/material";
+import { Box, Typography, Button, LinearProgress } from "@mui/material";
 import ImageIcon from '@mui/icons-material/Image';
 
 
@@ -99,8 +99,9 @@ export default function ImageInput({ imageUsage, oldUrl, }){
 
                     <img src={image.image} width="50%" style={{ borderRadius: imageUsage === 'image' ? '5%' : '50%' }} />
                     :
-                    <img src={inputValues[`${imageUsage}`] || oldUrl} width={imageUsage === 'avatar' ? "20%" : '40%'} style={{ borderRadius: imageUsage === 'image' ? '5%' : '50%' }} />
-
+                    inputValues[`${imageUsage}`] || oldUrl ?
+                     <img src={inputValues[`${imageUsage}`] || oldUrl} width={imageUsage === 'avatar' ? "20%" : '40%'} style={{ borderRadius: imageUsage === 'image' ? '5%' : '50%' }} /> 
+                     : null
                 }
 
             </div>
@@ -112,8 +113,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
                         Choose file
                     </Button>
                 </label>
-                <Button type="submit" onClick={fileHandler} variant="outlined" size="large">Upload</Button>
-               
+                <Button type="submit" onClick={fileHandler} variant="outlined" size="large">Upload</Button>      
             </section>
 
             <Box sx={{ width: '100%' }}>

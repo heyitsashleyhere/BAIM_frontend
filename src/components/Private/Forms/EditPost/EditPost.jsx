@@ -6,11 +6,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import CloseIcon from '@mui/icons-material/Close';
-import VideocamIcon from '@mui/icons-material/Videocam';
 import ImageInput from "../ImageInput.jsx";
-// import ImageIcon from '@mui/icons-material/Image';
-import TagInput from "./TagInput.jsx";
 import VideoInput from "../VideoInput.jsx";
+// import TagInput from "./TagInput.jsx";
+import defaultImg from "../../../../assets/LOKA2.jpg"
 
 
 
@@ -306,9 +305,10 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    
+    if(category === 'event') {
+      setInputValues({ ...inputValues, address});
+    } 
     const payload = {...inputValues, ...image, ...video}
-
 
     if(Object.values(payload).every(x => (x === null || x === ''))){
       setIsEditOpen(false)
@@ -344,6 +344,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
       setIsEditOpen(false);
 	}
   
+  console.log('postData.image :>> ', postData.image);
 
   return (
     <section className="CreatePost-section">
@@ -351,7 +352,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
         <form className="create-form" onSubmit={handleSubmit} style={{ padding: '5% 7%'}}>
           <Grid container spacing={2}>
             <Grid sx={{ textAlign: 'center', marginBottom: '2%'}}>
-              <ImageInput oldUrl={postData.image} category={category} imageUsage="image"/>
+              <ImageInput oldUrl={postData.image ? postData.image : defaultImg} category={category} imageUsage="image"/>
             </Grid>
             <Grid item xs={12}>
               <TextField name="title" label="Title"
@@ -567,7 +568,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
             </Grid> */}
 
             <Grid item xs={12} sm={8}>
-              <TextField name="link" label="Link"
+              <TextField name="link" label="Map Link"
                      type="text"
                      fullWidth margin="dense"
                      InputLabelProps={{ shrink: true }}
