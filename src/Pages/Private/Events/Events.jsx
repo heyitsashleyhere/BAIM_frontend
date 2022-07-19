@@ -34,6 +34,15 @@ export const Events = ({ data }) => {
 		setShowMobile(windowWidth <= 500 ? true : false);
 	}, [showMobile, windowWidth]);
 
+	// let nthNumber = (d) => {
+	// 	if (d > 3 && d < 21) return `${d}th`;
+	// 	switch (d % 10) {
+	// 		case 1: return `${d}st'`;
+	// 		case 2: return `${d}nd'`;
+	// 		case 3: return `${d}rd`;
+	// 		default: return `${d}th`
+	// 	}
+	// }
 
 	//current month in letters
 	const date = new Date();
@@ -104,30 +113,29 @@ export const Events = ({ data }) => {
 											sx={showMobile ? { pl: 1, pt: 0.5 } : { pl: 3, pt: 1 }}
 											primary={
 												<MUI.Typography
-													sx={{ display: "inline" }}
+													sx={{ display: "inline", fontWeight: 800 }}
 													component="span"
-													variant={showMobile ? "h5" : "h4"}
+													variant="h6"
 												>
 													{event.title}
 												</MUI.Typography>
 											}
 											secondary={
 												<>
-													<MUI.Typography
+													{/* <MUI.Typography
 														sx={{ display: "inline" }}
 														component="span"
 														variant="h6"
 														color="text.secondary"
 													>
-														{new Date(event.start).getDate()}
-													</MUI.Typography>
+														{nthNumber(new Date(event.start).getDate())}
+													</MUI.Typography> */}
 													<MUI.Typography
-														sx={{ display: "inline" }}
+														sx={{ display: "inline", fontSize: '1.6rem' }}
 														component="span"
-														variant="h6"
 														color="text.secondary"
 													>
-														{" — "}
+														{/* {" — "} */}
 														{event.address.street}
 														{", "}
 														{event.address.city}

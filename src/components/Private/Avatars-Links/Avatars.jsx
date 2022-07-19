@@ -182,7 +182,7 @@ export const PostHeaderAvatar = ({ id, name, image }) => {
 
 export const PostCommentsAvatar = ({ id, name, image }) => {
   return (
-    <Link to={`/profile/${name}`} className="CommentAvatar">
+    <Link to={`/profile/${name}`} key={id} className="CommentAvatar">
       <section className="comAvatar">
         <img src={image}></img>
       </section>

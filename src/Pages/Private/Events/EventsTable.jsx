@@ -32,6 +32,16 @@ export const EventsTable = (props) => {
   const date = new Date();
   let currentMonth = date.toLocaleString("default", { month: "long" });
 
+  let nthNumber = (d) => {
+    if (d > 3 && d < 21) return `${d}th`;
+    switch (d % 10) {
+      case 1: return `${d}st'`;
+      case 2: return `${d}nd'`;
+      case 3: return `${d}rd`;
+      default: return `${d}th`
+    }
+  }
+
   console.log(isAuthor);
   useEffect(() => {
     setIsAuthor(data.find(item => item.author === cookies.id))
@@ -87,6 +97,7 @@ export const EventsTable = (props) => {
                   pinEvent={pinEvent}
                   isAuthor={isAuthor}
                   data={data}
+                  nthNumber={nthNumber}
                 />
               ))}
             </MUI.TableBody>

@@ -38,58 +38,69 @@
 		}
 	}
 
-	.promo {
+	.promo-section {
 		width: 100%;
-		// height: 100vh;
 		height: 100%;
-		position: relative;
+		padding: 1rem;
 
-		&-content {
+		.section {
 			width: 100%;
-			min-height: 74rem;
-			position: relative;
-			background-color: #000;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+			margin-bottom: 15rem;
+			overflow: hidden;
+			color: #fff;
 
-			.promo-create,
-			.promo-connect,
-			.promo-welcome {
-				display: flex;
-				flex-direction: column;
+			&-header {
 				width: 100%;
-				padding: 1rem;
-				line-height: 1.2;
-				color: #fff;
+				font-weight: 800;
 
 				h1 {
-					text-align: center;
-					font-size: 4rem;
-					font-weight: 800;
-					padding: 1rem;
-					margin: 3rem 0;
+					margin-bottom: 4rem;
+					font-size: 5rem;
 				}
 
 				h2 {
-					text-align: center;
-					font-size: 2.4rem;
-					margin: 2rem 0rem;
+					font-size: 3rem;
+				}
+			}
+
+			&-cards {
+				display: flex;
+				flex-direction: column;
+				flex-wrap: wrap;
+				margin-block: 10rem;
+				width: 100%;
+
+				&-header {
+					margin-bottom: 4rem;
+
 				}
 
-				img {
-					width: 100%;
-					border-radius: 1rem;
-				}
+				.cards-list {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					justify-content: center;
+					margin-block: 4rem;
+					gap: 2rem;
 
-				.hero-text {
-					margin: 1rem 0rem;
-					padding: 1rem;
+					.card {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						font-size: 1.4rem;
+					}
 				}
 			}
 
 			&-text {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-
+				font-size: 2.2rem;
+				line-height: 1.5;
 			}
 		}
 	}
@@ -119,41 +130,8 @@
 			}
 		}
 
-		.promo {
-			// grid-column: 1/9;
+		.promo-section {
 			grid-column: 2/8;
-
-			.promo-create,
-			.promo-connect,
-			.promo-welcome {
-
-				min-height: 80rem;
-				width: 100%;
-				padding: 0;
-				// margin: 10rem 0rem;
-
-				h1 {
-					font-size: 4rem;
-					padding: 1rem;
-					margin: 3rem 0;
-				}
-
-				h2 {
-					font-size: 2.4rem;
-					margin: 1rem 0rem 2rem;
-				}
-
-				.hero-text {
-					width: 70%;
-					margin: 3rem 0rem;
-					padding: 1rem;
-
-					p {
-						font-size: 1.8rem;
-						color: #fff;
-					}
-				}
-			}
 		}
 	}
 
@@ -180,34 +158,13 @@
 			}
 		}
 
-		.promo {
+		.promo-section {
 			grid-column: 3/11;
+			padding: none;
 
-			.promo-create,
-			.promo-connect,
-			.promo-welcome {
-				// border: 1px solid red;
-				height: 100vh;
-				margin-block: 10rem;
-
-				h1 {
-					font-weight: 800;
-				}
-
-				h2 {
-					font-size: 3rem;
-				}
-
-				.hero-text {
-					margin-top: 5rem;
-					width: 100%;
-
-					p {
-						padding-inline: 1rem;
-						font-size: 2.2rem;
-					}
-				}
-			}
+			// .section {
+			// 	grid-column: 3/11;
+			// }
 		}
 	}
 }

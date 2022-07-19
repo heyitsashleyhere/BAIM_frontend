@@ -96,9 +96,11 @@ const Team = () => {
 										ref={addToRefs}
 										onClick={() => handleMemberComponent(member, index)}
 										key={index}
-										src={member.image}
+										src={isClicked && selectedImg === index ? member.image2 : member.image}
 										alt={`${member.name.split(" ")[0]} image`}
 										className={`member-img  ${isClicked && selectedImg === index ? 'active' : ''}`}
+										onMouseEnter={e => (e.currentTarget.src = `${member.image2}`)}
+										onMouseLeave={isClicked && selectedImg === index ? e => (e.currentTarget.src = `${member.image2}`) : e => (e.currentTarget.src = `${member.image}`)}
 									/>
 
 									<h2 ref={addToNames}>
@@ -121,7 +123,7 @@ const Team = () => {
 					<>
 						<section className="team_logo">
 							<p>BAIM TEAM</p>
-							<img className="logo" src={Logo}></img>
+							<img className="logo" src={Logo} ></img>
 						</section>
 						<section className="team_text team_section">
 							<span className="inner_text">
