@@ -32,7 +32,11 @@ function PostsContextProvider({ children }) {
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
 
+  // dependency for Ima component
   const [image, setImage]=useState({image:""})
+
+  // dependency for Video Component
+  const[video, setVideo]=useState({video:""})
 
 
   // const [loading, setLoading]=useState(true)
@@ -137,7 +141,8 @@ function PostsContextProvider({ children }) {
     seasonal, setSeasonal,
     profileData, setProfileData,
     postData, setPostData,
-    image, setImage
+    image, setImage,
+    video, setVideo,
   }
 
   return (

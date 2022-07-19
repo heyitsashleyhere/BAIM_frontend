@@ -15,7 +15,6 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     const img = useRef()
 
     function uploadFile(file){
-        
         if(!file){return}
 
         if(!oldUrl || !oldUrl.includes('firebase')){
@@ -37,9 +36,9 @@ export default function ImageInput({ imageUsage, oldUrl, }){
             })
         }else {
             const storage = getStorage()
-            const videoRef=ref(storage, `${oldUrl}`)
+            const imageRef = ref(storage, `${oldUrl}`)
 
-            deleteObject(videoRef).then(()=>{
+            deleteObject(imageRef).then(()=>{
                 setImage('')
                 setImageUrl('')
                
@@ -93,17 +92,17 @@ export default function ImageInput({ imageUsage, oldUrl, }){
 
 
     return(
+
         <div className="image">
             <div className="image-container">
-            { image.image ? 
-                <img src={ image.image } width="50%" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
-                : 
-                <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
-                
-            }
+                { image.image ?
 
-            {/* { (inputValues[`${imageUsage}`]) && <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> } */}
-            {/* { oldUrl && <img src={oldUrl} width={ imageUsage === 'avatar' ? "30%" : '50%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> }  */}
+                    <img src={image.image} width="50%" style={{ borderRadius: imageUsage === 'image' ? '5%' : '50%' }} />
+                    :
+                    <img src={inputValues[`${imageUsage}`] || oldUrl} width={imageUsage === 'avatar' ? "20%" : '40%'} style={{ borderRadius: imageUsage === 'image' ? '5%' : '50%' }} />
+
+                }
+
             </div>
 
             <section className="input-image" style={{marginTop: '2rem'}}>

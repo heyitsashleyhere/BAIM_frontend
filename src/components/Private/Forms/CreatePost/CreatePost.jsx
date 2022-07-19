@@ -9,13 +9,14 @@ import ImageIcon from '@mui/icons-material/Image';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import CloseIcon from '@mui/icons-material/Close';
 import ImageInput from "../ImageInput.jsx";
+import VideoInput from "../VideoInput.jsx";
 
 
 
 
 
 export default function CreatePost({ category, setCategory }) {
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload , image, setImage } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload , image, setImage, video, setVideo } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -313,8 +314,8 @@ export default function CreatePost({ category, setCategory }) {
     setInputValues({ ...inputValues, address});
     
 
-    // ? my solution to set the images in the inputValues... maybe do the same with address ?
-    const payload = { ...inputValues, ...image }
+    
+    const payload = { ...inputValues, ...image, ...video }
     const config = {
       method: "POST",
       credentials: "include", // specify this if you need cookies
@@ -332,6 +333,7 @@ export default function CreatePost({ category, setCategory }) {
             setPostId(result._id)
             setIsModalOpen(true)
             setImage('')
+            setVideo('')
             
        }
       })
@@ -548,12 +550,14 @@ export default function CreatePost({ category, setCategory }) {
             </Grid>
 
             <Grid item xs={12} sm={6}>
+            <VideoInput/>
               <label htmlFor="create-post-video">
-                <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
+              
+                {/* <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
                        onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
                 <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
                   Upload Video
-                </Button>
+                </Button> */}
               </label>
             </Grid>
 

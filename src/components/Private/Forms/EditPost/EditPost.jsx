@@ -10,12 +10,13 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import ImageInput from "../ImageInput.jsx";
 // import ImageIcon from '@mui/icons-material/Image';
 import TagInput from "./TagInput.jsx";
+import VideoInput from "../VideoInput.jsx";
 
 
 
 export default function EditPost({ postData, setPostData, setIsEditOpen }) {
   const [ category, setCategory ] = useState(postData.type)
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade, image, setImage } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload, upgrade, setUpgrade, image, setImage, video, setVideo } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -308,8 +309,8 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
   function handleSubmit(e) {
     e.preventDefault()
     
-    //? my solution to set the image in the post. kisses ivo
-    const payload = {...inputValues, ...image}
+    
+    const payload = {...inputValues, ...image, ...video}
 
     if(Object.values(payload).every(x => (x === null || x === ''))){
       setIsEditOpen(false)
@@ -549,11 +550,12 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
 
             <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               <label htmlFor="create-post-video">
-                <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
+              <VideoInput oldUrl={postData.video}/>
+                {/* <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
                        onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
                 <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
                   Upload Video
-                </Button>
+                </Button> */}
               </label>
             </Grid>
 
