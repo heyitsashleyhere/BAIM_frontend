@@ -277,11 +277,11 @@ export default function CreatePost({ category, setCategory }) {
   ]
 
   const categoriesForCategory = {
-     artsCraft: ["upcycling", "refashion", "decor", "ceramic", "textile", "drawings", "zero-waste", "other"],
-     beauty: ["hygiene","skin", "hair", "face", "anti-aging","makeup","other"],
-     event: ["market", "tasting", "workshop", "charity","sit-in","meet-and-greet","fair", "other" ],
-     garden: ["vegetable", "fruit", "grain", "herb","plants", "flower", "indoor-plant", "outdoor-plant", "plant", "tree", "other"],
-     recipe: ["juice","smoothie", "breakfast", "sandwiches", "main-dish", "soup", "salad", "appetizer", "dessert", "other"]
+    artsCraft: ["upcycling", "refashion", "decor", "ceramic", "textile", "drawings", "zero-waste", "other"],
+    beauty: ["hygiene", "skin", "hair", "face", "anti-aging", "makeup", "other"],
+    event: ["market", "tasting", "workshop", "charity", "sit-in", "meet-and-greet", "fair", "other"],
+    garden: ["vegetable", "fruit", "grain", "herb", "plants", "flower", "indoor-plant", "outdoor-plant", "plant", "tree", "other"],
+    recipe: ["juice", "smoothie", "breakfast", "sandwiches", "main-dish", "soup", "salad", "appetizer", "dessert", "other"]
   }
 
   function handleStart(value) {
@@ -303,7 +303,7 @@ export default function CreatePost({ category, setCategory }) {
   }
 
   function handleInputChange(e) {
-       setInputValues({ ...inputValues, [e.target.name]: e.target.value });
+    setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
@@ -318,26 +318,26 @@ export default function CreatePost({ category, setCategory }) {
       body: JSON.stringify(inputValues),
     }
 
-    fetch(`https://loka-database.herokuapp.com/${category}`, config)
+    fetch(`http://localhost:7000/${category}`, config)
       .then((response) => response.json())
       .then((result) => {
-       if (result.errors) {
-              setErrors(result.errors);
-       } else {
-            setPostId(result._id)
-            setIsModalOpen(true)
-       }
+        if (result.errors) {
+          setErrors(result.errors);
+        } else {
+          setPostId(result._id)
+          setIsModalOpen(true)
+        }
       })
       .catch((error) => console.log(error));
   }
 
   function handleClose(event, reason) {
-		if (reason === 'clickaway') {
-			return;
-		  }
-		  setIsModalOpen(false);
-      navigate(`/${category}/${postId}`)
-	}
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsModalOpen(false);
+    navigate(`/${category}/${postId}`)
+  }
 
   return (
     <section>
@@ -346,62 +346,62 @@ export default function CreatePost({ category, setCategory }) {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField name="title" label="Title"
-                     type="text"
-                     fullWidth margin="dense"
-                     error={errors.find((error) => error.title)}
-                     onChange={handleInputChange} />
+                type="text"
+                fullWidth margin="dense"
+                error={errors.find((error) => error.title)}
+                onChange={handleInputChange} />
               {errors.map(
-                     (error, i) =>
-                     error.title && (
-                     <FormHelperText error key={category + "-title" + i}>
-                     {error.title}
-                     </FormHelperText>
-                     )
+                (error, i) =>
+                  error.title && (
+                    <FormHelperText error key={category + "-title" + i}>
+                      {error.title}
+                    </FormHelperText>
+                  )
               )}
             </Grid>
             <Grid item xs={12}>
               <Autocomplete multiple
-                      options={categoriesForCategory[`${category}`]}
-                      getOptionLabel={(option) => option}
-                      onChange={(event, value) => setInputValues({ ...inputValues, category: value })}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          name="category"
-                          label="Category"
-                          autoComplete="new-password"
-                        />
-                      )}
-                    />
+                options={categoriesForCategory[`${category}`]}
+                getOptionLabel={(option) => option}
+                onChange={(event, value) => setInputValues({ ...inputValues, category: value })}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    name="category"
+                    label="Category"
+                    autoComplete="new-password"
+                  />
+                )}
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField name="description" label="Description"
-                     type="text"
-                     fullWidth margin="dense"
-                     multiline rows={6}
-                     error={errors.find((error) => error.description)}
-                     onChange={handleInputChange} />
+                type="text"
+                fullWidth margin="dense"
+                multiline rows={6}
+                error={errors.find((error) => error.description)}
+                onChange={handleInputChange} />
               {errors.map(
-                     (error, i) =>
-                     error.description && (
-                     <FormHelperText error key={category + "-description" + i}>
-                     {error.description}
-                     </FormHelperText>
-                     )
+                (error, i) =>
+                  error.description && (
+                    <FormHelperText error key={category + "-description" + i}>
+                      {error.description}
+                    </FormHelperText>
+                  )
               )}
             </Grid>
 
             <Grid item xs={12}>
-                <TextField name="tags" label="Tags (separated by comma)"
-                        type="text" fullWidth margin="dense"
-                        error={errors.find((error) => error.tags)}
-                        onChange={handleTags} />
-                  {errors.map( (error, i) =>
-                      error.tags && (
-                        <FormHelperText error key={category + "-tags" + i}>
-                          {error.tags}
-                        </FormHelperText>)
-                  )}
+              <TextField name="tags" label="Tags (separated by comma)"
+                type="text" fullWidth margin="dense"
+                error={errors.find((error) => error.tags)}
+                onChange={handleTags} />
+              {errors.map((error, i) =>
+                error.tags && (
+                  <FormHelperText error key={category + "-tags" + i}>
+                    {error.tags}
+                  </FormHelperText>)
+              )}
             </Grid>
 
             {category === "event" && (
@@ -411,81 +411,81 @@ export default function CreatePost({ category, setCategory }) {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="street" label="Street"
-                        type="text" fullWidth margin="dense"
-                        error={errors.find((error) => error["address.street"])}
-                        onChange={(e) => setAddress({ ...address, street: e.target.value })} />
+                    type="text" fullWidth margin="dense"
+                    error={errors.find((error) => error["address.street"])}
+                    onChange={(e) => setAddress({ ...address, street: e.target.value })} />
                   {errors.map(
-                        (error, i) =>
-                        error["address.street"] && (
+                    (error, i) =>
+                      error["address.street"] && (
                         <FormHelperText error key={category + "-streetAddress" + i}>
-                        {error["address.street"]}
+                          {error["address.street"]}
                         </FormHelperText>
-                        )
+                      )
                   )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="streetNumber" label="Street Number"
-                          type="text" fullWidth margin="dense"
-                          error={errors.find((error) => error["address.streetNumber"])}
-                          onChange={(e) => setAddress({ ...address, streetNumber: e.target.value })} />
-                    {errors.map(
-                          (error, i) =>
-                          error["address.streetNumber"] && (
-                          <FormHelperText error key={category + "-streetNumber" + i}>
+                    type="text" fullWidth margin="dense"
+                    error={errors.find((error) => error["address.streetNumber"])}
+                    onChange={(e) => setAddress({ ...address, streetNumber: e.target.value })} />
+                  {errors.map(
+                    (error, i) =>
+                      error["address.streetNumber"] && (
+                        <FormHelperText error key={category + "-streetNumber" + i}>
                           {error["address.streetNumber"]}
-                          </FormHelperText>
-                          )
-                    )}
+                        </FormHelperText>
+                      )
+                  )}
                 </Grid>
                 <Grid item xs={6}>
                   <TextField name="city" label="City"
-                          type="text" fullWidth margin="dense"
-                          error={errors.find((error) => error["address.city"])}
-                          onChange={(e) => setAddress({ ...address, city: e.target.value })} />
-                    {errors.map(
-                          (error, i) =>
-                          error["address.city"] && (
-                          <FormHelperText error key={category + "-city" + i}>
+                    type="text" fullWidth margin="dense"
+                    error={errors.find((error) => error["address.city"])}
+                    onChange={(e) => setAddress({ ...address, city: e.target.value })} />
+                  {errors.map(
+                    (error, i) =>
+                      error["address.city"] && (
+                        <FormHelperText error key={category + "-city" + i}>
                           {error["address.city"]}
-                          </FormHelperText>
-                          )
-                    )}
+                        </FormHelperText>
+                      )
+                  )}
                 </Grid>
                 <Grid item xs={6}>
                   <TextField name="zip" label="Zip Code"
-                          type="text" fullWidth margin="dense"
-                          error={errors.find((error) => error["address.zip"])}
-                          onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
-                    {errors.map(
-                          (error, i) =>
-                          error["address.zip"] && (
-                          <FormHelperText error key={category + "-zip" + i}>
+                    type="text" fullWidth margin="dense"
+                    error={errors.find((error) => error["address.zip"])}
+                    onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
+                  {errors.map(
+                    (error, i) =>
+                      error["address.zip"] && (
+                        <FormHelperText error key={category + "-zip" + i}>
                           {error["address.zip"]}
-                          </FormHelperText>
-                          )
-                    )}
+                        </FormHelperText>
+                      )
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="country" label="Country"
-                          select fullWidth margin="dense"
-                          error={errors.find((error) => error["address.country"])}
-                          value={country}
-                          onChange={(e) => {
-                            setCountry(e.target.value)
-                            setAddress({ ...address, country: e.target.value })
-                          }}>
-                      {countryList.map(option => (
-                        <MenuItem key={option} value={option}>{option}</MenuItem>
-                      ))}
+                    select fullWidth margin="dense"
+                    error={errors.find((error) => error["address.country"])}
+                    value={country}
+                    onChange={(e) => {
+                      setCountry(e.target.value)
+                      setAddress({ ...address, country: e.target.value })
+                    }}>
+                    {countryList.map(option => (
+                      <MenuItem key={option} value={option}>{option}</MenuItem>
+                    ))}
                   </TextField>
-                    {errors.map(
-                          (error, i) =>
-                          error["address.country"] && (
-                          <FormHelperText error key={category + "-country" + i}>
+                  {errors.map(
+                    (error, i) =>
+                      error["address.country"] && (
+                        <FormHelperText error key={category + "-country" + i}>
                           {error["address.country"]}
-                          </FormHelperText>
-                          )
-                    )}
+                        </FormHelperText>
+                      )
+                  )}
                 </Grid>
 
                 <Grid item xs={12}>
@@ -497,16 +497,16 @@ export default function CreatePost({ category, setCategory }) {
                     value={startTime}
                     onChange={handleStart}
                     renderInput={(params) => <TextField {...params} />}
-                    minDate={new Date()} 
+                    minDate={new Date()}
                   />
-                    {errors.map(
-                          (error, i) =>
-                          error.start && (
-                          <FormHelperText error key={category + "start" + i}>
+                  {errors.map(
+                    (error, i) =>
+                      error.start && (
+                        <FormHelperText error key={category + "start" + i}>
                           {error.start}
-                          </FormHelperText>
-                          )
-                    )}
+                        </FormHelperText>
+                      )
+                  )}
                 </Grid>
                 <Grid item xs={6}>
                   <DateTimePicker
@@ -514,16 +514,16 @@ export default function CreatePost({ category, setCategory }) {
                     value={endTime}
                     onChange={handleEnd}
                     renderInput={(params) => <TextField {...params} />}
-                    minDate={new Date()} 
+                    minDate={new Date()}
                   />
                   {errors.map(
-                          (error, i) =>
-                          error.end && (
-                          <FormHelperText error key={category + "end" + i}>
+                    (error, i) =>
+                      error.end && (
+                        <FormHelperText error key={category + "end" + i}>
                           {error.end}
-                          </FormHelperText>
-                          )
-                    )}
+                        </FormHelperText>
+                      )
+                  )}
                 </Grid>
               </LocalizationProvider>
             )}
@@ -531,19 +531,19 @@ export default function CreatePost({ category, setCategory }) {
             <Grid item xs={12} sm={6}>
               <ImageInput imageUsage="image" />
               {errors.map(
-              (error, i) =>
-                error.image && (
-                  <FormHelperText error key={category + "-imageFile" + i}>
-                    {error.image}
-                  </FormHelperText>
-                )
+                (error, i) =>
+                  error.image && (
+                    <FormHelperText error key={category + "-imageFile" + i}>
+                      {error.image}
+                    </FormHelperText>
+                  )
               )}
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <label htmlFor="create-post-video">
                 <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
-                       onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
+                  onChange={(e) => handleFileUpload(e)} style={{ display: 'none' }} />
                 <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
                   Upload Video
                 </Button>
@@ -552,20 +552,20 @@ export default function CreatePost({ category, setCategory }) {
 
             <Grid item xs={12}>
               <TextField name="link" label="Map Link"
-                     type="text"
-                     fullWidth margin="dense"
-                     error={errors.find((error) => error.link)}
-                     onChange={handleInputChange} />
+                type="text"
+                fullWidth margin="dense"
+                error={errors.find((error) => error.link)}
+                onChange={handleInputChange} />
               {errors.map(
-                     (error, i) =>
-                     error.link && (
-                     <FormHelperText error key={category + "-link" + i}>
-                     {error.link}
-                     </FormHelperText>
-                     )
+                (error, i) =>
+                  error.link && (
+                    <FormHelperText error key={category + "-link" + i}>
+                      {error.link}
+                    </FormHelperText>
+                  )
               )}
             </Grid>
-        
+
             <Grid item xs={12} textAlign='center'>
               <Button variant="contained" type="submit" size="large">Post</Button>
             </Grid>
@@ -575,29 +575,29 @@ export default function CreatePost({ category, setCategory }) {
 
       </Grow>
 
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null)}} >
-          <Snackbar open={isModalOpen} autoHideDuration={6000}
-              onClose={handleClose}
-              message={`post planted in ${category}`}
-              action={
-                  <React.Fragment>
-                    <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    sx={{ p: 0.5 }}
-                    onClick={handleClose}
-                    >
-                    <CloseIcon />
-                    </IconButton>
-                  </React.Fragment>
-                  } />
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
+        <Snackbar open={isModalOpen} autoHideDuration={6000}
+          onClose={handleClose}
+          message={`post planted in ${category}`}
+          action={
+            <React.Fragment>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                sx={{ p: 0.5 }}
+                onClick={handleClose}
+              >
+                <CloseIcon />
+              </IconButton>
+            </React.Fragment>
+          } />
       </Modal>
-       
+
     </section>
   )
 }
-            // old imageInput
-            {/* <Grid item xs={6}>
+// old imageInput
+{/* <Grid item xs={6}>
               <label htmlFor="create-post-image">
                 <input type="file" name="image" accept="image/*" id='create-post-image'
                       onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />

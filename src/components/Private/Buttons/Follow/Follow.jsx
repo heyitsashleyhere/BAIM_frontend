@@ -14,7 +14,7 @@ export const Follow = ({ name }) => {
 
 	useEffect(() => {
 		if (profileName) {
-			fetch(`https://loka-database.herokuapp.com/user/${profileName}`)
+			fetch(`http://localhost:7000/user/${profileName}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (result.errors) {
@@ -27,7 +27,7 @@ export const Follow = ({ name }) => {
 					console.log(`error from profileName request in Profile`, error)
 				);
 		} else {
-			fetch(`https://loka-database.herokuapp.com/user/${name}`)
+			fetch(`http://localhost:7000/user/${name}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (result.errors) {
@@ -50,7 +50,7 @@ export const Follow = ({ name }) => {
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
 
-		fetch(`https://loka-database.herokuapp.com/user/following/${profileData._id}`, config)
+		fetch(`http://localhost:7000/user/following/${profileData._id}`, config)
 			.then((response) => response.json())
 			.then((result) => {
 				if (result.errors) {
@@ -65,8 +65,8 @@ export const Follow = ({ name }) => {
 	function handleClose(event, reason) {
 		if (reason === 'clickaway') {
 			return;
-		  }
-		  setIsModalOpen(false);
+		}
+		setIsModalOpen(false);
 	}
 
 	return (
@@ -93,17 +93,17 @@ export const Follow = ({ name }) => {
 						onClose={handleClose}
 						message={`You are now ${profileData.followers.find((objId) => objId == cookies.id) ? `following` : `unfollowing`} ${profileData.profileName}`}
 						action={
-								<React.Fragment>
-									<IconButton
+							<React.Fragment>
+								<IconButton
 									aria-label="close"
 									color="inherit"
 									sx={{ p: 0.5 }}
 									onClick={handleClose}
-									>
+								>
 									<CloseIcon />
-									</IconButton>
-								</React.Fragment>
-								} />
+								</IconButton>
+							</React.Fragment>
+						} />
 				</Modal>
 			)}
 		</>

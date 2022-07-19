@@ -28,7 +28,7 @@ function PostsContextProvider({ children }) {
   // Profile Page
   const [profileData, setProfileData] = useState(null)
   // for Pin and Profile
-  const [ postData, setPostData ] = useState(null)
+  const [postData, setPostData] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
 
@@ -36,7 +36,7 @@ function PostsContextProvider({ children }) {
   // const [loading, setLoading]=useState(true)
 
   useEffect(() => {
-    fetch("https://loka-database.herokuapp.com/user")
+    fetch("http://localhost:7000/user")
       .then(response => response.json())
       .then(result => { setUsers(result) })
       .catch(error => console.log(error.message))
@@ -53,7 +53,7 @@ function PostsContextProvider({ children }) {
     //   };
 
     postCategories.map(cat => {
-      fetch(`https://loka-database.herokuapp.com/${cat}/`)
+      fetch(`http://localhost:7000/${cat}/`)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -112,7 +112,7 @@ function PostsContextProvider({ children }) {
       body: JSON.stringify(inputValues)
     }
 
-    fetch(`https://loka-database.herokuapp.com/${category}`, config)
+    fetch(`http://localhost:7000/${category}`, config)
       .then((response) => response.json())
       .then((result) => console.log(category, "fetch result:", result))
       .catch((error) => console.log(error));

@@ -26,7 +26,7 @@ export const PostPage = ({ data }) => {
   // const [isUserCommentModalOpen, setIsUserCommentModalOpen] = useState(false)
   const [selected, setSelected] = useState(data.find((item) => item._id === id))
   let navigate = useNavigate()
-  
+
   // formate date
   const date = (item) => new Date(item).toLocaleDateString("eu");
 
@@ -34,11 +34,11 @@ export const PostPage = ({ data }) => {
     const config = {
       method: "GET",
       credentials: "include",
-      withCredentials: true, 
+      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
-    
-    fetch(`https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
+
+    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -46,10 +46,10 @@ export const PostPage = ({ data }) => {
         } else {
           setSelected(result);
         }
-    })
-    .catch((error) => console.log('error from Pin component ', error));
+      })
+      .catch((error) => console.log('error from Pin component ', error));
   }, [isAddCommentModalOpen])
-  
+
 
   const handleDeleteClick = (event) => {
     setDeleteAnchorEl(event.currentTarget);
@@ -69,7 +69,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
+    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {
@@ -83,14 +83,14 @@ export const PostPage = ({ data }) => {
 
   function handleSnackbarClose(event, reason) {
     if (reason === 'clickaway') {
-			return;
-		  }
-      setIsSnackbarOpen(false)
-      // window.location.reload();
-      navigate(`/profile/${JSON.parse(localStorage.getItem("profileName"))}`, { replace: true });
+      return;
+    }
+    setIsSnackbarOpen(false)
+    // window.location.reload();
+    navigate(`/profile/${JSON.parse(localStorage.getItem("profileName"))}`, { replace: true });
   }
 
-  if(!selected) {
+  if (!selected) {
     return 'loading'
   }
 
@@ -102,7 +102,7 @@ export const PostPage = ({ data }) => {
         <section className="Post-Page-Inner">
           <section className="Post-hero">
             <section className="Post-Page-header">
-              <Pin post={selected}/>
+              <Pin post={selected} />
               <MdOutlineArrowBack onClick={() => navigate(-1)} className="Post-Page-Header-icons" />
             </section>
             <img src={selected.image}></img>
@@ -117,8 +117,8 @@ export const PostPage = ({ data }) => {
             {JSON.parse(localStorage.getItem("profileName")) === selected.authorProfileName && (
               <div>
                 <IconButton aria-label="delete" color="primary" sx={{ mr: 2 }}
-                            onClick={handleDeleteClick}>
-                    <DeleteIcon />
+                  onClick={handleDeleteClick}>
+                  <DeleteIcon />
                 </IconButton>
                 <Popover
                   id={deleteId}
@@ -155,47 +155,47 @@ export const PostPage = ({ data }) => {
                   </Box>
                 </Popover>
                 <Button variant="outlined" onClick={() => setIsPostEditOpen(true)}>
-                  <EditIcon fontSize="small" sx={{ mr: 2 }} color="primary"/>Edit
+                  <EditIcon fontSize="small" sx={{ mr: 2 }} color="primary" />Edit
                 </Button>
               </div>
             )}
           </section>
 
           <Modal open={isPostEditOpen} onClose={() => { setIsPostEditOpen(false) }}
-                sx={{
-                  display: 'flex',
-                  overflow: 'scroll',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                <Paper elevation={3} sx={{ width: '80%', height: '90%', overflow: 'scroll' }}>
-                  <EditPost postData={selected} setPostData={setSelected} setIsEditOpen={setIsPostEditOpen} />
-                </Paper>
+            sx={{
+              display: 'flex',
+              overflow: 'scroll',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <Paper elevation={3} sx={{ width: '80%', height: '90%', overflow: 'scroll' }}>
+              <EditPost postData={selected} setPostData={setSelected} setIsEditOpen={setIsPostEditOpen} />
+            </Paper>
 
           </Modal>
 
           <Modal open={isSnackbarOpen} onClose={() => { setIsSnackbarOpen(false); setUpgrade(!upgrade) }} >
             <Snackbar open={isSnackbarOpen} autoHideDuration={6000}
-                    onClose={handleSnackbarClose}
-                    message={"Your post is deleted"}
-                    action={
-                        <React.Fragment>
-                          <IconButton
-                          aria-label="close"
-                          color="inherit"
-                          sx={{ p: 0.5 }}
-                          onClick={handleSnackbarClose}
-                          >
-                          <CloseIcon />
-                          </IconButton>
-                        </React.Fragment>
-                        } />
+              onClose={handleSnackbarClose}
+              message={"Your post is deleted"}
+              action={
+                <React.Fragment>
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleSnackbarClose}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </React.Fragment>
+              } />
           </Modal>
 
           <section className="Post-title">
             <div>
-              {selected.category.map((item, i) => 
-                <Chip label={item.toUpperCase()} sx={{marginRight: 1}} variant="outlined" key={'category-'+ item + i}/>
+              {selected.category.map((item, i) =>
+                <Chip label={item.toUpperCase()} sx={{ marginRight: 1 }} variant="outlined" key={'category-' + item + i} />
               )}
             </div>
 
@@ -224,12 +224,12 @@ export const PostPage = ({ data }) => {
             <p>Comments</p>
             {selected.comments
               ? selected.comments.map((item, index) => (
-                  <UserComment post={item} key={'userComment' + index} />
-                ))
+                <UserComment post={item} key={'userComment' + index} />
+              ))
               : null}
 
-            <div className="Leave-Comment">  
-              <AddComment post={selected} isModalOpen={isAddCommentModalOpen} setIsModalOpen={setIsAddCommentModalOpen}/>
+            <div className="Leave-Comment">
+              <AddComment post={selected} isModalOpen={isAddCommentModalOpen} setIsModalOpen={setIsAddCommentModalOpen} />
             </div>
           </section>
         </section>

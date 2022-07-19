@@ -2,9 +2,8 @@ const team = [
 	{
 		id: 1,
 		name: "Brian Ladwig",
-		image:
-			"https://media-exp1.licdn.com/dms/image/C4E03AQFEQgosmDMJjQ/profile-displayphoto-shrink_200_200/0/1651083870107?e=2147483647&v=beta&t=u8MVSPOywXo6MuWNhvmEd0NV-laQCfT4E_3ITFIMqu4",
-		image2: "https://media-exp1.licdn.com/dms/image/C4E03AQFEQgosmDMJjQ/profile-displayphoto-shrink_200_200/0/1651083870107?e=2147483647&v=beta&t=u8MVSPOywXo6MuWNhvmEd0NV-laQCfT4E_3ITFIMqu4",
+		image: require("../../../assets/team-images/brian-default.jpg"),
+		image2: require("../../../assets/team-images/brian-active.jpg"),
 		bio: <div>
 			<p>I am on my path to become a fullstack web developer. My curiosity in design and aesthetics as well as my interest for science and logic based subjects in general are perfect attributes for that matter.</p>
 			<p>Therefore I feel at home in web development. Also, my desire to always learn more and new things is well served in this field.</p>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
-import { Select, MenuItem, TextField, InputAdornment, IconButton, Stack} from "@mui/material";
+import { Select, MenuItem, TextField, InputAdornment, IconButton, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBar({ display }) {
@@ -45,7 +45,7 @@ export default function SearchBar({ display }) {
 
 	function handleSearch() {
 		if (searchCat === "user") {
-			fetch(`https://loka-database.herokuapp.com/user/search/${searchInput}`)
+			fetch(`http://localhost:7000/user/search/${searchInput}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (!result.errors) {
@@ -58,31 +58,31 @@ export default function SearchBar({ display }) {
 		} else if (searchCat === "in season") {
 			if (searchOpt === "type") {
 				fetch(`https://lokalseasons.herokuapp.com/produce/${searchInput}`)
-				.then((response) => response.json())
-				.then((result) => {
-					if (!result.errors) {
-						setSearchResult(result);
-						navigate("/Search");
-					} else {
-						console.log("errors :>> ", errors);
-					}
-				})
-				.catch((error) => console.log(error.message));
+					.then((response) => response.json())
+					.then((result) => {
+						if (!result.errors) {
+							setSearchResult(result);
+							navigate("/Search");
+						} else {
+							console.log("errors :>> ", errors);
+						}
+					})
+					.catch((error) => console.log(error.message));
 			} else {
 				fetch(`https://lokalseasons.herokuapp.com/produce/search/${searchInput}`)
-				.then((response) => response.json())
-				.then((result) => {
-					if (!result.errors) {
-						setSearchResult(result);
-						navigate("/Search");
-					} else {
-						console.log("errors :>> ", errors);
-					}
-				})
-				.catch((error) => console.log(error.message));
+					.then((response) => response.json())
+					.then((result) => {
+						if (!result.errors) {
+							setSearchResult(result);
+							navigate("/Search");
+						} else {
+							console.log("errors :>> ", errors);
+						}
+					})
+					.catch((error) => console.log(error.message));
 			}
 		} else {
-			fetch(`https://loka-database.herokuapp.com/${searchCat}/${searchOpt}/${searchInput}`)
+			fetch(`http://localhost:7000/${searchCat}/${searchOpt}/${searchInput}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (!result.errors) {
@@ -179,17 +179,17 @@ export default function SearchBar({ display }) {
 			)}
 			{searchOpt !== "type" && (
 				<TextField placeholder="Search" variant="standard"
-						   className="search-input" fullWidth
-						   onChange={(e) => setSearchInput(e.target.value)}
-						   InputProps={{
-								endAdornment: (
-									<InputAdornment position="end">
-										<IconButton onClick={handleSearch}>
-											<SearchIcon />
-										</IconButton>
-									</InputAdornment>
-								),
-						   }}/>
+					className="search-input" fullWidth
+					onChange={(e) => setSearchInput(e.target.value)}
+					InputProps={{
+						endAdornment: (
+							<InputAdornment position="end">
+								<IconButton onClick={handleSearch}>
+									<SearchIcon />
+								</IconButton>
+							</InputAdornment>
+						),
+					}} />
 
 			)}
 

@@ -264,7 +264,6 @@ const Main = () => {
 					trigger: section,
 					start: 'top 70%',
 					scrub: true,
-					markers: true,
 					toggleActions: 'play none none reset',
 				}
 			})
