@@ -465,7 +465,7 @@ export default function UserRegistration() {
       body: JSON.stringify(inputValues),
     };
 
-    fetch("https://loka-database.herokuapp.com/user/register", config)
+    fetch("https://cors-anywhere-baim.herokuapp.com/https://loka-database.herokuapp.com/user/register", config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)
@@ -476,7 +476,8 @@ export default function UserRegistration() {
           setMessage(result.message)
           setIsLogin(true)
           setIsFromRegister(true)
-          // localStorage.setItem('user', JSON.stringify(result.user))
+          localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
+          localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
         }
         
       })

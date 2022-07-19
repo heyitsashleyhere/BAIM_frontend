@@ -27,7 +27,7 @@ export const PrivateHeader = () => {
 	//Links object
 	const links = [
 		{ path: "/discover", name: "Discover" },
-		{ path: `/profile/${cookies.profileName}`, name: "Profile" },
+		{ path: `/profile/${localStorage.getItem("profileName")}`, name: "Profile" },
 		{ path: "/create", name: "Create" },
 		{ path: "/search", name: "Search" },
 	];

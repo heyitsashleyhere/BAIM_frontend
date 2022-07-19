@@ -103,7 +103,7 @@ export const SquareAvatar = ({ data }) => {
         setAnchorEl(null);
         setDeleteAnchorEl(null)
         setIsEditOpen(false)
-      if(location.pathname === `/profile/${cookies.profileName}`){
+      if(location.pathname === `/profile/${localStorage.getItem("profileName")}`){
         window.location.reload();
       }
     }
@@ -113,7 +113,7 @@ export const SquareAvatar = ({ data }) => {
       <section className="SquareAvatar">
           <section className="Avatar-Controllers">
           <Pin post={pinPostData}/>
-          { cookies.profileName === data.authorProfileName && <>
+          { localStorage.getItem("profileName") === data.authorProfileName && <>
           <IconButton aria-label="edit"
                       aria-controls={openFeatures ? 'basic-menu' : undefined}
                       aria-haspopup="true"
@@ -186,7 +186,7 @@ export const RoundAvatar = ({ name, id, image }) => {
   const { user } = useContext(UserContext)
   const [cookies] = useCookies();
 
-  const author = cookies.profileName === name;
+  const author = localStorage.getItem("profileName") === name;
 
 
   return (

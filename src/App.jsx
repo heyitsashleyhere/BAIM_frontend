@@ -110,7 +110,7 @@ export default function App() {
 		<ThemeProvider theme={theme}>
 			<section className="App">
 				{displayNav || isNav ? (
-					cookies.profileName || isLogin ? (
+					localStorage.getItem("profileName") || isLogin ? (
 						<>
 							<PrivateHeader />
 						</>
@@ -185,7 +185,7 @@ export default function App() {
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
 
-				{cookies.profileName || isLogin ? (
+				{localStorage.getItem("profileName") || isLogin ? (
 					<>
 						<Footer />
 					</>

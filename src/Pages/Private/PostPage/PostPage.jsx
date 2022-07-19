@@ -87,7 +87,7 @@ export const PostPage = ({ data }) => {
 		  }
       setIsSnackbarOpen(false)
       // window.location.reload();
-      navigate(`/profile/${cookies.profileName}`, { replace: true });
+      navigate(`/profile/${localStorage.getItem("profileName")}`, { replace: true });
   }
 
   if(!selected) {
@@ -114,7 +114,7 @@ export const PostPage = ({ data }) => {
               name={selected.authorProfileName}
               image={selected.authorAvatar}
             />
-            {cookies.profileName === selected.authorProfileName && (
+            {localStorage.getItem("profileName") === selected.authorProfileName && (
               <div>
                 <IconButton aria-label="delete" color="primary" sx={{ mr: 2 }}
                             onClick={handleDeleteClick}>

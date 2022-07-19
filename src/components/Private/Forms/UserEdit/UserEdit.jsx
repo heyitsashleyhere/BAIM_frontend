@@ -483,6 +483,8 @@ export default function UserEdit({ setUserEditOpen }) {
           setMessage(result.message);
           setIsModalOpen(true)
           setUpgrade(!upgrade)
+          localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
+          localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
         }
       })
       .catch((error) => console.log(error));

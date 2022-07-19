@@ -74,13 +74,13 @@ export const Profile = () => {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
-            cookies.profileName === profileName
+            localStorage.getItem("profileName") === profileName
               ? setPostMessage("You have not posted anything yet")
               : setPostMessage("This person has not posted anything yet");
           }
 
           if (result.pin.length == 0) {
-            cookies.profileName === profileName
+            localStorage.getItem("profileName") === profileName
               ? setPinMessage("You have not pinned anything yet")
               : setPinMessage("This person has not pinned anything yet");
           }
@@ -176,7 +176,7 @@ export const Profile = () => {
         {profileData && (
           <div className="Profile-inner">
             <div className="Profile-header">
-              {cookies.profileName === profileName && (
+              {localStorage.getItem("profileName") === profileName && (
                 <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
@@ -276,7 +276,7 @@ export const Profile = () => {
             </div>
 
             <section className="Profile-Feed">
-              <h2 className="Profile-Feed-Header">{profileData.profileName === cookies.profileName ? 'Your' : `${profileData.profileName}'s`} feed</h2>
+              <h2 className="Profile-Feed-Header">{profileData.profileName === localStorage.getItem("profileName") ? 'Your' : `${profileData.profileName}'s`} feed</h2>
               <section className="Profile-Lib-Collection">
                 <ProfileFeed data={profileData.interests} />
               </section>
