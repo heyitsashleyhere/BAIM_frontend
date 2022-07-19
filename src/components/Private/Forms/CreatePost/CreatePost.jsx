@@ -315,7 +315,7 @@ export default function CreatePost({ category, setCategory }) {
       credentials: "include",
       withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(image ? payload : inputValues),
     }
 
     fetch(`https://loka-database.herokuapp.com/${category}`, config)
