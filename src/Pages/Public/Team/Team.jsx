@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 // Icons
 import { FaGithub, FaTwitter, FaLinkedin, FaFacebook , FaCookieBite, FaSass } from "react-icons/fa";
-import { SiSitepoint, SiGreensock, SiFirebase, SiReact, SiExpress, SiMongodb, SiNodemon, SiFigma, SiGithub, SiMaterialui, SiNodedotjs } from "react-icons/si"
+import { SiSitepoint, SiGreensock, SiFirebase, SiReact, SiExpress, SiMongodb, SiNodemon, SiFigma, SiGithub, SiMaterialui, SiJavascript } from "react-icons/si"
 import { GrInstagram } from "react-icons/gr"
 import {
 	MdAlternateEmail,
@@ -159,8 +159,8 @@ const Team = () => {
 										<p>Greensock Gsap</p>
 									</section>
 									<section className="s_icon">
-										<SiMaterialui/>
-										<p>Node JS</p>
+										<SiJavascript/>
+										<p>Java script</p>
 									</section>
 									<section className="s_icon">
 										<SiMongodb/>

@@ -30,7 +30,7 @@ export default function About() {
 	};
 
 
-	const promoVideo = `${process.env.PUBLIC_URL}/landingVideos/lokapromoVideo.webm`
+	const promoVideo = `${process.env.PUBLIC_URL}/landingVideos/lokaPromoVideo.webm`
 
 	return (
 		<section className="About">

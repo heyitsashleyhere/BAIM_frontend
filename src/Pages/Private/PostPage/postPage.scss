@@ -25,13 +25,23 @@
         position: relative;
         overflow: hidden;
 
+        &::after{
+            content:"";
+            width:100%;
+            height:99.5%;
+            position:absolute;
+            top:0;
+            left:0;
+            background-color: rgba(0, 0, 0, 0.295);
+        }
+
         .Post-Page-header {
             position: absolute;
             top: 10;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.144);
+            z-index:1;
             padding: 2rem;
 
             .Pin-icon,
@@ -55,7 +65,7 @@
             margin: 1rem 1.5rem;
             font-size: 3rem;
             color: white;
-            background-color: rgba(0, 0, 0, 0.295);
+            z-index:1;
             border-radius: 3px;
         }
     }
@@ -129,10 +139,10 @@
 
         .Post-Page-Inner {
             grid-column: 2/8;
+            height:100%;
 
             .Post-hero {
-                height: 45vh;
-
+                
                 img {
                     width: 100%;
                 }
@@ -140,6 +150,8 @@
                 h1 {
                     font-size: 5rem;
                 }
+
+          
             }
 
 
@@ -155,16 +167,18 @@
 
             .Post-hero {
                 width: 100%;
+                
 
 
                 img {
                     width: 100%;
+                    height:100%;
                     
 
                 }
 
                 h1 {
-                    font-size: 7rem;
+                    font-size: 5rem;
                 }
 
             }
@@ -182,7 +196,7 @@
 
             .Post-hero {
                 width: 100%;
-                height:55vh;
+                
 
 
                 img {

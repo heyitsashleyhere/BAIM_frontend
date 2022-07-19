@@ -17,7 +17,7 @@ export default function ImageInput({ imageUsage, oldUrl, }){
     function uploadFile(file){
         if(!file){return}
 
-        if(!oldUrl || !oldUrl.includes('firebase')){
+        if(!oldUrl || !oldUrl.includes('firebase') || oldUrl.includes('2FLOKA2.jpg')){
             const storageRef= ref(storage,`/files/image/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file)
     
