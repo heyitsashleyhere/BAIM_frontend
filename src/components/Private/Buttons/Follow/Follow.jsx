@@ -68,10 +68,10 @@ export const Follow = ({ name }) => {
 		}
 		setIsModalOpen(false);
 	}
-
+	console.log('profileData :>> ', profileData);
 	return (
 		<>
-			{/* {profileData && !isAuthor && (
+			{profileData && !isAuthor && (
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
@@ -85,7 +85,7 @@ export const Follow = ({ name }) => {
 						? "Unfollow"
 						: "Follow"}
 				</Button>
-			)} */}
+			)}
 			<p>{error}</p>
 			{profileData && (
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
