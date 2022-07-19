@@ -24,7 +24,7 @@ export default function UserRegistration() {
 
        const config = {
               method: "PATCH",
-              headers: { "Content-Type": "application/json" },
+              headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
               body: JSON.stringify(inputValues),
               }
                

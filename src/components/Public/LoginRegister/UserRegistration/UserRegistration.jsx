@@ -461,11 +461,11 @@ export default function UserRegistration() {
     const config = {
       method: "POST",
       credentials: 'include', // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     };
 
-    fetch("http://localhost:7000/user/register", config)
+    fetch("https://cors-anywhere-baim.herokuapp.com/http://localhost:7000/user/register", config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)
@@ -476,7 +476,8 @@ export default function UserRegistration() {
           setMessage(result.message)
           setIsLogin(true)
           setIsFromRegister(true)
-          // localStorage.setItem('user', JSON.stringify(result.user))
+          localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
+          localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
         }
         
       })

@@ -10,6 +10,7 @@ import { DiscoverNavbar } from "../../../components/Private/section-header/Disco
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
 import EditPost from "../../../components/Private/Forms/EditPost/EditPost.jsx";
 import "./postPage.scss";
+import defaultImg from '../../../assets/LOKA2.jpg'
 import { Button, Modal, Paper, IconButton, Popover, Typography, Box, Snackbar, Chip } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from "@mui/icons-material/Edit";
@@ -33,8 +34,9 @@ export const PostPage = ({ data }) => {
   useEffect(() => {
     const config = {
       method: "GET",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      withCredentials: true, 
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     
     fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
@@ -65,7 +67,7 @@ export const PostPage = ({ data }) => {
     const config = {
       method: "delete",
       credentials: 'include',
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
     fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
@@ -86,7 +88,7 @@ export const PostPage = ({ data }) => {
 		  }
       setIsSnackbarOpen(false)
       // window.location.reload();
-      navigate(`/profile/${cookies.profileName}`, { replace: true });
+      navigate(`/profile/${JSON.parse(localStorage.getItem("profileName"))}`, { replace: true });
   }
 
   if(!selected) {
@@ -104,7 +106,7 @@ export const PostPage = ({ data }) => {
               <Pin post={selected}/>
               <MdOutlineArrowBack onClick={() => navigate(-1)} className="Post-Page-Header-icons" />
             </section>
-            <img src={selected.image}></img>
+            <img src={selected.image ? selected.image : defaultImg}></img>
             <h1>{selected.title}</h1>
           </section>
 
@@ -113,7 +115,7 @@ export const PostPage = ({ data }) => {
               name={selected.authorProfileName}
               image={selected.authorAvatar}
             />
-            {cookies.profileName === selected.authorProfileName && (
+            {JSON.parse(localStorage.getItem("profileName")) === selected.authorProfileName && (
               <div>
                 <IconButton aria-label="delete" color="primary" sx={{ mr: 2 }}
                             onClick={handleDeleteClick}>

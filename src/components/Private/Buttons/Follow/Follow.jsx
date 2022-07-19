@@ -8,7 +8,7 @@ export const Follow = ({ name }) => {
 	const { profileName } = useParams();
 	const [cookies] = useCookies();
 	const [error, setError] = useState(null);
-	const isAuthor = cookies.profileName === profileName;
+	const isAuthor = JSON.parse(localStorage.getItem("profileName")) === profileName;
 	const [profileData, setProfileData] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -45,8 +45,9 @@ export const Follow = ({ name }) => {
 	function FollowUser() {
 		const config = {
 			method: "PATCH",
-			credentials: "include", // specify this if you need cookies
-			headers: { "Content-Type": "application/json" },
+			credentials: "include",
+			withCredentials: true, // specify this if you need cookies
+			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
 
 		fetch(`http://localhost:7000/user/following/${profileData._id}`, config)

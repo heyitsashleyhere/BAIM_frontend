@@ -62,8 +62,9 @@ export const Profile = () => {
 
     const config = {
       method: "GET",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      withCredentials: true, 
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
     fetch(`http://localhost:7000/user/${profileName}`, config)
@@ -73,13 +74,13 @@ export const Profile = () => {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
-            cookies.profileName === profileName
+            JSON.parse(localStorage.getItem("profileName")) === profileName
               ? setPostMessage("You have not posted anything yet")
               : setPostMessage("This person has not posted anything yet");
           }
 
           if (result.pin.length == 0) {
-            cookies.profileName === profileName
+            JSON.parse(localStorage.getItem("profileName")) === profileName
               ? setPinMessage("You have not pinned anything yet")
               : setPinMessage("This person has not pinned anything yet");
           }
@@ -96,8 +97,10 @@ export const Profile = () => {
   useEffect(() => {
     const config = {
       method: "GET",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      withCredentials: true, 
+      headers: { "Content-Type": "application/json", 
+      "Access-Control-Allow-Credentials": true, },
     }
 
     postCategories.map((cat) => {
@@ -144,7 +147,7 @@ export const Profile = () => {
     const config = {
       method: "delete",
       credentials: 'include',
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
     fetch(`http://localhost:7000/user/${id}`, config)
@@ -173,7 +176,7 @@ export const Profile = () => {
         {profileData && (
           <div className="Profile-inner">
             <div className="Profile-header">
-              {cookies.profileName === profileName && (
+              {JSON.parse(localStorage.getItem("profileName")) === profileName && (
                 <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
@@ -273,7 +276,7 @@ export const Profile = () => {
             </div>
 
             <section className="Profile-Feed">
-              <h2 className="Profile-Feed-Header">{profileData.profileName === cookies.profileName ? 'Your' : `${profileData.profileName}'s`} feed</h2>
+              <h2 className="Profile-Feed-Header">{profileData.profileName === JSON.parse(localStorage.getItem("profileName")) ? 'Your' : `${profileData.profileName}'s`} feed</h2>
               <section className="Profile-Lib-Collection">
                 <ProfileFeed data={profileData.interests} />
               </section>

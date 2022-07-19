@@ -16,7 +16,7 @@ import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import EditPost from "../Forms/EditPost/EditPost.jsx";
 import { Pin } from "../Buttons/Pin/Pin";
-
+import defaultImg from "../../../assets/LOKA2.jpg"
 
 
 // general avatars for the App
@@ -33,8 +33,9 @@ export const SquareAvatar = ({ data }) => {
     useEffect(() => {
       const config = {
         method: "GET",
-        credentials: "include", // specify this if you need cookies
-        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        withCredentials: true, // specify this if you need cookies
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
       
       fetch(`http://localhost:7000/${data.type}/${data._id}`, config)
@@ -80,7 +81,7 @@ export const SquareAvatar = ({ data }) => {
       const config = {
         method: "delete",
         credentials: 'include', 
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
   
       fetch(`http://localhost:7000/${type}/${id}`, config)
@@ -102,17 +103,16 @@ export const SquareAvatar = ({ data }) => {
         setAnchorEl(null);
         setDeleteAnchorEl(null)
         setIsEditOpen(false)
-      if(location.pathname === `/profile/${cookies.profileName}`){
-        window.location.reload();
+      if(location.pathname === `/profile/${JSON.parse(localStorage.getItem("profileName"))}` || location.pathname === `/${data.type}`){
+        window.location.reload(); 
       }
     }
-
 
     return (
       <section className="SquareAvatar">
           <section className="Avatar-Controllers">
           <Pin post={pinPostData}/>
-          { cookies.profileName === data.authorProfileName && <>
+          { JSON.parse(localStorage.getItem("profileName")) === data.authorProfileName && <>
           <IconButton aria-label="edit"
                       aria-controls={openFeatures ? 'basic-menu' : undefined}
                       aria-haspopup="true"
@@ -143,7 +143,7 @@ export const SquareAvatar = ({ data }) => {
     
         <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data._id}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
-                <img src={data.image}></img>
+                <img src={data.image ? data.image : defaultImg}></img>
                 <h2>{data.title}</h2>
               </section> 
         </NavLink>
@@ -185,7 +185,7 @@ export const RoundAvatar = ({ name, id, image }) => {
   const { user } = useContext(UserContext)
   const [cookies] = useCookies();
 
-  const author = cookies.profileName === name;
+  const author = JSON.parse(localStorage.getItem("profileName")) === name;
 
 
   return (

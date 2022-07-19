@@ -80,14 +80,7 @@ export default function App() {
 	const { isNav } = useContext(AnimationContext);
 	const [cookies] = useCookies();
 	const [displayNav, setDisplayNav] = useState();
-	const {
-		users,
-		allBeautyPost,
-		allArtsCraftPost,
-		allGardenPost,
-		allRecipePost,
-		allEventPost,
-	} = useContext(PostsContext);
+	const { users, allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost } = useContext(PostsContext);
 
 	useEffect(() => {
 		const localDisplayNav = localStorage.getItem("showNav");
@@ -110,7 +103,7 @@ export default function App() {
 		<ThemeProvider theme={theme}>
 			<section className="App">
 				{displayNav || isNav ? (
-					cookies.profileName || isLogin ? (
+					JSON.parse(localStorage.getItem("profileName")) || isLogin ? (
 						<>
 							<PrivateHeader />
 						</>
@@ -185,7 +178,7 @@ export default function App() {
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
 
-				{cookies.profileName || isLogin ? (
+				{JSON.parse(localStorage.getItem("profileName")) || isLogin ? (
 					<>
 						<Footer />
 					</>
