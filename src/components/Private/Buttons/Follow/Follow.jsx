@@ -11,6 +11,8 @@ export const Follow = ({ name }) => {
 	const isAuthor = JSON.parse(localStorage.getItem("profileName")) === profileName;
 	const [profileData, setProfileData] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [followers, setFollowers] = useState([])
+	const [following, setFollowing] = useState([])
 
 	useEffect(() => {
 		if (profileName) {
@@ -21,6 +23,8 @@ export const Follow = ({ name }) => {
 						console.log("errors from Profile GET user :>> ", result.errors);
 					} else {
 						setProfileData(result);
+						setFollowers(result.followers)
+						setFollowing(result.following)
 					}
 				})
 				.catch((error) =>
@@ -75,13 +79,13 @@ export const Follow = ({ name }) => {
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
-						profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+						followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
 							? "outlined"
 							: "contained"
 					}
 					onClick={FollowUser}
 				>
-					{profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+					{followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
 						? "Unfollow"
 						: "Follow"}
 				</Button>
@@ -91,7 +95,7 @@ export const Follow = ({ name }) => {
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
 					<Snackbar open={isModalOpen} autoHideDuration={6000}
 						onClose={handleClose}
-						message={`You are now ${profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id"))) ? `following` : `unfollowing`} ${profileData.profileName}`}
+						message={`You are now ${followers.find((objId) => objId == JSON.parse(localStorage.getItem("id"))) ? `following` : `unfollowing`} ${profileData.profileName}`}
 						action={
 							<React.Fragment>
 								<IconButton
