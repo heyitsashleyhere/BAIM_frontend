@@ -13,10 +13,8 @@ import showPinCategoryButton from "../../../components/Private/Profile-component
 import displayAvatars from "../../../components/Private/Profile-components/displayAvatars.jsx";
 import displayPinAvatars from "../../../components/Private/Profile-components/displayPinAvatars.jsx";
 import ProfileControllers from "../../../components/Private/Profile-components/ProfileControllers.jsx";
-// import { EventsTable } from "../../../components/Private/Avatars-Links/NONEEDTablesTables"
-import { EventsTable } from "../Events/EventsTable.jsx";
 import { ProfileFeed } from "../../../components/Private/Profile-components/ProfileFeed.jsx";
-import { Modal, Typography, Paper, Popper, Box } from "@mui/material";
+import { Modal, Typography, Paper } from "@mui/material";
 import "./profile.scss";
 import { FollowPage } from "../../../components/Private/Profile-components/FollowPage.jsx";
 

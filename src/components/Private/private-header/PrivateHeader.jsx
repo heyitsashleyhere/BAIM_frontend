@@ -40,9 +40,7 @@ export const PrivateHeader = () => {
 		fetch("https://loka-database.herokuapp.com/user/logout", config)
 			.then((response) => response.json())
 			.then((result) => {
-				// console.log("UserLogin:", result);
 				if (!result.errors) {
-					console.log("result.message :>> ", result.message);
 					setIsLogin(false);
 					setIsLogout(true)
 					localStorage.clear();
