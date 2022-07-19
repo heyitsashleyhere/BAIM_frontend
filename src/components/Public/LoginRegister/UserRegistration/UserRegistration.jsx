@@ -8,10 +8,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 export default function UserRegistration() {
   const [userAddress, setUserAddress] = useState({});
   const [errors, setErrors] = useState([]);
-  const { inputValues, setInputValues, 
-          setMessage, setIsLogin,
-          isShowPassword, showPasswordHandler,
-          setIsFromRegister } = useContext(UserContext);
+  const { inputValues, setInputValues,
+    setMessage, setIsLogin,
+    isShowPassword, showPasswordHandler,
+    setIsFromRegister } = useContext(UserContext);
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     {
@@ -479,185 +479,185 @@ export default function UserRegistration() {
           localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
           localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
         }
-        
+
       })
       .catch((error) => console.log(error));
   }
 
   return (
     <section className="RegisterForm">
-    <Grow in>
-      <form onSubmit={handleUserRegistration}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <h1>Register</h1>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField name="firstName" label="First Name"
-              fullWidth required
-              margin="dense" type="text"
-              error={errors.find((error) => error.firstName)}
-              onChange={handleChange} />
-            {errors.map(
-              (error, i) =>
-                error.firstName && (
-                  <FormHelperText error key={"firstNameError" + i}>
-                    {error.firstName}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField name="lastName" label="Last Name"
-              fullWidth required
-              margin="dense" type="text"
-              error={errors.find((error) => error.lastName)}
-              onChange={handleChange} />
-            {errors.map(
-              (error, i) =>
-                error.lastName && (
-                  <FormHelperText error key={"lastNameError" + i}>
-                    {error.lastName}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12}>
-            <TextField name="profileName" label="Profile Name"
-              fullWidth required
-              margin="dense" type="text"
-              error={errors.find((error) => error.profileName)}
-              onChange={handleChange} />
-            {errors.map(
-              (error, i) =>
-                error.profileName && (
-                  <FormHelperText error key={"profileNameError" + i}>
-                    {error.profileName}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField name="email" label="Email"
-              fullWidth required
-              margin="dense" type="email"
-              error={errors.find((error) => error.email)}
-              onChange={handleChange} />
-            {errors.map(
-              (error, i) =>
-                error.email && (
-                  <FormHelperText error key={"emailError" + i}>
-                    {error.email}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField name="password" label="Password"
-              fullWidth required
-              margin="dense" type={isShowPassword ? "text" : "password"}
-              error={errors.find((error) => error.password)}
-              onChange={handleChange}
-              InputProps={{
-                endAdornment: ( 
-                  <InputAdornment position="end">
-                    <IconButton onClick={showPasswordHandler} onMouseDown={showPasswordHandler} >
-                      {isShowPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment> )
-              }} />
-            {errors.map(
-              (error, i) =>
-                error.password && (
-                  <FormHelperText error key={"passwordError" + i}>
-                    {error.password}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField name="confirmPassword" label="Confirm Password"
-              fullWidth required
-              margin="dense" type="password"
-              error={errors.find((error) => error.confirmPassword)} 
-              onChange={handleChange} />
-            {errors.map(
-              (error, i) =>
-                error.confirmPassword && (
-                  <FormHelperText error key={"confirmPasswordError" + i}>
-                    {error.confirmPassword}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+      <Grow in>
+        <form onSubmit={handleUserRegistration}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <h1>Register</h1>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField name="firstName" label="First Name"
+                fullWidth required
+                margin="dense" type="text"
+                error={errors.find((error) => error.firstName)}
+                onChange={handleChange} />
+              {errors.map(
+                (error, i) =>
+                  error.firstName && (
+                    <FormHelperText error key={"firstNameError" + i}>
+                      {error.firstName}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField name="lastName" label="Last Name"
+                fullWidth required
+                margin="dense" type="text"
+                error={errors.find((error) => error.lastName)}
+                onChange={handleChange} />
+              {errors.map(
+                (error, i) =>
+                  error.lastName && (
+                    <FormHelperText error key={"lastNameError" + i}>
+                      {error.lastName}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField name="profileName" label="Profile Name"
+                fullWidth required
+                margin="dense" type="text"
+                error={errors.find((error) => error.profileName)}
+                onChange={handleChange} />
+              {errors.map(
+                (error, i) =>
+                  error.profileName && (
+                    <FormHelperText error key={"profileNameError" + i}>
+                      {error.profileName}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField name="email" label="Email"
+                fullWidth required
+                margin="dense" type="email"
+                error={errors.find((error) => error.email)}
+                onChange={handleChange} />
+              {errors.map(
+                (error, i) =>
+                  error.email && (
+                    <FormHelperText error key={"emailError" + i}>
+                      {error.email}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField name="password" label="Password"
+                fullWidth required
+                margin="dense" type={isShowPassword ? "text" : "password"}
+                error={errors.find((error) => error.password)}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={showPasswordHandler} onMouseDown={showPasswordHandler} >
+                        {isShowPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>)
+                }} />
+              {errors.map(
+                (error, i) =>
+                  error.password && (
+                    <FormHelperText error key={"passwordError" + i}>
+                      {error.password}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField name="confirmPassword" label="Confirm Password"
+                fullWidth required
+                margin="dense" type="password"
+                error={errors.find((error) => error.confirmPassword)}
+                onChange={handleChange} />
+              {errors.map(
+                (error, i) =>
+                  error.confirmPassword && (
+                    <FormHelperText error key={"confirmPasswordError" + i}>
+                      {error.confirmPassword}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
-          <Grid item xs={12}>
-            <h2>Address</h2>
-          </Grid>
+            <Grid item xs={12}>
+              <h2>Address</h2>
+            </Grid>
 
-          <Grid item xs={12} sm={12}>
-            <TextField name="street" label="Street"
-              fullWidth 
-              margin="dense" type="text"
-              error={errors.find((error) => error["userAddress.street"])}
-              onChange={handleAddressChange} />
-            {errors.map(
-              (error, i) =>
-                error["userAddress.street"] && (
-                  <FormHelperText error key={"streetError" + i}>
-                    {error["userAddress.street"]}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField name="streetNumber" label="Street Number"
-              fullWidth 
-              margin="dense" type="text"
-              error={errors.find((error) => error["userAddress.streetNumber"])}
-              onChange={handleAddressChange} />
-            {errors.map(
-              (error, i) =>
-                error["userAddress.streetNumber"] && (
-                  <FormHelperText error key={"streetNumberError" + i}>
-                    {error["userAddress.streetNumber"]}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField name="city" label="City"
-              fullWidth required
-              margin="dense" type="text"
-              error={errors.find((error) => error["userAddress.city"])}
-              onChange={handleAddressChange} />
-            {errors.map(
-              (error, i) =>
-                error["userAddress.city"] && (
-                  <FormHelperText error key={"cityError" + i}>
-                    {error["userAddress.city"]}
-                  </FormHelperText>
-                )
-            )}
-         </Grid>
-         <Grid item xs={12} sm={6}>
-            <TextField name="zip" label="Zip Code"
-              fullWidth 
-              margin="dense" type="text"
-              error={errors.find((error) => error["userAddress.zip"])}
-              onChange={handleAddressChange} />
-            {errors.map(
-              (error, i) =>
-                error["userAddress.zip"] && (
-                  <FormHelperText error key={"zipError" + i}>
-                    {error["userAddress.zip"]}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField name="street" label="Street"
+                fullWidth
+                margin="dense" type="text"
+                error={errors.find((error) => error["userAddress.street"])}
+                onChange={handleAddressChange} />
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.street"] && (
+                    <FormHelperText error key={"streetError" + i}>
+                      {error["userAddress.street"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField name="streetNumber" label="Street Number"
+                fullWidth
+                margin="dense" type="text"
+                error={errors.find((error) => error["userAddress.streetNumber"])}
+                onChange={handleAddressChange} />
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.streetNumber"] && (
+                    <FormHelperText error key={"streetNumberError" + i}>
+                      {error["userAddress.streetNumber"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField name="city" label="City"
+                fullWidth required
+                margin="dense" type="text"
+                error={errors.find((error) => error["userAddress.city"])}
+                onChange={handleAddressChange} />
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.city"] && (
+                    <FormHelperText error key={"cityError" + i}>
+                      {error["userAddress.city"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField name="zip" label="Zip Code"
+                fullWidth
+                margin="dense" type="text"
+                error={errors.find((error) => error["userAddress.zip"])}
+                onChange={handleAddressChange} />
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.zip"] && (
+                    <FormHelperText error key={"zipError" + i}>
+                      {error["userAddress.zip"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
-          <Grid item xs={12} sm={12}>
-            <Autocomplete
+            <Grid item xs={12} sm={12}>
+              <Autocomplete
                 options={countries}
                 value={country}
                 autoHighlight
@@ -689,22 +689,22 @@ export default function UserRegistration() {
                 )}
               />
               {errors.map(
-              (error, i) =>
-                error["userAddress.country"] && (
-                  <FormHelperText error key={"countryError" + i}>
-                    {error["userAddress.country"]}
-                  </FormHelperText>
-                )
+                (error, i) =>
+                  error["userAddress.country"] && (
+                    <FormHelperText error key={"countryError" + i}>
+                      {error["userAddress.country"]}
+                    </FormHelperText>
+                  )
               )}
-          </Grid>
+            </Grid>
 
 
-          <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
-            <Button variant="contained" type="submit" size="large">Register</Button>
+            <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
+              <Button variant="contained" type="submit" size="large">Register</Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </form>
-    </Grow>
+        </form>
+      </Grow>
     </section>
   )
 }

@@ -65,8 +65,8 @@ export const Follow = ({ name }) => {
 	function handleClose(event, reason) {
 		if (reason === 'clickaway') {
 			return;
-		  }
-		  setIsModalOpen(false);
+		}
+		setIsModalOpen(false);
 	}
 
 	return (
@@ -93,17 +93,17 @@ export const Follow = ({ name }) => {
 						onClose={handleClose}
 						message={`You are now ${profileData.followers.find((objId) => objId == cookies.id) ? `following` : `unfollowing`} ${profileData.profileName}`}
 						action={
-								<React.Fragment>
-									<IconButton
+							<React.Fragment>
+								<IconButton
 									aria-label="close"
 									color="inherit"
 									sx={{ p: 0.5 }}
 									onClick={handleClose}
-									>
+								>
 									<CloseIcon />
-									</IconButton>
-								</React.Fragment>
-								} />
+								</IconButton>
+							</React.Fragment>
+						} />
 				</Modal>
 			)}
 		</>

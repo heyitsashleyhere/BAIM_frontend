@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 export const PostsContext = React.createContext(null)
 
+
 function PostsContextProvider({ children }) {
   const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"]
   // creating a post
@@ -28,7 +29,7 @@ function PostsContextProvider({ children }) {
   // Profile Page
   const [profileData, setProfileData] = useState(null)
   // for Pin and Profile
-  const [ postData, setPostData ] = useState(null)
+  const [postData, setPostData] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
   // imageInput

@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import "./userComment.scss";
 
 // post={item} user={cookies.id}
-export const UserComment = ({ post } ) => {
+export const UserComment = ({ post }) => {
   const [cookies] = useCookies();
   const [error, setError] = useState();
   const [edit, setEdit] = useState(true);
@@ -39,15 +39,15 @@ export const UserComment = ({ post } ) => {
         } else {
           setCommentData(result);
         }
-    })
-    .catch((error) => console.log('errors from UserComment GET ', error));
+      })
+      .catch((error) => console.log('errors from UserComment GET ', error));
   }, [isUserCommentModalOpen])
 
   function editComment() {
     const payload = {
       type: commentData.type,
       [commentData.type]: commentData[`${commentData.type}`],
-      message: newComment === "" ? commentData.message : newComment 
+      message: newComment === "" ? commentData.message : newComment
     }
 
     console.log('payload :>> ', payload);
@@ -82,7 +82,7 @@ export const UserComment = ({ post } ) => {
     const config = {
       method: "DELETE",
       credentials: "include",
-withCredentials: true, // specify this if you need cookies
+      withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(payload),
     }
@@ -104,8 +104,8 @@ withCredentials: true, // specify this if you need cookies
 
   function handleSnackBarClose(event, reason) {
     if (reason === 'clickaway') {
-			return;
-		  }
+      return;
+    }
     setIsUserCommentModalOpen(false)
     setEdit(true)
   }
@@ -152,29 +152,29 @@ withCredentials: true, // specify this if you need cookies
             className="comment-input"
           />
         )}
-        
+
         {error && (
-        <Alert severity="error" sx={{ marginBottom: 2}}>{error.errors}</Alert>
+          <Alert severity="error" sx={{ marginBottom: 2 }}>{error.errors}</Alert>
         )}
       </section>
 
       <Modal open={isUserCommentModalOpen} onClose={() => setIsUserCommentModalOpen(false)}>
-					<Snackbar open={isUserCommentModalOpen} autoHideDuration={6000}
-						onClose={handleSnackBarClose}
-						message={snackBarMsg}
-						action={
-								<React.Fragment>
-									<IconButton
-									aria-label="close"
-									color="inherit"
-									sx={{ p: 0.5 }}
-									onClick={handleSnackBarClose}
-									>
-									<CloseIcon />
-									</IconButton>
-								</React.Fragment>
-								} />
-			</Modal>
+        <Snackbar open={isUserCommentModalOpen} autoHideDuration={6000}
+          onClose={handleSnackBarClose}
+          message={snackBarMsg}
+          action={
+            <React.Fragment>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                sx={{ p: 0.5 }}
+                onClick={handleSnackBarClose}
+              >
+                <CloseIcon />
+              </IconButton>
+            </React.Fragment>
+          } />
+      </Modal>
     </section>
   );
 };

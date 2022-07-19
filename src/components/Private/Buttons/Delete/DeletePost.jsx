@@ -9,7 +9,7 @@ import { PostsContext } from '../../../../contexts/PostContext'
 
 export const DeletePost = (props) => {
 
-  const{upgrade, setUpgrade}=useContext(PostsContext)
+const{upgrade, setUpgrade}=useContext(PostsContext)
 
 const { category, id }=props
 const [error, setError]=useState()

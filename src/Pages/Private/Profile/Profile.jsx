@@ -63,7 +63,7 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include",
-      withCredentials: true, 
+      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
@@ -98,9 +98,11 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include",
-      withCredentials: true, 
-      headers: { "Content-Type": "application/json", 
-      "Access-Control-Allow-Credentials": true, },
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
     }
 
     postCategories.map((cat) => {
@@ -163,10 +165,10 @@ export const Profile = () => {
 
 
   if (!profileData || !beauties
-		|| !artsCrafts || !gardens
-		|| !recipes || !events) {
-		return <LoadingSpinner />
-	}
+    || !artsCrafts || !gardens
+    || !recipes || !events) {
+    return <LoadingSpinner />
+  }
 
   return (
     <>
@@ -177,7 +179,7 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {JSON.parse(localStorage.getItem("profileName")) === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
+                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
               )}
 
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false) }} >
