@@ -313,7 +313,7 @@ export default function CreatePost({ category, setCategory }) {
     const config = {
       method: "POST",
       credentials: "include",
-withCredentials: true, // specify this if you need cookies
+      withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     }
@@ -326,7 +326,6 @@ withCredentials: true, // specify this if you need cookies
        } else {
             setPostId(result._id)
             setIsModalOpen(true)
-            setUpgrade(!upgrade)
        }
       })
       .catch((error) => console.log(error));

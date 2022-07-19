@@ -40,7 +40,7 @@ export const EventsTable = (props) => {
     const config = {
       method: "PATCH",
       credentials: "include",
-withCredentials: true,
+      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 

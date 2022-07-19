@@ -27,7 +27,7 @@ export const UserComment = ({ post } ) => {
     const config = {
       method: "GET",
       credentials: "include",
-withCredentials: true, // specify this if you need cookies
+      withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     
@@ -54,7 +54,7 @@ withCredentials: true, // specify this if you need cookies
     const config = {
       method: "PATCH",
       credentials: "include",
-withCredentials: true, // specify this if you need cookies
+      withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(payload),
     }

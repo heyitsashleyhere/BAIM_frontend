@@ -63,7 +63,7 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include",
-withCredentials: true, 
+      withCredentials: true, 
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
@@ -98,7 +98,7 @@ withCredentials: true,
     const config = {
       method: "GET",
       credentials: "include",
-withCredentials: true, 
+      withCredentials: true, 
       headers: { "Content-Type": "application/json", 
       "Access-Control-Allow-Credentials": true, },
     }
