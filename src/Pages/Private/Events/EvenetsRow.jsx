@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react'
-import { useCookies } from "react-cookie";
 import { PostsContext } from "../../../contexts/PostContext";
 import { PostCommentsAvatar } from '../../../components/Private/Avatars-Links/Avatars.jsx'
 
@@ -26,16 +25,6 @@ export function EventRow(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const { users } = useContext(PostsContext);
 
-  let nthNumber = (d) => {
-    if (d > 3 && d < 21) return `${d}th`;
-    switch (d % 10) {
-      case 1: return `${d}st'`;
-      case 2: return `${d}nd'`;
-      case 3: return `${d}rd`;
-      default: return `${d}th`
-    }
-  }
-
   const openMap = (e) => {
     setAnchorEl(anchorEl ? null : e.currentTarget);
   }
@@ -51,6 +40,11 @@ export function EventRow(props) {
     })
 
   }
+
+  // formate date
+  const date = (item) => new Date(item).toLocaleDateString("eu");
+
+
   return (
     <>
       <MUI.TableRow sx={styles2}>
@@ -79,11 +73,7 @@ export function EventRow(props) {
           </MUI.Typography>
         </MUI.TableCell>
         <MUI.TableCell component="th" scope="row">
-          {new Date(event.start).toLocaleString("default", {
-            weekday: "short",
-          })}
-          {", "}
-          {nthNumber(new Date(event.start).getDate())}
+          {date(event.start)}
         </MUI.TableCell>
         <MUI.TableCell align="right">
           {isAuthor ? null :

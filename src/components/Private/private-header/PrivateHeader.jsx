@@ -22,8 +22,6 @@ export const PrivateHeader = () => {
 
 	const headerRef = useRef(null);
 
-	console.log('document.cookie', document.cookie)
-
 	//Links object
 	const links = [
 		{ path: "/discover", name: "Discover" },
@@ -31,15 +29,15 @@ export const PrivateHeader = () => {
 		{ path: "/create", name: "Create" },
 		{ path: "/search", name: "Search" },
 	];
-	
+
 	function logoutUser() {
 		const config = {
 			method: "POST",
 			credentials: "include",
-			withCredentials: true, 
+			withCredentials: true,
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
-		fetch("https://loka-database.herokuapp.com/user/logout", config)
+		fetch("http://localhost:7000/user/logout", config)
 			.then((response) => response.json())
 			.then((result) => {
 				// console.log("UserLogin:", result);
@@ -59,10 +57,10 @@ export const PrivateHeader = () => {
 	useEffect(() => {
 		pathname.includes("/profile")
 			? (headerTl.current = gsap.timeline({ delay: 9 }).to(headerRef.current, {
-					duration: 0.8,
-					y: 0,
-					ease: "power2.inOut",
-			  }))
+				duration: 0.8,
+				y: 0,
+				ease: "power2.inOut",
+			}))
 			: (headerRef.current.style.transform = "translateY(0)");
 		return () => {
 			if (headerTl.current) {

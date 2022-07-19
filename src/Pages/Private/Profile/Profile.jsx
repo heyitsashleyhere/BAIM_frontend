@@ -63,11 +63,11 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include",
-      withCredentials: true, 
+      withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
-    fetch(`https://loka-database.herokuapp.com/user/${profileName}`, config)
+    fetch(`http://localhost:7000/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -98,13 +98,15 @@ export const Profile = () => {
     const config = {
       method: "GET",
       credentials: "include",
-      withCredentials: true, 
-      headers: { "Content-Type": "application/json", 
-      "Access-Control-Allow-Credentials": true, },
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
     }
 
     postCategories.map((cat) => {
-      fetch(`https://loka-database.herokuapp.com/${cat}/author/${profileName}/`, config)
+      fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -150,7 +152,7 @@ export const Profile = () => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`https://loka-database.herokuapp.com/user/${id}`, config)
+    fetch(`http://localhost:7000/user/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {
@@ -163,10 +165,10 @@ export const Profile = () => {
 
 
   if (!profileData || !beauties
-		|| !artsCrafts || !gardens
-		|| !recipes || !events) {
-		return <LoadingSpinner />
-	}
+    || !artsCrafts || !gardens
+    || !recipes || !events) {
+    return <LoadingSpinner />
+  }
 
   return (
     <>
@@ -177,7 +179,7 @@ export const Profile = () => {
           <div className="Profile-inner">
             <div className="Profile-header">
               {JSON.parse(localStorage.getItem("profileName")) === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
+                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
               )}
 
               <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false) }} >

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 export const PostsContext = React.createContext(null)
 
+
 function PostsContextProvider({ children }) {
   const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"]
   // creating a post
@@ -28,15 +29,17 @@ function PostsContextProvider({ children }) {
   // Profile Page
   const [profileData, setProfileData] = useState(null)
   // for Pin and Profile
-  const [ postData, setPostData ] = useState(null)
+  const [postData, setPostData] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
+  // imageInput
+  const [image, setImage]=useState({image:""})
+  // videoInput
+  const[video, setVideo]=useState({video:""})
 
-
-  // const [loading, setLoading]=useState(true)
 
   useEffect(() => {
-    fetch("https://loka-database.herokuapp.com/user")
+    fetch("http://localhost:7000/user")
       .then(response => response.json())
       .then(result => { setUsers(result) })
       .catch(error => console.log(error.message))
@@ -46,14 +49,8 @@ function PostsContextProvider({ children }) {
       .then(result => setSeasonal(result))
       .catch(error => console.log(error.message))
 
-    // const config = {
-    //     method: "GET",
-    //     credentials: 'include', // specify this if you need cookies
-    //     headers: { "Content-Type": "application/json" }
-    //   };
-
     postCategories.map(cat => {
-      fetch(`https://loka-database.herokuapp.com/${cat}/`)
+      fetch(`http://localhost:7000/${cat}/`)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -112,7 +109,7 @@ function PostsContextProvider({ children }) {
       body: JSON.stringify(inputValues)
     }
 
-    fetch(`https://loka-database.herokuapp.com/${category}`, config)
+    fetch(`http://localhost:7000/${category}`, config)
       .then((response) => response.json())
       .then((result) => console.log(category, "fetch result:", result))
       .catch((error) => console.log(error));
@@ -134,7 +131,9 @@ function PostsContextProvider({ children }) {
     searchInput, setSearchInput,
     seasonal, setSeasonal,
     profileData, setProfileData,
-    postData, setPostData
+    postData, setPostData,
+    image, setImage,
+    video, setVideo,
   }
 
   return (

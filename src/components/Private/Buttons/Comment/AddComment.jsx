@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import "./addComment.scss";
 
-export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
+export const AddComment = ({ post, isModalOpen, setIsModalOpen }) => {
   const [error, setError] = useState();
   const [comment, setComment] = useState("");
   const [message, setMessage] = useState(null);
@@ -25,7 +25,7 @@ export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
       body: JSON.stringify(payload),
     };
 
-    fetch(`https://loka-database.herokuapp.com/comments`, config)
+    fetch(`http://localhost:7000/comments`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('result :>> ', result);
@@ -41,11 +41,11 @@ export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
   }
 
   function handleClose(event, reason) {
-		if (reason === 'clickaway') {
-			return;
-		  }
-		  setIsModalOpen(false);
-	}
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsModalOpen(false);
+  }
 
   return (
     <section className="AddComment">
@@ -56,30 +56,30 @@ export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
       />
 
       {error && (
-        <Alert severity="error" sx={{ marginBottom: 2}}>{error[0].message}</Alert>
+        <Alert severity="error" sx={{ marginBottom: 2 }}>{error[0].message}</Alert>
       )}
-      
+
       <button className="NavLink-Black" onClick={AddComment}>
         submit
       </button>
 
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-					<Snackbar open={isModalOpen} autoHideDuration={6000}
-						onClose={handleClose}
-						message={message}
-						action={
-								<React.Fragment>
-									<IconButton
-									aria-label="close"
-									color="inherit"
-									sx={{ p: 0.5 }}
-									onClick={handleClose}
-									>
-									<CloseIcon />
-									</IconButton>
-								</React.Fragment>
-								} />
-			</Modal>
+        <Snackbar open={isModalOpen} autoHideDuration={6000}
+          onClose={handleClose}
+          message={message}
+          action={
+            <React.Fragment>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                sx={{ p: 0.5 }}
+                onClick={handleClose}
+              >
+                <CloseIcon />
+              </IconButton>
+            </React.Fragment>
+          } />
+      </Modal>
     </section>
   );
 };

@@ -20,6 +20,7 @@ export const ProduceNavbar = () => {
 
 	const firstSix = inSeason.filter((_, idx) => idx < 10);
 
+
 	return (
 		<section className="produce-nav">
 			<section className="produce-nav-container">
@@ -30,6 +31,6 @@ export const ProduceNavbar = () => {
 					<SeasonalAvatar id="plus" name="More" image={More} key="more" />
 				</section>
 			</section>
-		</section>
+		</section >
 	);
 };

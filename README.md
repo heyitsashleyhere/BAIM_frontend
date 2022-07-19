@@ -12,14 +12,14 @@
 
 <!-- ABOUT -->
 
-## About
+## Overview
 
 
 This Project is our Final Project of the one year fullstack web developer course at [DCI Digital Career Institute gGmbH](https://digitalcareerinstitute.org/de/).
 
-The Project take place from the 30th of May to the 19th of Juli
+The Project take place from the 30th of May to the 19th of July, 2022.
 
-## about the App "Loka"
+## About
 
 "There is no power for change greater than a community discovering what it cares about." Margaret J. Wheatley
 
@@ -92,7 +92,6 @@ The users can edit their posts, pin them to their profile, read and write commen
 
 ## Links
 
-
 - [Loka Backend](https://github.com/BrianLadwig/BAIM-backend/tree/main)
-- [Figma Designe](https://www.figma.com/file/ATMhtCX7NRp9otxh0y1EMy/Untitled-(Copy)?node-id=0%3A1)
-- [Github Projct Page](https://github.com/users/heyitsashleyhere/projects/2)
+- [Figma Design](https://www.figma.com/file/ATMhtCX7NRp9otxh0y1EMy/Untitled-(Copy)?node-id=0%3A1)
+- [Github Project Page](https://github.com/users/heyitsashleyhere/projects/2)

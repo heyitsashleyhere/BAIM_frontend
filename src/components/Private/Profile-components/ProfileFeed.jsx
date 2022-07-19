@@ -11,7 +11,7 @@ export const ProfileFeed = (props) => {
     const allCollections = [allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost] 
     // useEffect(() => {
     //   postCategories.map(cat => {
-    //     fetch(`https://loka-database.herokuapp.com/${cat === "arts-and-craft" ? 'artsCraft' : cat}/`)
+    //     fetch(`http://localhost:7000/${cat === "arts-and-craft" ? 'artsCraft' : cat}/`)
     //       .then((response) => response.json())
     //       .then((result) => {
     //         if (!result.errors) {
@@ -24,7 +24,7 @@ export const ProfileFeed = (props) => {
     //     })
 
     // // postCategories.map(cat => {
-    // //   fetch(`https://loka-database.herokuapp.com/${cat}/`)
+    // //   fetch(`http://localhost:7000/${cat}/`)
     // //     .then((response) => response.json())
     // //     .then((result) => {
     // //       if (!result.errors) {

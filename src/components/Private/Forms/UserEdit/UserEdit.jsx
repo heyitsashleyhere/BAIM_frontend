@@ -14,8 +14,8 @@ export default function UserEdit({ setUserEditOpen }) {
   const [errors, setErrors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState(null)
-  const {inputValues, setInputValues, isShowPassword, showPasswordHandler} = useContext(UserContext);
-  const {profileData, upgrade, setUpgrade, } = useContext(PostsContext)
+  const { inputValues, setInputValues, isShowPassword, showPasswordHandler } = useContext(UserContext);
+  const { profileData, upgrade, setUpgrade, } = useContext(PostsContext)
   const [userAddress, setUserAddress] = useState(profileData.userAddress);
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
@@ -444,7 +444,7 @@ export default function UserEdit({ setUserEditOpen }) {
   const [country, setCountry] = useState(profileData.userAddress.country)
 
   useEffect(() => {
-    if(!userAddress || !Object.keys(userAddress).length){
+    if (!userAddress || !Object.keys(userAddress).length) {
       return
     }
     setInputValues({ ...inputValues, userAddress });
@@ -468,12 +468,12 @@ export default function UserEdit({ setUserEditOpen }) {
 
     const config = {
       method: "PATCH",
-      credentials: 'include', 
+      credentials: 'include',
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     };
 
-    fetch(`https://loka-database.herokuapp.com/user/${cookies.id}`, config)
+    fetch(`http://localhost:7000/user/${cookies.id}`, config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)
@@ -491,246 +491,246 @@ export default function UserEdit({ setUserEditOpen }) {
   }
 
   function handleClose(event, reason) {
-		if (reason === 'clickaway') {
-			return;
-		  }
-		  setIsModalOpen(false);
-      setUserEditOpen(false)
-	}
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsModalOpen(false);
+    setUserEditOpen(false)
+  }
 
   return (
     <div className="ProfileEdit-form">
       <Grow in>
-      <form onSubmit={handleUserUpdate} style={{ padding: '5% 7%', overflow:'hidden'}} >
-        <Grid container spacing={2}>
-          <Grid item xs={12} sx={{ textAlign: 'center '}}>
-            <Typography variant="h3">Edit Profile</Typography>
-          </Grid>
+        <form onSubmit={handleUserUpdate} style={{ padding: '5% 7%', overflow: 'hidden' }} >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sx={{ textAlign: 'center ' }}>
+              <Typography variant="h3">Edit Profile</Typography>
+            </Grid>
 
-          <Grid item xs={12} sx={{ textAlign: 'center', marginBottom: '2%'}}>
-            <Typography variant="h5">Profile Picture</Typography>
-            <ImageInput imageUsage="avatar" oldUrl={profileData.avatar}/>
-          </Grid>
+            <Grid item xs={12} sx={{ textAlign: 'center', marginBottom: '2%' }}>
+              <Typography variant="h5">Profile Picture</Typography>
+              <ImageInput imageUsage="avatar" oldUrl={profileData.avatar} />
+            </Grid>
 
-          <Grid item xs={12} sm={6}>
-            <Typography>First Name</Typography>
-            <Typography name="firstName" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error.firstName)}
-              onInput={e => setInputValues({ ...inputValues, firstName: e.currentTarget.textContent}) } >
+            <Grid item xs={12} sm={6}>
+              <Typography>First Name</Typography>
+              <Typography name="firstName" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error.firstName)}
+                onInput={e => setInputValues({ ...inputValues, firstName: e.currentTarget.textContent })} >
                 {profileData.firstName}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error.firstName && (
-                  <FormHelperText error key={"firstNameError" + i}>
-                    {error.firstName}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography>Last Name</Typography>
-            <Typography name="lastName" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error.lastName)}
-              onInput={e => setInputValues({ ...inputValues, lastName: e.currentTarget.textContent}) } >
-              {profileData.lastName}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error.lastName && (
-                  <FormHelperText error key={"lastNameError" + i}>
-                    {error.lastName}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography>Profile Name</Typography>
-            <Typography name="profileName" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error.profileName)}
-              onInput={e => setInputValues({ ...inputValues, profileName: e.currentTarget.textContent}) } >
-              {profileData.profileName}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error.profileName && (
-                  <FormHelperText error key={"profileNameError" + i}>
-                    {error.profileName}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error.firstName && (
+                    <FormHelperText error key={"firstNameError" + i}>
+                      {error.firstName}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography>Last Name</Typography>
+              <Typography name="lastName" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error.lastName)}
+                onInput={e => setInputValues({ ...inputValues, lastName: e.currentTarget.textContent })} >
+                {profileData.lastName}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error.lastName && (
+                    <FormHelperText error key={"lastNameError" + i}>
+                      {error.lastName}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography>Profile Name</Typography>
+              <Typography name="profileName" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error.profileName)}
+                onInput={e => setInputValues({ ...inputValues, profileName: e.currentTarget.textContent })} >
+                {profileData.profileName}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error.profileName && (
+                    <FormHelperText error key={"profileNameError" + i}>
+                      {error.profileName}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
-          <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <Autocomplete multiple
-                      options={["arts-and-craft", "beauty", "event", "garden", "recipe"]}
-                      getOptionLabel={(option) => option}
-                      defaultValue={profileData.interests || []}
-                      onChange={(event, value) => setInputValues({ ...inputValues, interests: value })}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          name="interests"
-                          label="interests"
-                        />
-                      )}
-                    />
-          </Grid>
+                options={["arts-and-craft", "beauty", "event", "garden", "recipe"]}
+                getOptionLabel={(option) => option}
+                defaultValue={profileData.interests || []}
+                onChange={(event, value) => setInputValues({ ...inputValues, interests: value })}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    name="interests"
+                    label="interests"
+                  />
+                )}
+              />
+            </Grid>
 
-          <Grid item xs={12}>
-            <Typography>Status</Typography>
-            <Typography name="status" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error.email)}
-              onInput={e => setInputValues({ ...inputValues, status: e.currentTarget.textContent}) } >
-              {profileData.status}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error.email && (
-                  <FormHelperText error key={"emailError" + i}>
-                    {error.email}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+            <Grid item xs={12}>
+              <Typography>Status</Typography>
+              <Typography name="status" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error.email)}
+                onInput={e => setInputValues({ ...inputValues, status: e.currentTarget.textContent })} >
+                {profileData.status}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error.email && (
+                    <FormHelperText error key={"emailError" + i}>
+                      {error.email}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
 
-          <Grid item xs={12}>
-            <Typography>Email</Typography>
-            <Typography name="email" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error.email)}
-              onInput={e => setInputValues({ ...inputValues, email: e.currentTarget.textContent}) } >
-              {profileData.email}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error.email && (
-                  <FormHelperText error key={"emailError" + i}>
-                    {error.email}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+            <Grid item xs={12}>
+              <Typography>Email</Typography>
+              <Typography name="email" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error.email)}
+                onInput={e => setInputValues({ ...inputValues, email: e.currentTarget.textContent })} >
+                {profileData.email}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error.email && (
+                    <FormHelperText error key={"emailError" + i}>
+                      {error.email}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
-          <Grid item xs={12} sm={6}>
-            <TextField name="password" label="Password"
-              fullWidth
-              margin="dense" type={isShowPassword ? "text" : "password"}
-              error={errors.find((error) => error.password)}
-              onChange={handleChange}
-              InputProps={{
-                endAdornment: ( 
-                  <InputAdornment position="end">
-                    <IconButton onClick={showPasswordHandler} onMouseDown={showPasswordHandler} >
-                      {isShowPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment> )
-              }} />
-            {errors.map(
-              (error, i) =>
-                error.password && (
-                  <FormHelperText error key={"passwordError" + i}>
-                    {error.password}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField name="confirmPassword" label="Confirm Password"
-              fullWidth
-              margin="dense" type="password"
-              error={errors.find((error) => error.confirmPassword)} 
-              onChange={handleChange} />
-            {errors.map(
-              (error, i) =>
-                error.confirmPassword && (
-                  <FormHelperText error key={"confirmPasswordError" + i}>
-                    {error.confirmPassword}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField name="password" label="Password"
+                fullWidth
+                margin="dense" type={isShowPassword ? "text" : "password"}
+                error={errors.find((error) => error.password)}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={showPasswordHandler} onMouseDown={showPasswordHandler} >
+                        {isShowPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>)
+                }} />
+              {errors.map(
+                (error, i) =>
+                  error.password && (
+                    <FormHelperText error key={"passwordError" + i}>
+                      {error.password}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField name="confirmPassword" label="Confirm Password"
+                fullWidth
+                margin="dense" type="password"
+                error={errors.find((error) => error.confirmPassword)}
+                onChange={handleChange} />
+              {errors.map(
+                (error, i) =>
+                  error.confirmPassword && (
+                    <FormHelperText error key={"confirmPasswordError" + i}>
+                      {error.confirmPassword}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
-          <Grid item xs={12} sx={{margin: '6% 0 1% 0'}}>      
-            <Divider>Address</Divider>
-          </Grid>
+            <Grid item xs={12} sx={{ margin: '6% 0 1% 0' }}>
+              <Divider>Address</Divider>
+            </Grid>
 
-          <Grid item xs={12} sm={8}>
-            <Typography>Street</Typography>
-            <Typography name="street" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error["userAddress.street"])}
-              onInput={e => setUserAddress({ ...userAddress, street: e.currentTarget.textContent}) } >
-              {profileData.userAddress && (profileData.userAddress.street)}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error["userAddress.street"] && (
-                  <FormHelperText error key={"streetError" + i}>
-                    {error["userAddress.street"]}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography>Street Number</Typography>
-            <Typography name="streetNumber" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error["userAddress.streetNumber"])}
-              onInput={e => setUserAddress({ ...userAddress, streetNumber: e.currentTarget.textContent}) } >
-              {profileData.userAddress && (profileData.userAddress.streetNumber)}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error["userAddress.streetNumber"] && (
-                  <FormHelperText error key={"streetNumberError" + i}>
-                    {error["userAddress.streetNumber"]}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography>City</Typography>
-            <Typography name="city" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error["userAddress.city"])}
-              onInput={e => setUserAddress({ ...userAddress, city: e.currentTarget.textContent}) } >
-              {profileData.userAddress && (profileData.userAddress.city)}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error["userAddress.city"] && (
-                  <FormHelperText error key={"cityError" + i}>
-                    {error["userAddress.city"]}
-                  </FormHelperText>
-                )
-            )}
-         </Grid>
-         <Grid item xs={12} sm={6}>
-            <Typography>Zip Code</Typography>
-            <Typography name="zip" variant="h5"
-              contentEditable={true} suppressContentEditableWarning={true}
-              error={errors.find((error) => error["userAddress.zip"])}
-              onInput={e => setUserAddress({ ...userAddress, zip: e.currentTarget.textContent}) } >
-              {profileData.userAddress && (profileData.userAddress.zip)}
-            </Typography>
-            {errors.map(
-              (error, i) =>
-                error["userAddress.zip"] && (
-                  <FormHelperText error key={"zipError" + i}>
-                    {error["userAddress.zip"]}
-                  </FormHelperText>
-                )
-            )}
-          </Grid>
+            <Grid item xs={12} sm={8}>
+              <Typography>Street</Typography>
+              <Typography name="street" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error["userAddress.street"])}
+                onInput={e => setUserAddress({ ...userAddress, street: e.currentTarget.textContent })} >
+                {profileData.userAddress && (profileData.userAddress.street)}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.street"] && (
+                    <FormHelperText error key={"streetError" + i}>
+                      {error["userAddress.street"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography>Street Number</Typography>
+              <Typography name="streetNumber" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error["userAddress.streetNumber"])}
+                onInput={e => setUserAddress({ ...userAddress, streetNumber: e.currentTarget.textContent })} >
+                {profileData.userAddress && (profileData.userAddress.streetNumber)}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.streetNumber"] && (
+                    <FormHelperText error key={"streetNumberError" + i}>
+                      {error["userAddress.streetNumber"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography>City</Typography>
+              <Typography name="city" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error["userAddress.city"])}
+                onInput={e => setUserAddress({ ...userAddress, city: e.currentTarget.textContent })} >
+                {profileData.userAddress && (profileData.userAddress.city)}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.city"] && (
+                    <FormHelperText error key={"cityError" + i}>
+                      {error["userAddress.city"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography>Zip Code</Typography>
+              <Typography name="zip" variant="h5"
+                contentEditable={true} suppressContentEditableWarning={true}
+                error={errors.find((error) => error["userAddress.zip"])}
+                onInput={e => setUserAddress({ ...userAddress, zip: e.currentTarget.textContent })} >
+                {profileData.userAddress && (profileData.userAddress.zip)}
+              </Typography>
+              {errors.map(
+                (error, i) =>
+                  error["userAddress.zip"] && (
+                    <FormHelperText error key={"zipError" + i}>
+                      {error["userAddress.zip"]}
+                    </FormHelperText>
+                  )
+              )}
+            </Grid>
 
-          <Grid item xs={12} sm={12}>
-            <Autocomplete
+            <Grid item xs={12} sm={12}>
+              <Autocomplete
                 options={countries}
                 value={country}
                 autoHighlight
@@ -762,41 +762,41 @@ export default function UserEdit({ setUserEditOpen }) {
                 )}
               />
               {errors.map(
-              (error, i) =>
-                error["userAddress.country"] && (
-                  <FormHelperText error key={"countryError" + i}>
-                    {error["userAddress.country"]}
-                  </FormHelperText>
-                )
+                (error, i) =>
+                  error["userAddress.country"] && (
+                    <FormHelperText error key={"countryError" + i}>
+                      {error["userAddress.country"]}
+                    </FormHelperText>
+                  )
               )}
+            </Grid>
+
+            <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
+              <Button variant="contained" type="submit" size="large">Confirm</Button>
+
+              <Button variant="outlined" size="large" onClick={() => setUserEditOpen(false)}>Cancel</Button>
+            </Grid>
           </Grid>
+        </form>
+      </Grow>
 
-          <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
-            <Button variant="contained" type="submit" size="large">Confirm</Button>
-
-            <Button variant="outlined" size="large" onClick={() => setUserEditOpen(false)}>Cancel</Button>
-          </Grid>
-        </Grid>
-      </form>
-    </Grow>
-
-    <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade); setUserEditOpen(false) }} >
-      <Snackbar open={isModalOpen} autoHideDuration={6000}
-              onClose={handleClose}
-              message={message}
-              action={
-                  <React.Fragment>
-                    <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    sx={{ p: 0.5 }}
-                    onClick={handleClose}
-                    >
-                    <CloseIcon />
-                    </IconButton>
-                  </React.Fragment>
-                  } />
-    </Modal>
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade); setUserEditOpen(false) }} >
+        <Snackbar open={isModalOpen} autoHideDuration={6000}
+          onClose={handleClose}
+          message={message}
+          action={
+            <React.Fragment>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                sx={{ p: 0.5 }}
+                onClick={handleClose}
+              >
+                <CloseIcon />
+              </IconButton>
+            </React.Fragment>
+          } />
+      </Modal>
 
     </div>
 
@@ -806,7 +806,7 @@ export default function UserEdit({ setUserEditOpen }) {
 // old country input (that was slow in selecting)
           // {/* <Grid item xs={12} sm={12}>
           //   <TextField name="country" label="Country"
-          //     fullWidth 
+          //     fullWidth
           //     margin="dense" select
           //     value={ profileData.userAddress ? profileData.userAddress.country : country}
           //     error={errors.find((error) => error["userAddress.country"])}
@@ -817,7 +817,7 @@ export default function UserEdit({ setUserEditOpen }) {
           //                 <img loading="lazy" width="20"
           //                       src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
           //                       srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-          //                       alt={option.label} 
+          //                       alt={option.label}
           //                   />
           //                 <p>{option.label}</p>
           //               </Stack>
