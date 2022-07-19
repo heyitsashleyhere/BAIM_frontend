@@ -32,9 +32,11 @@ function PostsContextProvider({ children }) {
   const [postData, setPostData] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
+  // imageInput
+  const [image, setImage]=useState({image:""})
+  // videoInput
+  const[video, setVideo]=useState({video:""})
 
-
-  // const [loading, setLoading]=useState(true)
 
   useEffect(() => {
     fetch("http://localhost:7000/user")
@@ -46,12 +48,6 @@ function PostsContextProvider({ children }) {
       .then(response => response.json())
       .then(result => setSeasonal(result))
       .catch(error => console.log(error.message))
-
-    // const config = {
-    //     method: "GET",
-    //     credentials: 'include', // specify this if you need cookies
-    //     headers: { "Content-Type": "application/json" }
-    //   };
 
     postCategories.map(cat => {
       fetch(`http://localhost:7000/${cat}/`)
@@ -135,7 +131,9 @@ function PostsContextProvider({ children }) {
     searchInput, setSearchInput,
     seasonal, setSeasonal,
     profileData, setProfileData,
-    postData, setPostData
+    postData, setPostData,
+    image, setImage,
+    video, setVideo,
   }
 
   return (

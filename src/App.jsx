@@ -80,14 +80,7 @@ export default function App() {
 	const { isNav } = useContext(AnimationContext);
 	const [cookies] = useCookies();
 	const [displayNav, setDisplayNav] = useState();
-	const {
-		users,
-		allBeautyPost,
-		allArtsCraftPost,
-		allGardenPost,
-		allRecipePost,
-		allEventPost,
-	} = useContext(PostsContext);
+	const { users, allBeautyPost, allArtsCraftPost, allGardenPost, allRecipePost, allEventPost } = useContext(PostsContext);
 
 	useEffect(() => {
 		const localDisplayNav = localStorage.getItem("showNav");

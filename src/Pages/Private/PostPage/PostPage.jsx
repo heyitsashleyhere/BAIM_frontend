@@ -10,6 +10,7 @@ import { DiscoverNavbar } from "../../../components/Private/section-header/Disco
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
 import EditPost from "../../../components/Private/Forms/EditPost/EditPost.jsx";
 import "./postPage.scss";
+import defaultImg from '../../../assets/LOKA2.jpg'
 import { Button, Modal, Paper, IconButton, Popover, Typography, Box, Snackbar, Chip } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from "@mui/icons-material/Edit";
@@ -37,7 +38,7 @@ export const PostPage = ({ data }) => {
       withCredentials: true,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
-
+    
     fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
@@ -105,7 +106,7 @@ export const PostPage = ({ data }) => {
               <Pin post={selected} />
               <MdOutlineArrowBack onClick={() => navigate(-1)} className="Post-Page-Header-icons" />
             </section>
-            <img src={selected.image}></img>
+            <img src={selected.image ? selected.image : defaultImg}></img>
             <h1>{selected.title}</h1>
           </section>
 

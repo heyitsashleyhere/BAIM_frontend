@@ -5,17 +5,16 @@ import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import ImageIcon from '@mui/icons-material/Image';
-import VideocamIcon from '@mui/icons-material/Videocam';
 import CloseIcon from '@mui/icons-material/Close';
 import ImageInput from "../ImageInput.jsx";
+import VideoInput from "../VideoInput.jsx";
 
 
 
 
 
 export default function CreatePost({ category, setCategory }) {
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload , image, setImage, video, setVideo } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -25,263 +24,261 @@ export default function CreatePost({ category, setCategory }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   let navigate = useNavigate()
   const countryList = [
-    "Afghanistan",
-    "Albania",
-    "Algeria",
-    "American Samoa",
-    "Andorra",
-    "Angola",
-    "Anguilla",
-    "Antarctica",
-    "Antigua and Barbuda",
-    "Argentina",
-    "Armenia",
-    "Aruba",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas (the)",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bermuda",
-    "Bhutan",
-    "Bolivia (Plurinational State of)",
-    "Bonaire, Sint Eustatius and Saba",
-    "Bosnia and Herzegovina",
-    "Botswana",
-    "Bouvet Island",
-    "Brazil",
-    "British Indian Ocean Territory (the)",
-    "Brunei Darussalam",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cabo Verde",
-    "Cambodia",
-    "Cameroon",
-    "Canada",
-    "Cayman Islands (the)",
-    "Central African Republic (the)",
-    "Chad",
-    "Chile",
-    "China",
-    "Christmas Island",
-    "Cocos (Keeling) Islands (the)",
-    "Colombia",
-    "Comoros (the)",
-    "Congo (the Democratic Republic of the)",
-    "Congo (the)",
-    "Cook Islands (the)",
-    "Costa Rica",
-    "Croatia",
-    "Cuba",
-    "Curaçao",
-    "Cyprus",
-    "Czechia",
-    "Côte d'Ivoire",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic (the)",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Eritrea",
-    "Estonia",
-    "Eswatini",
-    "Ethiopia",
-    "Falkland Islands (the) [Malvinas]",
-    "Faroe Islands (the)",
-    "Fiji",
-    "Finland",
-    "France",
-    "French Guiana",
-    "French Polynesia",
-    "French Southern Territories (the)",
-    "Gabon",
-    "Gambia (the)",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Gibraltar",
-    "Greece",
-    "Greenland",
-    "Grenada",
-    "Guadeloupe",
-    "Guam",
-    "Guatemala",
-    "Guernsey",
-    "Guinea",
-    "Guinea-Bissau",
-    "Guyana",
-    "Haiti",
-    "Heard Island and McDonald Islands",
-    "Holy See (the)",
-    "Honduras",
-    "Hong Kong",
-    "Hungary",
-    "Iceland",
-    "India",
-    "Indonesia",
-    "Iran (Islamic Republic of)",
-    "Iraq",
-    "Ireland",
-    "Isle of Man",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jersey",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kiribati",
-    "Korea (the Democratic People's Republic of)",
-    "Korea (the Republic of)",
-    "Kuwait",
-    "Kyrgyzstan",
-    "Lao People's Democratic Republic (the)",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Macao",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Marshall Islands (the)",
-    "Martinique",
-    "Mauritania",
-    "Mauritius",
-    "Mayotte",
-    "Mexico",
-    "Micronesia (Federated States of)",
-    "Moldova (the Republic of)",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Montserrat",
-    "Morocco",
-    "Mozambique",
-    "Myanmar",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Netherlands (the)",
-    "New Caledonia",
-    "New Zealand",
-    "Nicaragua",
-    "Niger (the)",
-    "Nigeria",
-    "Niue",
-    "Norfolk Island",
-    "Northern Mariana Islands (the)",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palau",
-    "Palestine, State of",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines (the)",
-    "Pitcairn",
-    "Poland",
-    "Portugal",
-    "Puerto Rico",
-    "Qatar",
-    "Republic of North Macedonia",
-    "Romania",
-    "Russian Federation (the)",
-    "Rwanda",
-    "Réunion",
-    "Saint Barthélemy",
-    "Saint Helena, Ascension and Tristan da Cunha",
-    "Saint Kitts and Nevis",
-    "Saint Lucia",
-    "Saint Martin (French part)",
-    "Saint Pierre and Miquelon",
-    "Saint Vincent and the Grenadines",
-    "Samoa",
-    "San Marino",
-    "Sao Tome and Principe",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Sint Maarten (Dutch part)",
-    "Slovakia",
-    "Slovenia",
-    "Solomon Islands",
-    "Somalia",
-    "South Africa",
-    "South Georgia and the South Sandwich Islands",
-    "South Sudan",
-    "Spain",
-    "Sri Lanka",
-    "Sudan (the)",
-    "Suriname",
-    "Svalbard and Jan Mayen",
-    "Sweden",
-    "Switzerland",
-    "Syrian Arab Republic",
-    "Taiwan",
-    "Tajikistan",
-    "Tanzania, United Republic of",
-    "Thailand",
-    "Timor-Leste",
-    "Togo",
-    "Tokelau",
-    "Tonga",
-    "Trinidad and Tobago",
-    "Tunisia",
-    "Turkey",
-    "Turkmenistan",
-    "Turks and Caicos Islands (the)",
-    "Tuvalu",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates (the)",
-    "United Kingdom of Great Britain and Northern Ireland (the)",
-    "United States Minor Outlying Islands (the)",
-    "United States of America (the)",
-    "Uruguay",
-    "Uzbekistan",
-    "Vanuatu",
-    "Venezuela (Bolivarian Republic of)",
-    "Viet Nam",
-    "Virgin Islands (British)",
-    "Virgin Islands (U.S.)",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe",
-    "Åland Islands"
-  ]
+    'Andorra',
+    'United Arab Emirates',
+    'Afghanistan',
+    'Antigua and Barbuda',
+    'Anguilla',
+    'Albania',
+    'Armenia',
+    'Angola',
+    'Antarctica',
+    'Argentina',
+    'American Samoa',
+    'Austria',
+    'Australia',
+    'Aruba', 
+    'Alland Islands',
+    'Azerbaijan',
+    'Bosnia and Herzegovina',
+    'Barbados', 
+    'Bangladesh', 
+    'Belgium', 
+    'Burkina Faso', 
+    'Bulgaria', 
+    'Bahrain', 
+    'Burundi', 
+    'Benin', 
+    'Saint Barthelemy',
+    'Bermuda', 
+    'Brunei Darussalam',
+    'Bolivia',
+    'Brazil',
+    'Bahamas',
+    'Bhutan', 
+    'Bouvet Island',
+    'Botswana',
+    'Belarus',
+    'Belize',
+    'Canada',
+    'Cocos (Keeling) Islands',
+    'Congo, Democratic Republic of the',
+    'Central African Republic',
+    'Congo, Republic of the',
+    'Switzerland', 
+    "Cote d'Ivoire", 
+    'Cook Islands', 
+    'Chile',
+    'Cameroon', 
+    'China', 
+    'Colombia', 
+    'Costa Rica', 
+    'Cuba', 
+    'Cape Verde', 
+    'Curacao', 
+    'Christmas Island', 
+    'Cyprus', 
+    'Czech Republic',
+    'Germany',
+    'Djibouti', 
+    'Denmark', 
+    'Dominica', 
+    'Dominican Republic',
+    'Algeria', 
+    'Ecuador', 
+    'Estonia', 
+    'Egypt', 
+    'Western Sahara', 
+    'Eritrea',
+    'Spain', 
+    'Ethiopia', 
+    'Finland', 
+    'Fiji', 
+    'Falkland Islands (Malvinas)',
+    'Micronesia, Federated States of',
+    'Faroe Islands', 
+    'France',
+    'Gabon', 
+    'United Kingdom', 
+    'Grenada', 
+    'Georgia', 
+    'French Guiana', 
+    'Guernsey', 
+    'Ghana', 
+    'Gibraltar', 
+    'Greenland', 
+    'Gambia', 
+    'Guinea', 
+    'Guadeloupe', 
+    'Equatorial Guinea',
+    'Greece', 
+    'South Georgia and the South Sandwich Islands',
+    'Guatemala', 
+    'Guam', 
+    'Guinea-Bissau', 
+    'Guyana', 
+    'Hong Kong',
+    'Heard Island and McDonald Islands',
+    'Honduras',
+    'Croatia', 
+    'Haiti', 
+    'Hungary', 
+    'Indonesia', 
+    'Ireland', 
+    'Israel', 
+    'Isle of Man', 
+    'India', 
+    'British Indian Ocean Territory',
+    'Iraq', 
+    'Iran, Islamic Republic of',
+    'Iceland', 
+    'Italy', 
+    'Jersey', 
+    'Jamaica',
+    'Jordan',
+    'Japan',
+    'Kenya', 
+    'Kyrgyzstan', 
+    'Cambodia',
+    'Kiribati', 
+    'Comoros',
+    'Saint Kitts and Nevis',
+    "Korea, Democratic People's Republic of",
+    'Korea, Republic of',
+    'Kuwait', 
+    'Cayman Islands', 
+    'Kazakhstan', 
+    "Lao People's Democratic Republic",
+    'Lebanon', 
+    'Saint Lucia',
+    'Liechtenstein', 
+    'Sri Lanka', 
+    'Liberia', 
+    'Lesotho', 
+    'Lithuania',
+    'Luxembourg',
+    'Latvia', 
+    'Libya', 
+    'Morocco',
+    'Monaco', 
+    'Moldova, Republic of',
+    'Montenegro',
+    'Saint Martin (French part)',
+    'Madagascar',
+    'Marshall Islands', 
+    'Macedonia, the Former Yugoslav Republic of',
+    'Mali', 
+    'Myanmar', 
+    'Mongolia', 
+    'Macao', 
+    'Northern Mariana Islands',
+    'Martinique', 
+    'Mauritania',
+    'Montserrat', 
+    'Malta',
+    'Mauritius', 
+    'Maldives', 
+    'Malawi', 
+    'Mexico', 
+    'Malaysia', 
+    'Mozambique', 
+    'Namibia', 
+    'New Caledonia', 
+    'Niger', 
+    'Norfolk Island',
+    'Nigeria', 
+    'Nicaragua', 
+    'Netherlands', 
+    'Norway',
+    'Nepal', 
+    'Nauru', 
+    'Niue', 
+    'New Zealand', 
+    'Oman', 
+    'Panama', 
+    'Peru', 
+    'French Polynesia', 
+    'Papua New Guinea', 
+    'Philippines', 
+    'Pakistan', 
+    'Poland', 
+    'Saint Pierre and Miquelon',
+    'Pitcairn',
+    'Puerto Rico',
+    'Palestine, State of',
+    'Portugal', 
+    'Palau', 
+    'Paraguay', 
+    'Qatar', 
+    'Reunion', 
+    'Romania', 
+    'Serbia', 
+    'Russian Federation', 
+    'Rwanda', 
+    'Saudi Arabia', 
+    'Solomon Islands', 
+    'Seychelles', 
+    'Sudan',
+    'Sweden', 
+    'Singapore', 
+    'Saint Helena', 
+    'Slovenia', 
+    'Svalbard and Jan Mayen',
+    'Slovakia',
+    'Sierra Leone', 
+    'San Marino', 
+    'Senegal', 
+    'Somalia', 
+    'Suriname', 
+    'South Sudan', 
+    'Sao Tome and Principe',
+    'El Salvador',
+    'Sint Maarten (Dutch part)',
+    'Syrian Arab Republic',
+    'Swaziland', 
+    'Turks and Caicos Islands',
+    'Chad', 
+    'French Southern Territories',
+    'Togo', 
+    'Thailand',
+    'Tajikistan', 
+    'Tokelau', 
+    'Timor-Leste', 
+    'Turkmenistan', 
+    'Tunisia', 
+    'Tonga', 
+    'Turkey', 
+    'Trinidad and Tobago',
+    'Tuvalu', 
+    'Taiwan, Province of China',
+    'United Republic of Tanzania',
+    'Ukraine', 
+    'Uganda',
+    'United States',
+    'Uruguay',
+    'Uzbekistan', 
+    'Holy See (Vatican City State)',
+    'Saint Vincent and the Grenadines',
+    'Venezuela',
+    'British Virgin Islands',
+    'US Virgin Islands',
+    'Vietnam', 
+    'Vanuatu', 
+    'Wallis and Futuna', 
+    'Samoa', 
+    'Kosovo', 
+    'Yemen',
+    'Mayotte', 
+    'South Africa', 
+    'Zambia', 
+    'Zimbabwe']
 
   const categoriesForCategory = {
-    artsCraft: ["upcycling", "refashion", "decor", "ceramic", "textile", "drawings", "zero-waste", "other"],
-    beauty: ["hygiene", "skin", "hair", "face", "anti-aging", "makeup", "other"],
-    event: ["market", "tasting", "workshop", "charity", "sit-in", "meet-and-greet", "fair", "other"],
-    garden: ["vegetable", "fruit", "grain", "herb", "plants", "flower", "indoor-plant", "outdoor-plant", "plant", "tree", "other"],
-    recipe: ["juice", "smoothie", "breakfast", "sandwiches", "main-dish", "soup", "salad", "appetizer", "dessert", "other"]
+     artsCraft: ["upcycling", "refashion", "decor", "ceramic", "textile", "drawings", "zero-waste", "other"],
+     beauty: ["hygiene","skin", "hair", "face", "anti-aging","makeup","other"],
+     event: ["market", "tasting", "workshop", "charity","sit-in","meet-and-greet","fair", "other" ],
+     garden: ["vegetable", "fruit", "grain", "herb","plants", "flower", "indoor-plant", "outdoor-plant", "plant", "tree", "other"],
+     recipe: ["juice","smoothie", "breakfast", "sandwiches", "main-dish", "soup", "salad", "appetizer", "dessert", "other"]
   }
 
   function handleStart(value) {
@@ -303,41 +300,53 @@ export default function CreatePost({ category, setCategory }) {
   }
 
   function handleInputChange(e) {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value });
+       setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   }
 
+  
+ 
   function handleSubmit(e) {
     e.preventDefault()
-    setInputValues({ ...inputValues, address });
+    setInputValues({ ...inputValues, address});
 
+    const payload = { ...inputValues, ...image, ...video }
     const config = {
       method: "POST",
       credentials: "include",
       withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
-      body: JSON.stringify(inputValues),
+      body: JSON.stringify(payload),
     }
 
     fetch(`http://localhost:7000/${category}`, config)
       .then((response) => response.json())
       .then((result) => {
-        if (result.errors) {
-          setErrors(result.errors);
-        } else {
-          setPostId(result._id)
-          setIsModalOpen(true)
-        }
+       if (result.errors) {
+              setErrors(result.errors);
+       } else {
+            setPostId(result._id)
+            setIsModalOpen(true)
+            setImage('')
+            setVideo('')
+            
+       }
       })
       .catch((error) => console.log(error));
   }
 
   function handleClose(event, reason) {
-    if (reason === 'clickaway') {
-      return;
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
+    if(category === 'event') {
+      navigate(`/events`)
+      window.location.reload(); 
+    } else {
+      navigate(`/${category}/${postId}`)
+      window.location.reload(); 
     }
-    setIsModalOpen(false);
-    navigate(`/${category}/${postId}`)
-  }
+	}
 
   return (
     <section>
@@ -346,62 +355,62 @@ export default function CreatePost({ category, setCategory }) {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField name="title" label="Title"
-                type="text"
-                fullWidth margin="dense"
-                error={errors.find((error) => error.title)}
-                onChange={handleInputChange} />
+                     type="text"
+                     fullWidth margin="dense"
+                     error={errors.find((error) => error.title)}
+                     onChange={handleInputChange} />
               {errors.map(
-                (error, i) =>
-                  error.title && (
-                    <FormHelperText error key={category + "-title" + i}>
-                      {error.title}
-                    </FormHelperText>
-                  )
+                     (error, i) =>
+                     error.title && (
+                     <FormHelperText error key={category + "-title" + i}>
+                     {error.title}
+                     </FormHelperText>
+                     )
               )}
             </Grid>
             <Grid item xs={12}>
               <Autocomplete multiple
-                options={categoriesForCategory[`${category}`]}
-                getOptionLabel={(option) => option}
-                onChange={(event, value) => setInputValues({ ...inputValues, category: value })}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    name="category"
-                    label="Category"
-                    autoComplete="new-password"
-                  />
-                )}
-              />
+                      options={categoriesForCategory[`${category}`]}
+                      getOptionLabel={(option) => option}
+                      onChange={(event, value) => setInputValues({ ...inputValues, category: value })}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          name="category"
+                          label="Category"
+                          autoComplete="new-password"
+                        />
+                      )}
+                    />
             </Grid>
             <Grid item xs={12}>
               <TextField name="description" label="Description"
-                type="text"
-                fullWidth margin="dense"
-                multiline rows={6}
-                error={errors.find((error) => error.description)}
-                onChange={handleInputChange} />
+                     type="text"
+                     fullWidth margin="dense"
+                     multiline rows={6}
+                     error={errors.find((error) => error.description)}
+                     onChange={handleInputChange} />
               {errors.map(
-                (error, i) =>
-                  error.description && (
-                    <FormHelperText error key={category + "-description" + i}>
-                      {error.description}
-                    </FormHelperText>
-                  )
+                     (error, i) =>
+                     error.description && (
+                     <FormHelperText error key={category + "-description" + i}>
+                     {error.description}
+                     </FormHelperText>
+                     )
               )}
             </Grid>
 
             <Grid item xs={12}>
-              <TextField name="tags" label="Tags (separated by comma)"
-                type="text" fullWidth margin="dense"
-                error={errors.find((error) => error.tags)}
-                onChange={handleTags} />
-              {errors.map((error, i) =>
-                error.tags && (
-                  <FormHelperText error key={category + "-tags" + i}>
-                    {error.tags}
-                  </FormHelperText>)
-              )}
+                <TextField name="tags" label="Tags (separated by comma)"
+                        type="text" fullWidth margin="dense"
+                        error={errors.find((error) => error.tags)}
+                        onChange={handleTags} />
+                  {errors.map( (error, i) =>
+                      error.tags && (
+                        <FormHelperText error key={category + "-tags" + i}>
+                          {error.tags}
+                        </FormHelperText>)
+                  )}
             </Grid>
 
             {category === "event" && (
@@ -411,81 +420,81 @@ export default function CreatePost({ category, setCategory }) {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="street" label="Street"
-                    type="text" fullWidth margin="dense"
-                    error={errors.find((error) => error["address.street"])}
-                    onChange={(e) => setAddress({ ...address, street: e.target.value })} />
+                        type="text" fullWidth margin="dense"
+                        error={errors.find((error) => error["address.street"])}
+                        onChange={(e) => setAddress({ ...address, street: e.target.value })} />
                   {errors.map(
-                    (error, i) =>
-                      error["address.street"] && (
+                        (error, i) =>
+                        error["address.street"] && (
                         <FormHelperText error key={category + "-streetAddress" + i}>
-                          {error["address.street"]}
+                        {error["address.street"]}
                         </FormHelperText>
-                      )
+                        )
                   )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="streetNumber" label="Street Number"
-                    type="text" fullWidth margin="dense"
-                    error={errors.find((error) => error["address.streetNumber"])}
-                    onChange={(e) => setAddress({ ...address, streetNumber: e.target.value })} />
-                  {errors.map(
-                    (error, i) =>
-                      error["address.streetNumber"] && (
-                        <FormHelperText error key={category + "-streetNumber" + i}>
+                          type="text" fullWidth margin="dense"
+                          error={errors.find((error) => error["address.streetNumber"])}
+                          onChange={(e) => setAddress({ ...address, streetNumber: e.target.value })} />
+                    {errors.map(
+                          (error, i) =>
+                          error["address.streetNumber"] && (
+                          <FormHelperText error key={category + "-streetNumber" + i}>
                           {error["address.streetNumber"]}
-                        </FormHelperText>
-                      )
-                  )}
+                          </FormHelperText>
+                          )
+                    )}
                 </Grid>
                 <Grid item xs={6}>
                   <TextField name="city" label="City"
-                    type="text" fullWidth margin="dense"
-                    error={errors.find((error) => error["address.city"])}
-                    onChange={(e) => setAddress({ ...address, city: e.target.value })} />
-                  {errors.map(
-                    (error, i) =>
-                      error["address.city"] && (
-                        <FormHelperText error key={category + "-city" + i}>
+                          type="text" fullWidth margin="dense"
+                          error={errors.find((error) => error["address.city"])}
+                          onChange={(e) => setAddress({ ...address, city: e.target.value })} />
+                    {errors.map(
+                          (error, i) =>
+                          error["address.city"] && (
+                          <FormHelperText error key={category + "-city" + i}>
                           {error["address.city"]}
-                        </FormHelperText>
-                      )
-                  )}
+                          </FormHelperText>
+                          )
+                    )}
                 </Grid>
                 <Grid item xs={6}>
                   <TextField name="zip" label="Zip Code"
-                    type="text" fullWidth margin="dense"
-                    error={errors.find((error) => error["address.zip"])}
-                    onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
-                  {errors.map(
-                    (error, i) =>
-                      error["address.zip"] && (
-                        <FormHelperText error key={category + "-zip" + i}>
+                          type="text" fullWidth margin="dense"
+                          error={errors.find((error) => error["address.zip"])}
+                          onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
+                    {errors.map(
+                          (error, i) =>
+                          error["address.zip"] && (
+                          <FormHelperText error key={category + "-zip" + i}>
                           {error["address.zip"]}
-                        </FormHelperText>
-                      )
-                  )}
+                          </FormHelperText>
+                          )
+                    )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="country" label="Country"
-                    select fullWidth margin="dense"
-                    error={errors.find((error) => error["address.country"])}
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value)
-                      setAddress({ ...address, country: e.target.value })
-                    }}>
-                    {countryList.map(option => (
-                      <MenuItem key={option} value={option}>{option}</MenuItem>
-                    ))}
+                          select fullWidth margin="dense"
+                          error={errors.find((error) => error["address.country"])}
+                          value={country}
+                          onChange={(e) => {
+                            setCountry(e.target.value)
+                            setAddress({ ...address, country: e.target.value })
+                          }}>
+                      {countryList.map(option => (
+                        <MenuItem key={option} value={option}>{option}</MenuItem>
+                      ))}
                   </TextField>
-                  {errors.map(
-                    (error, i) =>
-                      error["address.country"] && (
-                        <FormHelperText error key={category + "-country" + i}>
+                    {errors.map(
+                          (error, i) =>
+                          error["address.country"] && (
+                          <FormHelperText error key={category + "-country" + i}>
                           {error["address.country"]}
-                        </FormHelperText>
-                      )
-                  )}
+                          </FormHelperText>
+                          )
+                    )}
                 </Grid>
 
                 <Grid item xs={12}>
@@ -497,16 +506,16 @@ export default function CreatePost({ category, setCategory }) {
                     value={startTime}
                     onChange={handleStart}
                     renderInput={(params) => <TextField {...params} />}
-                    minDate={new Date()}
+                    minDate={new Date()} 
                   />
-                  {errors.map(
-                    (error, i) =>
-                      error.start && (
-                        <FormHelperText error key={category + "start" + i}>
+                    {errors.map(
+                          (error, i) =>
+                          error.start && (
+                          <FormHelperText error key={category + "start" + i}>
                           {error.start}
-                        </FormHelperText>
-                      )
-                  )}
+                          </FormHelperText>
+                          )
+                    )}
                 </Grid>
                 <Grid item xs={6}>
                   <DateTimePicker
@@ -514,58 +523,60 @@ export default function CreatePost({ category, setCategory }) {
                     value={endTime}
                     onChange={handleEnd}
                     renderInput={(params) => <TextField {...params} />}
-                    minDate={new Date()}
+                    minDate={new Date()} 
                   />
                   {errors.map(
-                    (error, i) =>
-                      error.end && (
-                        <FormHelperText error key={category + "end" + i}>
+                          (error, i) =>
+                          error.end && (
+                          <FormHelperText error key={category + "end" + i}>
                           {error.end}
-                        </FormHelperText>
-                      )
-                  )}
+                          </FormHelperText>
+                          )
+                    )}
                 </Grid>
               </LocalizationProvider>
             )}
 
             <Grid item xs={12} sm={6}>
-              <ImageInput imageUsage="image" />
+              <ImageInput imageUsage="image" category={category} />
               {errors.map(
-                (error, i) =>
-                  error.image && (
-                    <FormHelperText error key={category + "-imageFile" + i}>
-                      {error.image}
-                    </FormHelperText>
-                  )
+              (error, i) =>
+                error.image && (
+                  <FormHelperText error key={category + "-imageFile" + i}>
+                    {error.image}
+                  </FormHelperText>
+                )
               )}
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <label htmlFor="create-post-video">
-                <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
-                  onChange={(e) => handleFileUpload(e)} style={{ display: 'none' }} />
-                <Button variant="contained" endIcon={<VideocamIcon />} size="large" component="span">
-                  Upload Video
-                </Button>
-              </label>
+              <VideoInput/>
+              {errors.map(
+              (error, i) =>
+                error.video && (
+                  <FormHelperText error key={category + "-videoFile" + i}>
+                    {error.video}
+                  </FormHelperText>
+                )
+              )}
             </Grid>
 
             <Grid item xs={12}>
               <TextField name="link" label="Map Link"
-                type="text"
-                fullWidth margin="dense"
-                error={errors.find((error) => error.link)}
-                onChange={handleInputChange} />
+                     type="text"
+                     fullWidth margin="dense"
+                     error={errors.find((error) => error.link)}
+                     onChange={handleInputChange} />
               {errors.map(
-                (error, i) =>
-                  error.link && (
-                    <FormHelperText error key={category + "-link" + i}>
-                      {error.link}
-                    </FormHelperText>
-                  )
+                     (error, i) =>
+                     error.link && (
+                     <FormHelperText error key={category + "-link" + i}>
+                     {error.link}
+                     </FormHelperText>
+                     )
               )}
             </Grid>
-
+        
             <Grid item xs={12} textAlign='center'>
               <Button variant="contained" type="submit" size="large">Post</Button>
             </Grid>
@@ -575,29 +586,29 @@ export default function CreatePost({ category, setCategory }) {
 
       </Grow>
 
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
-        <Snackbar open={isModalOpen} autoHideDuration={6000}
-          onClose={handleClose}
-          message={`post planted in ${category}`}
-          action={
-            <React.Fragment>
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                sx={{ p: 0.5 }}
-                onClick={handleClose}
-              >
-                <CloseIcon />
-              </IconButton>
-            </React.Fragment>
-          } />
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null)}} >
+          <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleClose}
+              message={`post planted in ${category}`}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
       </Modal>
-
+       
     </section>
   )
 }
-// old imageInput
-{/* <Grid item xs={6}>
+            // old imageInput
+            {/* <Grid item xs={6}>
               <label htmlFor="create-post-image">
                 <input type="file" name="image" accept="image/*" id='create-post-image'
                       onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />

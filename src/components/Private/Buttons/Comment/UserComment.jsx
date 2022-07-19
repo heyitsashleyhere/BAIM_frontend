@@ -30,7 +30,7 @@ export const UserComment = ({ post }) => {
       withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
-
+    
     fetch(`http://localhost:7000/comments/${post._id}`, config)
       .then((response) => response.json())
       .then((result) => {

@@ -22,8 +22,6 @@ export const PrivateHeader = () => {
 
 	const headerRef = useRef(null);
 
-	console.log('document.cookie', document.cookie)
-
 	//Links object
 	const links = [
 		{ path: "/discover", name: "Discover" },
