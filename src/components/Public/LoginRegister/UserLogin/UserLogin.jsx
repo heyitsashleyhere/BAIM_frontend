@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext.js";
 // mui
-import { Grid, TextField, InputAdornment, IconButton, Button, FormHelperText, Stack, Grow, Box } from '@mui/material';
+import { Grid, TextField, InputAdornment, IconButton, Button, FormHelperText, Link, Grow } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -97,7 +97,11 @@ export default function UserLogin() {
           <Grid item xs={12} textAlign='center'>
             <Button variant="contained" type="submit" size="large">Login</Button>
           </Grid>
-          
+
+          <Grid item xs={12} textAlign='center'>
+            <Link href="#" underline="hover">Forgot password</Link>
+          </Grid>
+             
       </Grid>
     </Grow>
     </section>

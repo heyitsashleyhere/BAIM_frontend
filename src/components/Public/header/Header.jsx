@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import gsap from "gsap";
-// context
-import { AnimationContext } from "../../../contexts/AnimationContext";
-// Styles
+import { AnimationContext } from "../../../contexts/AnimationContext.js";
+import { UserContext } from "../../../contexts/UserContext.js";
 import "./header.scss";
 import Logo from "../../../assets/logo/raspberry.png";
 
 const Header = () => {
 	const { windowWidth, setIsNav } = useContext(AnimationContext);
+	const { setIsLogout } = useContext(UserContext)
 
 	const headerRef = useRef(null);
 
@@ -31,6 +31,7 @@ const Header = () => {
 					to="/"
 					onClick={() => {
 						setIsNav(false);
+						setIsLogout(false);
 						localStorage.removeItem("showNav");
 					}}
 				>

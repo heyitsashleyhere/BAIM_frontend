@@ -14,7 +14,7 @@ import Logo from "../../../assets/logo/raspberry-black.png";
 export const PrivateHeader = () => {
 	const [burgerMenu, setBurgerMenu] = useState(false);
 
-	const { setIsLogin, user } = useContext(UserContext);
+	const { setIsLogin, setIsLogout } = useContext(UserContext);
 
 	const [cookies] = useCookies();
 	let navigate = useNavigate();
@@ -44,6 +44,7 @@ export const PrivateHeader = () => {
 				if (!result.errors) {
 					console.log("result.message :>> ", result.message);
 					setIsLogin(false);
+					setIsLogout(true)
 					localStorage.clear();
 					navigate("/main");
 				} else {
