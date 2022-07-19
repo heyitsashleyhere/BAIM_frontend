@@ -32,6 +32,8 @@ function PostsContextProvider({ children }) {
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
 
+  const [image, setImage]=useState({image:""})
+
 
   // const [loading, setLoading]=useState(true)
 
@@ -134,7 +136,8 @@ function PostsContextProvider({ children }) {
     searchInput, setSearchInput,
     seasonal, setSeasonal,
     profileData, setProfileData,
-    postData, setPostData
+    postData, setPostData,
+    image, setImage
   }
 
   return (
