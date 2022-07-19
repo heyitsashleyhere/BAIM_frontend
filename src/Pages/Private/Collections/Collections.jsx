@@ -5,7 +5,7 @@ import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 
 
 import "./collections.scss";
-//(userLibrary[category]).find(post => post._id === id)
+
 
 export const Collections = (props) => {
   const { data, type } = props
