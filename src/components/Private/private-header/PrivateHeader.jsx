@@ -22,6 +22,8 @@ export const PrivateHeader = () => {
 
 	const headerRef = useRef(null);
 
+	console.log('document.cookie', document.cookie)
+
 	//Links object
 	const links = [
 		{ path: "/discover", name: "Discover" },
@@ -30,7 +32,6 @@ export const PrivateHeader = () => {
 		{ path: "/search", name: "Search" },
 	];
 	
-	console.log('cookies', cookies)
 	function logoutUser() {
 		const config = {
 			method: "POST",
