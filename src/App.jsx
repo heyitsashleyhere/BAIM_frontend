@@ -110,7 +110,7 @@ export default function App() {
 		<ThemeProvider theme={theme}>
 			<section className="App">
 				{displayNav || isNav ? (
-					localStorage.getItem("profileName") || isLogin ? (
+					JSON.parse(localStorage.getItem("profileName")) || isLogin ? (
 						<>
 							<PrivateHeader />
 						</>
@@ -185,7 +185,7 @@ export default function App() {
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
 
-				{localStorage.getItem("profileName") || isLogin ? (
+				{JSON.parse(localStorage.getItem("profileName")) || isLogin ? (
 					<>
 						<Footer />
 					</>

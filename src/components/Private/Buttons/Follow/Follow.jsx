@@ -8,7 +8,7 @@ export const Follow = ({ name }) => {
 	const { profileName } = useParams();
 	const [cookies] = useCookies();
 	const [error, setError] = useState(null);
-	const isAuthor = localStorage.getItem("profileName") === profileName;
+	const isAuthor = JSON.parse(localStorage.getItem("profileName")) === profileName;
 	const [profileData, setProfileData] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 

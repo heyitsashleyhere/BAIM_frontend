@@ -118,7 +118,7 @@ const TransitionPage = ({isFromRegister}) => {
 		setIsOverlay(false);
 		navigate(`/discover`, { replace: true });
 		// if(isFromRegister) {
-		// 	navigate(`/profile/${localStorage.getItem("profileName")}`, { replace: true });
+		// 	navigate(`/profile/${JSON.parse(localStorage.getItem("profileName"))}`, { replace: true });
 		// } else {
 		// 	navigate(`/discover`, { replace: true });
 		// }
@@ -145,8 +145,8 @@ const TransitionPage = ({isFromRegister}) => {
 					</svg>
 					<div className="transition-page-content">
 						<div ref={textRef} className="user">
-							<img src={localStorage.getItem("avatar")} alt="user avatar" />
-							<h1>Hello {localStorage.getItem("profileName")}</h1>
+							<img src={JSON.parse(localStorage.getItem("avatar"))} alt="user avatar" />
+							<h1>Hello {JSON.parse(localStorage.getItem("profileName"))}</h1>
 						</div>
 						<div ref={textRef2} className="loka">
 							{/* <h1>Welcome to</h1> */}
