@@ -33,7 +33,7 @@ export const EventsTable = (props) => {
   let currentMonth = date.toLocaleString("default", { month: "long" });
 
   useEffect(() => {
-    setIsAuthor(data.find(item => item.author === cookies.id))
+    setIsAuthor(data.find(item => item.author === JSON.parse(localStorage.getItem("id"))))
   }, [isAuthor]);
 
   const pinEvent = (event) => {
@@ -51,7 +51,7 @@ export const EventsTable = (props) => {
           setError(result.errors);
         } else {
           setSnackbar({
-            message: `Event ${event.likes.find(item => item === cookies.id) ? `was removed from` : `was added to`} your Profile`,
+            message: `Event ${event.likes.find(item => item === JSON.parse(localStorage.getItem("id"))) ? `was removed from` : `was added to`} your Profile`,
             open: true,
             severity: "error"
           })
@@ -81,7 +81,7 @@ export const EventsTable = (props) => {
               {data.map((event) => (
                 <EventRow
                   key={event._id}
-                  currentUserId={cookies.id}
+                  currentUserId={JSON.parse(localStorage.getItem("id"))}
                   event={event}
                   showMobile={showMobile}
                   pinEvent={pinEvent}

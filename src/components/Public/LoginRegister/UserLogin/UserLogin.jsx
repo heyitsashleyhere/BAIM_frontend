@@ -39,6 +39,7 @@ export default function UserLogin() {
               setIsLogin(true)
               localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
               localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
+              localStorage.setItem('id', JSON.stringify(result.user._id))
             } else {
               setErrors(result.errors)
               console.log('errors :>> ', errors);

@@ -63,8 +63,8 @@ useEffect(() => {
   return (
     <section>
       { pinPostData && (
-          postData.author !== cookies.id && (
-            postData.likes.find(item => item === cookies.id) && pinPostData.likes.find(item => item === cookies.id) ? <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
+          postData.author !== JSON.parse(localStorage.getItem("id")) && (
+            postData.likes.find(item => item === JSON.parse(localStorage.getItem("id"))) && pinPostData.likes.find(item => item === JSON.parse(localStorage.getItem("id"))) ? <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
                 :
                 <BsPinAngle onClick={PinPost} className="Pin-icon" /> 
           )
@@ -75,7 +75,7 @@ useEffect(() => {
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
 					<Snackbar open={isModalOpen} autoHideDuration={6000}
 						onClose={handleClose}
-						message={`You have ${postData.likes.find(item => item === cookies.id) ? `pinned` : `unpinned`} the post`}
+						message={`You have ${postData.likes.find(item => item === JSON.parse(localStorage.getItem("id"))) ? `pinned` : `unpinned`} the post`}
 						action={
 								<React.Fragment>
 									<IconButton

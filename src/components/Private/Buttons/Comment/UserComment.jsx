@@ -8,7 +8,7 @@ import { Modal, Snackbar, IconButton, Alert } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import "./userComment.scss";
 
-// post={item} user={cookies.id}
+// post={item} user={JSON.parse(localStorage.getItem("id"))}
 export const UserComment = ({ post }) => {
   const [cookies] = useCookies();
   const [error, setError] = useState();
@@ -21,7 +21,7 @@ export const UserComment = ({ post }) => {
   const date = (item) => new Date(item).toLocaleDateString("eu");
 
   // check user comment id with current user id
-  const author = cookies.id === post.author;
+  const author = JSON.parse(localStorage.getItem("id")) === post.author;
 
   useEffect(() => {
     const config = {
