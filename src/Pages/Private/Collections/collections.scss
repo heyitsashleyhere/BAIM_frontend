@@ -10,18 +10,21 @@
         margin: 0 auto;
         overflow: hidden;
         width: 100%;
+        
+        
 
         .slideShowSlider {
             white-space: nowrap;
             transition: ease 1000ms;
+          
         }
 
         .slide {
             position: relative;
             display: inline-block;
             max-width: 100%;
-            height: 250px;
             overflow: hidden;
+            
 
             img {
                 width: 100%;
@@ -118,6 +121,7 @@
                 max-width: 100%;
                 height: 440px;
                 overflow: hidden;
+                
 
                 img {
                     width: 100%;
@@ -126,7 +130,6 @@
                 }
 
                 .Hero-text {
-                    height: 170px;
                     position: absolute;
                     top: 0;
                     background-color: rgba(0, 0, 0, 0.247);
@@ -161,6 +164,7 @@
                 margin: 1rem 0rem;
                 flex-direction: row;
                 flex-wrap: wrap;
+                justify-content: center;
 
             }
 
@@ -198,7 +202,6 @@
                 }
 
                 .Hero-text {
-                    height: 20rem;
                     position: absolute;
                     top: 0;
                     background-color: rgba(0, 0, 0, 0.247);
@@ -208,7 +211,7 @@
                     color: white;
 
                     h1 {
-                        font-size: 11rem;
+                        font-size: 9rem;
 
                     }
 
@@ -228,6 +231,7 @@
                 margin: 2rem 0rem 0rem;
                 flex-direction: row;
                 flex-wrap: wrap;
+                justify-content: center;
 
             }
         }
@@ -252,7 +256,7 @@
                 position: relative;
                 display: inline-block;
                 max-width: 100%;
-                height: 55vh;
+                height: 59vh;
                 overflow: hidden;
 
                 img {
@@ -262,7 +266,6 @@
                 }
 
                 .Hero-text {
-                    height: 25vh;
                     position: absolute;
                     top: 0;
                     background-color: rgba(0, 0, 0, 0.247);
@@ -272,7 +275,7 @@
                     color: white;
 
                     h1 {
-                        font-size: 12rem;
+                        font-size: 14rem;
 
                     }
 

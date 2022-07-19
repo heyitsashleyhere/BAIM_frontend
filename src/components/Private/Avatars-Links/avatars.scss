@@ -4,12 +4,15 @@
 	position: relative;
 	display: flex;
 	margin: 1rem 0rem;
+	
+
 
 	.Avatar-Controllers {
 		position: absolute;
 		right: 1rem;
 		top: 1rem;
 		z-index: 1;
+		
 
 		.Pin-icon {
 			position: relative;
@@ -38,11 +41,13 @@
 		text-decoration: none;
 		margin: 0.2rem 0.2rem;
 
+		
+
 		&:hover {
 			cursor: pointer;
 		}
 
-		.imageAvatar {
+		.imageAvatar {		
 			position: relative;
 			overflow: hidden;
 			border-radius: 10px;
@@ -92,6 +97,7 @@
 			}
 
 			.imageAvatar {
+			
 				// width:200px;
 				height: auto;
 
