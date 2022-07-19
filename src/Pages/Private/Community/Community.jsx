@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { RoundAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
-import { PostsContext } from "../../../contexts/PostContext.js";
 import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 
 import "./community.scss";
 
 export const Community = () => {
-	// const { users } = useContext(PostsContext);
 	const [users, setUsers] = useState([])
 
 	useEffect(() => {

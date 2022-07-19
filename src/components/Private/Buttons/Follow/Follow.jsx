@@ -72,7 +72,7 @@ export const Follow = ({ name }) => {
 		}
 		setIsModalOpen(false);
 	}
-	console.log('profileData :>> ', profileData);
+
 	return (
 		<>
 			{profileData && !isAuthor && (
