@@ -71,7 +71,7 @@ export const Follow = ({ name }) => {
 
 	return (
 		<>
-			{profileData && !isAuthor && (
+			{profileData.followers && !isAuthor && (
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
