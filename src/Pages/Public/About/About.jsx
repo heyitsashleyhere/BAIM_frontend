@@ -47,43 +47,29 @@ export default function About() {
 			</section>
 
 			<section className="about_logo">
-				<p>about loka ...</p>
+				<p>about Loka ...</p>
 				<img className="logo" src={Logo}></img>
 			</section>
 
 			<section className="about_text">
 				<section className="inner_text">
-					<p>"There is no power for change greater than a community discovering what it cares about." Margaret J. Wheatley</p>
+					<p><em>"There is no power for change greater than a community discovering what it cares about."</em> Margaret J. Wheatley</p>
 
 					<p>
-						Loka cares about this, it cares about community and locality as a reply of our concerns about the negative
-						side effects of globalization in the last decade.{" "}
+						Loka cares about this, it cares about community and locality as a reply to our concerns about the negative side effects of globalization in the last decade.{" "}
 					</p>
 
 					<p>
-						Our idea comes as an inspiration from Fridays for Future, we are 
-						politically Green and our motives are to make life in the cities more
-						sustainable wile bringing communities together and to bring
-						individuals, local producers and ideas for a cleaner future closer to each other.
+						Our idea comes as an inspiration from Fridays for Future, we are politically Green and our motives are to make life in the cities more sustainable while bringing communities together and to bring individuals, local producers, and ideas for a cleaner future closer to each other.
 					</p>
 
 					<p>
-						Loka is an Digital platform that wants to produce a library that is created from the users generating its own communities on topics of sustainability, where users can search, create , share and connect with other users.
-						Loka is passionate about gardening, local markets, regional produce food, DIY, events  and mostly important Loka is about to share
-						knowledge and inspiration... Loka wants to provide the users this resources:  what how and who is available to you in your region or surroundings, either there are your neighbors, bloggers, professionals, or your virtual friends. Loka moto is Gesunde Globalisierung? dann lokalisiere dich!
+						Loka is a Digital platform that wants to produce a library that is created by the users, generating its own communities on topics of sustainability. Users can search, create, share and connect with others. Loka is passionate about gardening, local markets, regional produce, food, DIY, workshops, and events and most important Loka is about sharing knowledge and inspiration... Loka wants to provide the users with these resources: WHAT HOW and WHO is available to you in your region or surroundings, your neighbors, bloggers, professionals, or your virtual friends. Loka motto is "Gesunde Globalisierung? Dann lokalisiere dich!"
 						{" "}
 					</p>
 
 					<p>
-						Loka as a team project started as an idea for creating a library of regional seasonal produce
-						in the area of germany. Our aim was to give to the
-						consumer a informative platform to know when to plant or eat what is
-						in season. Our App later evolved to a create a platform like a
-						collaborative a community library that could offer many
-						topics around planting eating and learning. In Loka is where the
-						consumer shares and asks for help on is own journey either planting
-						in the balkony, or posting your recipes, or DIY products related to
-						beauty, gardening, arts and crafts, events, etc...{" "}
+						Loka is a team project started as an idea for creating a library of regional seasonal produce in the area of Germany. Our aim was to give to the consumer an informative platform to know when to plant or eat or what is in season. Our App later evolved to create a platform like a collaborative community library that could offer many topics on learning around planting, eating, and DIY. In Loka is where the consumer shares and asks for help on their own journey either planting on the balcony, posting recipes, or DIY technics related to beauty, gardening, arts and crafts, events, etc...{" "} Our video is inspired by marketing strategy wants to demonstrate the type of clients this app aims for. Get inspired!
 					</p>
 				</section>
 			</section>

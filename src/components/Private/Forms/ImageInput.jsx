@@ -7,24 +7,65 @@ import { Grid, TextField, Box, Typography, Button, LinearProgress, Grow, Modal, 
 import ImageIcon from '@mui/icons-material/Image';
 
 
-export default function ImageInput({ imageUsage, oldUrl }){
+export default function ImageInput({ imageUsage, oldUrl, }){
     const { inputValues, setInputValues } = useContext(UserContext)
+    const { image , setImage } =useContext(PostsContext)
     const [ progress, setProgress ] = useState(0)
     const [ imageUrl, setImageUrl ] = useState()
     const img = useRef()
 
     function uploadFile(file){
+        
         if(!file){return}
-        const storageRef= ref(storage,`/files/image/${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, file)
 
-        uploadTask.on("state_changed", (snapshot)=>{
-            const prog= Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            setProgress(prog)
-        }, (err) => console.log("uploadFile error", err), 
-        () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> setInputValues({...inputValues, [`${imageUsage}`]: imgURL}))
-        })
+        if(!oldUrl || !oldUrl.includes('firebase')){
+            const storageRef= ref(storage,`/files/image/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file)
+    
+            uploadTask.on("state_changed", (snapshot)=>{
+                const prog= Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(prog)
+            }, (err) => console.log("uploadFile error", err), 
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> {
+                    if(imageUsage === "avatar"){
+                    setInputValues({...inputValues, [`${imageUsage}`]: imgURL})
+                    }else{
+                        setImage({ image: imgURL })
+                    }
+                })
+            })
+        }else {
+            const storage = getStorage()
+            const videoRef=ref(storage, `${oldUrl}`)
+
+            deleteObject(videoRef).then(()=>{
+                setImage('')
+                setImageUrl('')
+               
+                
+            }).catch((error)=>{
+                console.log(error)
+            })
+
+            const storageRef= ref(storage,`/files/image/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file)
+    
+            uploadTask.on("state_changed", (snapshot)=>{
+                const prog= Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(prog)
+            }, (err) => console.log("uploadFile error", err), 
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((imgURL)=> {
+                    if(imageUsage === "avatar"){
+                        setInputValues({...inputValues, [`${imageUsage}`]: imgURL})
+                        }else{
+                            setImage({ image: imgURL })
+                        }
+                })
+            })
+        }
+        
     }
 
     function fileHandler(e) {
@@ -32,31 +73,7 @@ export default function ImageInput({ imageUsage, oldUrl }){
         setImageUrl(URL.createObjectURL(img.current.files[0]))
         const url = uploadFile(img.current.files[0])
     }
-
-
-    // we need to fetch from the profile user to delete in real time 
-    function deleteFile(file){
-        if(inputValues[`${imageUsage}`]){
-            const storage = getStorage()
-            const imageRef = ref(storage, `/files/image/${imageUsage}`)
-
-            deleteObject(imageRef).then(()=>{
-                console.log('imageRef', img)
-                setInputValues({...inputValues, [`${imageUsage}`]:""})
-                setProgress(0)
-                setImageUrl('')
-            }).catch((error)=>{
-                console.log(error)
-            })
-        }
-    }
-
-
-
-    // console.log("checking image URL", inputValues[`${imageUsage}`])
-
-    // I have to find more about this according to some research in the 
-
+        
 
     function LinearProgressWithLabel(props) {
         return (
@@ -78,8 +95,15 @@ export default function ImageInput({ imageUsage, oldUrl }){
     return(
         <div className="image">
             <div className="image-container">
-                <img src={inputValues[`${imageUsage}`] || oldUrl} width="30%" 
-                     style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
+            { image.image ? 
+                <img src={ image.image } width="50%" style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
+                : 
+                <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> 
+                
+            }
+
+            {/* { (inputValues[`${imageUsage}`]) && <img src={inputValues[`${imageUsage}`] || oldUrl} width={ imageUsage === 'avatar' ? "20%" : '40%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> } */}
+            {/* { oldUrl && <img src={oldUrl} width={ imageUsage === 'avatar' ? "30%" : '50%' } style={{borderRadius: imageUsage === 'image' ? '5%' : '50%'}}/> }  */}
             </div>
 
             <section className="input-image" style={{marginTop: '2rem'}}>
@@ -90,7 +114,7 @@ export default function ImageInput({ imageUsage, oldUrl }){
                     </Button>
                 </label>
                 <Button type="submit" onClick={fileHandler} variant="outlined" size="large">Upload</Button>
-                <Button onClick={deleteFile} variant="outlined" size="large">Delete</Button>
+               
             </section>
 
             <Box sx={{ width: '100%' }}>

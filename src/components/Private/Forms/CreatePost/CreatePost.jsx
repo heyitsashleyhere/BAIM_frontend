@@ -15,7 +15,7 @@ import ImageInput from "../ImageInput.jsx";
 
 
 export default function CreatePost({ category, setCategory }) {
-  const { inputValues, setInputValues, address, setAddress, handleFileUpload } = useContext(PostsContext)
+  const { inputValues, setInputValues, address, setAddress, handleFileUpload , image, setImage } = useContext(PostsContext)
   const [errors, setErrors] = useState([])
   const [country, setCountry] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -306,17 +306,23 @@ export default function CreatePost({ category, setCategory }) {
        setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   }
 
+  
+ 
   function handleSubmit(e) {
     e.preventDefault()
-    setInputValues({ ...inputValues, address });
+    setInputValues({ ...inputValues, address});
+    
 
+    // ? my solution to set the images in the inputValues... maybe do the same with address ?
+    const payload = { ...inputValues, ...image }
     const config = {
       method: "POST",
       credentials: "include", // specify this if you need cookies
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(inputValues),
+      body: JSON.stringify(payload),
     }
 
+    console.log('createPost', config)
     fetch(`http://localhost:7000/${category}`, config)
       .then((response) => response.json())
       .then((result) => {
@@ -325,7 +331,8 @@ export default function CreatePost({ category, setCategory }) {
        } else {
             setPostId(result._id)
             setIsModalOpen(true)
-            setUpgrade(!upgrade)
+            setImage('')
+            
        }
       })
       .catch((error) => console.log(error));
@@ -529,7 +536,7 @@ export default function CreatePost({ category, setCategory }) {
             )}
 
             <Grid item xs={12} sm={6}>
-              <ImageInput imageUsage="image" />
+              <ImageInput imageUsage="image" category={category} />
               {errors.map(
               (error, i) =>
                 error.image && (

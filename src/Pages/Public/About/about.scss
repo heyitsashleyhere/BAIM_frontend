@@ -146,6 +146,10 @@
         .inner_text{
           align-self: center;
           width:75%;
+          line-height: 2.8rem;
+          em {
+            font-style: italic;
+          }
         }
       }
 

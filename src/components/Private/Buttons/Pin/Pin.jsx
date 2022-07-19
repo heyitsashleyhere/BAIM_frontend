@@ -8,7 +8,8 @@ import CloseIcon from '@mui/icons-material/Close';
 export const Pin = (props) => {
 const { post }= props
 const [ cookies ] = useCookies(); //loggedIn User info
-const { postData, setPostData } = useContext(PostsContext)
+const [ pinPostData, setPinPostData ] = useState(null) 
+const { postData, setPostData, upgrade } = useContext(PostsContext)
 const [ isModalOpen, setIsModalOpen ] = useState(false);
 
 useEffect(() => {
@@ -24,11 +25,12 @@ useEffect(() => {
       if (result.errors) {
         console.log("errors from Pin GET post :>> ", result.errors);
       } else {
-        setPostData(result);
+        setPostData(result)
+        setPinPostData(result);
       }
   })
   .catch((error) => console.log('error from Pin component ', error));
-}, [post, isModalOpen])
+}, [post, isModalOpen, upgrade])
 
   function PinPost(){
 		  const config = {
@@ -58,16 +60,16 @@ useEffect(() => {
 
   return (
     <section>
-      { postData && (
+      { pinPostData && (
           postData.author !== cookies.id && (
-            post.likes.find(item => item === cookies.id) ? <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
+            postData.likes.find(item => item === cookies.id) && pinPostData.likes.find(item => item === cookies.id) ? <BsPinAngleFill onClick={PinPost} className="Pin-icon" />
                 :
                 <BsPinAngle onClick={PinPost} className="Pin-icon" /> 
           )
         )
       }
 
-      {postData && (
+      {pinPostData && (
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
 					<Snackbar open={isModalOpen} autoHideDuration={6000}
 						onClose={handleClose}
