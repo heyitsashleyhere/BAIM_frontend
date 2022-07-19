@@ -143,7 +143,7 @@ export const SquareAvatar = ({ data }) => {
     
         <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data._id}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
-                <img src={data.image ? data.image : defaultImg}></img>
+                <img src={data.image}></img>
                 <h2>{data.title}</h2>
               </section> 
         </NavLink>
