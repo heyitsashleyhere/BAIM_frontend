@@ -106,7 +106,7 @@ export const PostPage = ({ data }) => {
               <Pin post={selected} />
               <MdOutlineArrowBack onClick={() => navigate(-1)} className="Post-Page-Header-icons" />
             </section>
-            <img src={selected.image ? selected.image : defaultImg}></img>
+            <img src={selected.image}></img>
             <h1>{selected.title}</h1>
           </section>
 

@@ -352,7 +352,7 @@ export default function EditPost({ postData, setPostData, setIsEditOpen }) {
         <form className="create-form" onSubmit={handleSubmit} style={{ padding: '5% 7%'}}>
           <Grid container spacing={2}>
             <Grid sx={{ textAlign: 'center', marginBottom: '2%'}}>
-              <ImageInput oldUrl={postData.image ? postData.image : defaultImg} category={category} imageUsage="image"/>
+              <ImageInput oldUrl={postData.image} category={category} imageUsage="image"/>
             </Grid>
             <Grid item xs={12}>
               <TextField name="title" label="Title"
