@@ -33,6 +33,8 @@ function PostsContextProvider({ children }) {
   const [upgrade, setUpgrade] = useState(false)
   // imageInput
   const [image, setImage]=useState({image:""})
+  // for Video Component
+  const[video, setVideo]=useState({video:""})
 
 
   useEffect(() => {
@@ -129,7 +131,8 @@ function PostsContextProvider({ children }) {
     seasonal, setSeasonal,
     profileData, setProfileData,
     postData, setPostData,
-    image, setImage
+    image, setImage,
+    video, setVideo,
   }
 
   return (
