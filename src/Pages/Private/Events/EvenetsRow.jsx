@@ -20,7 +20,7 @@ const styles2 = {
 };
 
 export function EventRow(props) {
-  const { event, pinEvent, isAuthor, currentUserId, nthNumber } = props;
+  const { event, pinEvent, isAuthor, currentUserId } = props;
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const { users } = useContext(PostsContext);

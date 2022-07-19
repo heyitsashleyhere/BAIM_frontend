@@ -205,6 +205,7 @@ export const RoundAvatar = ({ name, id, image }) => {
 
 // Seasonal avatar
 export const SeasonalAvatar = ({ name, id, image }) => {
+
   return (
     <section className="AvatarR">
       <NavLink to={name === 'More' ? `/seasonal` : `/seasonal/${name}`} key={id} className="RoundAvatar">

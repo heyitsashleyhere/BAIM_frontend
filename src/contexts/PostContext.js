@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 export const PostsContext = React.createContext(null)
 
+
 function PostsContextProvider({ children }) {
   const postCategories = ["beauty", "artsCraft", "garden", "recipe", "event"]
   // creating a post

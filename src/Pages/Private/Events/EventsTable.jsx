@@ -87,7 +87,6 @@ export const EventsTable = (props) => {
                   pinEvent={pinEvent}
                   isAuthor={isAuthor}
                   data={data}
-                  nthNumber={nthNumber}
                 />
               ))}
             </MUI.TableBody>
