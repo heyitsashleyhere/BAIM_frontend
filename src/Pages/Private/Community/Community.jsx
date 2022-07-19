@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useEffect } from "react";
 import { RoundAvatar } from "../../../components/Private/Avatars-Links/Avatars.jsx";
 import { DiscoverNavbar } from "../../../components/Private/section-header/DiscoverNavbar.jsx";
 import { PostsContext } from "../../../contexts/PostContext.js";
@@ -7,7 +8,17 @@ import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 import "./community.scss";
 
 export const Community = () => {
-	const { users } = useContext(PostsContext);
+	// const { users } = useContext(PostsContext);
+	const [users, setUsers] = useState([])
+
+	useEffect(() => {
+		fetch("https://loka-database.herokuapp.com/user")
+		.then(response => response.json())
+		.then(result => { setUsers(result) })
+		.catch(error => console.log(error.message))
+
+	}, [])
+	
 
 	if (!users.length) {
 		return <LoadingSpinner />
