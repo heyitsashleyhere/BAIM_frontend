@@ -31,14 +31,12 @@ function PostsContextProvider({ children }) {
   const [ postData, setPostData ] = useState(null)
   // dependency for fetches
   const [upgrade, setUpgrade] = useState(false)
-
+  // imageInput
   const [image, setImage]=useState({image:""})
 
 
-  // const [loading, setLoading]=useState(true)
-
   useEffect(() => {
-    fetch("https://loka-database.herokuapp.com/user")
+    fetch("http://localhost:7000/user")
       .then(response => response.json())
       .then(result => { setUsers(result) })
       .catch(error => console.log(error.message))
@@ -48,14 +46,8 @@ function PostsContextProvider({ children }) {
       .then(result => setSeasonal(result))
       .catch(error => console.log(error.message))
 
-    // const config = {
-    //     method: "GET",
-    //     credentials: 'include', // specify this if you need cookies
-    //     headers: { "Content-Type": "application/json" }
-    //   };
-
     postCategories.map(cat => {
-      fetch(`https://loka-database.herokuapp.com/${cat}/`)
+      fetch(`http://localhost:7000/${cat}/`)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -114,7 +106,7 @@ function PostsContextProvider({ children }) {
       body: JSON.stringify(inputValues)
     }
 
-    fetch(`https://loka-database.herokuapp.com/${category}`, config)
+    fetch(`http://localhost:7000/${category}`, config)
       .then((response) => response.json())
       .then((result) => console.log(category, "fetch result:", result))
       .catch((error) => console.log(error));

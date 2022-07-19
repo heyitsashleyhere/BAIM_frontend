@@ -16,7 +16,7 @@ import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
 import EditPost from "../Forms/EditPost/EditPost.jsx";
 import { Pin } from "../Buttons/Pin/Pin";
-
+import defaultImg from "../../../assets/LOKA2.jpg"
 
 
 // general avatars for the App
@@ -38,7 +38,7 @@ export const SquareAvatar = ({ data }) => {
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
       
-      fetch(`https://loka-database.herokuapp.com/${data.type}/${data._id}`, config)
+      fetch(`http://localhost:7000/${data.type}/${data._id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (result.errors) {
@@ -84,7 +84,7 @@ export const SquareAvatar = ({ data }) => {
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       };
   
-      fetch(`https://loka-database.herokuapp.com/${type}/${id}`, config)
+      fetch(`http://localhost:7000/${type}/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -103,11 +103,10 @@ export const SquareAvatar = ({ data }) => {
         setAnchorEl(null);
         setDeleteAnchorEl(null)
         setIsEditOpen(false)
-      if(location.pathname === `/profile/${JSON.parse(localStorage.getItem("profileName"))}`){
-        window.location.reload();
+      if(location.pathname === `/profile/${JSON.parse(localStorage.getItem("profileName"))}` || location.pathname === `/${data.type}`){
+        window.location.reload(); 
       }
     }
-
 
     return (
       <section className="SquareAvatar">
@@ -144,7 +143,7 @@ export const SquareAvatar = ({ data }) => {
     
         <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data._id}`} className="InnerSquareAvatar">
              <section className="imageAvatar">
-                <img src={data.image}></img>
+                <img src={data.image ? data.image : defaultImg}></img>
                 <h2>{data.title}</h2>
               </section> 
         </NavLink>

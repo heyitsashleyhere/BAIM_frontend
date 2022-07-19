@@ -25,7 +25,7 @@ export const AddComment = ({ post, isModalOpen, setIsModalOpen } ) => {
       body: JSON.stringify(payload),
     };
 
-    fetch(`https://loka-database.herokuapp.com/comments`, config)
+    fetch(`http://localhost:7000/comments`, config)
       .then((response) => response.json())
       .then((result) => {
         console.log('result :>> ', result);

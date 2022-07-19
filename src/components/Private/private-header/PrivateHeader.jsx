@@ -22,8 +22,6 @@ export const PrivateHeader = () => {
 
 	const headerRef = useRef(null);
 
-	console.log('document.cookie', document.cookie)
-
 	//Links object
 	const links = [
 		{ path: "/discover", name: "Discover" },
@@ -39,7 +37,7 @@ export const PrivateHeader = () => {
 			withCredentials: true, 
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
-		fetch("https://loka-database.herokuapp.com/user/logout", config)
+		fetch("http://localhost:7000/user/logout", config)
 			.then((response) => response.json())
 			.then((result) => {
 				// console.log("UserLogin:", result);
