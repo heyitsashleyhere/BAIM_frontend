@@ -37,7 +37,7 @@ export const PrivateHeader = () => {
 			withCredentials: true,
 			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
-		fetch("http://localhost:7000/user/logout", config)
+		fetch("https://loka-database.herokuapp.com/user/logout", config)
 			.then((response) => response.json())
 			.then((result) => {
 				// console.log("UserLogin:", result);

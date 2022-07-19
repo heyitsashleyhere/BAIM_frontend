@@ -67,7 +67,7 @@ export const Profile = () => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     }
 
-    fetch(`http://localhost:7000/user/${profileName}`, config)
+    fetch(`https://loka-database.herokuapp.com/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -106,7 +106,7 @@ export const Profile = () => {
     }
 
     postCategories.map((cat) => {
-      fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
+      fetch(`https://loka-database.herokuapp.com/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -152,7 +152,7 @@ export const Profile = () => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`http://localhost:7000/user/${id}`, config)
+    fetch(`https://loka-database.herokuapp.com/user/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {

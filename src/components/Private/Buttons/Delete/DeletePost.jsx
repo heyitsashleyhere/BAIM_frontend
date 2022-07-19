@@ -20,7 +20,7 @@ const [ preDelete, setPreDelete ]=useState(false)
         method: "DELETE",
       };
       
-      fetch(`http://localhost:7000/${category}/${id}`, config)
+      fetch(`https://loka-database.herokuapp.com/${category}/${id}`, config)
         .then((response) => response.json())
         .then((result) => {
           if(result.errors){

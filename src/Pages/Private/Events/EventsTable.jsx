@@ -44,7 +44,7 @@ export const EventsTable = (props) => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`http://localhost:7000/event/pin/${event._id}`, config)
+    fetch(`https://loka-database.herokuapp.com/event/pin/${event._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {

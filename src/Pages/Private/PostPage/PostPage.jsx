@@ -39,7 +39,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
     
-    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
+    fetch(`https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -70,7 +70,7 @@ export const PostPage = ({ data }) => {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`http://localhost:7000/${data[0].type}/${id}`, config)
+    fetch(`https://loka-database.herokuapp.com/${data[0].type}/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {
