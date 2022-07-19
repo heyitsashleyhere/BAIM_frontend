@@ -94,7 +94,7 @@ export const PostPage = ({ data }) => {
   if (!selected) {
     return 'loading'
   }
-  console.log('selected :>> ', selected);
+
   return (
     <>
       <ProduceNavbar />

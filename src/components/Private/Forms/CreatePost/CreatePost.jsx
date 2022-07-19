@@ -308,15 +308,13 @@ export default function CreatePost({ category, setCategory }) {
   function handleSubmit(e) {
     e.preventDefault()
     setInputValues({ ...inputValues, address});
-    console.log('inputValues :>> ', inputValues);
     const payload = { ...inputValues, ...image, ...video }
-    console.log('payload :>> ', payload);
     const config = {
       method: "POST",
       credentials: "include",
       withCredentials: true, // specify this if you need cookies
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(image !== '' ? inputValues : payload),
     }
 
     fetch(`https://loka-database.herokuapp.com/${category}`, config)
