@@ -24,11 +24,11 @@ export default function UserRegistration() {
 
        const config = {
               method: "PATCH",
-              headers: { "Content-Type": "application/json" },
+              headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
               body: JSON.stringify(inputValues),
               }
                
-       fetch(`http://localhost:7000/user/${user.id}`, config)
+       fetch(`https://loka-database.herokuapp.com/user/${user.id}`, config)
               .then((response) => response.json())
               .then((result) => {
                      console.log("UserEdit:", result)

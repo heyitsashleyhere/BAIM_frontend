@@ -25,7 +25,7 @@ export const SingleProducePage = () => {
       <section className="Seasonal-page-inner">
 
         <section className="Seasonal-back-button">
-        <MdOutlineArrowBack onClick={()=>navigate('/seasonal')} className="Seasonal-button"/>
+        <MdOutlineArrowBack onClick={()=>navigate(-1)} className="Seasonal-button"/>
         </section>
       
         <section className="Seasonal-page-hero">
@@ -94,17 +94,17 @@ export const SingleProducePage = () => {
           </section>
 
           <section className="Seasonal-planting">
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>Planting consideration</h3>
-                {data.planting_considerations}
+                <p>{data.planting_considerations}</p>
               </section>
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>When to Plant</h3>
-                {data.when_to_plant}
+                <p>{data.when_to_plant}</p>
               </section>
-              <section className="Seasonal-plant-map">
+              <section className="Seasonal-plant">
                 <h3>Growing from seed</h3>
-                {data.growing_from_seed}
+                <p>{data.growing_from_seed}</p>
               </section>
               <section className="Seasonal-plant">
                 <h3>Transplanting</h3>
@@ -119,41 +119,33 @@ export const SingleProducePage = () => {
               <p>{data.watering}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Feeding:</h3>
+                <h3>Feeding</h3>
               <p>{data.feeding}</p>
               </section>
-              <section className="Seasonal-plant-map">
-                <h3>Other Care:</h3>
-              {data.other_care}
+              <section className="Seasonal-plant">
+                <h3>Other Care</h3>
+              <p>{data.other_care}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Diseases:</h3>
+                <h3>Diseases</h3>
               <p>{data.diseases}</p>
               </section>
               <section className="Seasonal-plant">
-                <h3>Pests:</h3>
+                <h3>Pests</h3>
               <p>{data.pests}</p>
               </section>
           </section>
 
           <section className="Seasonal-harvest">
-            <section className="Seasonal-plant-map">
+            <section className="Seasonal-plant">
                 <h3>Harvesting</h3>
-                {data.harvesting}
+                <p>{data.harvesting}</p>
               </section>
             <section className="Seasonal-plant">
                 <h3>Storage</h3>
                 <p>{data.storage}</p>
                 </section>
-            
-            {/* <section className="Seasonal-harvest">
-                <h3>good neighbors:</h3>
-              <p>{data.good_neighbors.map(item=> <p>{item}</p>)}</p>
-              </section>
-              <section className="Seasonal-harvest">
-                <h3>bad neighbors:</h3>
-                <p>{data.bad_neighbors.map(item=><p>{item}</p>)}</p>
-              </section> */}
+      
             </section>
 
         </section>

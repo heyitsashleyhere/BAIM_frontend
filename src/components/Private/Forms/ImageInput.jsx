@@ -7,18 +7,11 @@ import { Grid, TextField, Box, Typography, Button, LinearProgress, Grow, Modal, 
 import ImageIcon from '@mui/icons-material/Image';
 
 
-export default function ImageInput({ imageUsage, oldUrl }){
+export default function ImageInput({ imageUsage, oldUrl, data }){
     const { inputValues, setInputValues } = useContext(UserContext)
     const [ progress, setProgress ] = useState(0)
     const [ imageUrl, setImageUrl ] = useState()
     const img = useRef()
-
-    function fileHandler(e) {
-        e.preventDefault()
-        setImageUrl(URL.createObjectURL(img.current.files[0]))
-        const url = uploadFile(img.current.files[0])
-    }
-
 
     function uploadFile(file){
         if(!file){return}
@@ -34,10 +27,16 @@ export default function ImageInput({ imageUsage, oldUrl }){
         })
     }
 
+    function fileHandler(e) {
+        e.preventDefault()
+        setImageUrl(URL.createObjectURL(img.current.files[0]))
+        const url = uploadFile(img.current.files[0])
+    }
+
 
     // we need to fetch from the profile user to delete in real time 
     function deleteFile(file){
-        if(inputValues[`${imageUsage}`]){
+        if(file){
             const storage = getStorage()
             const imageRef = ref(storage, `/files/image/${imageUsage}`)
 
@@ -50,13 +49,40 @@ export default function ImageInput({ imageUsage, oldUrl }){
                 console.log(error)
             })
         }
-    }
+        // if(inputValues[`${imageUsage}`]){
+        //     const storage = getStorage()
+        //     const videoRef=ref(storage, `${mongoImage}`)
+
+        //     deleteObject(videoRef).then(()=>{
+        //         setImage('')
+        //         setImageUrl('')
+               
+                
+        //     }).catch((error)=>{
+        //         console.log(error)
+        //     })
+        //     const url = `http://localhost:3000/${}/${projID}`
+            
+        //     const payload={ image:"" }
+        //     console.log(payload)
+        //     const config ={ 
+        //         method:"PATCH", 
+        //         headers:{"Content-Type":"application/json"}, 
+        //         body:JSON.stringify(payload)
+        //     }
+        //     fetch(url, config)
+        //     .then(response=> response.json())
+        //     .then(result => {
+        //         console.log(result)
+        //         setImage('')
+        //         setProject(result.project)
+        //     })
+        // }
+        }    
 
 
 
-    // console.log("checking image URL", inputValues[`${imageUsage}`])
 
-    // I have to find more about this according to some research in the 
 
 
     function LinearProgressWithLabel(props) {

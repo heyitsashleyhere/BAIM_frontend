@@ -22,21 +22,24 @@ export const PrivateHeader = () => {
 
 	const headerRef = useRef(null);
 
+	console.log('document.cookie', document.cookie)
+
 	//Links object
 	const links = [
 		{ path: "/discover", name: "Discover" },
-		{ path: `/profile/${cookies.profileName}`, name: "Profile" },
+		{ path: `/profile/${JSON.parse(localStorage.getItem("profileName"))}`, name: "Profile" },
 		{ path: "/create", name: "Create" },
 		{ path: "/search", name: "Search" },
 	];
-
+	
 	function logoutUser() {
 		const config = {
 			method: "POST",
-			credentials: "include", // specify this if you need cookies
-			headers: { "Content-Type": "application/json" },
+			credentials: "include",
+			withCredentials: true, 
+			headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
 		};
-		fetch("http://localhost:7000/user/logout", config)
+		fetch("https://loka-database.herokuapp.com/user/logout", config)
 			.then((response) => response.json())
 			.then((result) => {
 				// console.log("UserLogin:", result);

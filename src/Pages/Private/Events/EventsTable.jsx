@@ -32,6 +32,7 @@ export const EventsTable = (props) => {
   const date = new Date();
   let currentMonth = date.toLocaleString("default", { month: "long" });
 
+<<<<<<< HEAD
   let nthNumber = (d) => {
     if (d > 3 && d < 21) return `${d}th`;
     switch (d % 10) {
@@ -43,6 +44,8 @@ export const EventsTable = (props) => {
   }
 
   console.log(isAuthor);
+=======
+>>>>>>> 9c4456b3e7fd2c28974c11ebefcba093e1e01cd1
   useEffect(() => {
     setIsAuthor(data.find(item => item.author === cookies.id))
   }, [isAuthor]);
@@ -51,10 +54,11 @@ export const EventsTable = (props) => {
     const config = {
       method: "PATCH",
       credentials: "include",
-      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`http://localhost:7000/event/pin/${event._id}`, config)
+    fetch(`https://loka-database.herokuapp.com/event/pin/${event._id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
@@ -71,7 +75,7 @@ export const EventsTable = (props) => {
         console.log("error from Pin Event", error);
       });
   };
-  console.log(data.length)
+
   return (
     <>
       {data.length === 0 ? null : (

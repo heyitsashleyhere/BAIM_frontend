@@ -1,10 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { UserContext } from "../../../../contexts/UserContext.js";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Typography, TextField, Autocomplete, Paper, IconButton, Button, FormHelperText, Grow, MenuItem, Grid, Divider, Modal, InputAdornment, Stack } from "@mui/material";
+import { Box, Typography, TextField, Autocomplete, IconButton, Button, FormHelperText, Grow, Grid, Divider, Modal, InputAdornment, Snackbar } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import CloseIcon from '@mui/icons-material/Close';
 import ImageInput from "../ImageInput.jsx";
 
 
@@ -16,7 +17,6 @@ export default function UserEdit({ setUserEditOpen }) {
   const {inputValues, setInputValues, isShowPassword, showPasswordHandler} = useContext(UserContext);
   const {profileData, upgrade, setUpgrade, } = useContext(PostsContext)
   const [userAddress, setUserAddress] = useState(profileData.userAddress);
-  const [country, setCountry] = useState('')
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     {
@@ -441,6 +441,7 @@ export default function UserEdit({ setUserEditOpen }) {
     { code: 'ZM', label: 'Zambia', phone: '260' },
     { code: 'ZW', label: 'Zimbabwe', phone: '263' },
   ]
+  const [country, setCountry] = useState(profileData.userAddress.country)
 
   useEffect(() => {
     if(!userAddress || !Object.keys(userAddress).length){
@@ -456,9 +457,9 @@ export default function UserEdit({ setUserEditOpen }) {
   // this function handles all the address input changes:
   function handleAddressChange(e) {
     setUserAddress({ ...userAddress, [e.target.name]: e.target.value.trim() });
-    if(e.target.name === 'country') {
-      setCountry(e.target.value)
-    }
+    // if(e.target.name === 'country') {
+    //   setCountry(e.target.value)
+    // }
   }
 
   function handleUserUpdate(e) {
@@ -468,11 +469,11 @@ export default function UserEdit({ setUserEditOpen }) {
     const config = {
       method: "PATCH",
       credentials: 'include', 
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     };
 
-    fetch(`http://localhost:7000/user/${cookies.id}`, config)
+    fetch(`https://loka-database.herokuapp.com/user/${cookies.id}`, config)
       .then((response) => response.json())
       .then((result) => {
         // console.log("UserRegistrationPOST:", result)
@@ -482,10 +483,20 @@ export default function UserEdit({ setUserEditOpen }) {
           setMessage(result.message);
           setIsModalOpen(true)
           setUpgrade(!upgrade)
+          localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
+          localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
         }
       })
       .catch((error) => console.log(error));
   }
+
+  function handleClose(event, reason) {
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
+      setUserEditOpen(false)
+	}
 
   return (
     <div className="ProfileEdit-form">
@@ -717,56 +728,108 @@ export default function UserEdit({ setUserEditOpen }) {
                 )
             )}
           </Grid>
+
           <Grid item xs={12} sm={12}>
-            <TextField name="country" label="Country"
-              fullWidth 
-              margin="dense" select
-              value={ profileData.userAddress ? profileData.userAddress.country : country}
-              error={errors.find((error) => error["userAddress.country"])}
-              onChange={handleAddressChange}>
-              {countries.map(option => (
-                    <MenuItem key={option.label} value={option.label}>
-                        <Stack direction="row" spacing={1} alignItems='center'>
-                          <img loading="lazy" width="20"
-                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                                alt={option.label} 
-                            />
-                          <p>{option.label}</p>
-                        </Stack>
-                    </MenuItem>
-              ))}
-            </TextField>
-            {errors.map(
+            <Autocomplete
+                options={countries}
+                value={country}
+                autoHighlight
+                isOptionEqualToValue={(option, value) => option.label === value}
+                onInputChange={(event, newInputValue) => { setUserAddress({ ...userAddress, country: newInputValue }); setCountry(newInputValue) }}
+                renderOption={(props, option) => (
+                  <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                    <img
+                      loading="lazy"
+                      width="20"
+                      src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                      srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                      alt={`${option.code.toLowerCase()}`}
+                    />
+                    {option.label}
+                  </Box>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    name="country" label="Country"
+                    error={errors.find((error) => error["userAddress.country"])}
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: "new-password",
+                      autoFill: false // disable autocomplete and autofill
+                    }}
+                  />
+                )}
+              />
+              {errors.map(
               (error, i) =>
                 error["userAddress.country"] && (
                   <FormHelperText error key={"countryError" + i}>
                     {error["userAddress.country"]}
                   </FormHelperText>
                 )
-            )}
+              )}
           </Grid>
 
           <Grid item xs={12} textAlign='center' sx={{ marginBottom: `2rem` }}>
             <Button variant="contained" type="submit" size="large">Confirm</Button>
+
+            <Button variant="outlined" size="large" onClick={() => setUserEditOpen(false)}>Cancel</Button>
           </Grid>
         </Grid>
       </form>
     </Grow>
 
     <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade); setUserEditOpen(false) }} >
-        <Paper elevation={3} className="ProfileEdit-form" 
-               sx={{ width: '80%', padding: '2rem',
-                     position: 'absolute', top: '50%', left: '50%',
-                     transform: 'translate(-50%, -50%)'
-                   }}>
-              <Typography variant="h3" textAlign='center'>
-                  {message}
-              </Typography> 
-        </Paper>
+      <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleClose}
+              message={message}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
     </Modal>
 
     </div>
 
   )
 }
+
+// old country input (that was slow in selecting)
+          // {/* <Grid item xs={12} sm={12}>
+          //   <TextField name="country" label="Country"
+          //     fullWidth 
+          //     margin="dense" select
+          //     value={ profileData.userAddress ? profileData.userAddress.country : country}
+          //     error={errors.find((error) => error["userAddress.country"])}
+          //     onChange={handleAddressChange}>
+          //     {countries.map(option => (
+          //           <MenuItem key={option.label} value={option.label}>
+          //               <Stack direction="row" spacing={1} alignItems='center'>
+          //                 <img loading="lazy" width="20"
+          //                       src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+          //                       srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+          //                       alt={option.label} 
+          //                   />
+          //                 <p>{option.label}</p>
+          //               </Stack>
+          //           </MenuItem>
+          //     ))}
+          //   </TextField>
+          //   {errors.map(
+          //     (error, i) =>
+          //       error["userAddress.country"] && (
+          //         <FormHelperText error key={"countryError" + i}>
+          //           {error["userAddress.country"]}
+          //         </FormHelperText>
+          //       )
+          //   )}
+          // </Grid> */}

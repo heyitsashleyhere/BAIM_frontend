@@ -24,12 +24,12 @@ export default function UserLogin() {
       const config = {
         method: "POST",
         credentials: 'include', // specify this if you need cookies
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
         body: JSON.stringify(inputValues)
       };
       // https://stackoverflow.com/questions/36824106/express-doesnt-set-a-cookie
   
-      fetch("http://localhost:7000/user/login", config)
+      fetch("https://loka-database.herokuapp.com/user/login", config)
         .then((response) => response.json())
         .then((result) => {
             // console.log("UserLogin:", result);
@@ -37,7 +37,8 @@ export default function UserLogin() {
               // setUser(result.user)
               setMessage(result.message)
               setIsLogin(true)
-              // localStorage.setItem('user', JSON.stringify(result.user))
+              localStorage.setItem('profileName', JSON.stringify(result.user.profileName))
+              localStorage.setItem('avatar', JSON.stringify(result.user.avatar))
             } else {
               setErrors(result.errors)
               console.log('errors :>> ', errors);

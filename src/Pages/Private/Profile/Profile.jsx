@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PostsContext } from "../../../contexts/PostContext.js";
+import { UserContext } from "../../../contexts/UserContext.js";
 import LoadingSpinner from "../../TransitionPage/LoadingSpinner.jsx";
 import { Follow } from "../../../components/Private/Buttons/Follow/Follow.jsx";
 import { ProduceNavbar } from "../../../components/Private/section-header/ProduceNavbar.jsx";
@@ -20,9 +21,11 @@ import "./profile.scss";
 import { FollowPage } from "../../../components/Private/Profile-components/FollowPage.jsx";
 
 export const Profile = () => {
-  const { postCategories, upgrade, setUpgrade, profileData, setProfileData } = useContext(PostsContext);
+  const { postCategories, upgrade, setUpgrade, profileData, setProfileData, postData } = useContext(PostsContext);
+  const { setIsLogin } = useContext(UserContext)
   const { profileName } = useParams();
   const [cookies] = useCookies();
+  let navigate = useNavigate()
 
   // user library
   const [beauties, setBeauties] = useState(null);
@@ -38,11 +41,6 @@ export const Profile = () => {
   const [postMessage, setPostMessage] = useState(null)
   const [pinMessage, setPinMessage] = useState(null)
   const [pins, setPins] = useState([])
-  const [beautyPins, setBeautyPins] = useState([])
-  const [artsCraftPins, setArtsCraftsPins] = useState([])
-  const [gardenPins, setGardenPins] = useState([])
-  const [recipePins, setRecipePins] = useState([])
-  const [eventPins, setEventPins] = useState([])
   // pop up Modals
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUserEditOpen, setUserEditOpen] = useState(false)
@@ -52,39 +50,37 @@ export const Profile = () => {
   const [showCatPosts, setShowCatPosts] = useState(false)
   const [showCatPins, setShowCatPins] = useState(false)
 
-
-  //toggle followpage
+  //toggle followPage
   // const [isFollowers, setIsFollowers] = useState(false)
   // const [isFollowing, setIsFollowing] = useState(false)
   const [isFollowingOpen, setIsFollowingOpen] = useState(false)
   const [isFollowersOpen, setIsFollowersOpen] = useState(false)
 
-
-  const config = {
-    method: "GET",
-    credentials: "include", // specify this if you need cookies
-    headers: { "Content-Type": "application/json" },
-  }
-
-
   useEffect(() => {
     setPostMessage(null)
     setPinMessage(null)
 
-    fetch(`http://localhost:7000/user/${profileName}`, config)
+    const config = {
+      method: "GET",
+      credentials: "include",
+      withCredentials: true, 
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
+    }
+
+    fetch(`https://loka-database.herokuapp.com/user/${profileName}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (result.errors) {
           console.log("errors from Profile GET user :>> ", result.errors);
         } else {
           if (result['beauty'].length == 0 && result['artsCraft'].length == 0 && result['garden'].length == 0 && result['recipe'].length == 0 && result['event'].length == 0) {
-            cookies.profileName === profileName
+            JSON.parse(localStorage.getItem("profileName")) === profileName
               ? setPostMessage("You have not posted anything yet")
               : setPostMessage("This person has not posted anything yet");
           }
 
           if (result.pin.length == 0) {
-            cookies.profileName === profileName
+            JSON.parse(localStorage.getItem("profileName")) === profileName
               ? setPinMessage("You have not pinned anything yet")
               : setPinMessage("This person has not pinned anything yet");
           }
@@ -96,11 +92,19 @@ export const Profile = () => {
       })
       .catch((error) => console.log(`error from profileName request in Profile`, error));
 
-  }, [profileName]);
+  }, [profileName, upgrade, postData]);
 
   useEffect(() => {
+    const config = {
+      method: "GET",
+      credentials: "include",
+      withCredentials: true, 
+      headers: { "Content-Type": "application/json", 
+      "Access-Control-Allow-Credentials": true, },
+    }
+
     postCategories.map((cat) => {
-      fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config)
+      fetch(`https://loka-database.herokuapp.com/${cat}/author/${profileName}/`, config)
         .then((response) => response.json())
         .then((result) => {
           if (!result.errors) {
@@ -135,41 +139,18 @@ export const Profile = () => {
   }, [profileName, showMyPosts, showCatPosts])
 
 
-  // useEffect(() => {
-  //   console.log('pins :>> ', pins);
-  //   pins.forEach(pin => {
-  //     switch (pin.postType) {
-  //       case "beauty":
-  //         setBeautyPins([...beautyPins, pin]);
-  //         break;
-  //       case "artsCraft":
-  //         setArtsCraftsPins([...artsCraftPins, pin]);
-  //         break;
-  //       case "garden":
-  //         setGardenPins([...gardenPins, pin]);
-  //         break;
-  //       case "recipe":
-  //         setRecipePins([...recipePins, pin]);
-  //         break;
-  //       case "event":
-  //         setEventPins([...eventPins, pin]);
-  //         break;
-  //     }
-  //   })
-  // }, [showMyPins, pins])
-
   function handleEdit() {
     setUserEditOpen(true)
   }
 
-  function handleDelete(id) {
+  function handleUserDelete(id) {
     const config = {
       method: "delete",
       credentials: 'include',
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
     };
 
-    fetch(`http://localhost:7000/user/${id}`, config)
+    fetch(`https://loka-database.herokuapp.com/user/${id}`, config)
       .then((response) => response.json())
       .then((result) => {
         if (!result.errors) {
@@ -182,29 +163,10 @@ export const Profile = () => {
 
 
   if (!profileData || !beauties
-    || !artsCrafts || !gardens
-    || !recipes || !events) {
-    return <LoadingSpinner />
-  }
-
-  // function openFollowers() {
-
-  //   if (isFollowing) {
-  //     setIsFollowing(false)
-  //     setFollowers(!isFollowers)
-  //   }
-  //   setFollowers(!isFollowers)
-
-  // }
-
-  // function openFollowing() {
-  //   if (isFollowers) {
-  //     setIsFollowers(false)
-  //     setIsFollowing(!isFollowing)
-  //   }
-  //   setIsFollowing(!isFollowing)
-  // }
-
+		|| !artsCrafts || !gardens
+		|| !recipes || !events) {
+		return <LoadingSpinner />
+	}
 
   return (
     <>
@@ -214,11 +176,11 @@ export const Profile = () => {
         {profileData && (
           <div className="Profile-inner">
             <div className="Profile-header">
-              {cookies.profileName === profileName && (
-                <ProfileControllers handleEdit={handleEdit} handleDelete={handleDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
+              {JSON.parse(localStorage.getItem("profileName")) === profileName && (
+                <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor"/>
               )}
 
-              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
+              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false) }} >
                 <Paper elevation={3} className="ProfileEdit-form"
                   sx={{
                     width: '80%', padding: '2rem',
@@ -260,11 +222,8 @@ export const Profile = () => {
 
               <div className="Profile-followers">
                 <Follow className="Profile-follow-button" />
-
                 <button className="NavLink-Black" onClick={() => setIsFollowersOpen(true)}>{followers.length} followers</button>
                 <button className="NavLink-Black" onClick={() => setIsFollowingOpen(true)}>{following.length} following</button>
-
-
 
                 <Modal open={isFollowingOpen} onClose={() => setIsFollowingOpen(false)}>
                   <Paper elevation={1} sx={{ width: '80%', height: '90%', overflow: 'scroll', position: "fixed", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -277,12 +236,13 @@ export const Profile = () => {
                     <FollowPage follow={followers} type='followers' />
                   </Paper>
                 </Modal>
+
               </div>
             </div>
 
             <div className="Profile-Collection-Nav">
               <button className="LokaB" onClick={() => { setShowMyPosts(!showMyPosts); setShowMyPins(false); setShowCatPosts(false); setShowCatPins(false) }}>Posts</button>
-              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins); setShowCatPosts(false) }}>Pins</button>
+              <button className="LokaB" onClick={() => { setShowMyPosts(false); setShowMyPins(!showMyPins); setShowCatPosts(false); setShowCatPins(false) }}>Pins</button>
             </div>
 
             <div className="Profile-Collection">
@@ -304,9 +264,6 @@ export const Profile = () => {
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "garden"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "recipe"), display, setDisplay, showCatPins, setShowCatPins)}
                   {showPinCategoryButton(pins.filter(pin => pin.postType === "event"), display, setDisplay, showCatPins, setShowCatPins)}
-                  <EventsTable data={eventPins} />
-
-
                 </div>}
             </div>
 
@@ -319,7 +276,7 @@ export const Profile = () => {
             </div>
 
             <section className="Profile-Feed">
-              <h2 className="Profile-Feed-Header">{profileData.profileName} feed</h2>
+              <h2 className="Profile-Feed-Header">{profileData.profileName === JSON.parse(localStorage.getItem("profileName")) ? 'Your' : `${profileData.profileName}'s`} feed</h2>
               <section className="Profile-Lib-Collection">
                 <ProfileFeed data={profileData.interests} />
               </section>
@@ -331,15 +288,3 @@ export const Profile = () => {
     </>
   )
 }
-
-    // const promises = postCategories.map(cat => fetch(`http://localhost:7000/${cat}/author/${profileName}/`, config))
-    // Promise.all(promises)
-    //        .then(responses => Promise.all( responses.map(r => r.json())) )
-    //        .then(result =>  {
-    //         result.forEach(cat => currentUserLibrary[cat[0].type] = cat)
-    //         setTest(result)
-    //       }) // result.forEach(catArr =>  setCurrentUserLibrary({...currentUserLibrary, [catArr[0].type]: catArr}))
-    //        .catch(err => console.error(`from Promise all`, err))
-
-    //       console.log('currentUserLibrary :>> ', currentUserLibrary);
-    //       console.log('typeof test :>> ', typeof test);

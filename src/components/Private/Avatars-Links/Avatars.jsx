@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./avatars.scss";
 
-import { Modal, IconButton, Button, Typography, Menu, MenuItem, Popover, Box, Paper } from "@mui/material";
+import { Modal,	IconButton,	Button,	Typography,	Menu,	MenuItem,	Popover, Box, Paper, Snackbar} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -11,11 +11,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-import berry from "../../../assets/logo/raspberry.png";
 import { Follow } from "../Buttons/Follow/Follow.jsx";
 import { UserContext } from "../../../contexts/UserContext";
 import { PostsContext } from "../../../contexts/PostContext";
-import { DeletePost } from "../Buttons/Delete/DeletePost";
 import EditPost from "../Forms/EditPost/EditPost.jsx";
 import { Pin } from "../Buttons/Pin/Pin";
 
@@ -23,113 +21,164 @@ import { Pin } from "../Buttons/Pin/Pin";
 
 // general avatars for the App
 export const SquareAvatar = ({ data }) => {
-  const [cookies] = useCookies();
-  const { upgrade, setUpgrade } = useContext(PostsContext)
-  const [message, setMessage] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isEditOpen, setIsEditOpen] = useState(false)
-  const [postData, setPostData] = useState(data)
+    const [cookies] = useCookies();
+    const {upgrade, setUpgrade}=useContext(PostsContext)
+    const [message, setMessage] = useState('')
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isEditOpen, setIsEditOpen] = useState(false)
+    const [postData, setPostData] = useState(data)
+    const [pinPostData, setPinPostData] = useState(data)
+    let location = useLocation()
 
-  // MUI popper START
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
-  const openFeatures = Boolean(anchorEl);
-  const openPopper = Boolean(deleteAnchorEl);
-
-  const handlePopper = (event) => {
-    setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
-  };
-
-  const popperId = openPopper ? 'simple-popper' : undefined;
-
-  const handleFeatures = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setDeleteAnchorEl(null)
-  };
-  // MUI popper END 
-
-  function handleEdit() {
-    setIsEditOpen(true)
-  }
-
-  function handleDelete(type, id) {
-    const config = {
-      method: "delete",
-      credentials: 'include',
-      headers: { "Content-Type": "application/json" },
-    };
-
-    fetch(`http://localhost:7000/${type}/${id}`, config)
-      .then((response) => response.json())
-      .then((result) => {
-        if (!result.errors) {
-          setMessage(result.message);
-          setIsModalOpen(true)
-        }
+    useEffect(() => {
+      const config = {
+        method: "GET",
+        credentials: "include",
+        withCredentials: true, // specify this if you need cookies
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
+      };
+      
+      fetch(`https://loka-database.herokuapp.com/${data.type}/${data._id}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.errors) {
+            console.log("errors from Pin GET post :>> ", result.errors);
+          } else {
+            setPinPostData(result);
+          }
       })
-      .catch((error) => console.log(error));
-  }
+      .catch((error) => console.log('error from squareAvatar pinData fetch ', error));
+    }, [])
+    
+   
+    // MUI popper START
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [deleteAnchorEl, setDeleteAnchorEl] = useState(null)
+    const openFeatures = Boolean(anchorEl);
+    const openPopper = Boolean(deleteAnchorEl);
+  
+    const handlePopper = (event) => {
+      setDeleteAnchorEl(deleteAnchorEl ? null : event.currentTarget);
+    };
+  
+    const popperId = openPopper ? 'simple-popper' : undefined;
+  
+    const handleFeatures = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+      setDeleteAnchorEl(null)
+    };
+    // MUI popper END 
+
+    function handleEdit() {
+      setIsEditOpen(true)
+    }
+
+    function handleDelete(type, id) {
+      const config = {
+        method: "delete",
+        credentials: 'include', 
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
+      };
+  
+      fetch(`https://loka-database.herokuapp.com/${type}/${id}`, config)
+        .then((response) => response.json())
+        .then((result) => {
+          if (!result.errors) {
+            setMessage(result.message);
+            setIsModalOpen(true)
+          }
+        })
+        .catch((error) => console.log(error));
+    }
+
+    function handleSnackBarClose(event, reason) {
+      if (reason === 'clickaway') {
+        return;
+        }
+        setIsModalOpen(false);
+        setAnchorEl(null);
+        setDeleteAnchorEl(null)
+        setIsEditOpen(false)
+      if(location.pathname === `/profile/${JSON.parse(localStorage.getItem("profileName"))}`){
+        window.location.reload();
+      }
+    }
 
 
-  return (
-    <section className="SquareAvatar">
-      <section className="Avatar-Controllers">
-        <Pin post={data} />
-        {cookies.profileName === data.authorProfileName && <>
+    return (
+      <section className="SquareAvatar">
+          <section className="Avatar-Controllers">
+          <Pin post={pinPostData}/>
+          { JSON.parse(localStorage.getItem("profileName")) === data.authorProfileName && <>
           <IconButton aria-label="edit"
-            aria-controls={openFeatures ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={openFeatures ? 'true' : undefined}
-            onClick={handleFeatures}
-            className="editor-icon" >
+                      aria-controls={openFeatures ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={openFeatures ? 'true' : undefined}
+                      onClick={handleFeatures}
+                      className="editor-icon" >
             <MoreVertIcon />
           </IconButton>
           <Menu anchorEl={anchorEl}
-            open={openFeatures}
-            onClose={handleClose}>
-            <MenuItem onClick={handleEdit} ><EditIcon fontSize="small" sx={{ mr: 2 }} color="primary" />Edit</MenuItem>
-            <MenuItem onClick={handlePopper}><DeleteIcon fontSize="small" sx={{ mr: 2 }} color="primary" />Delete</MenuItem>
-            <Popover id={popperId} open={openPopper} anchorEl={deleteAnchorEl}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
-              <Typography sx={{ p: 2 }}>Want this gone forever ever?</Typography>
-              <Box sx={{ textAlign: 'center' }}>
-                <Button variant="outlined" color="success"
-                  startIcon={<CheckCircleIcon />} sx={{ mb: 1 }}
-                  onClick={() => handleDelete(data.type, data._id)} >YES</Button>
-                <Button variant="outlined" color="error"
-                  startIcon={<CloseIcon />} sx={{ mb: 1 }}
-                  onClick={() => setDeleteAnchorEl(null)} >NO</Button>
-              </Box>
+                open={openFeatures}
+                onClose={handleClose}>
+            <MenuItem onClick={handleEdit} ><EditIcon fontSize="small" sx={{ mr: 2 }} color="primary"/>Edit</MenuItem>
+            <MenuItem onClick={handlePopper}><DeleteIcon fontSize="small" sx={{ mr: 2 }} color="primary"/>Delete</MenuItem>
+            <Popover id={popperId} open={openPopper} anchorEl={deleteAnchorEl} 
+                      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+                    <Typography sx={{ p: 2 }}>Want this gone forever ever?</Typography>
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Button variant="outlined" color="success" 
+                              startIcon={<CheckCircleIcon/>} sx={{ mb: 1 }}
+                              onClick={() => handleDelete(data.type, data._id)} >YES</Button>
+                      <Button variant="outlined" color="error" 
+                              startIcon={<CloseIcon/>} sx={{ mb: 1 }}
+                              onClick={() => setDeleteAnchorEl(null)} >NO</Button>
+                    </Box>     
             </Popover>
           </Menu></>}
+        </section> 
+    
+        <NavLink  to={data.type === 'event' ? `/${data.type}s/`:`/${data.type}/${data._id}`} className="InnerSquareAvatar">
+             <section className="imageAvatar">
+                <img src={data.image}></img>
+                <h2>{data.title}</h2>
+              </section> 
+        </NavLink>
+    
+       <Modal open={isModalOpen} onClose={() => {setIsModalOpen(false); setUpgrade(!upgrade)}} >
+          <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleSnackBarClose}
+              message={message}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleSnackBarClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
+       </Modal>
+      
+       <Modal open={isEditOpen} onClose={() => {setIsEditOpen(false)}}
+              sx={{ display: 'flex', overflow:'scroll', justifyContent: 'center', alignItems: 'center' }} >
+          <Paper elevation={3} sx={{width: '80%', height: '90%', overflow: 'scroll'}}>
+              <EditPost postData={postData} setPostData={setPostData} setIsEditOpen={setIsEditOpen} />
+          </Paper>
+       </Modal>
+       
+
       </section>
-
-      <NavLink to={data.type === 'event' ? `/${data.type}s/` : `/${data.type}/${data.title}`} className="InnerSquareAvatar">
-        <section className="imageAvatar">
-          <img src={data.image}></img>
-          <h2>{data.title}</h2>
-        </section>
-      </NavLink>
-
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setUpgrade(!upgrade) }} >
-        <p>{message}</p>
-      </Modal>
-
-      <Modal open={isEditOpen} onClose={() => { setIsEditOpen(false); setUpgrade(!upgrade) }}
-        sx={{ display: 'flex', overflow: 'scroll', justifyContent: 'center', alignItems: 'center' }} >
-        <Paper elevation={3} sx={{ width: '80%', height: '90%', overflow: 'scroll' }}>
-          <EditPost postData={postData} setPostData={setPostData} setIsEditOpen={setIsEditOpen} />
-        </Paper>
-      </Modal>
-
-
-    </section>
-  )
-}
+    )
+  }
+  
 
 // Avatars used specially in community page and general search engines.
 // this avatar uses nested components to fetch
@@ -137,7 +186,7 @@ export const RoundAvatar = ({ name, id, image }) => {
   const { user } = useContext(UserContext)
   const [cookies] = useCookies();
 
-  const author = cookies.profileName === name;
+  const author = JSON.parse(localStorage.getItem("profileName")) === name;
 
 
   return (

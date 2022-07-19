@@ -42,6 +42,11 @@
 
 		.Seasonal-inner {
 			grid-column: 3/11;
+
+			.Seasonal-wrapper-collection{
+				display:flex;
+				justify-content: center;
+			}
 		}
 	}
 }

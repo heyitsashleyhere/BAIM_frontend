@@ -30,8 +30,8 @@ import { UserContext } from "./contexts/UserContext.js";
 import { Events } from "./Pages/Private/Events/Events.jsx";
 
 const { REACT_APP_TEST } = process.env
-console.log("process.env:", process.env);
-console.log("REACT_APP_TEST:", REACT_APP_TEST);
+// console.log("process.env:", process.env);
+// console.log("REACT_APP_TEST:", REACT_APP_TEST);
 
 const theme = createTheme({
 	palette: {
@@ -93,7 +93,7 @@ export default function App() {
 		const localDisplayNav = localStorage.getItem("showNav");
 		setDisplayNav(localDisplayNav);
 	}, []);
-
+	
 
 	if (!users.length || !allBeautyPost.length
 		|| !allArtsCraftPost.length || !allGardenPost.length
@@ -110,7 +110,7 @@ export default function App() {
 		<ThemeProvider theme={theme}>
 			<section className="App">
 				{displayNav || isNav ? (
-					cookies.profileName || isLogin ? (
+					JSON.parse(localStorage.getItem("profileName")) || isLogin ? (
 						<>
 							<PrivateHeader />
 						</>
@@ -139,7 +139,7 @@ export default function App() {
 						element={<Collections data={allGardenPost} type="garden" />}
 					/>
 					<Route
-						path="/garden/:title"
+						path="/garden/:id"
 						element={<PostPage data={allGardenPost} />}
 					/>
 
@@ -148,7 +148,7 @@ export default function App() {
 						element={<Collections data={allArtsCraftPost} type="arts" />}
 					/>
 					<Route
-						path="/artsCraft/:title"
+						path="/artsCraft/:id"
 						element={<PostPage data={allArtsCraftPost} />}
 					/>
 
@@ -157,7 +157,7 @@ export default function App() {
 						element={<Collections data={allRecipePost} type="recipe" />}
 					/>
 					<Route
-						path="/recipe/:title"
+						path="/recipe/:id"
 						element={<PostPage data={allRecipePost} />}
 					/>
 
@@ -166,12 +166,12 @@ export default function App() {
 						element={<Collections data={allBeautyPost} type="beauty" />}
 					/>
 					<Route
-						path="/beauty/:title"
+						path="/beauty/:id"
 						element={<PostPage data={allBeautyPost} />}
 					/>
 
 					<Route path="/community" element={<Community />} />
-					<Route path="/community/:title" element={<PostPage />} />
+					{/* <Route path="/community/:id" element={<PostPage />} /> */}
 
 					<Route path="/seasonal" element={<Seasonal />} />
 					<Route path="/seasonal/:name" element={<SingleProducePage />} />
@@ -185,7 +185,7 @@ export default function App() {
 				</Routes>
 				{/* {isLogin ? <Footer /> : null} */}
 
-				{cookies.profileName || isLogin ? (
+				{JSON.parse(localStorage.getItem("profileName")) || isLogin ? (
 					<>
 						<Footer />
 					</>

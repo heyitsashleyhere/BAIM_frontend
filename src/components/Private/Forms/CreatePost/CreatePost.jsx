@@ -1,11 +1,14 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PostsContext } from "../../../../contexts/PostContext.js";
-import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal } from "@mui/material";
+import { Grid, TextField, MenuItem, Autocomplete, Button, FormHelperText, Grow, Modal, Snackbar, IconButton } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ImageIcon from '@mui/icons-material/Image';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import CloseIcon from '@mui/icons-material/Close';
+import ImageInput from "../ImageInput.jsx";
 
 
 
@@ -18,7 +21,9 @@ export default function CreatePost({ category, setCategory }) {
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [tagsArray, setTagsArray] = useState([])
+  const [postId, setPostId] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  let navigate = useNavigate()
   const countryList = [
     "Afghanistan",
     "Albania",
@@ -304,29 +309,38 @@ export default function CreatePost({ category, setCategory }) {
   function handleSubmit(e) {
     e.preventDefault()
     setInputValues({ ...inputValues, address });
+
     const config = {
       method: "POST",
-      credentials: "include", // specify this if you need cookies
-      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      withCredentials: true, // specify this if you need cookies
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Credentials": true, },
       body: JSON.stringify(inputValues),
     }
 
-    fetch(`http://localhost:7000/${category}`, config)
+    fetch(`https://loka-database.herokuapp.com/${category}`, config)
       .then((response) => response.json())
       .then((result) => {
        if (result.errors) {
               setErrors(result.errors);
        } else {
-            //  console.log(category, "fetch result:", result)
+            setPostId(result._id)
             setIsModalOpen(true)
        }
       })
       .catch((error) => console.log(error));
   }
 
+  function handleClose(event, reason) {
+		if (reason === 'clickaway') {
+			return;
+		  }
+		  setIsModalOpen(false);
+      navigate(`/${category}/${postId}`)
+	}
+
   return (
     <section>
-    
       <Grow in>
         <form className="create-form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -355,6 +369,7 @@ export default function CreatePost({ category, setCategory }) {
                           {...params}
                           name="category"
                           label="Category"
+                          autoComplete="new-password"
                         />
                       )}
                     />
@@ -513,7 +528,19 @@ export default function CreatePost({ category, setCategory }) {
               </LocalizationProvider>
             )}
 
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
+              <ImageInput imageUsage="image" />
+              {errors.map(
+              (error, i) =>
+                error.image && (
+                  <FormHelperText error key={category + "-imageFile" + i}>
+                    {error.image}
+                  </FormHelperText>
+                )
+              )}
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
               <label htmlFor="create-post-video">
                 <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" id='create-post-video'
                        onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
@@ -523,18 +550,8 @@ export default function CreatePost({ category, setCategory }) {
               </label>
             </Grid>
 
-            <Grid item xs={6}>
-              <label htmlFor="create-post-image">
-                <input type="file" name="image" accept="image/*" id='create-post-image'
-                      onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
-                <Button variant="contained" endIcon={<ImageIcon />} size="large" component="span">
-                  Upload Image
-                </Button>
-              </label>
-            </Grid>
-
             <Grid item xs={12}>
-              <TextField name="link" label="Link"
+              <TextField name="link" label="Map Link"
                      type="text"
                      fullWidth margin="dense"
                      error={errors.find((error) => error.link)}
@@ -557,10 +574,44 @@ export default function CreatePost({ category, setCategory }) {
         </form>
 
       </Grow>
-      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null) }} >
-          <p>You have 'planted' a post in {category}</p>
-       </Modal>
+
+      <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setCategory(null)}} >
+          <Snackbar open={isModalOpen} autoHideDuration={6000}
+              onClose={handleClose}
+              message={`post planted in ${category}`}
+              action={
+                  <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                  </React.Fragment>
+                  } />
+      </Modal>
        
     </section>
   )
 }
+            // old imageInput
+            {/* <Grid item xs={6}>
+              <label htmlFor="create-post-image">
+                <input type="file" name="image" accept="image/*" id='create-post-image'
+                      onChange={(e) => handleFileUpload(e)} style={{display: 'none'}} />
+                <Button variant="contained" endIcon={<ImageIcon />} size="large" component="span">
+                  Upload Image
+                </Button>
+              </label>
+
+              {errors.map(
+              (error, i) =>
+                error.image && (
+                  <FormHelperText error key={category + "-imageFile" + i}>
+                    {error.image}
+                  </FormHelperText>
+                )
+              )}
+            </Grid> */}
