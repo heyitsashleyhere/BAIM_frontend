@@ -75,23 +75,23 @@ export const Follow = ({ name }) => {
 
 	return (
 		<>
-			{profileData && followers && !isAuthor && (
+			{profileData && !isAuthor && (
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
-						followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+						followers.find((objId) => objId == JSON.parse(localStorage.getItem("id"))) || profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
 							? "outlined"
 							: "contained"
 					}
 					onClick={FollowUser}
 				>
-					{followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+					{followers.find((objId) => objId == JSON.parse(localStorage.getItem("id"))) || profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
 						? "Unfollow"
 						: "Follow"}
 				</Button>
 			)}
 			<p>{error}</p>
-			{profileData && followers && (
+			{profileData && (
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
 					<Snackbar open={isModalOpen} autoHideDuration={6000}
 						onClose={handleClose}
