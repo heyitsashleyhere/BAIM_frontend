@@ -65,7 +65,9 @@ const team = [
 		name: "Murad Muqbel",
 		image: require("../../../assets/team-images/murad-default.jpg"),
 		image2: require("../../../assets/team-images/murad-active.jpg"),
-		bio: "My name is Murad Muqbel, i am originally from Jordan, currently based in Berlin Germany.",
+		bio: <div><p>My name is Murad Muqbel, I am originally from Jordan and now based in Berlin Germany.</p>
+		<p>I am currently on the journey to becoming a fullstack Web Developer where I can work with more technologies, programming languages and develope more inspiring apps.</p>
+	  </div>,
 		role: "Animation, scss styling, frontend and seasonal API and database",
 		contact: {
 			email: "muradgm@gmail.com"
