@@ -50,12 +50,12 @@ const team = [
 		image: require('../../../../src/assets/team-images/ivoSerra.jpg'),
 		image2: require('../../../../src/assets/team-images/Ivo-active.jpg'),
 		bio: <div><p>My name is Ivo Serra. I was born in Lisbon Portugal in 1979 and Im living in Berlin since 2011.</p><p> Iam a creative junior web-developer consistently demonstrating experience in content creation. Collaborating internationally with amazing teams and non-profit Organizations in the fields of Art , culture and visual communication.</p><p>I'm interested in a future that is diverse, inclusive and creative: that explores ideas driven by strategy, creativity, technology and design. I have a bachelor in Video new media taken in Lisbon, here I developed interest on artistic communities around dance and performance, providing video documentation and interviews to create visibility of cultural agencies and non-profit organizations.</p><p>This passion about documentation, art and community was extended with one year internship in the department of video archive and documentation in NYC for Movement-research. In 2011 I came to Berlin and made a Master of arts in UDK on the field of choreography, solo and authorship.</p><p>After 23 years working as an interdisciplinary content creator in the field of art, as a video maker and archivist, I decided to join DCI and to continue to develop my interests in design by becoming a web-developer.</p></div>,
-		role: "",
+		role: "UI-UX Design, Branding , styling and FrontEnd",
 		contact: {
 			email: "herrserra@icloud.com"
 		},
 		social: {
-			portfolio: "https://ivoserra.github.io/portfolio/",
+			portfolio: "https://ivoserra.github.io/portfolioFullstack/",
 			linkedin: "https://www.linkedin.com/in/ivo-serra/",
 			github: "https://github.com/ivoserra",
 		},
@@ -65,8 +65,8 @@ const team = [
 		name: "Murad Muqbel",
 		image: require("../../../assets/team-images/murad-default.jpg"),
 		image2: require("../../../assets/team-images/murad-active.jpg"),
-		bio: "My name isMurad Muqbel, i am originally from Jordan, currently based in Berlin Germany.",
-		role: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, id nostrum! Consequatur ab quas perspiciatis.",
+		bio: "My name is Murad Muqbel, i am originally from Jordan, currently based in Berlin Germany.",
+		role: "Animation, styling, Frontend and Seasonal Api Backend",
 		contact: {
 			email: "muradgm@gmail.com"
 		},
