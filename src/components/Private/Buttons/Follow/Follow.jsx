@@ -79,13 +79,13 @@ export const Follow = ({ name }) => {
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
-						followers.find((objId) => objId == JSON.parse(localStorage.getItem("id"))) || profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+						followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
 							? "outlined"
 							: "contained"
 					}
 					onClick={FollowUser}
 				>
-					{followers.find((objId) => objId == JSON.parse(localStorage.getItem("id"))) || profileData.followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+					{followers.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
 						? "Unfollow"
 						: "Follow"}
 				</Button>
