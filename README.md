@@ -37,16 +37,22 @@ Loka started as an idea for creating a library of regional produce in the area o
 
 ## Features
 
-The users are able to create an account view and create posts of different kinds all related to the idea of sustainability.
-The Post categories are 
-- Arts Crafts
+The users are able to register an account, login, and create posts for different categories all related to the idea of sustainability.
+The Post categories are:
+- Arts and Craft
 - Beauty
 - Recipe
 - Garden
 - Events
 
-The users can edit their posts, pin them to their profile, read and write comments and attend an event.
+The users can edit their posts, pin them to their profile, read, write and delete comments and attend events.
 
+<h2 align="center">Future Features</h2>
+
+Making LOKA community more engaging by:
+- Users can see other online users
+- Live chat with other users
+- See users and events happening near you
 
 <!-- TECHNOLOGIES -->
 
@@ -74,15 +80,13 @@ The users can edit their posts, pin them to their profile, read and write commen
 <!-- TEAM -->
 
 ## Team
+At BAIM, we come from different professional backgrounds and nationalities and together we created Loka as our final project of the program. Our major roles in the projects are:
 
+- [Brian](https://github.com/BrianLadwig): Backend, database and UX inputs
+- [Ashley](https://github.com/heyitsashleyhere): Error handling and version control
+- [Ivo](https://github.com/ivoserra): UI-UX design, branding, scss styling and frontend
+- [Murad](https://github.com/muradgm): Animation, scss styling, frontend and seasonal API and database
 
-- [Ashley](https://github.com/heyitsashleyhere)
-
-- [Ivo](https://github.com/ivoserra)
-
-- [Murad](https://github.com/muradgm)
-
-- [Brian](https://github.com/BrianLadwig)
 
 
 
