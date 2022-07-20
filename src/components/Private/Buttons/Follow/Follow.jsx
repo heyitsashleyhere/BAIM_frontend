@@ -75,7 +75,7 @@ export const Follow = ({ name }) => {
 
 	return (
 		<>
-			{followers && !isAuthor && (
+			{profileData && followers && !isAuthor && (
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
@@ -91,7 +91,7 @@ export const Follow = ({ name }) => {
 				</Button>
 			)}
 			<p>{error}</p>
-			{followers && (
+			{profileData && followers && (
 				<Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
 					<Snackbar open={isModalOpen} autoHideDuration={6000}
 						onClose={handleClose}
