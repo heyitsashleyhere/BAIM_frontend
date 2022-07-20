@@ -91,7 +91,7 @@ export const PrivateHeader = () => {
 						{links.map((link, i) => {
 							return (
 								<li className="navbar-list-item" key={i}>
-									<Link className="NavLink-Black" to={link.path} key={link.name}>
+									<Link className="NavLink-Black" to={link.path} key={link.name} onClick={() => setIsLogout(false)}>
 										{link.name}
 									</Link>
 								</li>
