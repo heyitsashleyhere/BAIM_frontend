@@ -326,8 +326,7 @@ export default function CreatePost({ category, setCategory }) {
             setPostId(result._id)
             setIsModalOpen(true)
             setImage('')
-            setVideo('')
-            
+            setVideo('')  
        }
       })
       .catch((error) => console.log(error));
