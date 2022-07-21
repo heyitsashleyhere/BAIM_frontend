@@ -94,6 +94,6 @@ At BAIM, we come from different professional backgrounds and nationalities and t
 
 ## Links
 
-- [Loka Backend](https://github.com/BrianLadwig/BAIM-backend/tree/main)
+- [LOKA Backend](https://github.com/BrianLadwig/BAIM-backend/tree/main)
 - [Figma Design](https://www.figma.com/file/ATMhtCX7NRp9otxh0y1EMy/Untitled-(Copy)?node-id=0%3A1)
 - [Github Project Page](https://github.com/users/heyitsashleyhere/projects/2)
