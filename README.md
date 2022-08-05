@@ -19,6 +19,8 @@ This Project is our Final Project of the one year fullstack web developer course
 
 The Project take place from the 30th of May to the 19th of July, 2022.
 
+<video width="500px" src="./public/landingVideos/demo.mp4"  autoPlay loop></video>
+
 ## About
 
 > "There is no power for change greater than a community discovering what it cares about." Margaret J. Wheatley
@@ -30,8 +32,6 @@ Our idea comes as an inspiration from Fridays for Future, politically Green with
 LOKA is an Application that wants to produce a community library, where users can search, create, share and connect with other users, on topics of sustainability, planting, food, DIY, and crafts. Loka is passionate about gardening, local markets, and regional produce mostly about sharing knowledge and resources on topics of lifestyle and DIY. LOKA is aimed at anyone, either a gardener, a food lover, a blogger, a professional, an event organizer, or beauty gurus.
 
 LOKA started as an idea for creating a library of regional produce in the area of Brandenburg, Berlin. Our aim was to give to the consumer an informative platform to know when to plant or eat what is in season. Our App later evolved to create a platform like a collaborative community library that could offer many topics around planting eating and learning. In LOKA is where the consumer shares and asks for help on their own journey either planting on the balcony, posting their recipes, or DIY products related to beauty, gardening, arts and crafts, events, etc... 
-
-
 
 <!-- FEATURES -->
 
