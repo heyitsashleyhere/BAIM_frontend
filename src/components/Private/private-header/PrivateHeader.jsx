@@ -46,6 +46,7 @@ export const PrivateHeader = () => {
 					localStorage.removeItem('id');
 					localStorage.removeItem('profileName');
 					navigate("/main");
+					window.location.reload();
 				} else {
 					console.log("errors :>> ", result.errors);
 				}

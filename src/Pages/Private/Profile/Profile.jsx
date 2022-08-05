@@ -184,7 +184,7 @@ export const Profile = () => {
                 <ProfileControllers handleEdit={handleEdit} handleUserDelete={handleUserDelete} isUserEditOpen={isUserEditOpen} className="Profile-editor" />
               )}
 
-              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false) }} >
+              <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); navigate("/main"); setIsLogin(false); window.location.reload();}} >
                 <Paper elevation={3} className="ProfileEdit-form"
                   sx={{
                     width: '80%', padding: '2rem',
