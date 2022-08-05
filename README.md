@@ -1,6 +1,6 @@
 <h1 align="center">Loka App Frontend</h1>
 <p align="center">
-check our <a href="https://github.com/BrianLadwig/BAIM-backend/tree/main" target="_blank">Frontend</a> or our <a href="https://loka.vercel.app/" target="_blank">live app</a>
+check our <a href="https://github.com/BrianLadwig/BAIM-backend/tree/main" target="_blank">Backend</a> or our <a href="https://loka.vercel.app/" target="_blank">live app</a>
 </p>
 
 <!-- TABLE OF CONTENTS -->
