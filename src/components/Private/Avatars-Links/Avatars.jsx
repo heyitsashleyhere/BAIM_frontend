@@ -181,7 +181,7 @@ export const SquareAvatar = ({ data }) => {
 
 // Avatars used specially in community page and general search engines.
 // this avatar uses nested components to fetch
-export const RoundAvatar = ({ name, id, image }) => {
+export const RoundAvatar = ({ name, id, image, followers, following }) => {
   const { user } = useContext(UserContext)
   const [cookies] = useCookies();
 
@@ -196,7 +196,7 @@ export const RoundAvatar = ({ name, id, image }) => {
         </section>
         <h2>{name}</h2>
       </Link>
-      {author ? <Button disabled style={{ fontSize: "1rem", padding: '0.5em 1em' }} >hey its me</Button> : <Follow name={name} />}
+      {author ? <Button disabled style={{ fontSize: "1rem", padding: '0.5em 1em' }} >hey its me</Button> : <Follow name={name} followers={followers} following={following} />}
 
     </section>
   );

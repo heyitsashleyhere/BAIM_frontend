@@ -24,7 +24,8 @@ export const FollowPage = ({ follow, type }) => {
         <h2>{type}</h2>
       </section>
       <section className="Follow-body">
-        {filter(users, follow).map(item => <RoundAvatar key={item._id} name={item.profileName} id={item._id} image={item.avatar} />)}
+        {filter(users, follow).map(item => <RoundAvatar key={item._id} name={item.profileName} id={item._id} image={item.avatar}
+                                                        followers={item.followers} following={item.following} />)}
       </section>
     </div>
   )

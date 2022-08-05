@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom";
 import { Modal, Button, Snackbar, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
-export const Follow = ({ name }) => {
+export const Follow = ({ name, followers, following }) => {
 	const { profileName } = useParams();
 	const [cookies] = useCookies();
 	const [error, setError] = useState(null);
 	const isAuthor = JSON.parse(localStorage.getItem("profileName")) === profileName;
 	const [profileData, setProfileData] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [followers, setFollowers] = useState([])
-	const [following, setFollowing] = useState([])
+	const [followers, setFollowers] = useState(followers)
+	const [following, setFollowing] = useState(following)
 
 	useEffect(() => {
 		if (profileName) {

@@ -60,6 +60,8 @@ export default function Search() {
 								<RoundAvatar name={post.profileName}
 											 id={post._id}
 											 image={post.avatar} 
+											 followers={post.followers}
+											 following={post.following}
 											 key={`searchUser-` + post._id}/>
 							))}
 						</div>

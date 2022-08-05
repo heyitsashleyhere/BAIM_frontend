@@ -44,6 +44,8 @@ export const Community = () => {
 								id={item._id}
 								image={item.avatar}
 								name={item.profileName}
+								followers={item.followers}
+								following={item.following}
 								key={"community-users-roundAvatar" + item._id}
 							/>
 						))}
