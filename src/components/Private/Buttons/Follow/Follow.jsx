@@ -79,13 +79,13 @@ export const Follow = ({ name, followers, following }) => {
 				<Button
 					style={{ fontSize: "1rem", padding: '0.5em 1em' }}
 					variant={
-						followersArr.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+						followersArr.find((objId) => objId === JSON.parse(localStorage.getItem("id")))
 							? "outlined"
 							: "contained"
 					}
 					onClick={FollowUser}
 				>
-					{followersArr.find((objId) => objId == JSON.parse(localStorage.getItem("id")))
+					{followersArr.find((objId) => objId === JSON.parse(localStorage.getItem("id")))
 						? "Unfollow"
 						: "Follow"}
 				</Button>

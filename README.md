@@ -8,7 +8,7 @@
 - [Features](#features)
 - [Technologies](#technologies)
 - [Team](#team)
-- [links](#links)
+- [Links](#links)
 
 <!-- ABOUT -->
 
