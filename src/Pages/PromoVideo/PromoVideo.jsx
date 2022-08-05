@@ -46,7 +46,7 @@ const PromoVideo = () => {
   return (
     <section className="promo-container">
       <div className="promo-video-wrapper">
-        <video src={videoUrl} autoPlay playsInline onEnded={() => {
+        <video src={videoUrl} autoPlay playsInline muted onEnded={() => {
           setIsNav(true)
           localStorage.setItem('showNav', 'showNav')
           navigate('/main')

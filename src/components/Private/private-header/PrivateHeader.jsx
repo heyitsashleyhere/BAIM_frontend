@@ -14,7 +14,7 @@ import Logo from "../../../assets/logo/raspberry-black.png";
 export const PrivateHeader = () => {
 	const [burgerMenu, setBurgerMenu] = useState(false);
 
-	const { setIsLogin, setIsLogout } = useContext(UserContext);
+	const { setIsLogin } = useContext(UserContext);
 
 	const [cookies] = useCookies();
 	let navigate = useNavigate();
@@ -42,8 +42,9 @@ export const PrivateHeader = () => {
 			.then((result) => {
 				if (!result.errors) {
 					setIsLogin(false);
-					setIsLogout(true)
-					localStorage.clear();
+					localStorage.removeItem('avatar');
+					localStorage.removeItem('id');
+					localStorage.removeItem('profileName');
 					navigate("/main");
 				} else {
 					console.log("errors :>> ", result.errors);
@@ -91,7 +92,7 @@ export const PrivateHeader = () => {
 						{links.map((link, i) => {
 							return (
 								<li className="navbar-list-item" key={i}>
-									<Link className="NavLink-Black" to={link.path} key={link.name} onClick={() => setIsLogout(false)}>
+									<Link className="NavLink-Black" to={link.path} key={link.name}>
 										{link.name}
 									</Link>
 								</li>

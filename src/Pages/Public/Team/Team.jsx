@@ -208,7 +208,7 @@ const Team = () => {
 							<span className="inner_text">
 								<h2>Excalidraw Project</h2>
 								<p>We started this project using Excalidraw. This was a perfect collaborative tool that helped us sketch an initial understanding of our product. Here we created strategies and relations from the frontend and backend. Are you curious to see more? Please click on the image below.</p>
-								<a href="https://excalidraw.com/#room=abb0e7e174f679add6d4,LTObiIulrnaU9LxThYW01w" target="_blank"><img src={require('./../../../assets/team-projects/excalidraw.png')}/></a>
+								<a href="https://excalidraw.com/#json=xRc8dVCvvbkzxKv2stulG,Pu1VyqgLULSQ0T_2HzIWeQ" target="_blank"><img src={require('./../../../assets/team-projects/excalidraw.png')}/></a>
 							</span>
 						</section>
 						<section className="team_text team_section">

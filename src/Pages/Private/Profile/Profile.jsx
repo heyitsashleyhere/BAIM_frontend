@@ -20,7 +20,7 @@ import { FollowPage } from "../../../components/Private/Profile-components/Follo
 
 export const Profile = () => {
   const { postCategories, upgrade, setUpgrade, profileData, setProfileData, postData } = useContext(PostsContext);
-  const { setIsLogin, setIsLogout } = useContext(UserContext)
+  const { setIsLogin } = useContext(UserContext)
   const { profileName } = useParams();
   const [cookies] = useCookies();
   let navigate = useNavigate()
@@ -157,8 +157,9 @@ export const Profile = () => {
           setMessage(result.message);
           setIsModalOpen(true)
           setIsLogin(false);
-					setIsLogout(true)
-					localStorage.clear();
+          localStorage.removeItem('avatar');
+					localStorage.removeItem('id');
+					localStorage.removeItem('profileName');
         }
       })
       .catch((error) => console.log(error));
