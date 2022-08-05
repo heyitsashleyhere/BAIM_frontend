@@ -29,6 +29,7 @@ const Header = () => {
 					to="/"
 					onClick={() => {
 						setIsNav(false);
+						window.location.reload
 						localStorage.removeItem("showNav");
 					}}
 				>
