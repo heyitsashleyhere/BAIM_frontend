@@ -19,7 +19,9 @@ This Project is our Final Project of the one year fullstack web developer course
 
 The Project take place from the 30th of May to the 19th of July, 2022.
 
-<video width="500px" src="./public/landingVideos/demo.mp4"  autoPlay loop></video>
+
+https://user-images.githubusercontent.com/84905549/183072833-d5508b11-17da-4361-968a-09fb3715894d.mp4
+
 
 ## About
 
